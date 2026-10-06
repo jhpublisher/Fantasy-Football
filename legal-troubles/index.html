@@ -9,17 +9,17 @@
 /* Layout: BI console in the CEO Briefing's identity — sticky top bar with tabs (Overview, League, Our Roster, Market), every team and player clickable into one detail drawer so the numbers link together. */
 :root{
   --bg:#f3f4f1; --surface:#ffffff; --sunk:#eceee9; --ink:#14201b; --muted:#5d6b64; --line:#d9ded9;
-  --field:#1d4a3a; --brass:#b07a1c; --brass-soft:#f3e7cf; --good:#2f7d4f; --warn:#b5651d; --bad:#b23a32; --info:#2f5d8a;
+  --field:#1d4a3a; --brass:#8a5d12; --brass-soft:#f3e7cf; --good:#2f7d4f; --warn:#9a5212; --bar-low:#aab4ae; --bad:#b23a32; --info:#2f5d8a;
   --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0e1512; --surface:#16201c; --sunk:#111a16; --ink:#e9eee9; --muted:#9aa8a1; --line:#2a3832;
-  --field:#5fae8c; --brass:#e0a948; --brass-soft:#3a2e17; --good:#5cc286; --warn:#e39a52; --bad:#ec7a70; --info:#7aa9d6; color-scheme:dark}}
+  --field:#5fae8c; --brass:#e0a948; --brass-soft:#3a2e17; --good:#5cc286; --warn:#e39a52; --bad:#ec7a70; --info:#7aa9d6; --bar-low:#4b5b54; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0e1512; --surface:#16201c; --sunk:#111a16; --ink:#e9eee9; --muted:#9aa8a1; --line:#2a3832;
-  --field:#5fae8c; --brass:#e0a948; --brass-soft:#3a2e17; --good:#5cc286; --warn:#e39a52; --bad:#ec7a70; --info:#7aa9d6; color-scheme:dark}
+  --field:#5fae8c; --brass:#e0a948; --brass-soft:#3a2e17; --good:#5cc286; --warn:#e39a52; --bad:#ec7a70; --info:#7aa9d6; --bar-low:#4b5b54; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45}
 button{font:inherit;color:inherit}
@@ -51,15 +51,34 @@ td.num,th.num{text-align:right}
 tr.row{cursor:pointer}
 tr.row:hover td{background:var(--sunk)}
 tr.me td{background:var(--brass-soft)}
+.heat tr.me td{background:none}
+.heat tr.me td:first-child{box-shadow:inset 4px 0 0 var(--brass);font-weight:700}
+.heat tr.me td.h100{background:color-mix(in srgb,var(--good) 28%,transparent)}
+.heat tr.me td.hhigh{background:color-mix(in srgb,var(--good) 50%,transparent)}
+.pbar{display:flex;align-items:center;gap:10px}.pbar .bar{flex:1}.pbar span{min-width:3.2em;text-align:right}
+.flag{font-size:.82rem;border-left:3px solid var(--warn);padding:6px 10px;background:var(--sunk);border-radius:4px}
 tr.cut td{border-bottom:2px dashed var(--ink)}
 .link{background:none;border:0;padding:0;cursor:pointer;font-weight:600;text-align:left;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .link:hover{text-decoration-color:var(--brass)}
-.chip{display:inline-block;font-family:var(--mono);font-size:.7rem;padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.chip{display:inline-block;font-family:var(--mono);font-size:.76rem;padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
 .s-ACTIVE{color:var(--good)} .s-QUESTIONABLE,.s-DAY_TO_DAY{color:var(--warn)} .s-OUT,.s-INJURY_RESERVE,.s-DOUBTFUL,.s-SUSPENSION{color:var(--bad)}
 .t-sell{color:var(--warn)} .t-claim,.t-target,.t-buy{color:var(--good)} .t-rental{color:var(--info)} .t-drop{color:var(--bad)} .t-stash{color:var(--muted)} .t-roster{color:var(--muted)}
 .bar{height:8px;border-radius:4px;background:var(--sunk);position:relative;min-width:80px}
 .bar i{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--field)}
 .me .bar i{background:var(--brass)}
+.srt{background:none;border:0;padding:0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;display:inline-flex;gap:4px;align-items:center}
+.srt i{font-style:normal;opacity:.45;font-size:.65rem}
+.srt.on{color:var(--ink)}.srt.on i{opacity:1;color:var(--brass)}
+.srt:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.phr{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.rst{background:var(--brass-soft);border:1px solid var(--brass);color:var(--ink);border-radius:999px;padding:2px 10px;font-family:var(--mono);font-size:.7rem;cursor:pointer}
+.rst:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.planw{display:grid;gap:2px;justify-items:start}
+.was{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.was b{color:var(--brass);font-weight:600}
+.plan{font:inherit;font-size:.82rem;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer}
+.plan.mine{border-color:var(--brass);box-shadow:inset 3px 0 0 var(--brass)}
+.plan:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 .heat td.h{text-align:center;font-family:var(--mono);font-size:.78rem;border-radius:4px}
 .h100{background:color-mix(in srgb,var(--good) 28%,transparent)}
 .hhigh{background:color-mix(in srgb,var(--good) 50%,transparent);font-weight:700}
@@ -88,7 +107,7 @@ svg text{font-family:var(--mono)}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .o-Likely{color:var(--good)} .o-Contested{color:var(--warn)} .o-Unlikely{color:var(--bad)} .o-Hold{color:var(--info)}
-.src{font-family:var(--mono);font-size:.68rem;color:var(--info)}
+.src{font-family:var(--mono);font-size:.72rem;color:var(--info)}
 .news a{color:var(--ink)}
 .trend li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.9rem}
 .health{display:flex;flex-wrap:wrap;gap:6px}
@@ -136,7 +155,18 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 
 <script>
 (function(){
-const S={meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview'};
+const S={meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
+const PLAN_OPTS=[['','—'],['sell','Sell high'],['buy','Buy low'],['target','Target'],['claim','Claim'],['rental','Rental'],['stash','Stash'],['drop','Drop']];
+let savePlan=null;
+function mergePlans(){const wk=S.meta?.week,base={};
+  for(const [id,p] of Object.entries(S.raw))base[id]={...p,staffTag:p.tag};
+  const byName=Object.fromEntries(Object.entries(base).map(([id,p])=>[p.name,id]));
+  for(const p of Object.values(base)){const c=p.claim;if(!c||!c.drop||c.odds==='Hold')continue;const d=base[byName[c.drop]];if(!d||!d.ours)continue;
+    if(!d.tag||d.tag==='roster'){d.tag='drop';d.staffTag='drop'}if(d.tag==='drop')d.dropFor=(d.dropFor?d.dropFor+', ':'')+p.name}
+  S.players={};for(const [id,p] of Object.entries(base)){const o=S.plans[id];S.players[id]=(o&&wk!=null&&o.week===wk)?{...p,tag:o.tag||'roster',mine:true}:p}}
+function planSel(id,p){const cur=p.tag==='roster'?'':p.tag;if(!savePlan)return p.tag&&p.tag!=='roster'?tagChip(p.tag):'';
+  const st=p.staffTag, stL=st&&st!=='roster'?(TAGS[st]||st):'none';
+  return `<div class="planw"><select class="plan${p.mine?' mine':''}" data-plan="${id}" aria-label="Plan for ${esc(p.name)}" title="${p.mine?'Your pick for this week (resets at next week\'s refresh)':'Staff plan. Change to set your own for this week'}">${p.mine?`<option value="__staff">↺ Undo</option>`:''}${PLAN_OPTS.map(([v,l])=>`<option value="${v}"${v===cur?' selected':''}>${l}</option>`).join('')}</select>${p.mine?`<span class="was"><b>Your pick</b> · staff: ${esc(stL)}</span>`:''}</div>`}
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const STATUS={ACTIVE:'Healthy',QUESTIONABLE:'Questionable',DAY_TO_DAY:'Day-to-day',OUT:'Out',DOUBTFUL:'Doubtful',INJURY_RESERVE:'IR',SUSPENSION:'Suspended'};
 const TAGS={sell:'Sell high',claim:'Claim',rental:'Rental',buy:'Buy low',target:'Target',drop:'Drop',stash:'Stash',roster:'Roster'};
@@ -148,13 +178,17 @@ function latestOdds(){const ks=Object.keys(S.odds).sort();return ks.length?S.odd
 function teamByName(n){const o=latestOdds();return o&&o.teams.find(t=>t.name===n)}
 
 /* ---------- charts ---------- */
+function niceStep(m){const raw=m/3,p=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/p;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p}
 function barsSVG(vals,{w=420,h=150,line=null,hi=null,labelPrefix='Wk '}={}){
   const ks=Object.keys(vals).map(Number).sort((a,b)=>a-b); if(!ks.length) return '<p class="note">No games yet.</p>';
-  const max=Math.max(line||0,...ks.map(k=>vals[k]),1)*1.12, padL=34,padB=22,padT=8, bw=(w-padL-8)/ks.length;
-  const y=v=>padT+(h-padT-padB)*(1-Math.max(0,v)/max);
-  let g=''; [0,max/2/1.12,max/1.12].forEach(v=>{v=Math.round(v);g+=`<line x1="${padL}" x2="${w-4}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line)"/><text x="${padL-6}" y="${y(v)+4}" text-anchor="end" font-size="10" style="fill:var(--muted)">${v}</text>`});
-  ks.forEach((k,i)=>{const v=vals[k],x=padL+i*bw+bw*.18,bwid=bw*.64,col=(hi&&v>=hi)?'var(--good)':'var(--field)';
-    g+=`<rect x="${x}" y="${y(v)}" width="${bwid}" height="${Math.max(1,h-padB-y(v))}" rx="3" style="fill:${col}"/><text x="${x+bwid/2}" y="${y(v)-4}" text-anchor="middle" font-size="10" style="fill:var(--ink)">${v}</text><text x="${x+bwid/2}" y="${h-6}" text-anchor="middle" font-size="10" style="fill:var(--muted)">${labelPrefix}${k}</text>`});
+  const nums=ks.map(k=>vals[k]).filter(v=>v!=null), raw=Math.max(line||0,...nums,1), step=niceStep(raw), top=Math.ceil(raw*1.1/step)*step;
+  const padL=34,padB=22,padT=12, bw=(w-padL-8)/ks.length, y=v=>padT+(h-padT-padB)*(1-Math.max(0,v)/top);
+  let g='';for(let v=0;v<=top+1e-9;v+=step){g+=`<line x1="${padL}" x2="${w-4}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line)"/><text x="${padL-6}" y="${y(v)+4}" text-anchor="end" font-size="10" style="fill:var(--muted)">${+v.toFixed(1)}</text>`}
+  ks.forEach((k,i)=>{const v=vals[k],x=padL+i*bw+bw*.18,bwid=bw*.64,cx=x+bwid/2;
+    g+=`<text x="${cx}" y="${h-6}" text-anchor="middle" font-size="10" style="fill:var(--muted)">${labelPrefix}${k}</text>`;
+    if(v==null){g+=`<text x="${cx}" y="${h-padB-6}" text-anchor="middle" font-size="12" style="fill:var(--muted)"><title>Did not play</title>–</text>`;return}
+    const col=hi?(v>=hi?'var(--good)':'var(--bar-low)'):'var(--field)';
+    g+=`<rect x="${x}" y="${y(v)}" width="${bwid}" height="${Math.max(1,h-padB-y(v))}" rx="3" style="fill:${col}"/><text x="${cx}" y="${y(v)-4}" text-anchor="middle" font-size="10" style="fill:var(--ink)">${(+v).toFixed(1)}</text>`});
   if(line){g+=`<line x1="${padL}" x2="${w-4}" y1="${y(line)}" y2="${y(line)}" style="stroke:var(--brass)" stroke-dasharray="4 3"/><text x="${w-6}" y="${y(line)-4}" text-anchor="end" font-size="10" style="fill:var(--brass)">${line}</text>`}
   return `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="Weekly points">${g}</svg>`;
 }
@@ -175,89 +209,126 @@ function trendSVG(){
 /* ---------- views ---------- */
 function overview(){
   const m=S.meta,o=latestOdds(); if(!m||!o) return emptyState();
-  const st=o.teams.slice().sort((a,b)=>a.seed-b.seed);
+  const base=o.teams.slice().sort((a,b)=>a.seed-b.seed);
+  const st=sortRows(base,'ov',(t,k)=>({seed:t.seed,name:t.name.toLowerCase(),wl:t.w-t.l,po:t.playoffPct,first:t.byePct})[k]), seedView=SORT.ov.k==='seed'&&SORT.ov.d>0;
+  const meT=o.teams.find(t=>t.name===m.team), e8=base[7], ga=meT&&e8?((meT.w-e8.w)+(e8.l-meT.l))/2:null;
   return `<div class="kpis">
     <div class="kpi"><span class="v">${esc(m.record)}</span><span class="k">Record</span></div>
     <div class="kpi"><span class="v">#${m.seed}</span><span class="k">Seed</span></div>
     <div class="kpi hl"><span class="v">${m.playoffPct}%</span><span class="k">Playoff odds</span></div>
     <div class="kpi"><span class="v">${m.byePct}%</span><span class="k">#1 seed (bye)</span></div>
-    <div class="kpi"><span class="v">+${m.cushion}</span><span class="k">Wins over 8th</span></div>
+    <div class="kpi"><span class="v">${ga==null?'–':(ga>0?'+':'')+ga}</span><span class="k">Games ahead of 8th</span><span class="k">Proj. ${m.cushion>0?'+':''}${m.cushion} at season end</span></div>
     <div class="kpi"><span class="v">${Math.round(m.pf)}</span><span class="k">Points for</span></div></div>
   <div class="grid2">
-    <section class="panel"><div class="ph"><h2>Playoff odds</h2><span class="eyebrow">Top 7 make it · tap a team</span></div>
-      <div class="tw"><table><thead><tr><th>Seed</th><th>Team</th><th>W-L</th><th>Playoffs</th><th class="num">%</th><th class="num">Bye</th></tr></thead><tbody>
-      ${st.map(t=>`<tr class="row ${t.name===m.team?'me':''} ${t.seed===7?'cut':''}" tabindex="0" data-team="${esc(t.name)}"><td>${t.seed}</td><td>${esc(t.name)}</td><td>${t.w}-${t.l}</td><td><div class="bar"><i style="width:${t.playoffPct}%"></i></div></td><td class="num">${t.playoffPct}%</td><td class="num">${t.byePct}%</td></tr>`).join('')}
-      </tbody></table></div><p class="note">Dashed line = playoff cutoff. ${m.sims.toLocaleString()} simulations in our scoring.</p></section>
+    <section class="panel"><div class="ph"><h2>Playoff odds</h2><span class="phr">${resetBtn('ov')}<span class="eyebrow">Top 7 make it · tap a team · click a column to sort</span></span></div>
+      <div class="tw"><table><thead><tr>${sh('ov','seed','Seed')}${sh('ov','name','Team')}${sh('ov','wl','W-L')}${sh('ov','po','Playoffs')}${sh('ov','first','1st%',1)}</tr></thead><tbody>
+      ${st.map(t=>`<tr class="row ${t.name===m.team?'me':''} ${seedView&&t.seed===7?'cut':''}" tabindex="0" data-team="${esc(t.name)}"><td>${t.seed}</td><td>${esc(t.name)}</td><td>${t.w}-${t.l}</td><td><div class="pbar"><div class="bar"><i style="width:${t.playoffPct}%"></i></div><span>${t.playoffPct}%</span></div></td><td class="num">${t.byePct}%</td></tr>`).join('')}
+      </tbody></table></div><p class="note">${seedView?'Dashed line = playoff cutoff. ':'Click Seed to return to standings order. '}${m.sims.toLocaleString()} simulations in our scoring.</p></section>
     <div style="display:grid;gap:18px">
-      <section class="panel"><div class="ph"><h2>Odds trend</h2><span class="eyebrow">Us vs top rivals</span></div>${trendSVG()}</section>
+      ${Object.keys(S.odds).length>=2?`<section class="panel"><div class="ph"><h2>Odds trend</h2><span class="eyebrow">Us vs top rivals</span></div>${trendSVG()}</section>`:''}
       <section class="panel"><div class="ph"><h2>Our weekly scores</h2><span class="eyebrow">100 line</span></div>${barsSVG(teamScores(m.team),{line:100,hi:100})}</section>
       <section class="panel"><div class="ph"><h2>Action items</h2><button class="link" data-goto="market">Open market →</button></div>
-        <ul class="list">${Object.entries(S.players).filter(([,p])=>['sell','claim','target','drop'].includes(p.tag)).map(([id,p])=>`<li>${tagChip(p.tag)} <button class="link" data-player="${id}">${esc(p.name)}</button> <span class="note">${esc(p.pos)} · ${esc(p.nfl)}</span> ${p.claim?oddsChip(p.claim.odds):''}</li>`).join('')}</ul></section>
+        <ul class="list">${Object.entries(S.players).filter(([,p])=>['sell','claim','target','drop'].includes(p.tag)).map(([id,p])=>`<li>${tagChip(p.tag)} <button class="link" data-player="${id}">${esc(p.name)}</button> <span class="note">${esc(p.pos)} · ${esc(p.nfl)}</span> ${p.claim?claimChip(p.claim):''}</li>`).join('')}</ul></section>
     </div></div>`;
 }
 function teamScores(name){const v={};Object.values(S.scores).forEach(s=>{if(s.scores&&name in s.scores)v[s.week]=s.scores[name]});return v}
+function avgPPG(name){const a=Object.values(teamScores(name)).filter(x=>x!=null);return a.length?(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2):'–'}
+const SORT_DEF={st:{k:'seed',d:1},tr:{k:'seed',d:1},ov:{k:'seed',d:1},ro:{k:'line',d:1},cl:{k:'pri',d:1},wo:{k:'rank',d:1},pr:{k:'ord',d:1}};
+const SORT=JSON.parse(JSON.stringify(SORT_DEF));
+const resetBtn=t=>(SORT[t].k!==SORT_DEF[t].k||SORT[t].d!==SORT_DEF[t].d)?`<button class="rst" data-reset="${t}">↺ Reset sort</button>`:'';
+function sortRows(rows,tbl,val,tie=(a,b)=>a.seed-b.seed){const {k,d}=SORT[tbl];return rows.slice().sort((a,b)=>{const x=val(a,k),y=val(b,k);
+  const c=(x==null&&y==null)?0:x==null?1:y==null?-1:typeof x==='string'?x.localeCompare(y):x-y;return (x==null||y==null?c:c*d)||tie(a,b)})}
+function sh(tbl,k,label,num){const s=SORT[tbl],on=s.k===k;
+  return `<th class="${num?'num':''}" aria-sort="${on?(s.d>0?'ascending':'descending'):'none'}"><button class="srt${on?' on':''}" data-sort="${tbl}:${k}" title="Sort">${label}<i>${on?(s.d>0?'▲':'▼'):'↕'}</i></button></th>`}
+function setSort(tbl,k){const s=SORT[tbl];if(s.k===k)s.d=-s.d;else{s.k=k;s.d=(['seed','name','line','pos','player','nfl','plan','bye','pri','drop','rank','team','need','ord'].includes(k)||(tbl==='ro'&&k==='status'))?1:-1}render()}
 function league(){
   const o=latestOdds(); if(!o) return emptyState();
   const wks=Object.values(S.scores).map(s=>s.week).sort((a,b)=>a-b);
-  const st=o.teams.slice().sort((a,b)=>a.seed-b.seed);
-  return `<section class="panel"><div class="ph"><h2>Standings</h2><span class="eyebrow">Record, then head-to-head, then points for</span></div>
-    <div class="tw"><table><thead><tr><th>Seed</th><th>Team</th><th>W-L</th><th class="num">PF</th><th class="num">Strength</th><th class="num">Playoffs</th><th class="num">100+ games</th></tr></thead><tbody>
-    ${st.map(t=>`<tr class="row ${t.name===S.meta?.team?'me':''} ${t.seed===7?'cut':''}" tabindex="0" data-team="${esc(t.name)}"><td>${t.seed}</td><td>${esc(t.name)}</td><td>${t.w}-${t.l}</td><td class="num">${t.pf.toFixed(1)}</td><td class="num">${t.strength}</td><td class="num">${t.playoffPct}%</td><td class="num">${t.hundreds}</td></tr>`).join('')}
-    </tbody></table></div><p class="note">Strength = projected points per week used in the odds model.</p></section>
-  <section class="panel"><div class="ph"><h2>100+ tracker</h2><span class="eyebrow">Green = 100+ · bold = 120+</span></div>
-    <div class="tw"><table class="heat"><thead><tr><th>Team</th>${wks.map(w=>`<th class="num">Wk ${w}</th>`).join('')}<th class="num">100+</th></tr></thead><tbody>
-    ${st.map(t=>{const s=teamScores(t.name);return `<tr class="row ${t.name===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(t.name)}"><td>${esc(t.name)}</td>${wks.map(w=>{const v=s[w];return `<td class="h ${v>=120?'hhigh':v>=100?'h100':''}">${v==null?'–':v.toFixed(1)}</td>`}).join('')}<td class="num">${t.hundreds}</td></tr>`}).join('')}
+  const base=o.teams.slice().sort((a,b)=>a.seed-b.seed);
+  const avgN=n=>{const v=avgPPG(n);return v==='–'?null:+v};
+  const vs=(t,k)=>({seed:t.seed,name:t.name.toLowerCase(),wl:t.w-t.l,pf:t.pf,avg:avgN(t.name),str:t.strength,po:t.playoffPct,h:t.hundreds})[k];
+  const st=sortRows(base,'st',vs), seedView=SORT.st.k==='seed'&&SORT.st.d>0;
+  const vt=(t,k)=>k.startsWith('w')?(teamScores(t.name)[+k.slice(1)]??null):k==='seed'?t.seed:k==='name'?t.name.toLowerCase():k==='avg'?avgN(t.name):k==='h'?t.hundreds:null;
+  const tr=sortRows(base,'tr',vt);
+  return `<section class="panel"><div class="ph"><h2>Standings</h2><span class="phr">${resetBtn('st')}<span class="eyebrow">Click a column to sort · again to flip</span></span></div>
+    <div class="tw"><table><thead><tr>${sh('st','seed','Seed')}${sh('st','name','Team')}${sh('st','wl','W-L')}${sh('st','pf','PF',1)}${sh('st','avg','Avg PPG',1)}${sh('st','str','Strength',1)}${sh('st','po','Playoffs',1)}${sh('st','h','100+ games',1)}</tr></thead><tbody>
+    ${st.map(t=>`<tr class="row ${t.name===S.meta?.team?'me':''} ${seedView&&t.seed===7?'cut':''}" tabindex="0" data-team="${esc(t.name)}"><td>${t.seed}</td><td>${esc(t.name)}</td><td>${t.w}-${t.l}</td><td class="num">${t.pf.toFixed(1)}</td><td class="num">${avgPPG(t.name)}</td><td class="num">${t.strength}</td><td class="num">${t.playoffPct}%</td><td class="num">${t.hundreds}</td></tr>`).join('')}
+    </tbody></table></div><p class="note">${seedView?'Seeds: record, then head-to-head, then points for. Dashed line = playoff cutoff. ':'Click Seed to return to standings order. '}Avg PPG = actual points per game played. Strength = projected points per week used in the odds model.</p></section>
+  <section class="panel"><div class="ph"><h2>100+ tracker</h2><span class="phr">${resetBtn('tr')}<span class="eyebrow">Green = 100+ · bold = 120+ · click a column to sort</span></span></div>
+    <div class="tw"><table class="heat"><thead><tr>${sh('tr','name','Team')}${wks.map(w=>sh('tr','w'+w,'Wk '+w,1)).join('')}${sh('tr','avg','Avg',1)}${sh('tr','h','100+',1)}</tr></thead><tbody>
+    ${tr.map(t=>{const s=teamScores(t.name);return `<tr class="row ${t.name===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(t.name)}"><td>${esc(t.name)}</td>${wks.map(w=>{const v=s[w];return `<td class="h ${v>=120?'hhigh':v>=100?'h100':''}">${v==null?'–':v.toFixed(1)}</td>`}).join('')}<td class="num"><b>${avgPPG(t.name)}</b></td><td class="num">${t.hundreds}</td></tr>`}).join('')}
     </tbody></table></div></section>`;
 }
 const slotChip=sl=>!sl?'–':`<span class="chip ${sl==='IR'?'s-INJURY_RESERVE':sl==='Bench'?'t-roster':'s-ACTIVE'}">${esc(sl==='Bench'?'Bench':sl==='IR'?'IR':'Starter · '+sl)}</span>`;
 function roster(){
-  const ours=Object.entries(S.players).filter(([,p])=>p.ours); if(!ours.length) return emptyState();
+  let ours=Object.entries(S.players).filter(([,p])=>p.ours); if(!ours.length) return emptyState();
   const SLOT_ORDER=['QB','RB','WR','TE','FLEX','D/ST','K','Bench','IR'];
   const so=p=>{const i=SLOT_ORDER.indexOf(p.slot);return i<0?99:i};
   const grp=p=>p.slot==='IR'?2:p.slot==='Bench'?1:0;
   ours.sort((a,b)=>so(a[1])-so(b[1])||POS_ORDER.indexOf(a[1].pos)-POS_ORDER.indexOf(b[1].pos)||b[1].total-a[1].total);
-  return `<section class="panel"><div class="ph"><h2>Our roster</h2><span class="eyebrow">Tap a player</span></div>
-    <div class="tw"><table><thead><tr><th>Lineup</th><th>Pos</th><th>Player</th><th>NFL</th><th>Status</th><th>Plan</th><th>Trend</th><th class="num">Total</th><th class="num">This wk</th><th class="num">Bye</th></tr></thead><tbody>
-    ${ours.map(([id,p],i)=>`<tr class="row ${ours[i+1]&&grp(ours[i+1][1])!==grp(p)?'cut':''}" tabindex="0" data-player="${id}"><td>${slotChip(p.slot)}</td><td>${esc(p.pos)}</td><td><b>${esc(p.name)}</b></td><td>${esc(p.nfl)}</td><td>${stChip(p.status)}</td><td>${tagChip(p.tag)}</td><td>${spark(p.weekly)}</td><td class="num">${p.total}</td><td class="num">${p.nextProj||'–'}</td><td class="num">${p.bye??'–'}</td></tr>`).join('')}
-    </tbody></table></div><p class="note">Lineup = where the player sits in our ESPN lineup right now. Dashed line = starters above, bench and IR below. This wk = ESPN projection in our scoring.</p></section>`;
+  const idx=new Map(ours.map((e,i)=>[e[0],i])), SEV={ACTIVE:0,QUESTIONABLE:1,DAY_TO_DAY:1,DOUBTFUL:2,OUT:3,SUSPENSION:4,INJURY_RESERVE:5};
+  const rv=([id,p],k)=>({line:idx.get(id),pos:POS_ORDER.indexOf(p.pos),player:p.name.toLowerCase(),nfl:p.nfl||null,status:SEV[p.status]??6,plan:p.tag&&p.tag!=='roster'?(TAGS[p.tag]||p.tag):null,total:+p.total||0,proj:p.nextProj?+p.nextProj:null,bye:p.bye??null})[k];
+  const lineView=SORT.ro.k==='line'&&SORT.ro.d>0;
+  ours=sortRows(ours,'ro',rv,(a,b)=>idx.get(a[0])-idx.get(b[0]));
+  return `<section class="panel"><div class="ph"><h2>Our roster</h2><span class="phr">${resetBtn('ro')}<span class="eyebrow">Tap a player · click a column to sort</span></span></div>
+    <div class="tw"><table><thead><tr>${sh('ro','line','Lineup')}${sh('ro','pos','Pos')}${sh('ro','player','Player')}${sh('ro','nfl','NFL')}${sh('ro','status','Status')}${sh('ro','plan','Plan')}${sh('ro','total','Total',1)}${sh('ro','proj','This wk',1)}${sh('ro','bye','Bye',1)}</tr></thead><tbody>
+    ${ours.map(([id,p],i)=>`<tr class="row ${lineView&&ours[i+1]&&grp(ours[i+1][1])!==grp(p)?'cut':''}" tabindex="0" data-player="${id}"><td>${slotChip(p.slot)}</td><td>${esc(p.pos)}</td><td><b>${esc(p.name)}</b></td><td>${esc(p.nfl)}</td><td>${stChip(p.status)}</td><td>${planSel(id,p)}</td><td class="num">${(+p.total||0).toFixed(1)}</td><td class="num">${p.nextProj?(+p.nextProj).toFixed(1):'–'}</td><td class="num">${p.bye??'–'}</td></tr>`).join('')}
+    </tbody></table></div><p class="note">Lineup = where the player sits in our ESPN lineup right now. ${lineView?'Dashed line = starters above, bench and IR below.':'Click Lineup to return to lineup order.'} This wk = ESPN projection in our scoring. Plan: pick from the menu to set your own for this week. Your picks get a gold edge and show what staff recommended; pick “↺ Undo” to go back. Staff plans take over again at the next weekly refresh.</p></section>`;
 }
 const oddsChip=o=>`<span class="chip o-${o}">${esc(o)}</span>`;
+const claimChip=c=>c.odds==='Hold'?chip('t-roster','On hold'):oddsChip(c.odds);
+const ODDS_RANK={Likely:3,Contested:2,Unlikely:1};
+const allNews=()=>[...(S.news.ours?.items||[]),...(S.news.league?.items||[])];
+function latestConfirmed(name){return allNews().filter(i=>i.player===name&&i.kind==='Confirmed').sort((a,b)=>new Date(b.time)-new Date(a.time))[0]||null}
+function claimNews(p){const c=latestConfirmed(p.name),asOf=S.meta?.updatedAt;return c&&(!asOf||new Date(c.time)>new Date(asOf))?c:null}
 function claimsPanel(){
-  const cl=Object.entries(S.players).filter(([,p])=>p.claim).sort((a,b)=>(a[1].claim.priority??99)-(b[1].claim.priority??99));
-  if(!cl.length) return '';
+  let cl=Object.entries(S.players).filter(([,p])=>p.claim); if(!cl.length) return '';
+  const base=cl.sort((a,b)=>(a[1].claim.priority??99)-(b[1].claim.priority??99)), ix=new Map(base.map((e,i)=>[e[0],i]));
+  cl=sortRows(base,'cl',([id,p],k)=>({pri:p.claim.priority??null,player:p.name.toLowerCase(),drop:p.claim.drop?p.claim.drop.toLowerCase():null,status:p.claim.odds==='Hold'?1:claimNews(p)?2:0,odds:ODDS_RANK[p.claim.odds]??null})[k],(a,b)=>ix.get(a[0])-ix.get(b[0]));
   const w=S.waivers, myRank=w?.order?.find(x=>x.team===S.meta?.team)?.rank;
-  return `<div class="grid2"><section class="panel"><div class="ph"><h2>Waiver claims</h2><span class="eyebrow">${myRank?`We pick ${myRank} of ${w.order.length}`:''}</span></div>
-    <div class="tw"><table><thead><tr><th>#</th><th>Claim</th><th>Drop</th><th>Odds</th></tr></thead><tbody>
-    ${cl.map(([id,p])=>`<tr class="row" tabindex="0" data-player="${id}"><td>${p.claim.priority??'–'}</td><td><b>${esc(p.name)}</b> <span class="note">${esc(p.pos)}</span></td><td>${esc(p.claim.drop||'Watch only')}</td><td>${oddsChip(p.claim.odds)}</td></tr>`).join('')}
-    </tbody></table></div><p class="note">Odds = chance the player reaches us, given who picks ahead and what they need. Tap for the reasoning.</p></section>
-  ${w?`<section class="panel"><div class="ph"><h2>Waiver order</h2><span class="eyebrow">Inverse standings</span></div><div class="tw"><table><thead><tr><th>#</th><th>Team</th><th>Need</th></tr></thead><tbody>
-    ${w.order.map(x=>`<tr class="row ${x.team===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(x.team)}"><td>${x.rank}</td><td>${esc(x.team)} <span class="note">${esc(x.record)}</span></td><td class="note">${esc(x.need)}</td></tr>`).join('')}
+  const wo=w?sortRows(w.order,'wo',(x,k)=>({rank:x.rank??null,team:x.team.toLowerCase(),need:x.need?x.need.toLowerCase():null})[k],(a,b)=>(a.rank??99)-(b.rank??99)):[];
+  return `<div class="grid2"><section class="panel"><div class="ph"><h2>Waiver claims</h2><span class="phr">${resetBtn('cl')}<span class="eyebrow">${myRank?`We pick ${myRank} of ${w.order.length}`:''}</span></span></div>
+    <div class="tw"><table><thead><tr>${sh('cl','pri','#')}${sh('cl','player','Claim')}${sh('cl','drop','Drop')}${sh('cl','status','Status')}${sh('cl','odds','Odds')}</tr></thead><tbody>
+    ${cl.map(([id,p])=>{const n=claimNews(p);return `<tr class="row" tabindex="0" data-player="${id}"><td>${p.claim.priority??'–'}</td><td><b>${esc(p.name)}</b> <span class="note">${esc(p.pos)}</span></td><td>${esc(p.claim.drop||'Watch only')}</td><td>${p.claim.odds==='Hold'?chip('t-roster','On hold'):n?chip('s-QUESTIONABLE','Check news'):chip('s-ACTIVE','Active')}</td><td>${p.claim.odds==='Hold'?'–':oddsChip(p.claim.odds)}</td></tr>`}).join('')}
+    </tbody></table></div><p class="note">Odds = chance the player reaches us, given who picks ahead and what they need. "Check news" = a confirmed report came out after this plan was set. Tap for the reasoning.</p></section>
+  ${w?`<section class="panel"><div class="ph"><h2>Waiver order</h2><span class="phr">${resetBtn('wo')}<span class="eyebrow">Inverse standings</span></span></div><div class="tw"><table><thead><tr>${sh('wo','rank','#')}${sh('wo','team','Team')}${sh('wo','need','Need')}</tr></thead><tbody>
+    ${wo.map(x=>`<tr class="row ${x.team===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(x.team)}"><td>${x.rank}</td><td>${esc(x.team)} <span class="note">${esc(x.record)}</span></td><td class="note">${esc(x.need)}</td></tr>`).join('')}
     </tbody></table></div></section>`:''}</div>`;
 }
 function market(){
   const cols=[['sell','Sell high'],['claim','Claim'],['rental','Rentals'],['buy','Buy low / targets'],['drop','Drop'],['stash','Stash']];
   const by=t=>Object.entries(S.players).filter(([,p])=>t==='buy'?['buy','target'].includes(p.tag):p.tag===t);
   if(!Object.keys(S.players).length) return emptyState();
-  return claimsPanel()+`<section class="panel"><div class="ph"><h2>Market</h2><span class="eyebrow">From Tony's weekly Market Watch · tap a card</span></div>
-    <div class="market">${cols.filter(([t])=>t!=='stash').map(([t,lab])=>`<div class="mcol"><h3 class="t-${t}">${lab}</h3>${by(t).map(([id,p])=>`<button class="card" data-player="${id}"><span class="n">${esc(p.name)}</span><span class="m">${esc(p.pos)} · ${esc(p.nfl)} · ${esc(p.ours?'Ours':p.owner)}</span>${p.claim?`<span>${oddsChip(p.claim.odds)}</span>`:''}${p.ret?`<span class="r">${esc(p.ret)}</span>`:''}</button>`).join('')||'<p class="note">None this week.</p>'}</div>`).join('')}
+  return claimsPanel()+`<section class="panel"><div class="ph"><h2>Market</h2><span class="eyebrow">Weekly market watch · tap a card</span></div>
+    <div class="market">${cols.filter(([t])=>t!=='stash').map(([t,lab])=>`<div class="mcol"><h3 class="t-${t}">${lab}</h3>${by(t).map(([id,p])=>`<button class="card" data-player="${id}"><span class="n">${esc(p.name)}</span><span class="m">${esc(p.pos)} · ${esc(p.nfl)} · ${esc(p.ours?'Ours':p.owner)}</span>${p.claim?`<span>${claimChip(p.claim)}</span>`:''}${p.ret?`<span class="r">${esc(p.ret)}</span>`:''}</button>`).join('')||'<p class="note">None this week.</p>'}</div>`).join('')}
     <div class="mcol"><h3 class="t-stash">Stash</h3>${by('stash').map(([id,p])=>`<button class="card" data-player="${id}"><span class="n">${esc(p.name)}</span><span class="m">${esc(p.pos)} · ${esc(p.nfl)}</span>${p.ret?`<span class="r">${esc(p.ret)}</span>`:''}</button>`).join('')}</div></div></section>`;
 }
 const fmtT=t=>{try{return new Date(t).toLocaleString([], {weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}catch(e){return t}};
 const pid=name=>{const e=Object.entries(S.players).find(([,p])=>p.name===name);return e?e[0]:null};
 const nameBtn=n=>{const id=pid(n);return id?`<button class="link" data-player="${id}">${esc(n)}</button>`:`<b>${esc(n)}</b>`};
 function newsList(items){return items?.length?`<ul class="list news">${items.map(i=>`<li><div class="meta"><span>${fmtT(i.time)}</span>${i.kind?`<span class="chip k-${i.kind}">${esc(i.kind)}</span>`:''}${i.why?`<span class="chip t-roster">${esc(i.why)}</span>`:''}<span>${esc(i.pos)} · ${esc(i.nfl)} · ${esc(i.owner)}</span></div><div>${nameBtn(i.player)} ${i.source?`<span class="src">${esc(i.source.replace('Google News: ','via '))}</span>`:'<span class="src">RotoWire via ESPN</span>'}</div><div class="hl">${i.link?`<a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.headline)}</a>`:esc(i.headline)}</div></li>`).join('')}</ul>`:'<p class="note">Nothing new.</p>'}
+const PSEV={DNP:2,Limited:1,Full:0};
+function seasonYear(){return new Date(S.meta?.updatedAt||Date.now()).getFullYear()}
+function dayDate(lbl){const [mm,dd]=lbl.slice(4).split('/').map(Number);return new Date(seasonYear(),mm-1,dd)}
+function nflWeekOf(d){const start=new Date(seasonYear(),8,1);while(start.getDay()!==2)start.setDate(start.getDate()+1);start.setDate(start.getDate()+7);return Math.floor((d-start)/864e5/7)+1}
+function practiceNow(){const pr=S.practice,wk=S.meta?.week;const out={};
+  for(const [n,p] of Object.entries(pr?.players||{})){const days=Object.fromEntries(Object.entries(p.days).filter(([d])=>nflWeekOf(dayDate(d))===wk));if(Object.keys(days).length)out[n]={...p,days}}
+  for(const p of Object.values(S.players))if(p.ours&&['QUESTIONABLE','DOUBTFUL','OUT','DAY_TO_DAY'].includes(p.status)&&!out[p.name])out[p.name]={pos:p.pos,nfl:p.nfl,ours:true,days:{},noReport:true};
+  return out}
 function newsView(){
-  const ours=S.news.ours,lg=S.news.league,pr=S.practice;
+  const ours=S.news.ours,lg=S.news.league,pr=S.practice,wk=S.meta?.week;
   if(!ours&&!lg&&!pr) return emptyState();
-  const days=pr?[...new Set(Object.values(pr.players).flatMap(p=>Object.keys(p.days)))].sort((a,b)=>new Date(a.slice(4)+'/2026')-new Date(b.slice(4)+'/2026')):[];
-  return `<section class="panel"><div class="ph"><h2>Practice report</h2><span class="eyebrow">Our players + watch list · Wed–Sat</span></div>
-    ${pr&&Object.keys(pr.players).length?`<div class="tw"><table class="prac"><thead><tr><th>Player</th>${days.map(d=>`<th class="num">${esc(d)}</th>`).join('')}</tr></thead><tbody>
-    ${Object.entries(pr.players).map(([n,p])=>`<tr><td>${nameBtn(n)} <span class="note">${esc(p.pos)} · ${esc(p.nfl)}${p.ours?' · ours':''}</span></td>${days.map(d=>{const x=p.days[d];return `<td class="d">${x?`<span class="chip p-${x.status}" title="${esc(x.note)}">${x.status}</span>`:'–'}</td>`}).join('')}</tr>`).join('')}
-    </tbody></table></div>`:'<p class="note">No practice reports yet this week. Teams report Wednesday through Friday.</p>'}
-    <p class="note">DNP = did not practice · Limited · Full. Updated ${pr?fmtT(pr.updatedAt):'–'}.</p></section>
-  ${S.news.desk?.rumors?.length?`<section class="panel"><div class="ph"><h2>Rumor mill</h2><span class="eyebrow">Unconfirmed · only what could matter to us</span></div><ul class="list">${S.news.desk.rumors.map(r=>`<li class="rumor"><div class="meta news"><span class="chip k-Rumor">Rumor</span><span class="chip t-roster">${esc(r.action)}</span><span class="src">${r.sources} report${r.sources>1?'s':''}</span></div><div>${nameBtn(r.player)} <span class="c">${esc(r.claim)}</span></div><div class="i"><b>Why it matters:</b> ${esc(r.impact)}</div>${r.link?`<div class="i"><a href="${esc(r.link)}" target="_blank" rel="noopener">Latest: ${esc(r.latest)}</a></div>`:''}</li>`).join('')}</ul></section>`:''}
-  ${S.news.desk?`<div class="grid2"><section class="panel"><div class="ph"><h2>What fantasy is adding</h2><span class="eyebrow">Sleeper · last 24h</span></div><ul class="list trend">${S.news.desk.trending.slice(0,12).map(t=>`<li><span>${nameBtn(t.player)} <span class="note">${esc(t.pos||'')} · ${esc(t.nfl||'')} · ${esc(t.owner)}</span></span><span class="src">${Number(t.adds24h).toLocaleString()} adds</span></li>`).join('')}</ul><p class="note">Tells us which claims will be contested before waivers run.</p></section>
-  <section class="panel"><div class="ph"><h2>News desk sources</h2><span class="eyebrow">Checked every sweep</span></div><div class="health">${Object.entries(S.news.desk.sources).map(([k,v])=>`<span class="chip ${v==='ok'?'s-ACTIVE':'s-OUT'}">${esc(k.replace('Google News: ','Insider: '))}</span>`).join('')}</div><p class="note">Insider names are searched across all news outlets that quote them.</p></section></div>`:''}
+  const pn=practiceNow(), days=[...new Set(Object.values(pn).flatMap(p=>Object.keys(p.days)))].sort((a,b)=>dayDate(a)-dayDate(b));
+  const names=Object.keys(pn), ix=new Map(names.map((n,i)=>[n,i]));
+  const rows=sortRows(names,'pr',(n,k)=>k==='player'?n.toLowerCase():k==='gs'?({ACTIVE:0,QUESTIONABLE:1,DAY_TO_DAY:1,DOUBTFUL:2,OUT:3,INJURY_RESERVE:4}[S.players[pid(n)]?.status]??null):k.startsWith('d')?(PSEV[pn[n].days[days[+k.slice(1)]]?.status]??null):ix.get(n),(a,b)=>ix.get(a)-ix.get(b));
+  const desk=S.news.desk, srcs=desk?Object.entries(desk.sources):[], bad=srcs.filter(([,v])=>v!=='ok');
+  return `<section class="panel"><div class="ph"><h2>Week ${wk??''} practice report</h2><span class="phr">${resetBtn('pr')}<span class="eyebrow">Our players + watch list · Wed–Sat</span></span></div>
+    ${names.length?`<div class="tw"><table class="prac"><thead><tr>${sh('pr','player','Player')}${sh('pr','gs','Game status')}${days.map((d,i)=>sh('pr','d'+i,esc(d),1)).join('')}</tr></thead><tbody>
+    ${rows.map(n=>{const p=pn[n],sp=S.players[pid(n)];return `<tr><td>${nameBtn(n)} <span class="note">${esc(p.pos)} · ${esc(p.nfl)}${p.ours?' · ours':''}</span></td><td>${sp?stChip(sp.status):'–'}</td>${days.map(d=>{const x=p.days[d];return `<td class="d">${x?`<span class="chip p-${x.status}" title="${esc(x.note)}">${x.status}</span>`:'–'}</td>`}).join('')}${!days.length&&p.noReport?'':''}</tr>`}).join('')}
+    </tbody></table></div>`:''}
+    <p class="note">${days.length?'':`No Week ${wk??''} practice reports yet. Teams report Wednesday through Friday. `}Our injured players are always listed, even before reports come in. DNP = did not practice · Limited · Full. Updated ${pr?fmtT(pr.updatedAt):'–'}.</p></section>
+  ${desk?.rumors?.length?`<section class="panel"><div class="ph"><h2>Rumor mill</h2><span class="eyebrow">Unconfirmed · only what could matter to us</span></div><ul class="list">${desk.rumors.map(r=>{const c=latestConfirmed(r.player),upd=c&&(!r.time||new Date(c.time)>new Date(r.time));return `<li class="rumor"><div class="meta news">${upd?'<span class="chip k-Confirmed">Confirmed update</span>':'<span class="chip k-Rumor">Rumor</span>'}<span class="chip t-roster">${esc(r.action)}</span><span class="src">${r.sources} report${r.sources>1?'s':''}</span></div><div>${nameBtn(r.player)} <span class="c">${esc(r.claim)}</span></div>${upd?`<div class="flag"><b>Newer confirmed report (${fmtT(c.time)}):</b> ${c.link?`<a href="${esc(c.link)}" target="_blank" rel="noopener">${esc(c.headline)}</a>`:esc(c.headline)}</div>`:''}<div class="i"><b>Why it matters:</b> ${esc(r.impact)}</div>${r.link&&!upd?`<div class="i"><a href="${esc(r.link)}" target="_blank" rel="noopener">Latest: ${esc(r.latest)}</a></div>`:''}</li>`}).join('')}</ul></section>`:''}
+  ${desk?`<section class="panel"><div class="ph"><h2>What fantasy is adding</h2><span class="eyebrow">Sleeper · last 24h</span></div><ul class="list trend">${desk.trending.slice(0,12).map(t=>`<li><span>${nameBtn(t.player)} <span class="note">${esc(t.pos||'')} · ${esc(t.nfl||'')} · ${esc(t.owner)}</span></span><span class="src">${Number(t.adds24h).toLocaleString()} adds</span></li>`).join('')}</ul><p class="note">Tells us which claims will be contested before waivers run. News sources: ${srcs.length-bad.length}/${srcs.length} OK${bad.length?' · down: '+bad.map(([k])=>esc(k.replace('Google News: ','Insider: '))).join(', '):''}.</p></section>`:''}
   <div class="grid2"><section class="panel"><div class="ph"><h2>Our players</h2><span class="eyebrow">Updated ${ours?fmtT(ours.updatedAt):'–'}</span></div>${newsList(ours?.items)}</section>
   <section class="panel"><div class="ph"><h2>League-wide: matters to us</h2><span class="eyebrow">Signings, injuries, rumors, role changes</span></div>${newsList(lg?.items)}</section></div>`;
 }
@@ -270,18 +341,19 @@ function notesView(){
     ${m.sections.map(sec=>`<section><h3>${esc(sec.h)}</h3><ul>${sec.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></section>`).join('')}
     ${m.huddle?`<p class="note"><b>Huddle:</b> ${esc(m.huddle)}</p>`:''}</article>`;
 }
-function emptyState(){return `<div class="empty">No data loaded yet. Maya loads fresh numbers every Tuesday; this view fills in automatically.</div>`}
+function emptyState(){return `<div class="empty">No data loaded yet. Fresh numbers load every Tuesday; this view fills in automatically.</div>`}
 
 /* ---------- drawer ---------- */
 function openPlayer(id){const p=S.players[id];if(!p)return;
   const t=p.ours?null:teamByName(p.owner);
   drawer(`<div class="dh"><div><div class="eyebrow">${esc(p.pos)} · ${esc(p.nfl)} · bye ${p.bye??'–'}</div><h2 id="dtitle">${esc(p.name)}</h2></div><button class="x" aria-label="Close" data-close>×</button></div>
-   <div class="chips">${stChip(p.status)} ${tagChip(p.tag)} ${p.ours?slotChip(p.slot):''}</div>
+   <div class="chips">${stChip(p.status)} ${p.tag&&p.tag!=='roster'?tagChip(p.tag):''} ${p.ours?slotChip(p.slot):''}</div>
+   ${p.dropFor?`<div class="why"><b>Planned drop</b> if we land ${esc(p.dropFor)}.</div>`:''}
    ${p.note?`<div class="why"><b>Why:</b> ${esc(p.note)}${p.ret?`<br><b>Timing:</b> ${esc(p.ret)}`:''}</div>`:''}
-   ${p.claim?`<div class="claimbox"><div class="ph"><b>Waiver claim${p.claim.priority?' #'+p.claim.priority:''}</b>${oddsChip(p.claim.odds)}</div><div class="note">${esc(p.claim.note)}</div>${p.claim.drop?`<div class="note">Drop: <b>${esc(p.claim.drop)}</b></div>`:''}</div>`:''}
-   <div class="facts"><div class="fact"><b>${p.total}</b><span>Points so far</span></div><div class="fact"><b>${p.nextProj||'–'}</b><span>Proj. this week</span></div><div class="fact"><b>${p.seasonProj||'–'}</b><span>Proj. season</span></div></div>
+   ${p.claim?`<div class="claimbox"><div class="ph"><b>Waiver claim${p.claim.priority?' #'+p.claim.priority:''}</b>${claimChip(p.claim)}</div><div class="note">${esc(p.claim.note)}</div>${(()=>{const c=claimNews(p);return c?`<div class="flag"><b>Newer confirmed report (${fmtT(c.time)}):</b> ${esc(c.headline)}</div>`:''})()}${p.claim.drop?`<div class="note">Drop: <b>${esc(p.claim.drop)}</b></div>`:''}</div>`:''}
+   <div class="facts"><div class="fact"><b>${(+p.total||0).toFixed(1)}</b><span>Points so far</span></div><div class="fact"><b>${p.nextProj?(+p.nextProj).toFixed(1):'–'}</b><span>Proj. this week</span></div><div class="fact"><b>${p.seasonProj?(+p.seasonProj).toFixed(1):'–'}</b><span>Rest-of-season proj.</span></div></div>
    <section class="panel"><div class="ph"><h2>Weekly points</h2><span class="eyebrow">Our scoring</span></div>${barsSVG(p.weekly)}</section>
-   ${(()=>{const pr=S.practice?.players?.[p.name];return pr?`<section class="panel"><div class="ph"><h2>Practice</h2></div><div class="chips">${Object.entries(pr.days).map(([d,x])=>`<span class="chip p-${x.status}" title="${esc(x.note)}">${esc(d)} ${x.status}</span>`).join('')}</div></section>`:''})()}
+   ${(()=>{const pr=practiceNow()[p.name];return pr&&Object.keys(pr.days).length?`<section class="panel"><div class="ph"><h2>Practice</h2></div><div class="chips">${Object.entries(pr.days).map(([d,x])=>`<span class="chip p-${x.status}" title="${esc(x.note)}">${esc(d)} ${x.status}</span>`).join('')}</div></section>`:''})()}
    ${(()=>{const it=[...(S.news.ours?.items||[]),...(S.news.league?.items||[])].filter(i=>i.player===p.name).slice(0,4);return it.length?`<section class="panel"><div class="ph"><h2>Latest news</h2></div>${newsList(it)}</section>`:''})()}
    <section class="panel"><div class="ph"><h2>Playoff schedule</h2></div><div class="chips">${(p.playoffs||[]).map((o,i)=>chip('t-roster','Wk '+(15+i)+' '+o)).join('')}</div></section>
    ${!p.ours?`<section class="panel"><div class="ph"><h2>Owner</h2></div><div>${p.owner==='Free agent'?'Free agent':`<button class="link" data-team="${esc(p.owner)}">${esc(p.owner)}</button>${t?` <span class="note">${t.w}-${t.l} · playoffs ${t.playoffPct}%</span>`:''}`}</div></section>`:''}`);
@@ -289,7 +361,7 @@ function openPlayer(id){const p=S.players[id];if(!p)return;
 function openTeam(name){const t=teamByName(name);if(!t)return;const s=teamScores(name);
   const ours=Object.entries(S.players).filter(([,p])=>p.owner===name&&!p.ours);
   drawer(`<div class="dh"><div><div class="eyebrow">Seed ${t.seed} · ${t.w}-${t.l}</div><h2 id="dtitle">${esc(name)}</h2></div><button class="x" aria-label="Close" data-close>×</button></div>
-   <div class="facts"><div class="fact"><b>${t.playoffPct}%</b><span>Playoff odds</span></div><div class="fact"><b>${t.byePct}%</b><span>#1 seed</span></div><div class="fact"><b>${t.pf.toFixed(0)}</b><span>Points for</span></div><div class="fact"><b>${t.strength}</b><span>Strength</span></div><div class="fact"><b>${t.hundreds}</b><span>100+ games</span></div></div>
+   <div class="facts"><div class="fact"><b>${t.playoffPct}%</b><span>Playoff odds</span></div><div class="fact"><b>${t.byePct}%</b><span>#1 seed</span></div><div class="fact"><b>${t.pf.toFixed(0)}</b><span>Points for</span></div><div class="fact"><b>${avgPPG(t.name)}</b><span>Avg PPG</span></div><div class="fact"><b>${t.strength}</b><span>Strength</span></div><div class="fact"><b>${t.hundreds}</b><span>100+ games</span></div></div>
    <section class="panel"><div class="ph"><h2>Weekly scores</h2><span class="eyebrow">100 line</span></div>${barsSVG(s,{line:100,hi:100})}</section>
    ${ours.length?`<section class="panel"><div class="ph"><h2>Players we're watching</h2></div><ul class="list">${ours.map(([id,p])=>`<li>${tagChip(p.tag)} <button class="link" data-player="${id}">${esc(p.name)}</button> <span class="note">${esc(p.pos)}</span></li>`).join('')}</ul></section>`:''}`);
 }
@@ -298,11 +370,14 @@ function drawer(html){lastFocus=document.activeElement;const d=$('#drawer');d.in
 function closeDrawer(){$('#drawer').hidden=true;$('#scrim').hidden=true;lastFocus?.focus?.()}
 
 /* ---------- wiring ---------- */
-function render(){const v={overview,league,roster,market,news:newsView,notes:notesView}[S.view];$('#view').innerHTML=v();
+function render(){mergePlans();const v={overview,league,roster,market,news:newsView,notes:notesView}[S.view];$('#view').innerHTML=v();
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===S.view));
   if(S.meta)$('#stamp').textContent=`Week ${S.meta.week} · updated ${new Date(S.meta.updatedAt).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}`;}
 function setView(v){S.view=v;try{localStorage.setItem('lt-bi-view',v)}catch(e){}render()}
-document.addEventListener('click',e=>{const mb=e.target.closest('[data-memo]');if(mb){S.memoSel=mb.dataset.memo;return render()}
+document.addEventListener('click',e=>{if(e.target.closest('select'))return;
+  const rs=e.target.closest('[data-reset]');if(rs){Object.assign(SORT[rs.dataset.reset],SORT_DEF[rs.dataset.reset]);return render()}
+  const so=e.target.closest('[data-sort]');if(so){const [t,k]=so.dataset.sort.split(':');return setSort(t,k)}
+  const mb=e.target.closest('[data-memo]');if(mb){S.memoSel=mb.dataset.memo;return render()}
   const el=e.target.closest('[data-v],[data-player],[data-team],[data-goto],[data-close]');
   if(e.target.id==='scrim')return closeDrawer(); if(!el)return;
   if(el.dataset.v)return setView(el.dataset.v);
@@ -310,6 +385,9 @@ document.addEventListener('click',e=>{const mb=e.target.closest('[data-memo]');i
   if('close' in el.dataset)return closeDrawer();
   if(el.dataset.player)return openPlayer(el.dataset.player);
   if(el.dataset.team)return openTeam(el.dataset.team);});
+document.addEventListener('change',async e=>{const sel=e.target.closest('select[data-plan]');if(!sel||!savePlan)return;const id=sel.dataset.plan,tag=sel.value,prev=S.plans[id];
+  if(tag==='__staff')delete S.plans[id];else S.plans[id]={tag,week:S.meta?.week,name:S.raw[id]?.name||'',setAt:new Date().toISOString()};render();
+  try{await savePlan(id,S.plans[id]||null)}catch(err){console.warn('plan save failed',err);if(prev)S.plans[id]=prev;else delete S.plans[id];render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeDrawer();
   if(e.key==='Enter'&&e.target.matches('tr.row')){const t=e.target;t.dataset.player?openPlayer(t.dataset.player):openTeam(t.dataset.team)}});
 try{const v=localStorage.getItem('lt-bi-view');if(v&&['overview','league','roster','market','news','notes'].includes(v))S.view=v}catch(e){}
@@ -318,9 +396,11 @@ render();
 (async()=>{
   async function load(){
     try{const r=await fetch('data/bundle.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(r.status);const b=await r.json();
-      S.meta=b.meta;S.odds=b.odds||{};S.scores=b.scores||{};S.players=b.players||{};S.waivers=b.waivers;S.news=b.news||{};S.practice=b.practice;S.memos=b.memos||{};render();}
+      S.meta=b.meta;S.odds=b.odds||{};S.scores=b.scores||{};S.raw=b.players||{};S.waivers=b.waivers;S.news=b.news||{};S.practice=b.practice;S.memos=b.memos||{};render();}
     catch(e){if(!S.meta){$('#view').innerHTML='<div class="empty">Data is loading. Refresh in a minute.</div>';$('#stamp').textContent='Offline'}}
   }
+  try{S.plans=JSON.parse(localStorage.getItem('lt-plans')||'{}')}catch(e){S.plans={}}
+  savePlan=async()=>{try{localStorage.setItem('lt-plans',JSON.stringify(S.plans))}catch(e){}};
   await load(); setInterval(load,10*60*1000);
 })();
 })();
