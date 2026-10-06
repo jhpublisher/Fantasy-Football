@@ -141,4 +141,93 @@ dump("odds", f"w{wk:02d}", {"week": wk, "teams": teams})
 for w, s in weekly.items(): dump("scores", f"w{w:02d}", {"week": w, "scores": s})
 dump("waivers", "current", {"week": wk, "order": [{"rank": x.get("waiverRank"), "team": x["name"].strip(), "record": f'{x["record"]["overall"]["wins"]}-{x["record"]["overall"]["losses"]}', "need": QB_NEED.get(x["name"].strip(), "")} for x in sorted(t["teams"], key=lambda x: x.get("waiverRank", 99))]})
 for pid, d in players.items(): dump("players", pid, d)
+# ---- extras: this week's matchup, KPI change vs last week, seed race, bye/playoff grids, free agents, key dates ----
+try:
+    import math
+    def _get(u, h=None): return json.load(urllib.request.urlopen(urllib.request.Request(u, headers=h or {}), timeout=90))
+    games = [g_ for g_ in m["schedule"] if g_["matchupPeriodId"] <= REG]
+    def res_through(w_):
+        W_ = defaultdict(int); L_ = defaultdict(int); PF_ = defaultdict(float); H_ = defaultdict(int)
+        for g_ in games:
+            if g_["matchupPeriodId"] > w_ or g_["winner"] == "UNDECIDED": continue
+            h_, a_ = g_["home"]["teamId"], g_["away"]["teamId"]; hs_, as2 = g_["home"]["totalPoints"], g_["away"]["totalPoints"]
+            PF_[h_] += hs_; PF_[a_] += as2; x_, y_ = (h_, a_) if hs_ > as2 else (a_, h_); W_[x_] += 1; L_[y_] += 1; H_[(x_, y_)] += 1
+        return W_, L_, PF_, H_
+    def prev_kpis(w_done, n_=N):
+        W_, L_, PF_, H_ = res_through(w_done); rem_ = [(g_["home"]["teamId"], g_["away"]["teamId"]) for g_ in games if g_["matchupPeriodId"] > w_done]
+        made_ = defaultdict(int); top_ = defaultdict(int); rng = random.Random(7)
+        for _ in range(n_):
+            w_ = dict(W_); pf_ = dict(PF_); hh_ = dict(H_)
+            for h_, a_ in rem_:
+                hs_, as2 = rng.gauss(mu[h_], 21), rng.gauss(mu[a_], 21); pf_[h_] = pf_.get(h_, 0) + hs_; pf_[a_] = pf_.get(a_, 0) + as2
+                x_, y_ = (h_, a_) if hs_ > as2 else (a_, h_); w_[x_] = w_.get(x_, 0) + 1; hh_[(x_, y_)] = hh_.get((x_, y_), 0) + 1
+            o_ = rank(w_, pf_, hh_)
+            for k_ in o_[:PO]: made_[k_] += 1
+            top_[o_[0]] += 1
+        o_ = rank(W_, PF_, H_)
+        return {"record": f"{W_[me]}-{L_[me]}", "seed": o_.index(me) + 1, "playoffPct": round(100 * made_[me] / n_), "byePct": round(100 * top_[me] / n_),
+                "pf": round(PF_[me], 2), "gamesAhead8": ((W_[me] - W_[o_[PO]]) + (L_[o_[PO]] - L_[me])) / 2}
+    prev = prev_kpis(wk - 2) if wk > 2 else None
+    def starters(tid):
+        tm = next(x for x in r["teams"] if x["id"] == tid); out_ = []
+        for e in tm["roster"]["entries"]:
+            p = e["playerPoolEntry"]["player"]; sl = SLOTS.get(e["lineupSlotId"], "?")
+            if sl in ("Bench", "IR"): continue
+            st = stats(p); out_.append({"name": p["fullName"], "slot": sl, "pos": POS.get(p["defaultPositionId"], "?"), "nfl": ab.get(p.get("proTeamId"), "FA"),
+                "proj": round(st.get((1, 1, wk), 0) or 0, 1), "status": p.get("injuryStatus") or "ACTIVE", "bye": bye.get(p.get("proTeamId")) == wk})
+        return out_
+    tby = {x["id"]: x for x in teams}
+    g0 = next((g_ for g_ in games if g_["matchupPeriodId"] == wk and me in (g_["home"]["teamId"], g_["away"]["teamId"])), None)
+    matchup = None
+    if g0:
+        opp = g0["away"]["teamId"] if g0["home"]["teamId"] == me else g0["home"]["teamId"]
+        us_s, op_s = starters(me), starters(opp); pu, po_ = sum(x["proj"] for x in us_s), sum(x["proj"] for x in op_s)
+        wp = 0.5 * (1 + math.erf((pu - po_) / (21 * math.sqrt(2)) / math.sqrt(2)))
+        matchup = {"week": wk, "opp": names[opp], "oppRecord": f'{tby[opp]["w"]}-{tby[opp]["l"]}', "oppSeed": tby[opp]["seed"], "projUs": round(pu, 1), "projOpp": round(po_, 1),
+                   "winPct": round(100 * wp), "flags": [x for x in us_s if x["bye"] or x["status"] in ("OUT", "INJURY_RESERVE", "DOUBTFUL", "SUSPENSION", "QUESTIONABLE")],
+                   "usStarters": us_s, "oppStarters": op_s}
+    sb = _get(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week={wk}&dates={YR}")
+    fa_raw = get(f"scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps({"players": {"filterStatus": {"value": ["FREEAGENT", "WAIVERS"]}, "limit": 400, "sortPercOwned": {"sortPriority": 1, "sortAsc": False}}})})["players"]
+    wpd = [x.get("waiverProcessDate") for x in fa_raw if x.get("waiverProcessDate")]
+    dates = {"waivers": datetime.fromtimestamp(min(wpd) / 1000, timezone.utc).isoformat() if wpd else None,
+             "kickoff": min((e["date"] for e in sb["events"]), default=None),
+             "tradeDeadline": datetime.fromtimestamp(t["settings"]["tradeSettings"]["deadlineDate"] / 1000, timezone.utc).isoformat() if t["settings"].get("tradeSettings", {}).get("deadlineDate") else None}
+    fas = defaultdict(list)
+    for x in fa_raw:
+        p = x["player"]; pos = POS.get(p["defaultPositionId"])
+        if not pos: continue
+        st = stats(p); pr = round(st.get((1, 1, wk), 0) or 0, 1)
+        if bye.get(p.get("proTeamId")) == wk or pr <= 0: continue
+        fas[pos].append({"name": p["fullName"], "nfl": ab.get(p.get("proTeamId"), "FA"), "proj": pr, "pct": round(p.get("ownership", {}).get("percentOwned", 0), 1), "status": x.get("status"), "inj": p.get("injuryStatus") or "ACTIVE"})
+    free_agents = {k: sorted(v, key=lambda z: -z["proj"])[:4] for k, v in fas.items()}
+    first, seventh, eighth = order[0], order[PO - 1], order[PO]
+    remaining = defaultdict(list); h2h = {}
+    for g_ in games:
+        h_, a_ = g_["home"]["teamId"], g_["away"]["teamId"]
+        if g_["winner"] == "UNDECIDED": remaining[h_].append(a_); remaining[a_].append(h_)
+        if me in (h_, a_):
+            o_ = a_ if h_ == me else h_
+            h2h[o_] = f'Wk {g_["matchupPeriodId"]}' if g_["winner"] == "UNDECIDED" else ("W" if (g_["winner"] == "HOME") == (h_ == me) else "L") + f' Wk {g_["matchupPeriodId"]}'
+    gb = lambda a_, b_: ((W[a_] - W[b_]) + (L[b_] - L[a_])) / 2
+    race = [{"name": names[k], "seed": i + 1, "w": W[k], "l": L[k], "gb1": gb(first, k), "vs7": gb(k, eighth) if i < PO else -gb(seventh, k),
+             "sos": round(statistics.mean(mu[o_] for o_ in remaining[k]), 1) if remaining[k] else None, "h2h": h2h.get(k, "—" if k == me else ""),
+             "po": tby[k]["playoffPct"], "bye": tby[k]["byePct"]} for i, k in enumerate(order)]
+    pa = defaultdict(list); pscored = defaultdict(list)
+    for w_ in range(1, wk):
+        s_ = _get(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week={w_}&dates={YR}")
+        for e in s_["events"]:
+            if not e["status"]["type"]["completed"]: continue
+            a_, b_ = e["competitions"][0]["competitors"]
+            pa[a_["team"]["abbreviation"]].append(int(b_["score"])); pa[b_["team"]["abbreviation"]].append(int(a_["score"]))
+            pscored[a_["team"]["abbreviation"]].append(int(a_["score"])); pscored[b_["team"]["abbreviation"]].append(int(b_["score"]))
+    ppa = {k: round(statistics.mean(v), 1) for k, v in pa.items()}; ppf = {k: round(statistics.mean(v), 1) for k, v in pscored.items()}
+    def opp_v(code, d):
+        c = code.lstrip("@"); return d.get(c) or d.get({"WSH": "WAS", "WAS": "WSH"}.get(c, c))
+    roster_x = [{"name": p["name"], "pos": p["pos"], "nfl": p["nfl"], "slot": p.get("slot"), "bye": p.get("bye"),
+                 "playoffs": [{"opp": o_, "pa": opp_v(o_, ppa) if o_ != "BYE" else None, "ps": opp_v(o_, ppf) if o_ != "BYE" else None} for o_ in (p.get("playoffs") or [])]}
+                for p in players.values() if p.get("ours")]
+    dump("extras", "current", {"week": wk, "builtAt": datetime.now(timezone.utc).isoformat(timespec="minutes"), "prev": prev, "matchup": matchup, "dates": dates,
+         "freeAgents": free_agents, "race": race, "roster": roster_x, "leaguePA": round(statistics.mean(ppa.values()), 1) if ppa else None, "regWeeks": REG})
+except Exception as _e:
+    print("extras skipped:", _e)
 print(f"week {wk}: {len(players)} players, {len(weekly)} score weeks -> {out}")
