@@ -81,6 +81,7 @@ def best(pl):
     for k in by: by[k].sort(reverse=True)
     tot = sum(by[p][0] for p in ["QB","RB","WR","TE","D/ST","K"] if by[p])
     return tot + sum(sorted(by["RB"][1:] + by["WR"][1:] + by["TE"][1:], reverse=True)[:2])
+def played(p): return {s["scoringPeriodId"] for s in p.get("stats", []) if s.get("seasonId", YR) == YR and s["statSourceId"] == 0 and s["statSplitTypeId"] == 1 and s.get("stats")}
 def stats(p): return {(s["statSourceId"], s["statSplitTypeId"], s["scoringPeriodId"]): s.get("appliedTotal", 0) for s in p.get("stats", []) if s.get("seasonId", YR) == YR}
 proj = {}
 for tm in r["teams"]:
@@ -121,7 +122,7 @@ for pe in all_p["players"]:
     if own == me and tag in ("claim", "buy", "target", "rental"): tag = "roster"
     players[str(p["id"])] = {"name": p["fullName"], "pos": pos, "nfl": ab.get(nfl, "FA"), "owner": names.get(own, "Free agent"),
         "ownerId": own, "ours": own == me, "slot": slot_of.get(p["id"]) if own == me else None, "status": p.get("injuryStatus") or "ACTIVE", "tag": tag, "note": note, "ret": ret,
-        "weekly": {str(w): round(st.get((0, 1, w), 0) or 0, 1) for w in range(1, wk)},
+        "weekly": {str(w): (round(st.get((0, 1, w)) or 0, 1) if w in played(p) and w != bye.get(nfl) else None) for w in range(1, wk)},  # None = did not play (bye/inactive/IR)
         "total": round(st.get((0, 0, YR)) or st.get((0, 0, 0)) or 0, 1),
         "nextProj": round(st.get((1, 1, wk), 0) or 0, 1), "seasonProj": round(st.get((1, 0, YR)) or st.get((1, 0, 0)) or 0, 1),
         "bye": bye.get(nfl), "playoffs": po_sched(nfl)}

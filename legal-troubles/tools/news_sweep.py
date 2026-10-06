@@ -87,10 +87,19 @@ def rss(src_url):
         return [{"src": src, "error": str(e)[:80]}]
 by_name = {}
 for p in pool: by_name[p["name"]] = p
+by_id = {p["id"]: p for p in pool}
+# every rostered player (any position) by ESPN id/name, so trending never calls a rostered player a free agent
+by_own = {}
+for pe in allp:
+    _p = pe["player"]; _o = pe.get("onTeamId", 0)
+    if _o:
+        rec = {"id": _p["id"], "name": _p["fullName"], "owner": names.get(_o, "Free agent")}; by_id.setdefault(_p["id"], rec); by_own[_p["fullName"]] = rec
 last = {}  # last-name index for "Mixon" style headlines
 for p in pool:
     ln = p["name"].replace(" Jr.", "").replace(" Sr.", "").replace(" III", "").replace(" II", "").split()[-1]
     if len(ln) > 3: last.setdefault(ln, []).append(p)
+TITLE_WORDS = {"Bears","Bengals","Bills","Broncos","Browns","Buccaneers","Bucs","Cardinals","Chargers","Chiefs","Colts","Commanders","Cowboys","Dolphins","Eagles","Falcons","49ers","Niners","Giants","Jaguars","Jags","Jets","Lions","Packers","Panthers","Patriots","Raiders","Rams","Ravens","Saints","Seahawks","Steelers","Texans","Titans","Vikings",
+  "Report","Reports","Source","Sources","Rookie","Veteran","Star","Coach","Signing","Signs","Sign","Release","Released","Waived","Activated","Injured","Free","Agent","Former","Ex","Back","Watch","Update","Breaking","Fantasy","Why","How","What","When","Will","Could","Should","Is","Are","Has","Have","With","Without","For","And","But","After","Before","On","In","At","To","As","Of","The","A","An","If","Not","No","Yes","Mr","Week","Sunday","Monday","Thursday","Saturday","Tuesday","Wednesday","Friday"}
 desk, seen, health = [], set(), {}
 with cf.ThreadPoolExecutor(12) as ex:
     for items in ex.map(rss, FEEDS.items()):
@@ -99,10 +108,19 @@ with cf.ThreadPoolExecutor(12) as ex:
             health[it["src"]] = "ok"
             if it["ts"] < cut: continue
             text = it["title"] + " " + it["desc"]
-            hits = [p for n, p in by_name.items() if n in text]
+            hits = [p for n, p in by_name.items() if re.search(rf"(?<![A-Za-z.'-]){re.escape(n)}(?![A-Za-z'-])", text)]
             if not hits:
                 for ln, ps in last.items():
-                    if re.search(rf"\b{re.escape(ln)}\b", it["title"]) and len(ps) == 1: hits.append(ps[0])
+                    if len(ps) != 1: continue
+                    first = ps[0]["name"].split()[0]
+                    for mt in re.finditer(rf"\b{re.escape(ln)}\b", it["title"]):
+                        before = re.search(r"([A-Z][A-Za-z.'-]+)\s+$", it["title"][:mt.start()])
+                        after = re.match(r"\s+([A-Z][a-z][A-Za-z'-]+)", it["title"][mt.end():])
+                        if after and after.group(1) not in ("Jr", "Sr"): continue  # "Tyson Bagent": Tyson is a first name here
+                        bw = before.group(1) if before else ""
+                        looks_first = bw and bw != first and not bw.isupper() and not bw.endswith(("'s", "'")) and bw.rstrip(".") not in TITLE_WORDS
+                        if looks_first: continue  # "Scotty Miller" is not Kendre Miller
+                        hits.append(ps[0]); break
             for p in hits[:2]:
                 k = (p["name"], it["title"][:60].lower())
                 if k in seen: continue
@@ -112,6 +130,8 @@ with cf.ThreadPoolExecutor(12) as ex:
                 if rel == "Free agent" and not KEY.search(it["title"]): continue
                 item = {"player": p["name"], "pos": p["pos"], "nfl": p["nfl"], "owner": p["owner"], "time": it["ts"].isoformat(timespec="minutes").replace("+00:00", "Z"), "headline": it["title"], "source": it["src"], "link": it["link"], "why": rel}
                 (ours if p["ours"] else league).append(item)
+_norm = lambda n: re.sub(r"[^a-z]", "", re.sub(r"\b(jr|sr|ii|iii|iv|v)\.?$", "", n.lower().strip()))
+by_norm = {_norm(v["name"]): v for v in list(by_own.values()) + pool}
 # Sleeper: what the fantasy world is adding right now (crowd signal)
 try:
     tr = json.load(urllib.request.urlopen(urllib.request.Request("https://api.sleeper.app/v1/players/nfl/trending/add?lookback_hours=24&limit=25", headers=UA), timeout=25))
@@ -122,8 +142,10 @@ if tr:
     try:
         sp = json.load(urllib.request.urlopen(urllib.request.Request("https://api.sleeper.app/v1/players/nfl", headers=UA), timeout=60))
         for t_ in tr:
-            q = sp.get(t_["player_id"], {}); nm = q.get("full_name") or ""
-            p = by_name.get(nm)
+            q = sp.get(t_["player_id"], {}); nm = q.get("full_name") or (f'{q.get("team") or t_["player_id"]} D/ST' if q.get("position") == "DEF" or str(t_["player_id"]).isalpha() else "")
+            eid = q.get("espn_id"); p = by_id.get(int(eid)) if str(eid or "").isdigit() else None
+            p = p or by_name.get(nm) or (by_own.get(nm) if nm else None) or (by_norm.get(_norm(nm)) if nm else None)
+            if p: nm = p["name"]
             trending.append({"player": nm, "pos": q.get("position"), "nfl": q.get("team") or "FA", "adds24h": t_["count"], "owner": p["owner"] if p else "Free agent (not in our pool)"})
     except Exception: health["Sleeper players"] = "error"
 # ---------- classify: Rumor / Confirmed / Analysis / News, and build the rumor mill ----------
