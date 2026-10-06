@@ -1,0 +1,34 @@
+name: Legal Troubles data refresh
+on:
+  schedule:
+    - cron: "17 */3 * * *"   # every 3 hours
+  workflow_dispatch: {}
+  push:
+    paths: ["legal-troubles/curated/**", "legal-troubles/tools/**"]
+permissions:
+  contents: write
+concurrency:
+  group: legal-troubles-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Pull ESPN data, odds, news
+        working-directory: legal-troubles
+        env:
+          LT_CURATED: ${{ github.workspace }}/legal-troubles/curated
+          LT_WATCHLIST: ${{ github.workspace }}/legal-troubles/curated/watchlist.json
+        run: |
+          python3 tools/bi_refresh.py /tmp/out 20000
+          python3 tools/news_sweep.py /tmp/out 48
+          python3 tools/build_bundle.py /tmp/out data/bundle.json curated
+      - name: Commit if changed
+        run: |
+          git config user.name "Legal Troubles Front Office"
+          git config user.email "actions@users.noreply.github.com"
+          git add legal-troubles/data/bundle.json
+          git diff --cached --quiet || (git commit -m "Data refresh $(date -u +%Y-%m-%dT%H:%MZ)" && git pull --rebase && git push)
