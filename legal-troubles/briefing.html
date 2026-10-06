@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head><body>
+<title>Legal Troubles CEO Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: owner's briefing — scoreboard, then bulleted decision lists (Claim / Drop / Trade: shop + target), each row taps open for detail; odds chart, road, risks below. Max 900px, one column. */
+:root{
+  --bg:#f3f4f1; --surface:#ffffff; --ink:#14201b; --muted:#5d6b64; --line:#d9ded9;
+  --field:#1d4a3a; --brass:#b07a1c; --brass-soft:#f3e7cf; --good:#2f7d4f; --warn:#b5651d; --bad:#b23a32;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1512; --surface:#16201c; --ink:#e9eee9; --muted:#9aa8a1; --line:#2a3832;
+  --field:#5fae8c; --brass:#e0a948; --brass-soft:#3a2e17; --good:#5cc286; --warn:#e39a52; --bad:#ec7a70; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1512; --surface:#16201c; --ink:#e9eee9; --muted:#9aa8a1; --line:#2a3832;
+  --field:#5fae8c; --brass:#e0a948; --brass-soft:#3a2e17; --good:#5cc286; --warn:#e39a52; --bad:#ec7a70; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:28px 56px;display:grid;gap:40px}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;margin:0;line-height:1;text-wrap:balance}
+h1{font-size:clamp(2.2rem,6.5vw,3.6rem);font-weight:900}
+h2{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800}
+h3{font-size:1.3rem;font-weight:800}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--brass);font-weight:500}
+.hero{display:grid;gap:16px}
+.board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.stat{padding:14px 16px;display:grid;gap:4px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat .v{font-family:var(--display);font-weight:800;font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums}
+.stat .k{font-size:.8rem;color:var(--muted)}
+.stat.hl .v{color:var(--brass)}
+section{display:grid;gap:18px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.group{display:grid;gap:8px}
+.group-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.when{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;background:var(--brass-soft);color:var(--ink);padding:4px 9px;border-radius:6px}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.sub{font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+ul.rows{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+details[open]{border-color:var(--ink)}
+summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px 14px}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:8px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--good)}
+.drop .dot{background:var(--bad)} .shop .dot{background:var(--warn)} .target .dot{background:var(--good)} .opt .dot{background:transparent;border:2px solid var(--good)}
+.nm{font-weight:600}
+.nm .pm{font-family:var(--mono);font-size:.72rem;color:var(--muted);font-weight:500;margin-left:6px}
+.nm .hint{display:block;font-weight:400;font-size:.88rem;color:var(--muted)}
+.chev{font-family:var(--mono);color:var(--muted);transition:transform .15s}
+details[open] .chev{transform:rotate(90deg)}
+.more{padding:0 14px 14px 38px;display:grid;gap:6px;font-size:.92rem}
+.more ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.more .kv{display:flex;flex-wrap:wrap;gap:6px}
+.kv span{font-family:var(--mono);font-size:.74rem;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.offer{border:1px dashed var(--brass);border-radius:8px;padding:12px 14px;display:grid;gap:4px;font-size:.95rem}
+.offer b{font-weight:600}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 16px 8px;margin:0}
+.chart svg{width:100%;height:auto;display:block}
+.note{font-size:.85rem;color:var(--muted);margin:0}
+ul.plain{margin:0;padding-left:20px;display:grid;gap:6px}
+ul.plain b{font-weight:600}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px;font-size:.85rem;color:var(--muted)}
+footer a{color:var(--field);font-weight:600}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+@media (max-width:720px){
+  .board{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat{border-bottom:1px solid var(--line)}
+  .stat:nth-child(2n){border-right:0}
+  .stat:last-child{grid-column:1/-1}
+  .split{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow"><b>Legal Troubles</b> · Owner's Briefing · Week 5 · Tue Oct 6, 2026</div>
+  <h1>Unbeaten. Building the title roster.</h1>
+  <div class="board">
+    <div class="stat"><span class="v">4-0</span><span class="k">Record</span></div>
+    <div class="stat"><span class="v">#1</span><span class="k">Seed</span></div>
+    <div class="stat hl"><span class="v">99%</span><span class="k">Playoffs</span></div>
+    <div class="stat"><span class="v">57%</span><span class="k">#1 seed (bye)</span></div>
+    <div class="stat"><span class="v">+4</span><span class="k">Wins over 8th</span></div>
+  </div>
+</header>
+
+<section aria-labelledby="dec">
+  <div class="sec-head"><h2 id="dec">Your decisions</h2><span class="eyebrow">Tap any player for more</span></div>
+
+  <div class="group">
+    <div class="group-h"><h3>Claim</h3><span class="when">Today · we pick 14th of 14</span></div>
+    <ul class="rows">
+      <li><details class="add"><summary><span class="dot"></span><span class="nm">1. Dohnte Meyers<span class="pm">WR · CIN · contested</span><span class="hint">Chase hurt; returns kicks</span></span><span class="chev">›</span></summary>
+        <div class="more"><ul>
+          <li>Ja'Marr Chase left Week 4 with a concussion. No return timeline yet.</li>
+          <li>Week 4: ~29 pts in our scoring, 170 of his yards on returns.</li>
+          <li>Only 0.3% owned, but a big week gets noticed. WR-needy teams pick ahead of us.</li>
+        </ul><div class="kv"><span>Drop: Mariota</span><span>Odds: contested</span></div></div></details></li>
+      <li><details class="add"><summary><span class="dot"></span><span class="nm">2. Joe Mixon<span class="pm">RB · SEA · likely</span><span class="hint">Lock up Seattle's backfield</span></span><span class="chev">›</span></summary>
+        <div class="more"><ul>
+          <li>Seahawks expected to sign him (Oct 5). He threatens our two Seattle stashes, Charbonnet and Price.</li>
+          <li>Owning all three gives us Seattle's lead back for the playoffs: @PHI, LAR, @CAR.</li>
+          <li>9.5% owned, age 30, coming off a foot injury. Few teams will chase him.</li>
+        </ul><div class="kv"><span>Drop: Schultz</span><span>Odds: likely</span></div></div></details></li>
+      <li><details class="add"><summary><span class="dot"></span><span class="nm">3. Drake Maye<span class="pm">QB · NE · unlikely</span><span class="hint">Free try; expect him gone</span></span><span class="chev">›</span></summary>
+        <div class="more"><ul>
+          <li>Four QB-needy teams pick ahead of us: Monty's, Pop A TD, Oviedo, El' Político.</li>
+          <li>Backup plan: claim a QB on next week's waivers for Allen's Week 7 bye, chosen for the matchup.</li>
+        </ul><div class="kv"><span>Drop: Kyle Williams</span><span>Odds: unlikely</span></div></div></details></li>
+    </ul><div class="kv"><span>Drop: Mariota</span><span>Priority 1</span></div></div></details></li>
+      <li><details class="add"><summary><span class="dot"></span><span class="nm">Drake Maye<span class="pm">QB · NE</span><span class="hint">Covers Allen's Week 7 bye</span></span><span class="chev">›</span></summary>
+        <div class="more"><ul>
+          <li>Josh Allen is on bye in Week 7; we have no healthy backup QB.</li>
+          <li>6-pt passing TDs make starting QBs valuable trade chips later.</li>
+        </ul><div class="kv"><span>Drop: Schultz</span><span>Priority 2</span></div></div></details></li>
+      <li><details class="opt"><summary><span class="dot"></span><span class="nm">Will Shipley<span class="pm">RB · PHI</span><span class="hint">Optional rental while Barkley is out</span></span><span class="chev">›</span></summary>
+        <div class="more"><ul>
+          <li>Saquon Barkley (hamstring) is week-to-week; Eagles say not long term.</li>
+          <li>Tank Bigsby also got hurt Sunday, so Shipley is the last healthy back. He returns kicks too.</li>
+          <li>Cut him when Barkley returns (about 1–3 weeks).</li>
+        </ul><div class="kv"><span>Drop: Kyle Williams</span><span>Optional</span></div></div></details></li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <div class="group-h"><h3>Drop</h3></div>
+    <ul class="rows">
+      <li><details class="drop"><summary><span class="dot"></span><span class="nm">Marcus Mariota<span class="pm">QB · WSH</span><span class="hint">Knee sprain; backup again</span></span><span class="chev">›</span></summary>
+        <div class="more"><ul><li>MCL sprain, multiple weeks. Jayden Daniels returns Sunday, so Mariota has no role when healthy.</li></ul></div></details></li>
+      <li><details class="drop"><summary><span class="dot"></span><span class="nm">Dalton Schultz<span class="pm">TE · HOU</span><span class="hint">Backup TE we don't need</span></span><span class="chev">›</span></summary>
+        <div class="more"><ul><li>Tucker Kraft starts. We can pick up a TE for Kraft's Week 11 bye.</li></ul></div></details></li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <div class="group-h"><h3>Trade</h3><span class="when">This week</span></div>
+    <div class="split">
+      <div class="group">
+        <span class="sub">Shop (ours)</span>
+        <ul class="rows">
+          <li><details class="shop"><summary><span class="dot"></span><span class="nm">Aaron Jones<span class="pm">RB · MIN</span><span class="hint">Peak value; sell before Mason returns</span></span><span class="chev">›</span></summary>
+            <div class="more"><ul>
+              <li>23 touches a game only because Jordan Mason (thumb surgery) is on IR.</li>
+              <li>Mason is eligible to return Week 7. Jones is on bye Week 6.</li>
+              <li>Value only goes down from here.</li>
+            </ul></div></details></li>
+          <li><details class="shop"><summary><span class="dot"></span><span class="nm">Brian Robinson Jr.<span class="pm">RB · ATL</span><span class="hint">3 TDs Monday night: peak value</span></span><span class="chev">›</span></summary>
+            <div class="more"><ul>
+              <li>Charbonnet (back ~Week 7–8) and Price (eligible Week 8) refill our RB room.</li>
+              <li>Useful sweetener to land a WR.</li>
+            </ul></div></details></li>
+        </ul>
+      </div>
+      <div class="group">
+        <span class="sub">Target (theirs)</span>
+        <ul class="rows">
+          <li><details class="target"><summary><span class="dot"></span><span class="nm">Rashid Shaheed<span class="pm">WR · SEA</span><span class="hint">Team RM · returner + big plays</span></span><span class="chev">›</span></summary>
+            <div class="more"><ul>
+              <li>Return yards and 40+ yd TD bonuses both score extra for us.</li>
+              <li>Team RM is 1-3 with Barkley hurt and no healthy RBs. They need what we're selling.</li>
+              <li>Playoff schedule: @PHI, LAR, @CAR.</li>
+            </ul></div></details></li>
+          <li><details class="target"><summary><span class="dot"></span><span class="nm">A.J. Brown<span class="pm">WR · NE</span><span class="hint">D'ez Nutz · hurt now, back for playoffs</span></span><span class="chev">›</span></summary>
+            <div class="more"><ul>
+              <li>On IR with a high-ankle sprain since Sep 13; expected back Week 7–8.</li>
+              <li>His owner gets nothing from him today, so the price is lowest now.</li>
+              <li>Playoff schedule: @KC, @NYJ, DEN.</li>
+            </ul></div></details></li>
+          <li><details class="target"><summary><span class="dot"></span><span class="nm">Justin Jefferson<span class="pm">WR · MIN</span><span class="hint">JV Squad (1-3) · ask before he returns</span></span><span class="chev">›</span></summary>
+            <div class="more"><ul>
+              <li>Missed Week 4 with an ankle injury; Vikings hope he's back Week 5.</li>
+              <li>JV Squad is 1-3 and may sell a star to fix its season.</li>
+              <li>Expensive. Ask the price before he plays and it rises.</li>
+            </ul></div></details></li>
+        </ul>
+      </div>
+    </div>
+    <div class="offer"><span class="sub">Offer to send</span><span><b>Jones + Robinson</b> to Team RM for <b>Shaheed</b>. Fallback: Jones alone.</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="odds">
+  <div class="sec-head"><h2 id="odds">Playoff odds</h2><span class="eyebrow">Top 7 make it</span></div>
+  <figure class="chart"><svg id="oddsChart" viewBox="0 0 900 470" role="img" aria-label="Playoff odds by team. Legal Troubles 99 percent, highest in the league."></svg></figure>
+  <p class="note">20,000 simulations of the rest of the season in our scoring.</p>
+</section>
+
+<section aria-labelledby="road">
+  <div class="sec-head"><h2 id="road">Road to the title</h2></div>
+  <ul class="plain">
+    <li><b>Wk 7:</b> Allen bye; Maye starts. Charbonnet and Tyson can return.</li>
+    <li><b>Wk 8:</b> Price eligible off IR.</li>
+    <li><b>Wk 10:</b> vs Oviedo. Bye-race game, full lineup.</li>
+    <li><b>Wk 11:</b> 6 starters on bye. A loss is acceptable.</li>
+    <li><b>Wk 13:</b> vs Liddle' Schitty. Bye-race game, full lineup.</li>
+    <li><b>Dec 9:</b> Trade deadline.</li>
+    <li><b>Wk 15–17:</b> Playoffs.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="risks">
+  <div class="sec-head"><h2 id="risks">Risks</h2></div>
+  <ul class="plain">
+    <li><b>Josh Jacobs:</b> possible suspension. If it covers Weeks 15–17, we cut him.</li>
+    <li><b>Jordan Mason:</b> his return ends the Jones sell window.</li>
+    <li><b>Cushion:</b> if we fall within 2 wins of 8th, we switch to win-now.</li>
+  </ul>
+</section>
+
+<footer>
+  <span>John (GM) with Tony, Frank, Maya · Presented by Grace · Data as of Oct 6 · Confidence: high on moves, medium on odds</span>
+  <a href="./" >BI dashboard and GM notes →</a>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  const data=[["Legal Troubles",99,1],["Liddle' Schitty",92],["Oviedo Roosters",89],["D'ez Nutz",74],["Monty's",63],["El' Político",61],["Pop A TD",58],["JV Squad",40],["Team RM",39],["Chud's Chubbies",36],["Team Waters",17],["De'Von",14],["Mahomies",10],["Brown Friday!",8]];
+  const svg=document.getElementById('oddsChart'),NS="http://www.w3.org/2000/svg";
+  const L=160,R=860,T=14,rowH=31,bh=19,x=v=>L+(R-L)*v/100;
+  const el=(n,a,t)=>{const e=document.createElementNS(NS,n);for(const k in a){if((k==='fill'||k==='stroke')&&String(a[k]).startsWith('var('))e.style[k]=a[k];else e.setAttribute(k,a[k]);}if(t!=null)e.textContent=t;svg.appendChild(e);return e};
+  [0,25,50,75,100].forEach(v=>{el('line',{x1:x(v),x2:x(v),y1:T-4,y2:T+rowH*data.length,stroke:'var(--line)','stroke-width':1});el('text',{x:x(v),y:T+rowH*data.length+18,'text-anchor':'middle','font-size':12,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'},v+'%')});
+  data.forEach((d,i)=>{
+    const y=T+i*rowH,me=d[2],inPO=i<7;
+    el('text',{x:L-12,y:y+bh/2+5,'text-anchor':'end','font-size':14,'font-weight':me?700:400,fill:'var(--ink)','font-family':'IBM Plex Sans, sans-serif'},d[0]);
+    el('rect',{x:L,y:y,width:Math.max(2,x(d[1])-L),height:bh,rx:3,fill:me?'var(--brass)':(inPO?'var(--field)':'var(--line)'),opacity:me?1:(inPO?.55:1)});
+    el('text',{x:x(d[1])+8,y:y+bh/2+5,'font-size':13,'font-weight':me?700:500,fill:'var(--ink)','font-family':'IBM Plex Mono, monospace'},d[1]+'%');
+  });
+  const cut=T+7*rowH-6;
+  el('line',{x1:L-150,x2:R,y1:cut,y2:cut,stroke:'var(--ink)','stroke-width':1.5,'stroke-dasharray':'5 4'});
+  el('text',{x:R,y:cut-6,'text-anchor':'end','font-size':11,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'},'PLAYOFF LINE');
+})();
+</script>
+
+</body></html>
