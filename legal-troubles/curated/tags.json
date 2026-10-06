@@ -1,12 +1,12 @@
 {
  "Aaron Jones Sr.": [
   "sell",
-  "Bell-cow only while Jordan Mason (thumb surgery, IR) is out. Mason eligible Wk 7; Jones bye Wk 6. Sell this week.",
+  "Bell-cow only while Jordan Mason (thumb surgery, IR) is out. Mason eligible Wk 7; Jones bye Wk 6. Package for Jefferson this week.",
   "Mason back Wk 7"
  ],
  "Brian Robinson Jr.": [
   "sell",
-  "3 TDs Monday night: value at its peak. RB surplus once Charbonnet (~Wk 7-8) and Price (Wk 8) return.",
+  "3 TDs Monday night: value at its peak. Bijan Robinson's backup (proj 9.7). Package with Jones for a starting WR.",
   "Sell this week"
  ],
  "Dohnte Meyers": [
@@ -14,25 +14,10 @@
   "Bengals' top target while Ja'Marr Chase is in concussion protocol. ~29 pts in Wk 4 with 170 return yds.",
   "Chase: no timeline"
  ],
- "Drake Maye": [
-  "claim",
-  "Covers Josh Allen's Wk 7 bye. Starting QB = trade chip with 6-pt pass TDs.",
-  "Allen bye Wk 7"
- ],
- "Joe Mixon": [
-  "claim",
-  "Seahawks planned a practice-squad deal (Oct 5) pending a physical; one Oct 6 report says it fell through. If he signs, he threatens our Seattle stashes (Charbonnet, Price) and owning him locks up the backfield.",
-  "Physical pending"
- ],
  "Will Shipley": [
   "rental",
   "Eagles lead back now: Saquon Barkley (hamstring) is week-to-week and Tank Bigsby (core surgery) is going on IR. Cut when Barkley returns.",
   "Barkley 1-3 wks"
- ],
- "Rashid Shaheed": [
-  "target",
-  "Returner + deep threat: return yards and 40+ yd TD bonuses score extra for us. Team RM is RB-starved.",
-  ""
  ],
  "A.J. Brown": [
   "buy",
@@ -40,9 +25,9 @@
   "Back Wk 7-8"
  ],
  "Justin Jefferson": [
-  "buy",
-  "Missed Wk 4 (ankle). JV Squad is 1-3 and may sell before he returns.",
-  "Back Wk 5-6"
+  "target",
+  "Trade target: offer Aaron Jones + Brian Robinson (+ Kyle Williams if needed) to JV Squad (1-3) before Jefferson plays Sunday. Playoff schedule: DET, WSH, @NYJ.",
+  "Offer before Sunday"
  ],
  "Marcus Mariota": [
   "drop",
@@ -73,5 +58,20 @@
   "stash",
   "Commissioner's Exempt List; GB expects him back in 2026. Cut if a ban covers Wks 15-17.",
   "Unknown"
+ ],
+ "Kaden Wetjen": [
+  "claim",
+  "Steelers' kick and punt returner: about 10 points a week from return yards in our scoring (4.0, 11.3, 10.7, 12.6). Return yards are a free edge on waivers.",
+  "Every week"
+ ],
+ "Cowboys D/ST": [
+  "claim",
+  "Week 5 stream: projected 6.4 vs Tampa Bay with Baker Mayfield out. The Rams project 2.6 against Buffalo, which means rooting against our own QB.",
+  "Wk 5 stream"
+ ],
+ "Rams D/ST": [
+  "drop",
+  "Projected 2.6 vs Buffalo in Week 5 and a poor playoff schedule (DAL, @SEA, @TB) in a league that penalizes yards allowed. Stream instead.",
+  ""
  ]
 }
