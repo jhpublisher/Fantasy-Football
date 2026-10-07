@@ -25,6 +25,23 @@ print(r.stdout[-800:],r.stderr[-800:])
 if r.returncode: sys.exit(f'FAIL: fill_rg.py exit {r.returncode}')
 R=json.load(open(os.path.join(OUT,'returns.json'),encoding='utf-8'))
 R['store']={'weeks':weeks,'sha256':{str(w):idx['weeks'][str(w)]['sha256'] for w in weeks}}
+# injuries (official) + injury checker, compact for the page
+POSK={'WR','RB','TE','FB','CB','S','DB'}
+INJ={}
+ii=os.path.join(STORE,'injuries','index.json')
+if os.path.exists(ii):
+    for w,e in json.load(open(ii))['weeks'].items():
+        J=json.load(open(os.path.join(STORE,'injuries',e['file']),encoding='utf-8'));INJ[w]={}
+        for t in set(J['report'])|set(J['inactives']):
+            INJ[w][t]={'out':[[p['name'],p['pos']] for p in J['inactives'].get(t,{}).get('did_not_play',[]) if p['pos'] in POSK],
+                       'report':[[r['player'],r['pos'],r['injury'],r['practice'],r['game_status']] for r in J['report'].get(t,[]) if r['pos'] in POSK and r['game_status']]}
+cr=os.path.join(C,'injury_report.json');CUR={}
+if os.path.exists(cr):
+    J=json.load(open(cr,encoding='utf-8'));CUR={'week':J['week'],'asOf':J.get('_asOf'),'teams':{t:[[r['player'],r['pos'],r['injury'],r['practice'],r['game_status']] for r in rows if r['pos'] in POSK] for t,rows in J['report'].items()}}
+R['injuries']={'source':'NFL.com official injury reports + game-day inactives','weeks':INJ,'current':CUR}
+r2=subprocess.run([sys.executable,os.path.join(TD,'rg_checker.py'),STORE,'--json',os.path.join(OUT,'checker.json')],capture_output=True,text=True)
+if r2.returncode: sys.exit(f'FAIL: rg_checker.py {r2.stderr[-300:]}')
+R['checker']=json.load(open(os.path.join(OUT,'checker.json')))
 R['currentState']=json.load(open(os.path.join(C,'status.json'))) if os.path.exists(os.path.join(C,'status.json')) else {}
 json.dump(R,open(os.path.join(OUT,'returns.json'),'w',encoding='utf-8'),ensure_ascii=False,separators=(',',':'))
 print('assembled weeks',weeks,'bytes',os.path.getsize(os.path.join(OUT,'returns.json')))

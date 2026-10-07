@@ -3,6 +3,7 @@
 # Usage: python3 refresh_current.py <store_dir> <tools_dir> [--force]     writes <store>/current/*.json + current/status.json
 #   ownership.json  every run   league owner + fantasy position for every returner in stored weeks and on depth charts; league current week
 #   espn_depth.json  daily       ESPN depth-chart feed (KR/PR)          rosters.json  daily   32 team rosters (name -> ESPN id, position)
+#   injury_report.json  every run (2.5h+ old)  this week's official NFL.com report, before kickoff (locked weekly copy: injuries/)
 #   team_sites.json  daily Tue-Sat (ET)  32 team-site depth charts      schedule.json  Tuesdays (or if missing/older than 6 days)
 import json,os,sys,time,subprocess,tempfile,shutil,datetime,urllib.request,concurrent.futures as cf
 STORE,TD=(os.path.abspath(x) for x in sys.argv[1:3]);FORCE='--force' in sys.argv
@@ -56,6 +57,12 @@ def do_schedule():
             if t not in seen: out[t][str(w)]={'bye':True}
     if w-1<17: raise RuntimeError(f'only {w-1} schedule weeks')
     save('schedule.json',{'weeks':w-1,'teams':out})
+def do_injury_report():   # this week's official NFL.com report (practice + game status), before games are played
+    W=json.load(open(os.path.join(C,'ownership.json')))['currentWeek'] if os.path.exists(os.path.join(C,'ownership.json')) else None
+    if not W: raise RuntimeError('current week unknown (ownership.json missing)')
+    T=tempfile.mkdtemp();r=subprocess.run([sys.executable,os.path.join(TD,'injuries.py'),str(W),os.path.join(T,'r.json'),'--report-only'],capture_output=True,text=True)
+    if r.returncode: raise RuntimeError(f'injuries.py exit {r.returncode}: {(r.stdout+r.stderr)[-200:]}')
+    d=json.load(open(os.path.join(T,'r.json'),encoding='utf-8'));shutil.rmtree(T);save('injury_report.json',d)
 def do_ownership():
     B="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leagues/293318"
     L=get(f"{B}?view=mTeam&view=mStatus&view=mSettings");names={x['id']:(x.get('name') or '').strip() for x in L['teams']}
@@ -93,6 +100,7 @@ part('rosters', age_h('rosters.json')>20, do_rosters)
 part('team_sites', age_h('team_sites.json')>20 and (et.weekday() in (1,2,3,4,5) or age_h('team_sites.json')>96), do_sites)
 part('schedule', (et.weekday()==1 and age_h('schedule.json')>12) or age_h('schedule.json')>144, do_schedule)
 part('ownership', True, do_ownership)
-for n in ('espn_depth','rosters','team_sites','schedule','ownership'): ST.setdefault(n,{})['ageHours']=round(age_h(n+'.json'),1)
+part('injury_report', age_h('injury_report.json')>2.5, do_injury_report)
+for n in ('espn_depth','rosters','team_sites','schedule','ownership','injury_report'): ST.setdefault(n,{})['ageHours']=round(age_h(n+'.json'),1)
 json.dump(ST,open(os.path.join(C,'status.json'),'w'),indent=1);print(json.dumps(ST))
 sys.exit(0 if all(ST[n].get('ok',True) for n in ST) else 2)   # 2 = some part failed (last good kept)
