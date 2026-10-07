@@ -1,77 +1,107 @@
 {
- "Aaron Jones Sr.": [
-  "sell",
-  "Bell-cow only while Jordan Mason (thumb surgery, IR) is out. Mason eligible Wk 7; Jones bye Wk 6. Package for Jefferson this week.",
-  "Mason back Wk 7"
- ],
- "Brian Robinson Jr.": [
-  "sell",
-  "3 TDs Monday night: value at its peak. Bijan Robinson's backup (proj 9.7). Package with Jones for a starting WR.",
-  "Sell this week"
- ],
- "Dohnte Meyers": [
-  "claim",
-  "Bengals' top target while Ja'Marr Chase is in concussion protocol. ~29 pts in Wk 4 with 170 return yds.",
-  "Chase: no timeline"
- ],
- "Will Shipley": [
-  "rental",
-  "Eagles lead back now: Saquon Barkley (hamstring) is week-to-week and Tank Bigsby (core surgery) is going on IR. Cut when Barkley returns.",
-  "Barkley 1-3 wks"
- ],
- "A.J. Brown": [
-  "buy",
-  "IR, high-ankle sprain since Sep 13. Owner gets nothing now; healthy for the playoffs.",
-  "Back Wk 7-8"
- ],
- "Justin Jefferson": [
-  "target",
-  "Trade target: offer Aaron Jones + Brian Robinson (+ Kyle Williams if needed) to JV Squad (1-3) before Jefferson plays Sunday. Playoff schedule: DET, WSH, @NYJ.",
-  "Offer before Sunday"
- ],
- "Marcus Mariota": [
-  "drop",
-  "MCL sprain, multi-week; Jayden Daniels returns. No role.",
-  ""
- ],
- "Dalton Schultz": [
-  "drop",
-  "Backup TE; Kraft starts. Stream a TE for Kraft's Wk 11 bye.",
-  ""
- ],
- "Zach Charbonnet": [
-  "stash",
-  "ACL recovery; practice window opened Oct 1. Playoff RB.",
-  "Activation ~Wk 7"
- ],
- "Jadarian Price": [
-  "stash",
-  "IR (chest). Eligible Wk 8.",
-  "Eligible Wk 8"
- ],
- "Jordyn Tyson": [
-  "stash",
-  "IR (hamstring). Week 7 at the soonest.",
-  "Wk 7+"
- ],
- "Josh Jacobs": [
-  "stash",
-  "Commissioner's Exempt List; GB expects him back in 2026. Cut if a ban covers Wks 15-17.",
-  "Unknown"
- ],
- "Kaden Wetjen": [
-  "claim",
-  "Steelers' kick and punt returner: about 10 points a week from return yards in our scoring (4.0, 11.3, 10.7, 12.6). Return yards are a free edge on waivers.",
-  "Every week"
- ],
- "Cowboys D/ST": [
-  "claim",
-  "Week 5 stream: projected 6.4 vs Tampa Bay with Baker Mayfield out. The Rams project 2.6 against Buffalo, which means rooting against our own QB.",
-  "Wk 5 stream"
- ],
- "Rams D/ST": [
-  "drop",
-  "Projected 2.6 vs Buffalo in Week 5 and a poor playoff schedule (DAL, @SEA, @TB) in a league that penalizes yards allowed. Stream instead.",
-  ""
- ]
+ "Aaron Jones Sr.": {
+  "tag": "sell",
+  "note": "Bell-cow only while Jordan Mason (thumb surgery, IR) is out. Mason eligible Wk 7; Jones bye Wk 6. Package for Jefferson this week.",
+  "ret": "Mason back Wk 7",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Brian Robinson Jr.": {
+  "tag": "sell",
+  "note": "3 TDs Monday night: value at its peak. Bijan Robinson's backup (proj 9.7). Package with Jones for a starting WR.",
+  "ret": "Sell this week",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Dohnte Meyers": {
+  "tag": "claim",
+  "note": "Bengals' top target while Ja'Marr Chase is in concussion protocol. ~29 pts in Wk 4 with 170 return yds.",
+  "ret": "Chase: no timeline",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Will Shipley": {
+  "tag": "rental",
+  "note": "Eagles lead back now: Saquon Barkley (hamstring) is week-to-week and Tank Bigsby (core surgery) is going on IR. Cut when Barkley returns.",
+  "ret": "Barkley 1-3 wks",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "A.J. Brown": {
+  "tag": "buy",
+  "note": "IR, high-ankle sprain since Sep 13. Owner gets nothing now; healthy for the playoffs.",
+  "ret": "Back Wk 7-8",
+  "asOf": "2026-10-06",
+  "expiresWeek": 7
+ },
+ "Justin Jefferson": {
+  "tag": "target",
+  "note": "Trade target: offer Aaron Jones + Brian Robinson (+ Kyle Williams if needed) to JV Squad (1-3) before Jefferson plays Sunday. Playoff schedule: DET, WSH, @NYJ.",
+  "ret": "Offer before Sunday",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Marcus Mariota": {
+  "tag": "drop",
+  "note": "MCL sprain, multi-week; Jayden Daniels returns. No role.",
+  "ret": "",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Dalton Schultz": {
+  "tag": "drop",
+  "note": "Backup TE; Kraft starts. Stream a TE for Kraft's Wk 11 bye.",
+  "ret": "",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Zach Charbonnet": {
+  "tag": "stash",
+  "note": "ACL recovery; practice window opened Oct 1. Playoff RB.",
+  "ret": "Activation ~Wk 7",
+  "asOf": "2026-10-06",
+  "expiresWeek": 7
+ },
+ "Jadarian Price": {
+  "tag": "stash",
+  "note": "IR (chest). Eligible Wk 8.",
+  "ret": "Eligible Wk 8",
+  "asOf": "2026-10-06",
+  "expiresWeek": 8
+ },
+ "Jordyn Tyson": {
+  "tag": "stash",
+  "note": "IR (hamstring). Week 7 at the soonest.",
+  "ret": "Wk 7+",
+  "asOf": "2026-10-06",
+  "expiresWeek": 7
+ },
+ "Josh Jacobs": {
+  "tag": "stash",
+  "note": "Commissioner's Exempt List; GB expects him back in 2026. Cut if a ban covers Wks 15-17.",
+  "ret": "Unknown",
+  "asOf": "2026-10-06",
+  "expiresWeek": 8
+ },
+ "Kaden Wetjen": {
+  "tag": "claim",
+  "note": "Steelers' kick and punt returner: about 10 points a week from return yards in our scoring (4.0, 11.3, 10.7, 12.6). Return yards are a free edge on waivers.",
+  "ret": "Every week",
+  "asOf": "2026-10-06",
+  "expiresWeek": 6
+ },
+ "Cowboys D/ST": {
+  "tag": "claim",
+  "note": "Week 5 stream: projected 6.4 vs Tampa Bay with Baker Mayfield out. The Rams project 2.6 against Buffalo, which means rooting against our own QB.",
+  "ret": "Wk 5 stream",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Rams D/ST": {
+  "tag": "drop",
+  "note": "Projected 2.6 vs Buffalo in Week 5 and a poor playoff schedule (DAL, @SEA, @TB) in a league that penalizes yards allowed. Stream instead.",
+  "ret": "",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ }
 }

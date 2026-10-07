@@ -1,6 +1,34 @@
 {
- "Dohnte Meyers": [1, "Unlikely", "Fantasy's #2 add today (1.6M Sleeper adds); WR-needy teams pick ahead of us. Free try.", "Marcus Mariota"],
- "Kaden Wetjen": [2, "Likely", "0.1% owned. Nobody is chasing return yards except us.", "Dalton Schultz"],
- "Cowboys D/ST": [3, "Likely", "6.5% owned; streaming D/ST draws little competition.", "Rams D/ST"],
- "Will Shipley": [null, "Unlikely", "#5 add in fantasy; Team RM picks 3rd with no healthy RB. Watch only.", ""]
+ "Dohnte Meyers": {
+  "priority": 1,
+  "odds": "Unlikely",
+  "note": "Fantasy's #2 add today (1.6M Sleeper adds); WR-needy teams pick ahead of us. Free try.",
+  "drop": "Marcus Mariota",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Kaden Wetjen": {
+  "priority": 2,
+  "odds": "Likely",
+  "note": "0.1% owned. Nobody is chasing return yards except us.",
+  "drop": "Dalton Schultz",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Cowboys D/ST": {
+  "priority": 3,
+  "odds": "Likely",
+  "note": "6.5% owned; streaming D/ST draws little competition.",
+  "drop": "Rams D/ST",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ },
+ "Will Shipley": {
+  "priority": null,
+  "odds": "Unlikely",
+  "note": "#5 add in fantasy; Team RM picks 3rd with no healthy RB. Watch only.",
+  "drop": "",
+  "asOf": "2026-10-06",
+  "expiresWeek": 5
+ }
 }
