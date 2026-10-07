@@ -15,6 +15,12 @@ def get(u,h=None,tries=3):   # retry transient errors, then raise
         except Exception:
             if k==tries-1: raise
             time.sleep(2*(k+1))
+import os
+# Offline mode (Oct 7 redesign): RG_CURRENT=<data/rg/current> -> rosters, ownership and schedule come from refresh_current.py files; no network at all.
+CURD=os.environ.get('RG_CURRENT')
+if CURD:
+    def get(u,h=None,tries=3): raise RuntimeError(f'offline assemble tried the network: {u[:80]}')
+    _cur=lambda f:json.load(open(os.path.join(CURD,f),encoding='utf-8'))
 M=json.load(open('box_meta.json'));S=json.load(open('team_sites.json'));E=json.load(open('espn_depth.json'))
 SUF=re.compile(r'\b(jr|sr|ii|iii|iv|v)\b')
 def norm(s):
@@ -67,8 +73,13 @@ for p in list(P.values())+list(Q.values()): canon.setdefault((p['team'],norm(p['
 for t in teams:
     for kk in ('kr','pr'):
         for _,i,(n,ps) in E[t].get(kk,[]): canon.setdefault((t,norm(n)),n);ids.setdefault((t,norm(n)),int(i));poss[int(i)]=ps
-tm={x['team']['abbreviation']:x['team']['id'] for x in get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams")['sports'][0]['leagues'][0]['teams']}
 roster_fail=[]
+if CURD:
+    RO=_cur('rosters.json')['teams']
+    for t in teams:
+        if t not in RO: roster_fail.append(t);continue
+        for fn,i,ps in RO[t]: k=(t,norm(fn));canon.setdefault(k,fn);ids.setdefault(k,int(i));poss.setdefault(int(i),ps)
+tm={} if CURD else {x['team']['abbreviation']:x['team']['id'] for x in get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams")['sports'][0]['leagues'][0]['teams']}
 for t,tid in tm.items():
     try: ro=get(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/{tid}/roster")
     except Exception as e: roster_fail.append(t);continue
@@ -119,11 +130,12 @@ print('depth-only added KR',len(add),'PR',len(addq),'without ESPN id:',[a['name'
 # 5) fantasy owner/pos for anyone missing one
 LG=293318;B=f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leagues/{LG}"
 POS={1:"QB",2:"RB",3:"WR",4:"TE",5:"K",16:"D/ST"}
-names={x["id"]:x["name"].strip() for x in get(f"{B}?view=mTeam")["teams"]}
+names={} if CURD else {x["id"]:x["name"].strip() for x in get(f"{B}?view=mTeam")["teams"]}
 allp=list(P.values())+add;allq=list(Q.values())+addq
 need=[p for p in allp+allq if p['id'] and p['owner'] in (None,'—','Not in ESPN fantasy')]
 idl=sorted({p['id'] for p in need})
 F={}
+if CURD: OW=_cur('ownership.json');F={int(i):tuple(v) for i,v in OW['players'].items()};idl=[]
 for k in range(0,len(idl),50):
     for p in get(f"{B}?view=kona_player_info&scoringPeriodId={CUR}",{"X-Fantasy-Filter":json.dumps({"players":{"filterIds":{"value":idl[k:k+50]}}})})["players"]:
         F[p["player"]["id"]]=(POS.get(p["player"]["defaultPositionId"],"Other"),names.get(p.get("onTeamId",0),"Free agent"))
@@ -152,6 +164,49 @@ for t,x in R['teams'].items():
         if not (mine==(g['team_pr'],g['team_pr_yds'])==(g['espn_pr'],g['espn_pr_yds'])): bad.append((t,w,'punt totals mismatch',mine,g['espn_pr'],g['espn_pr_yds']))
 if roster_fail: print('WARN roster unreadable:',roster_fail)
 print('status counts',st)
+# 5b) Kickoff coverage (Oct 7, Joe): kickoffs[t][w] = {opp, kickoffs, returned, ret_yds_allowed, ret_td_allowed, touchback, out_of_bounds,
+#     short_of_landing_zone, fair_catch, muff_lost, onside, onside_attempts} for the KICKING team, or {bye:true}. From kickoffs.py (kickoff_coverage.csv).
+import os
+if not os.path.exists('kickoff_coverage.csv'): bad.append(('kickoffs','kickoff_coverage.csv missing: run kickoffs.py after box.py'))
+else:
+    R['kickoffs']={t:{} for t in teams}
+    for r in csv.DictReader(open('kickoff_coverage.csv')):
+        if r['team'] not in R['kickoffs']: bad.append((r['team'],r['week'],'kickoff team not in teams'));continue
+        R['kickoffs'][r['team']][r['week']]={'opp':r['opp'],'home':r['home_away']=='home',**{k:int(r[k]) for k in ('kickoffs','returned','ret_yds_allowed','ret_td_allowed','touchback','out_of_bounds','short_of_landing_zone','fair_catch','muff_lost','onside','onside_attempts','other')}}
+    for t in teams:
+        for wk in W:
+            if wk in R['teams'][t]['byes']: R['kickoffs'][t].setdefault(str(wk),{'bye':True})
+            elif str(wk) not in R['kickoffs'][t]: bad.append((t,wk,'no kickoff row'))
+            else:
+                x=R['kickoffs'][t][str(wk)];g=R['teams'].get(x['opp'],{}).get('weeks',{}).get(str(wk)) or R['teams'].get(x['opp'],{}).get('weeks',{}).get(wk)
+                if not g: bad.append((t,wk,'opponent week missing'))
+                elif g.get('team_kr')!=x['returned']: bad.append((t,wk,'kickoffs returned != opponent kick returns',x['returned'],g.get('team_kr')))
+# 6) NFL schedule, whole regular season (Oct 7, Joe): schedule[t][w] = {opp, home, kickoff} or {bye:true}. The Returns tab shows only currentWeek.
+SEASON=M.get('season',2026);SB="https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
+R['schedule']={t:{} for t in teams};w=0
+if CURD:
+    SC=_cur('schedule.json');R['schedule']={t:SC['teams'].get(t,{}) for t in teams};w=SC['weeks']+1
+while not CURD:
+    w+=1;ev=get(f"{SB}?seasontype=2&week={w}&dates={SEASON}").get('events',[])
+    if not ev: break
+    seen=set()
+    for e in ev:
+        c=e['competitions'][0]['competitors'];ab={x['homeAway']:x['team']['abbreviation'] for x in c}
+        for side,o in (('home','away'),('away','home')):
+            t=ab[side]
+            if t not in R['schedule']: bad.append((t,w,'schedule team not in depth-chart teams'));continue
+            if t in seen: bad.append((t,w,'two games in one week'))
+            seen.add(t);R['schedule'][t][str(w)]={'opp':ab[o],'home':side=='home','kickoff':e['date']}
+    for t in teams:
+        if t not in seen: R['schedule'][t][str(w)]={'bye':True}
+    if w>=25: bad.append(('schedule','more than 25 weeks returned'));break
+R['scheduleWeeks']=w-1
+if R['scheduleWeeks']<R['regSeasonWeeks']: bad.append(('schedule',f"only {R['scheduleWeeks']} NFL weeks found"))
+for t in teams:   # bye weeks from the schedule must agree with box.py's byes for completed weeks
+    for wk in W:
+        if R['schedule'][t].get(str(wk),{}).get('bye',False)!=(wk in R['teams'][t]['byes']): bad.append((t,wk,'schedule bye disagrees with box scores'))
+    if str(CUR) not in R['schedule'][t]: bad.append((t,CUR,'no current-week schedule entry'))
+print('schedule:',R['scheduleWeeks'],'weeks; week',CUR,'byes:',[t for t in teams if R['schedule'][t].get(str(CUR),{}).get('bye')])
 if bad: sys.exit(f"FAIL blanks: {bad[:10]}")
 json.dump(R,open('returns.json','w'))
 mm=[(t,x['site']['raw'][0],x['espn']['kr'][0]) for t,x in R['teams'].items() if x['site']['raw'] and x['espn']['kr'] and x['site']['raw'][0]!=x['espn']['kr'][0] and x['site']['kr'][0]==x['espn']['kr'][0]]

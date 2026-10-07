@@ -1,7 +1,7 @@
 # Kick- AND punt-return box scores for every completed NFL week, in OUR league's scoring.
 # Outputs: kick_returns.csv + team_game_kick_totals.csv (unchanged shape), punt_returns.csv + team_game_punt_totals.csv, box_meta.json.
 # Punt fair catches come from play-by-play ("fair catch by X.Name" on punt plays); ESPN's box has no fair-catch column.
-# Weeks come from the league's current scoring period + the NFL scoreboard (never hard-coded).
+# Weeks come from the league's current scoring period + the NFL scoreboard (never hard-coded). RG_WEEK=N limits the run to week N (used by update_week.py).
 # Stats are read by key/label, not by column position. Fails loudly if a week is incomplete.
 import json,urllib.request,csv,sys,concurrent.futures as cf
 def get(u,h=None,tries=3):   # retry transient errors, then raise
@@ -26,15 +26,18 @@ PR_YD,PR_TD=SC[115],SC[102]
 names={x["id"]:(x.get("name") or "").strip() for x in L["teams"]}
 ALL_TEAMS=None
 # 2) weeks: every week before the current one must be complete; the current week counts only when all its games are final
+# RG_WEEK=N (Oct 7, Joe): fetch ONLY week N (the weekly update never re-reads locked weeks). Week N must be complete.
+import os
+ONLY=int(os.environ['RG_WEEK']) if os.environ.get('RG_WEEK') else None
 games=[];weeks=[];byes={};problems=[]
-for w in range(1,CUR+1):
+for w in ([ONLY] if ONLY else range(1,CUR+1)):
     sb=get(f"{SB}?seasontype=2&week={w}&dates={SEASON}")
     ev=sb["events"];done=[e for e in ev if e["status"]["type"]["completed"]]
     playing={c["team"]["abbreviation"] for e in ev for c in e["competitions"][0]["competitors"]}
     if ALL_TEAMS is None:
         ALL_TEAMS=sorted(t["team"]["abbreviation"] for t in get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams")["sports"][0]["leagues"][0]["teams"])
     if len(done)<len(ev):
-        if w<CUR: problems.append(f"Week {w}: {len(done)} of {len(ev)} scheduled games final")
+        if w<CUR or ONLY: problems.append(f"Week {w}: {len(done)} of {len(ev)} scheduled games final")
         else: print(f"Week {w} in progress ({len(done)}/{len(ev)} final): left out until all games are final")
         continue
     weeks.append(w);byes[w]=[t for t in ALL_TEAMS if t not in playing]
@@ -54,20 +57,22 @@ def norm(s):
     s=re.sub(r"[.'’`,-]",' ',s);s=re.sub(r'\b(jr|sr|ii|iii|iv|v)\b',' ',s);return re.sub(r'[^a-z]','',s)
 def abbr_key(first,last):return (first[:1].lower(),norm(last))
 TID={t["team"]["abbreviation"]:t["team"]["id"] for t in get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams")["sports"][0]["leagues"][0]["teams"]}
-ROST={}
-def roster(ab):
-    try: ro=get(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/{TID[ab]}/roster")
-    except Exception as e: return ab,None
-    m={}
-    for grp in ro.get("athletes",[]):
-        for a in grp.get("items",[]):
-            k=abbr_key(a.get("firstName") or a["fullName"],a.get("lastName") or a["fullName"].split()[-1]);m.setdefault(k,[]).append((a["fullName"],int(a["id"])))
-    return ab,m
-with cf.ThreadPoolExecutor(8) as ex:
-    for ab,m in ex.map(roster,list(TID)): ROST[ab]=m
+class _Rost(dict):   # team rosters fetched only when a fair-catch name isn't in that game's box (Oct 7 review: no 32-roster pull every run)
+    def get(self,ab,default=None):
+        if ab not in self:
+            try: ro=get(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/{TID[ab]}/roster")
+            except Exception: self[ab]=None;return default
+            m={}
+            for grp in ro.get("athletes",[]):
+                for a in grp.get("items",[]):
+                    k=abbr_key(a.get("firstName") or a["fullName"],a.get("lastName") or a["fullName"].split()[-1]);m.setdefault(k,[]).append((a["fullName"],int(a["id"])))
+            self[ab]=m
+        return dict.get(self,ab) if dict.get(self,ab) is not None else default
+ROST=_Rost()
 FCRX=re.compile(r"fair catch by ([A-Z][A-Za-z']*)\.\s?((?:St\.\s?)?[A-Z][A-Za-z'\-]+)")
 def game(g):
     w,gid,dt=g;d=get(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event={gid}")
+    if CACHE is not None: CACHE[gid]={k:v for k,v in d.items() if k in ('header','boxscore','drives','gameInfo')}
     comp=d["header"]["competitions"][0]["competitors"];ab={c["team"]["id"]:c["team"]["abbreviation"] for c in comp}
     rows=[];tots=[];prow=[];ptots=[]
     idab={c["team"]["id"]:c["team"]["abbreviation"] for c in comp}
@@ -126,6 +131,7 @@ def game(g):
     for r in prow: r["share"]=round(r["pr"]/r["team_pr"],3) if r["team_pr"] else 0; r["fpts"]=round(r["pr_yds"]*PR_YD+PR_TD*r["td"],1)
     return rows,tots,prow,ptots,fc_unmatched,(fc is None)
 R=[];TT=[];PR=[];PT=[];FCW=[];NOPBP=[]
+CACHE={} if os.environ.get('RG_SUMMARY_CACHE') else None   # RG_SUMMARY_CACHE=<file>: save each game summary (header, boxscore, drives, gameInfo) once for kickoffs.py and the raw archive
 with cf.ThreadPoolExecutor(8) as ex:
     for (rows,tots,prow,ptots,fcu,nopbp),g in zip(ex.map(game,games),games): R+=rows;TT+=tots;PR+=prow;PT+=ptots;FCW+=fcu;NOPBP+=[g[1]] if nopbp else []
 def fant(ids):
@@ -140,7 +146,8 @@ R.sort(key=lambda r:(r["week"],r["team"],-r["kr"]));TT.sort(key=lambda r:(r["wee
 PR.sort(key=lambda r:(r["week"],r["team"],-r["pr"],-(r["fc"] or 0)));PT.sort(key=lambda r:(r["week"],r["team"]))
 for fn,data in (("kick_returns.csv",R),("team_game_kick_totals.csv",TT),("punt_returns.csv",PR),("team_game_punt_totals.csv",PT)):
     with open(fn,"w",newline="") as f: w=csv.DictWriter(f,fieldnames=list(data[0]));w.writeheader();w.writerows(data)
-json.dump({"currentWeek":CUR,"regSeasonWeeks":REG,"weeks":weeks,"byes":byes,"scoring":{"krYd":PER_YD,"krTd":PER_TD,"prYd":PR_YD,"prTd":PR_TD},"gamesPerWeek":EXPECT,
+if CACHE is not None: json.dump(CACHE,open(os.environ['RG_SUMMARY_CACHE'],'w'))
+json.dump({"season":SEASON,"currentWeek":CUR,"regSeasonWeeks":REG,"weeks":weeks,"byes":byes,"scoring":{"krYd":PER_YD,"krTd":PER_TD,"prYd":PR_YD,"prTd":PR_TD},"gamesPerWeek":EXPECT,
            "fairCatches":{"source":"ESPN play-by-play (punt plays, 'fair catch by')","gamesWithoutPlayByPlay":NOPBP,"unmatched":FCW}},open("box_meta.json","w"),indent=1)
 # checks: every scheduled game has two team boxes; ESPN totals match our sums; 32 teams each week (playing + bye)
 bad=[t for t in TT if str(t["team_kr"])!=str(t["espn_total_kr"]) or str(t["team_kr_yds"])!=str(t["espn_total_yds"])]
