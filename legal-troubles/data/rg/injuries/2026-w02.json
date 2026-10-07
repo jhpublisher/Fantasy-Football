@@ -1,0 +1,4311 @@
+{
+"season": 2026,
+"week": 2,
+"sources": {
+"injury_report": "https://www.nfl.com/injuries/league/2026/reg2",
+"inactives": "ESPN game rosters (didNotPlay), sports.core.api.espn.com competitions/{id}/competitors/{team}/roster"
+},
+"byes": [],
+"games": [
+{
+"game_id": "401872932",
+"home": "BUF",
+"away": "DET",
+"date": "2026-09-18T00:15Z",
+"final": true
+},
+{
+"game_id": "401872933",
+"home": "ATL",
+"away": "CAR",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872937",
+"home": "CHI",
+"away": "MIN",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872939",
+"home": "TEN",
+"away": "PHI",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872946",
+"home": "NE",
+"away": "PIT",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872936",
+"home": "NYJ",
+"away": "GB",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872935",
+"home": "TB",
+"away": "CLE",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872938",
+"home": "BAL",
+"away": "NO",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872934",
+"home": "HOU",
+"away": "CIN",
+"date": "2026-09-20T17:00Z",
+"final": true
+},
+{
+"game_id": "401872940",
+"home": "DEN",
+"away": "JAX",
+"date": "2026-09-20T20:05Z",
+"final": true
+},
+{
+"game_id": "401872941",
+"home": "LAC",
+"away": "LV",
+"date": "2026-09-20T20:05Z",
+"final": true
+},
+{
+"game_id": "401872944",
+"home": "DAL",
+"away": "WSH",
+"date": "2026-09-20T20:25Z",
+"final": true
+},
+{
+"game_id": "401872943",
+"home": "ARI",
+"away": "SEA",
+"date": "2026-09-20T20:25Z",
+"final": true
+},
+{
+"game_id": "401872942",
+"home": "SF",
+"away": "MIA",
+"date": "2026-09-20T20:25Z",
+"final": true
+},
+{
+"game_id": "401872945",
+"home": "KC",
+"away": "IND",
+"date": "2026-09-21T00:20Z",
+"final": true
+},
+{
+"game_id": "401872947",
+"home": "LAR",
+"away": "NYG",
+"date": "2026-09-22T00:15Z",
+"final": true
+}
+],
+"report": {
+"DET": [
+{
+"player": "Christian Izien",
+"pos": "S",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "christian-izien",
+"match": "game roster/team roster",
+"espn_id": 4372459,
+"inactive": false
+},
+{
+"player": "Christian Mahogany",
+"pos": "G",
+"injury": "Hip",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "christian-mahogany",
+"match": "game roster/team roster",
+"espn_id": 4427864,
+"inactive": true
+},
+{
+"player": "Blake Miller",
+"pos": "T",
+"injury": "Knee",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "blake-miller-3",
+"match": "game roster/team roster",
+"espn_id": 5081450,
+"inactive": true
+},
+{
+"player": "D.J. Reed",
+"pos": "CB",
+"injury": "Foot",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "d-j-reed",
+"match": "game roster/team roster",
+"espn_id": 3139387,
+"inactive": false
+},
+{
+"player": "Juice Scruggs",
+"pos": "G",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "juice-scruggs",
+"match": "game roster/team roster",
+"espn_id": 4361425,
+"inactive": false
+}
+],
+"BUF": [
+{
+"player": "Terrel Bernard",
+"pos": "LB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "terrel-bernard",
+"match": "game roster/team roster",
+"espn_id": 4259166,
+"inactive": false
+},
+{
+"player": "Cole Bishop",
+"pos": "S",
+"injury": "Knee, Groin",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "cole-bishop",
+"match": "game roster/team roster",
+"espn_id": 4676004,
+"inactive": false
+},
+{
+"player": "Bradley Chubb",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "bradley-chubb",
+"match": "game roster/team roster",
+"espn_id": 3116733,
+"inactive": false
+},
+{
+"player": "Jordan Hancock",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jordan-hancock",
+"match": "game roster/team roster",
+"espn_id": 4596480,
+"inactive": false
+},
+{
+"player": "Ty Johnson",
+"pos": "RB",
+"injury": "Hamstring",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "ty-johnson-x3152",
+"match": "game roster/team roster",
+"espn_id": 3915411,
+"inactive": true
+},
+{
+"player": "T.J. Sanders",
+"pos": "DE",
+"injury": "Knee, Illness",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "t-j-sanders",
+"match": "game roster/team roster",
+"espn_id": 4684527,
+"inactive": true
+}
+],
+"CLE": [
+{
+"player": "Parker Brailsford",
+"pos": "C",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "parker-brailsford",
+"match": "game roster/team roster",
+"espn_id": 4816090,
+"inactive": true
+},
+{
+"player": "Tyson Campbell",
+"pos": "CB",
+"injury": "Ankle",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "tyson-campbell",
+"match": "game roster/team roster",
+"espn_id": 4379397,
+"inactive": false
+},
+{
+"player": "Maliek Collins",
+"pos": "DT",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "maliek-collins",
+"match": "game roster/team roster",
+"espn_id": 3040471,
+"inactive": false
+},
+{
+"player": "Noah Igbinoghene",
+"pos": "CB",
+"injury": "Hand",
+"practice": "",
+"game_status": "Questionable",
+"nfl_slug": "noah-igbinoghene",
+"match": "game roster/team roster",
+"espn_id": 4242516,
+"inactive": false
+},
+{
+"player": "Elgton Jenkins",
+"pos": "C",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "elgton-jenkins",
+"match": "game roster/team roster",
+"espn_id": 3115485,
+"inactive": false
+},
+{
+"player": "Teven Jenkins",
+"pos": "G",
+"injury": "Back",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "teven-jenkins",
+"match": "game roster/team roster",
+"espn_id": 4038457,
+"inactive": true
+},
+{
+"player": "Jerry Jeudy",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jerry-jeudy",
+"match": "game roster/team roster",
+"espn_id": 4241463,
+"inactive": false
+},
+{
+"player": "Zion Johnson",
+"pos": "G",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "zion-johnson",
+"match": "game roster/team roster",
+"espn_id": 4247347,
+"inactive": false
+},
+{
+"player": "Dawand Jones",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "dawand-jones",
+"match": "game roster/team roster",
+"espn_id": 4427637,
+"inactive": false
+}
+],
+"TB": [
+{
+"player": "Miles Killebrew",
+"pos": "S",
+"injury": "Concussion",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "miles-killebrew",
+"match": "game roster/team roster",
+"espn_id": 2575164,
+"inactive": false
+},
+{
+"player": "Jalen McMillan",
+"pos": "WR",
+"injury": "Knee",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "jalen-mcmillan",
+"match": "game roster/team roster",
+"espn_id": 4430834,
+"inactive": false
+},
+{
+"player": "Jacob Parrish",
+"pos": "CB",
+"injury": "Back",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "jacob-parrish",
+"match": "game roster/team roster",
+"espn_id": 4912847,
+"inactive": true
+},
+{
+"player": "A'Shawn Robinson",
+"pos": "DT",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "a-shawn-robinson",
+"match": "game roster/team roster",
+"espn_id": 3054857,
+"inactive": false
+},
+{
+"player": "Christian Rozeboom",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "christian-rozeboom",
+"match": "game roster/team roster",
+"espn_id": 3909013,
+"inactive": false
+},
+{
+"player": "Justin Skule",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "justin-skule",
+"match": "game roster/team roster",
+"espn_id": 3915777,
+"inactive": false
+},
+{
+"player": "Sean Tucker",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "sean-tucker",
+"match": "game roster/team roster",
+"espn_id": 4430871,
+"inactive": false
+}
+],
+"NO": [
+{
+"player": "Oscar Delp",
+"pos": "TE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "oscar-delp",
+"match": "game roster/team roster",
+"espn_id": 4702559,
+"inactive": false
+},
+{
+"player": "Davon Godchaux",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "davon-godchaux",
+"match": "game roster/team roster",
+"espn_id": 3115383,
+"inactive": false
+},
+{
+"player": "Juwan Johnson",
+"pos": "TE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "juwan-johnson",
+"match": "game roster/team roster",
+"espn_id": 3929645,
+"inactive": false
+},
+{
+"player": "Cameron Jordan",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "cameron-jordan",
+"match": "game roster/team roster",
+"espn_id": 13971,
+"inactive": false
+},
+{
+"player": "Alvin Kamara",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "alvin-kamara",
+"match": "game roster/team roster",
+"espn_id": 3054850,
+"inactive": false
+},
+{
+"player": "Christen Miller",
+"pos": "DT",
+"injury": "Toe",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "christen-miller",
+"match": "game roster/team roster",
+"espn_id": 4685479,
+"inactive": true
+},
+{
+"player": "Chris Olave",
+"pos": "WR",
+"injury": "Hamstring",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "chris-olave",
+"match": "game roster/team roster",
+"espn_id": 4361370,
+"inactive": false
+},
+{
+"player": "Isaiah Stalbird",
+"pos": "LB",
+"injury": "Shoulder",
+"practice": "Did Not Participate In Practice",
+"game_status": "Doubtful",
+"nfl_slug": "isaiah-stalbird",
+"match": "game roster/team roster",
+"espn_id": 4361194,
+"inactive": true
+},
+{
+"player": "Zach Wood",
+"pos": "LS",
+"injury": "Calf",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "zach-wood",
+"match": "game roster/team roster",
+"espn_id": 2575788,
+"inactive": false
+},
+{
+"player": "Chase Young",
+"pos": "LB",
+"injury": "Calf",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "chase-young",
+"match": "game roster/team roster",
+"espn_id": 4241986,
+"inactive": false
+}
+],
+"BAL": [
+{
+"player": "Teddye Buchanan",
+"pos": "LB",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "teddye-buchanan",
+"match": "game roster/team roster",
+"espn_id": 4698244,
+"inactive": true
+},
+{
+"player": "Calais Campbell",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "calais-campbell",
+"match": "game roster/team roster",
+"espn_id": 11284,
+"inactive": false
+},
+{
+"player": "Zay Flowers",
+"pos": "WR",
+"injury": "Hamstring",
+"practice": "Limited Participation in Practice",
+"game_status": "Doubtful",
+"nfl_slug": "zay-flowers",
+"match": "game roster/team roster",
+"espn_id": 4429615,
+"inactive": true
+},
+{
+"player": "Jaylinn Hawkins",
+"pos": "S",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jaylinn-hawkins",
+"match": "game roster/team roster",
+"espn_id": 3858276,
+"inactive": false
+},
+{
+"player": "Trey Hendrickson",
+"pos": "LB",
+"injury": "Finger",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "trey-hendrickson",
+"match": "game roster/team roster",
+"espn_id": 3052743,
+"inactive": false
+},
+{
+"player": "Keondre Jackson",
+"pos": "S",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "keondre-jackson",
+"match": "game roster/team roster",
+"espn_id": 4878287,
+"inactive": false
+},
+{
+"player": "Nnamdi Madubuike",
+"pos": "DT",
+"injury": "Neck",
+"practice": "Limited Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "nnamdi-madubuike",
+"match": "game roster/team roster",
+"espn_id": 4035245,
+"inactive": true
+},
+{
+"player": "John Simpson",
+"pos": "G",
+"injury": "Groin",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "john-simpson-2",
+"match": "game roster/team roster",
+"espn_id": 4035479,
+"inactive": false
+},
+{
+"player": "Ronnie Stanley",
+"pos": "T",
+"injury": "Toe",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "ronnie-stanley",
+"match": "game roster/team roster",
+"espn_id": 2980153,
+"inactive": false
+},
+{
+"player": "T.J. Tampa",
+"pos": "CB",
+"injury": "Knee",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "t-j-tampa",
+"match": "game roster/team roster",
+"espn_id": 4575483,
+"inactive": false
+},
+{
+"player": "Devontez Walker",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "devontez-walker",
+"match": "game roster/team roster",
+"espn_id": 4696882,
+"inactive": false
+}
+],
+"PIT": [
+{
+"player": "Troy Fautanu",
+"pos": "T",
+"injury": "Ankle",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "troy-fautanu",
+"match": "game roster/team roster",
+"espn_id": 4427170,
+"inactive": false
+},
+{
+"player": "Cameron Heyward",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "cameron-heyward",
+"match": "game roster/team roster",
+"espn_id": 13977,
+"inactive": false
+},
+{
+"player": "Michael Pittman",
+"pos": "WR",
+"injury": "Foot",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "michael-pittman-2",
+"match": "game roster/team roster",
+"espn_id": 4035687,
+"inactive": true
+},
+{
+"player": "Joey Porter Jr.",
+"pos": "CB",
+"injury": "Back",
+"practice": "Limited Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "joey-porter-jr",
+"match": "game roster/team roster",
+"espn_id": 4426506,
+"inactive": true
+},
+{
+"player": "Darnell Washington",
+"pos": "TE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "darnell-washington",
+"match": "game roster/team roster",
+"espn_id": 4430802,
+"inactive": false
+}
+],
+"NE": [
+{
+"player": "Ben Brown",
+"pos": "C",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "ben-brown-2",
+"match": "game roster/team roster",
+"espn_id": 4362890,
+"inactive": false
+},
+{
+"player": "Dametrious Crownover",
+"pos": "T",
+"injury": "Knee",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "dametrious-crownover",
+"match": "game roster/team roster",
+"espn_id": 4431526,
+"inactive": true
+},
+{
+"player": "Carlton Davis III",
+"pos": "CB",
+"injury": "Neck",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "carlton-davis",
+"match": "game roster/team roster",
+"espn_id": 3916923,
+"inactive": true
+},
+{
+"player": "TreVeyon Henderson",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "treveyon-henderson",
+"match": "game roster/team roster",
+"espn_id": 4432710,
+"inactive": false
+},
+{
+"player": "Dre'Mont Jones",
+"pos": "LB",
+"injury": "Foot",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "dre-mont-jones",
+"match": "game roster/team roster",
+"espn_id": 3915525,
+"inactive": false
+},
+{
+"player": "Robert Spillane",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "robert-spillane",
+"match": "game roster/team roster",
+"espn_id": 3129446,
+"inactive": false
+}
+],
+"CIN": [
+{
+"player": "Jonathan Allen",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jonathan-allen",
+"match": "game roster/team roster",
+"espn_id": 3054840,
+"inactive": false
+},
+{
+"player": "Joe Burrow",
+"pos": "QB",
+"injury": "Back",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "joe-burrow",
+"match": "game roster/team roster",
+"espn_id": 3915511,
+"inactive": false
+},
+{
+"player": "B.J. Hill",
+"pos": "DT",
+"injury": "Achilles",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "b-j-hill",
+"match": "game roster/team roster",
+"espn_id": 3116748,
+"inactive": true
+},
+{
+"player": "Daxton Hill",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "dax-hill",
+"match": "game roster/team roster",
+"espn_id": 4426422,
+"inactive": false
+},
+{
+"player": "Dexter Lawrence",
+"pos": "DT",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "dexter-lawrence",
+"match": "game roster/team roster",
+"espn_id": 4035483,
+"inactive": false
+},
+{
+"player": "Samaje Perine",
+"pos": "RB",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "samaje-perine",
+"match": "game roster/team roster",
+"espn_id": 3116389,
+"inactive": false
+},
+{
+"player": "Shemar Stewart",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "shemar-stewart",
+"match": "game roster/team roster",
+"espn_id": 4685562,
+"inactive": false
+}
+],
+"HOU": [
+{
+"player": "Will Anderson Jr.",
+"pos": "DE",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "will-anderson-jr",
+"match": "game roster/team roster",
+"espn_id": 4685724,
+"inactive": false
+},
+{
+"player": "Trent Brown",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "trent-brown",
+"match": "game roster/team roster",
+"espn_id": 3043109,
+"inactive": false
+},
+{
+"player": "Jadeveon Clowney",
+"pos": "DE",
+"injury": "Knee",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "jadeveon-clowney",
+"match": "game roster/team roster",
+"espn_id": 16734,
+"inactive": true
+},
+{
+"player": "Nico Collins",
+"pos": "WR",
+"injury": "Hamstring",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "nico-collins",
+"match": "game roster/team roster",
+"espn_id": 4258173,
+"inactive": true
+},
+{
+"player": "Logan Hall",
+"pos": "DE",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "logan-hall",
+"match": "game roster/team roster",
+"espn_id": 4360189,
+"inactive": false
+},
+{
+"player": "Jacob Hummel",
+"pos": "LB",
+"injury": "Groin",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "jake-hummel",
+"match": "game roster/team roster",
+"espn_id": 4241250,
+"inactive": true
+},
+{
+"player": "Ed Ingram",
+"pos": "G",
+"injury": "Groin",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "ed-ingram",
+"match": "game roster/team roster",
+"espn_id": 4242227,
+"inactive": true
+},
+{
+"player": "Dalton Schultz",
+"pos": "TE",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "dalton-schultz",
+"match": "game roster/team roster",
+"espn_id": 3117256,
+"inactive": false
+},
+{
+"player": "Wade Woodaz",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "wade-woodaz",
+"match": "game roster/team roster",
+"espn_id": 4837286,
+"inactive": false
+}
+],
+"GB": [
+{
+"player": "Aaron Banks",
+"pos": "G",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "aaron-banks",
+"match": "game roster/team roster",
+"espn_id": 4242390,
+"inactive": false
+},
+{
+"player": "Warren Brinson",
+"pos": "DT",
+"injury": "Calf",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "warren-brinson",
+"match": "game roster/team roster",
+"espn_id": 4429136,
+"inactive": true
+},
+{
+"player": "Brandon Cisse",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "brandon-cisse",
+"match": "game roster/team roster",
+"espn_id": 5076652,
+"inactive": false
+},
+{
+"player": "Javon Hargrave",
+"pos": "DT",
+"injury": "Knee, Concussion",
+"practice": "Did Not Participate In Practice",
+"game_status": "Doubtful",
+"nfl_slug": "javon-hargrave",
+"match": "game roster/team roster",
+"espn_id": 2983055,
+"inactive": true
+},
+{
+"player": "Ty'Ron Hopper",
+"pos": "LB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "ty-ron-hopper",
+"match": "game roster/team roster",
+"espn_id": 4567406,
+"inactive": false
+},
+{
+"player": "Barryn Sorrell",
+"pos": "LB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "barryn-sorrell",
+"match": "game roster/team roster",
+"espn_id": 4683643,
+"inactive": false
+},
+{
+"player": "Benjamin St-Juste",
+"pos": "CB",
+"injury": "Hamstring",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "benjamin-st-juste",
+"match": "game roster/team roster",
+"espn_id": 4258206,
+"inactive": true
+},
+{
+"player": "Zach Bako-Bewele",
+"pos": "T",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "zach-tom",
+"match": "game roster/team roster",
+"espn_id": 4240435,
+"inactive": false
+},
+{
+"player": "Lukas Van Ness",
+"pos": "LB",
+"injury": "Concussion",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "lukas-van-ness",
+"match": "game roster/team roster",
+"espn_id": 4686906,
+"inactive": false
+},
+{
+"player": "Devonte Wyatt",
+"pos": "DT",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "devonte-wyatt",
+"match": "game roster/team roster",
+"espn_id": 4361791,
+"inactive": false
+}
+],
+"NYJ": [
+{
+"player": "Jarvis Brownlee Jr.",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jarvis-brownlee-jr",
+"match": "game roster/team roster",
+"espn_id": 4426817,
+"inactive": false
+},
+{
+"player": "Omar Cooper Jr.",
+"pos": "WR",
+"injury": "Ankle",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "omar-cooper-jr",
+"match": "game roster/team roster",
+"espn_id": 4723820,
+"inactive": false
+},
+{
+"player": "Minkah Fitzpatrick",
+"pos": "S",
+"injury": "Groin",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "minkah-fitzpatrick",
+"match": "game roster/team roster",
+"espn_id": 3925345,
+"inactive": true
+},
+{
+"player": "Will McDonald IV",
+"pos": "DE",
+"injury": "Ankle",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "will-mcdonald-iv",
+"match": "game roster/team roster",
+"espn_id": 4361767,
+"inactive": false
+},
+{
+"player": "Kene Nwangwu",
+"pos": "RB",
+"injury": "Back",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "kene-nwangwu",
+"match": "game roster/team roster",
+"espn_id": 4035537,
+"inactive": true
+},
+{
+"player": "David Onyemata",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "david-onyemata",
+"match": "game roster/team roster",
+"espn_id": 4002046,
+"inactive": false
+},
+{
+"player": "Joseph Ossai",
+"pos": "DE",
+"injury": "Foot",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "joseph-ossai",
+"match": "game roster/team roster",
+"espn_id": 4362094,
+"inactive": true
+},
+{
+"player": "D'Angelo Ponds",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "d-angelo-ponds",
+"match": "game roster/team roster",
+"espn_id": 5118340,
+"inactive": true
+},
+{
+"player": "Jamien Sherwood",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jamien-sherwood",
+"match": "game roster/team roster",
+"espn_id": 4361331,
+"inactive": false
+}
+],
+"PHI": [
+{
+"player": "Marquise Brown",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "marquise-brown",
+"match": "ESPN search (Hollywood Brown)",
+"espn_id": 4241372,
+"inactive": false
+},
+{
+"player": "Jalen Carter",
+"pos": "DT",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "jalen-carter",
+"match": "game roster/team roster",
+"espn_id": 4685759,
+"inactive": false
+},
+{
+"player": "Cooper DeJean",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "cooper-dejean",
+"match": "game roster/team roster",
+"espn_id": 4682618,
+"inactive": false
+},
+{
+"player": "Jonathan Greenard",
+"pos": "LB",
+"injury": "Pectoral",
+"practice": "Limited Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "jonathan-greenard",
+"match": "game roster/team roster",
+"espn_id": 3916409,
+"inactive": true
+},
+{
+"player": "Elijah Moore",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "elijah-moore",
+"match": "game roster/team roster",
+"espn_id": 4372414,
+"inactive": true
+},
+{
+"player": "Andrew Mukuba",
+"pos": "S",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "andrew-mukuba",
+"match": "game roster/team roster",
+"espn_id": 4602197,
+"inactive": false
+}
+],
+"TEN": [
+{
+"player": "Cordale Flott",
+"pos": "CB",
+"injury": "Quadricep",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "cordale-flott",
+"match": "game roster/team roster",
+"espn_id": 4429607,
+"inactive": true
+},
+{
+"player": "Cedric Gray",
+"pos": "LB",
+"injury": "Concussion",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "cedric-gray",
+"match": "game roster/team roster",
+"espn_id": 4429834,
+"inactive": false
+},
+{
+"player": "James Williams",
+"pos": "LB",
+"injury": "Elbow",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "james-williams-8",
+"match": "game roster/team roster",
+"espn_id": 4431613,
+"inactive": true
+}
+],
+"MIN": [
+{
+"player": "Blake Cashman",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "blake-cashman",
+"match": "game roster/team roster",
+"espn_id": 3728281,
+"inactive": false
+},
+{
+"player": "Christian Darrisaw",
+"pos": "T",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "christian-darrisaw",
+"match": "game roster/team roster",
+"espn_id": 4361985,
+"inactive": false
+},
+{
+"player": "Jauan Jennings",
+"pos": "WR",
+"injury": "Not injury related - personal matter",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "jauan-jennings",
+"match": "game roster/team roster",
+"espn_id": 3886598,
+"inactive": true
+},
+{
+"player": "Kyler Murray",
+"pos": "QB",
+"injury": "Concussion",
+"practice": "Limited Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "kyler-murray",
+"match": "game roster/team roster",
+"espn_id": 3917315,
+"inactive": true
+},
+{
+"player": "Brian O'Neill",
+"pos": "T",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "brian-o-neill",
+"match": "game roster/team roster",
+"espn_id": 3123954,
+"inactive": false
+},
+{
+"player": "Harrison Smith",
+"pos": "S",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "harrison-smith",
+"match": "game roster/team roster",
+"espn_id": 14945,
+"inactive": false
+},
+{
+"player": "Andrew Van Ginkel",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "andrew-van-ginkel",
+"match": "game roster/team roster",
+"espn_id": 3133487,
+"inactive": false
+}
+],
+"CHI": [
+{
+"player": "Neville Gallimore",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "neville-gallimore",
+"match": "game roster/team roster",
+"espn_id": 3892883,
+"inactive": false
+},
+{
+"player": "Grady Jarrett",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "grady-jarrett",
+"match": "game roster/team roster",
+"espn_id": 2576492,
+"inactive": false
+},
+{
+"player": "Kyle Monangai",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "kyle-monangai",
+"match": "game roster/team roster",
+"espn_id": 4608686,
+"inactive": false
+},
+{
+"player": "Malik Muhammad",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "malik-muhammad",
+"match": "game roster/team roster",
+"espn_id": 4870953,
+"inactive": false
+},
+{
+"player": "Dayo Odeyingbo",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "dayo-odeyingbo",
+"match": "game roster/team roster",
+"espn_id": 4242659,
+"inactive": false
+},
+{
+"player": "D'Andre Swift",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "d-andre-swift",
+"match": "game roster/team roster",
+"espn_id": 4259545,
+"inactive": false
+},
+{
+"player": "Joe Thuney",
+"pos": "G",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "joseph-michael-thuney",
+"match": "game roster/team roster",
+"espn_id": 2577773,
+"inactive": false
+},
+{
+"player": "Ozzy Trapilo",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "ozzy-trapilo",
+"match": "game roster/team roster",
+"espn_id": 4432595,
+"inactive": true
+},
+{
+"player": "Xavier Woods",
+"pos": "S",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "xavier-woods",
+"match": "game roster/team roster",
+"espn_id": 3040572,
+"inactive": false
+},
+{
+"player": "Darnell Wright",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "darnell-wright",
+"match": "game roster/team roster",
+"espn_id": 4426358,
+"inactive": false
+}
+],
+"CAR": [
+{
+"player": "Bobby Brown III",
+"pos": "DT",
+"injury": "Back",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "bobby-brown-iii",
+"match": "game roster/team roster",
+"espn_id": 4372518,
+"inactive": true
+},
+{
+"player": "Jalen Coker",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jalen-coker",
+"match": "game roster/team roster",
+"espn_id": 4695883,
+"inactive": false
+},
+{
+"player": "Patrick Jones II",
+"pos": "LB",
+"injury": "Back",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "patrick-jones-ii",
+"match": "game roster/team roster",
+"espn_id": 4036063,
+"inactive": true
+},
+{
+"player": "Darren Waller",
+"pos": "TE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "darren-waller",
+"match": "game roster/team roster",
+"espn_id": 2576925,
+"inactive": false
+}
+],
+"ATL": [
+{
+"player": "Billy Bowman Jr.",
+"pos": "CB",
+"injury": "Achilles",
+"practice": "Full Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "billy-bowman-jr",
+"match": "game roster/team roster",
+"espn_id": 4431194,
+"inactive": true
+},
+{
+"player": "Kendal Daniels",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "kendal-daniels",
+"match": "game roster/team roster",
+"espn_id": 4595343,
+"inactive": false
+},
+{
+"player": "Chris Lindstrom",
+"pos": "G",
+"injury": "Concussion",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "chris-lindstrom",
+"match": "game roster/team roster",
+"espn_id": 3672833,
+"inactive": false
+},
+{
+"player": "Jake Matthews",
+"pos": "T",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "jake-matthews",
+"match": "game roster/team roster",
+"espn_id": 16713,
+"inactive": false
+},
+{
+"player": "Ryan Neuzil",
+"pos": "C",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "ryan-neuzil",
+"match": "game roster/team roster",
+"espn_id": 4036444,
+"inactive": false
+},
+{
+"player": "Michael Penix Jr.",
+"pos": "QB",
+"injury": "Knee",
+"practice": "Full Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "michael-penix-jr",
+"match": "game roster/team roster",
+"espn_id": 4360423,
+"inactive": true
+},
+{
+"player": "Cooper Rush",
+"pos": "QB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "cooper-rush",
+"match": "game roster/team roster",
+"espn_id": 2972515,
+"inactive": false
+},
+{
+"player": "Za'Darius Smith",
+"pos": "DE",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "za-darius-smith",
+"match": "game roster/team roster",
+"espn_id": 3043168,
+"inactive": false
+},
+{
+"player": "Tua Tagovailoa",
+"pos": "QB",
+"injury": "Oblique",
+"practice": "Did Not Participate In Practice",
+"game_status": "Doubtful",
+"nfl_slug": "tua-tagovailoa",
+"match": "game roster/team roster",
+"espn_id": 4241479,
+"inactive": true
+},
+{
+"player": "Jawaan Taylor",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jawaan-taylor",
+"match": "game roster/team roster",
+"espn_id": 4034961,
+"inactive": false
+},
+{
+"player": "A.J. Terrell",
+"pos": "CB",
+"injury": "Shoulder",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "a-j-terrell",
+"match": "game roster/team roster",
+"espn_id": 4239995,
+"inactive": false
+}
+],
+"LV": [
+{
+"player": "Brock Bowers",
+"pos": "TE",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Doubtful",
+"nfl_slug": "brock-bowers",
+"match": "game roster/team roster",
+"espn_id": 4432665,
+"inactive": true
+},
+{
+"player": "Ashton Jeanty",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "ashton-jeanty",
+"match": "game roster/team roster",
+"espn_id": 4890973,
+"inactive": false
+},
+{
+"player": "Aidan O'Connell",
+"pos": "QB",
+"injury": "Not injury related - personal matter",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "aidan-o-connell",
+"match": "game roster/team roster",
+"espn_id": 4260394,
+"inactive": true
+},
+{
+"player": "Darien Porter",
+"pos": "CB",
+"injury": "Foot",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "darien-porter-2",
+"match": "game roster/team roster",
+"espn_id": 4430330,
+"inactive": true
+}
+],
+"LAC": [
+{
+"player": "Derius Davis",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "derius-davis",
+"match": "game roster/team roster",
+"espn_id": 4362477,
+"inactive": false
+},
+{
+"player": "Bud Dupree",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "bud-dupree",
+"match": "game roster/team roster",
+"espn_id": 2576702,
+"inactive": false
+},
+{
+"player": "Deane Leonard",
+"pos": "CB",
+"injury": "Abdomen",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "deane-leonard",
+"match": "game roster/team roster",
+"espn_id": 4690171,
+"inactive": true
+},
+{
+"player": "Khalil Mack",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "khalil-mack",
+"match": "game roster/team roster",
+"espn_id": 16710,
+"inactive": false
+},
+{
+"player": "Ladd McConkey",
+"pos": "WR",
+"injury": "Rib",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "ladd-mcconkey",
+"match": "game roster/team roster",
+"espn_id": 4612826,
+"inactive": false
+},
+{
+"player": "Akheem Mesidor",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "akheem-mesidor",
+"match": "game roster/team roster",
+"espn_id": 4429190,
+"inactive": false
+},
+{
+"player": "Elijah Molden",
+"pos": "S",
+"injury": "Hamstring",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "elijah-molden",
+"match": "game roster/team roster",
+"espn_id": 4243328,
+"inactive": true
+},
+{
+"player": "Trey Pipkins",
+"pos": "T",
+"injury": "Knee",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "trey-pipkins",
+"match": "game roster/team roster",
+"espn_id": 4411189,
+"inactive": true
+},
+{
+"player": "Teair Tart",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "teair-tart",
+"match": "game roster/team roster",
+"espn_id": 4374269,
+"inactive": false
+},
+{
+"player": "Dalvin Tomlinson",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "dalvin-tomlinson",
+"match": "game roster/team roster",
+"espn_id": 2979860,
+"inactive": false
+}
+],
+"JAX": [
+{
+"player": "LeQuint Allen Jr.",
+"pos": "RB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "lequint-allen",
+"match": "game roster/team roster",
+"espn_id": 4911851,
+"inactive": false
+},
+{
+"player": "Christian Braswell",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "christian-braswell",
+"match": null,
+"espn_id": null,
+"inactive": false
+},
+{
+"player": "Jakobi Meyers",
+"pos": "WR",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "jakobi-meyers",
+"match": "game roster/team roster",
+"espn_id": 3916433,
+"inactive": false
+},
+{
+"player": "Foyesade Oluokun",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "foye-oluokun",
+"match": "game roster/team roster",
+"espn_id": 3050073,
+"inactive": false
+},
+{
+"player": "Brian Thomas Jr.",
+"pos": "WR",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "brian-thomas-jr",
+"match": "game roster/team roster",
+"espn_id": 4432773,
+"inactive": false
+},
+{
+"player": "Cole Van Lanen",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "cole-van-lanen",
+"match": "game roster/team roster",
+"espn_id": 4035791,
+"inactive": false
+}
+],
+"DEN": [
+{
+"player": "Jonah Elliss",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jonah-elliss",
+"match": "game roster/team roster",
+"espn_id": 4687592,
+"inactive": false
+},
+{
+"player": "Troy Franklin",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "troy-franklin",
+"match": "game roster/team roster",
+"espn_id": 4431280,
+"inactive": false
+},
+{
+"player": "RJ Harvey",
+"pos": "RB",
+"injury": "Hamstring",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "rj-harvey",
+"match": "game roster/team roster",
+"espn_id": 4568490,
+"inactive": true
+},
+{
+"player": "Marvin Mims Jr.",
+"pos": "WR",
+"injury": "Foot",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "marvin-mims-jr",
+"match": "game roster/team roster",
+"espn_id": 4686472,
+"inactive": true
+}
+],
+"SEA": [
+{
+"player": "Anthony Bradford",
+"pos": "G",
+"injury": "Knee, Hip",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "anthony-bradford",
+"match": "game roster/team roster",
+"espn_id": 4429211,
+"inactive": true
+},
+{
+"player": "Sam Darnold",
+"pos": "QB",
+"injury": "Glute",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "sam-darnold",
+"match": "game roster/team roster",
+"espn_id": 3912547,
+"inactive": true
+},
+{
+"player": "Nick Emmanwori",
+"pos": "S",
+"injury": "Ankle, Hip",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "nick-emmanwori",
+"match": "game roster/team roster",
+"espn_id": 4869523,
+"inactive": false
+},
+{
+"player": "Tory Horton",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "tory-horton",
+"match": "game roster/team roster",
+"espn_id": 4597703,
+"inactive": false
+},
+{
+"player": "Josh Jobe",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "joshua-jobe",
+"match": "game roster/team roster",
+"espn_id": 4372020,
+"inactive": false
+},
+{
+"player": "Josh Jones",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "josh-jones-2",
+"match": "game roster/team roster",
+"espn_id": 3914630,
+"inactive": false
+},
+{
+"player": "Cooper Kupp",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "cooper-kupp",
+"match": "game roster/team roster",
+"espn_id": 2977187,
+"inactive": false
+},
+{
+"player": "Ty Okada",
+"pos": "S",
+"injury": "Hamstring",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "ty-okada",
+"match": "game roster/team roster",
+"espn_id": 4247808,
+"inactive": true
+}
+],
+"ARI": [
+{
+"player": "Isaiah Adams",
+"pos": "G",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "isaiah-adams",
+"match": "game roster/team roster",
+"espn_id": 5084939,
+"inactive": false
+},
+{
+"player": "Budda Baker",
+"pos": "S",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "budda-baker",
+"match": "game roster/team roster",
+"espn_id": 3127287,
+"inactive": false
+},
+{
+"player": "Andrew Billings",
+"pos": "DT",
+"injury": "Knee",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "andrew-billings",
+"match": "game roster/team roster",
+"espn_id": 3051775,
+"inactive": true
+},
+{
+"player": "Jack Gibbens",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "jack-gibbens",
+"match": "game roster/team roster",
+"espn_id": 4249739,
+"inactive": false
+},
+{
+"player": "Roy Lopez",
+"pos": "DT",
+"injury": "Groin",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "roy-lopez",
+"match": "game roster/team roster",
+"espn_id": 4040805,
+"inactive": false
+},
+{
+"player": "Trey McBride",
+"pos": "TE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "trey-mcbride",
+"match": "game roster/team roster",
+"espn_id": 4361307,
+"inactive": false
+},
+{
+"player": "Max Melton",
+"pos": "CB",
+"injury": "Ankle",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "max-melton",
+"match": "game roster/team roster",
+"espn_id": 4698113,
+"inactive": false
+},
+{
+"player": "Isaac Seumalo",
+"pos": "G",
+"injury": "Shoulder",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "isaac-seumalo",
+"match": "game roster/team roster",
+"espn_id": 2978247,
+"inactive": false
+},
+{
+"player": "Cody Simon",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "cody-simon",
+"match": "game roster/team roster",
+"espn_id": 4429071,
+"inactive": false
+},
+{
+"player": "Josh Sweat",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "josh-sweat",
+"match": "game roster/team roster",
+"espn_id": 3693166,
+"inactive": false
+},
+{
+"player": "Dadrion Taylor-Demerson",
+"pos": "S",
+"injury": "Ribs",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "dadrion-taylor-demerson",
+"match": "game roster/team roster",
+"espn_id": 4428633,
+"inactive": false
+},
+{
+"player": "Garrett Williams",
+"pos": "CB",
+"injury": "Achilles",
+"practice": "Limited Participation in Practice",
+"game_status": "Out",
+"nfl_slug": "garrett-williams",
+"match": "game roster/team roster",
+"espn_id": 4568506,
+"inactive": true
+}
+],
+"MIA": [
+{
+"player": "Tucker Addington",
+"pos": "LS",
+"injury": "Shoulder",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "tucker-addington",
+"match": "game roster/team roster",
+"espn_id": 4034729,
+"inactive": false
+},
+{
+"player": "Ronnie Harrison",
+"pos": "LB",
+"injury": "Hamstring",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "ronnie-harrison",
+"match": "game roster/team roster",
+"espn_id": 3859006,
+"inactive": false
+},
+{
+"player": "Chop Robinson",
+"pos": "LB",
+"injury": "Concussion",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "chop-robinson",
+"match": "game roster/team roster",
+"espn_id": 4431586,
+"inactive": true
+},
+{
+"player": "Dante Trader Jr.",
+"pos": "S",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "dante-trader-jr",
+"match": "game roster/team roster",
+"espn_id": 4431664,
+"inactive": false
+},
+{
+"player": "Seydou Traore",
+"pos": "TE",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "seydou-traore",
+"match": "game roster/team roster",
+"espn_id": 4714379,
+"inactive": false
+},
+{
+"player": "Malik Willis",
+"pos": "QB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "malik-willis",
+"match": "game roster/team roster",
+"espn_id": 4242512,
+"inactive": false
+}
+],
+"SF": [
+{
+"player": "Kaelon Black",
+"pos": "RB",
+"injury": "Groin",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "kaelon-black",
+"match": "game roster/team roster",
+"espn_id": 4696044,
+"inactive": false
+},
+{
+"player": "Nick Bosa",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "nick-bosa",
+"match": "game roster/team roster",
+"espn_id": 4040605,
+"inactive": false
+},
+{
+"player": "Dre Greenlaw",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "dre-greenlaw-x9042",
+"match": "game roster/team roster",
+"espn_id": 3916903,
+"inactive": false
+},
+{
+"player": "Kyle Juszczyk",
+"pos": "FB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "kyle-juszczyk",
+"match": "game roster/team roster",
+"espn_id": 16002,
+"inactive": false
+},
+{
+"player": "Khalid Kareem",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "khalid-kareem",
+"match": "game roster/team roster",
+"espn_id": 4039029,
+"inactive": false
+},
+{
+"player": "George Kittle",
+"pos": "TE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "george-kittle",
+"match": "game roster/team roster",
+"espn_id": 3040151,
+"inactive": false
+},
+{
+"player": "Christian McCaffrey",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "christian-mccaffrey",
+"match": "game roster/team roster",
+"espn_id": 3117251,
+"inactive": false
+},
+{
+"player": "Eddy Pineiro",
+"pos": "K",
+"injury": "Illness",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "eddy-pineiro",
+"match": "game roster/team roster",
+"espn_id": 4034949,
+"inactive": false
+},
+{
+"player": "Upton Stout",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "upton-stout",
+"match": "game roster/team roster",
+"espn_id": 4565200,
+"inactive": false
+},
+{
+"player": "De'Zhaun Stribling",
+"pos": "WR",
+"injury": "Ankle",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "de-zhaun-stribling",
+"match": "game roster/team roster",
+"espn_id": 4710714,
+"inactive": false
+},
+{
+"player": "Keion White",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "keion-white",
+"match": "game roster/team roster",
+"espn_id": 4243493,
+"inactive": false
+},
+{
+"player": "Trent Williams",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "trent-williams",
+"match": "game roster/team roster",
+"espn_id": 13241,
+"inactive": false
+}
+],
+"WSH": [
+{
+"player": "Kaytron Allen",
+"pos": "RB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "kaytron-allen",
+"match": "game roster/team roster",
+"espn_id": 4685246,
+"inactive": false
+},
+{
+"player": "Dorance Armstrong",
+"pos": "LB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "dorance-armstrong",
+"match": "game roster/team roster",
+"espn_id": 3928979,
+"inactive": false
+},
+{
+"player": "K'Lavon Chaisson",
+"pos": "LB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "k-lavon-chaisson",
+"match": "game roster/team roster",
+"espn_id": 4242205,
+"inactive": false
+},
+{
+"player": "Javon Kinlaw",
+"pos": "DT",
+"injury": "Back",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "javon-kinlaw",
+"match": "game roster/team roster",
+"espn_id": 4259491,
+"inactive": false
+},
+{
+"player": "Jaylin Lane",
+"pos": "WR",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "jaylin-lane",
+"match": "game roster/team roster",
+"espn_id": 4602667,
+"inactive": false
+},
+{
+"player": "Frankie Luvu",
+"pos": "LB",
+"injury": "Groin",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "frankie-luvu",
+"match": "game roster/team roster",
+"espn_id": 3127273,
+"inactive": true
+},
+{
+"player": "Chig Okonkwo",
+"pos": "TE",
+"injury": "Hamstring",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "chigoziem-okonkwo",
+"match": "game roster/team roster",
+"espn_id": 4360635,
+"inactive": true
+},
+{
+"player": "Charles Omenihu",
+"pos": "DE",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "charles-omenihu",
+"match": "game roster/team roster",
+"espn_id": 3929865,
+"inactive": false
+},
+{
+"player": "Odafe Oweh",
+"pos": "LB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "odafe-oweh",
+"match": "game roster/team roster",
+"espn_id": 4361422,
+"inactive": false
+},
+{
+"player": "Tyler Owens",
+"pos": "S",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "tyler-owens",
+"match": "game roster/team roster",
+"espn_id": 4572460,
+"inactive": false
+},
+{
+"player": "Chris Paul",
+"pos": "G",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "chris-paul",
+"match": "game roster/team roster",
+"espn_id": 4244615,
+"inactive": false
+},
+{
+"player": "Daron Payne",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "daron-payne",
+"match": "game roster/team roster",
+"espn_id": 3925354,
+"inactive": false
+}
+],
+"DAL": [
+{
+"player": "Ajani Cornelius",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "ajani-cornelius",
+"match": "game roster/team roster",
+"espn_id": 4696203,
+"inactive": true
+},
+{
+"player": "Malik Hooker",
+"pos": "S",
+"injury": "Forearm",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "malik-hooker",
+"match": "game roster/team roster",
+"espn_id": 3121415,
+"inactive": true
+},
+{
+"player": "James Houston",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "james-houston",
+"match": "game roster/team roster",
+"espn_id": 4240608,
+"inactive": true
+},
+{
+"player": "DeMarvion Overshown",
+"pos": "LB",
+"injury": "Hamstring",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "demarvion-overshown",
+"match": "game roster/team roster",
+"espn_id": 4362088,
+"inactive": true
+}
+],
+"IND": [
+{
+"player": "Austin Ajiake",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "austin-ajiake",
+"match": "game roster/team roster",
+"espn_id": 4374171,
+"inactive": true
+},
+{
+"player": "Keenan Allen",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "keenan-allen",
+"match": "game roster/team roster",
+"espn_id": 15818,
+"inactive": false
+},
+{
+"player": "DeForest Buckner",
+"pos": "DT",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "deforest-buckner",
+"match": "game roster/team roster",
+"espn_id": 2971282,
+"inactive": false
+},
+{
+"player": "Akeem Davis-Gaither",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "akeem-davis-gaither",
+"match": "game roster/team roster",
+"espn_id": 3917142,
+"inactive": false
+},
+{
+"player": "Ashton Dulin",
+"pos": "WR",
+"injury": "Ankle",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "ashton-dulin",
+"match": "game roster/team roster",
+"espn_id": 4061956,
+"inactive": true
+},
+{
+"player": "Sauce Gardner",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "sauce-gardner",
+"match": "game roster/team roster",
+"espn_id": 4427250,
+"inactive": false
+},
+{
+"player": "DJ Giddens",
+"pos": "RB",
+"injury": "Knee",
+"practice": "Full Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "dj-giddens",
+"match": "game roster/team roster",
+"espn_id": 4874509,
+"inactive": true
+},
+{
+"player": "Alec Pierce",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "alec-pierce",
+"match": "game roster/team roster",
+"espn_id": 4360078,
+"inactive": false
+},
+{
+"player": "Anthony Richardson",
+"pos": "QB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "anthony-richardson",
+"match": "game roster/team roster",
+"espn_id": 4429084,
+"inactive": true
+},
+{
+"player": "Grover Stewart",
+"pos": "DT",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "grover-stewart",
+"match": "game roster/team roster",
+"espn_id": 4058825,
+"inactive": false
+},
+{
+"player": "Charvarius Ward",
+"pos": "CB",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "charvarius-ward",
+"match": "game roster/team roster",
+"espn_id": 4037361,
+"inactive": false
+}
+],
+"KC": [
+{
+"player": "Chamarri Conner",
+"pos": "S",
+"injury": "Knee",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "chamarri-conner",
+"match": "game roster/team roster",
+"espn_id": 4361964,
+"inactive": true
+},
+{
+"player": "Mansoor Delane",
+"pos": "CB",
+"injury": "Shoulder",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "mansoor-delane",
+"match": "game roster/team roster",
+"espn_id": 4880124,
+"inactive": true
+},
+{
+"player": "Ashton Gillotte",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "ashton-gillotte",
+"match": "game roster/team roster",
+"espn_id": 4684432,
+"inactive": false
+},
+{
+"player": "Chris Jones",
+"pos": "DT",
+"injury": "Calf",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "chris-jones",
+"match": "game roster/team roster",
+"espn_id": 3044859,
+"inactive": false
+},
+{
+"player": "Patrick Mahomes",
+"pos": "QB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "patrick-mahomes",
+"match": "game roster/team roster",
+"espn_id": 3139477,
+"inactive": false
+},
+{
+"player": "Rashee Rice",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "rashee-rice",
+"match": "game roster/team roster",
+"espn_id": 4428331,
+"inactive": false
+},
+{
+"player": "Josh Simmons",
+"pos": "T",
+"injury": "Back",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "josh-simmons-2",
+"match": "game roster/team roster",
+"espn_id": 4569659,
+"inactive": true
+},
+{
+"player": "L'Jarius Sneed",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "l-jarius-sneed",
+"match": "game roster/team roster",
+"espn_id": 4040432,
+"inactive": false
+},
+{
+"player": "R Mason Thomas",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "r-mason-thomas",
+"match": "game roster/team roster",
+"espn_id": 5081927,
+"inactive": false
+}
+],
+"NYG": [
+{
+"player": "Paulson Adebo",
+"pos": "CB",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "paulson-adebo",
+"match": "game roster/team roster",
+"espn_id": 4242547,
+"inactive": false
+},
+{
+"player": "Deonte Banks",
+"pos": "CB",
+"injury": "Calf",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "deonte-banks",
+"match": "game roster/team roster",
+"espn_id": 4428328,
+"inactive": true
+},
+{
+"player": "Chauncey Golston",
+"pos": "DE",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "chauncey-golston",
+"match": "game roster/team roster",
+"espn_id": 4036132,
+"inactive": false
+},
+{
+"player": "Francis Mauigoa",
+"pos": "T",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "francis-mauigoa",
+"match": "game roster/team roster",
+"espn_id": 4870914,
+"inactive": false
+},
+{
+"player": "Micah McFadden",
+"pos": "LB",
+"injury": "Neck",
+"practice": "Limited Participation in Practice",
+"game_status": "Questionable",
+"nfl_slug": "micah-mcfadden",
+"match": "game roster/team roster",
+"espn_id": 4371961,
+"inactive": true
+},
+{
+"player": "Greg Newsome II",
+"pos": "CB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "greg-newsome-ii",
+"match": "game roster/team roster",
+"espn_id": 4361266,
+"inactive": false
+},
+{
+"player": "Andrew Thomas",
+"pos": "T",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "andrew-thomas",
+"match": "game roster/team roster",
+"espn_id": 4259566,
+"inactive": false
+}
+],
+"LAR": [
+{
+"player": "Davante Adams",
+"pos": "WR",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "davante-adams",
+"match": "game roster/team roster",
+"espn_id": 16800,
+"inactive": false
+},
+{
+"player": "Kam Curl",
+"pos": "S",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "kamren-curl",
+"match": "game roster/team roster",
+"espn_id": 4242154,
+"inactive": false
+},
+{
+"player": "Aaron Donald",
+"pos": "DT",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "aaron-donald",
+"match": "game roster/team roster",
+"espn_id": 16716,
+"inactive": false
+},
+{
+"player": "Tyler Higbee",
+"pos": "TE",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "tyler-higbee",
+"match": "game roster/team roster",
+"espn_id": 2573401,
+"inactive": false
+},
+{
+"player": "Alaric Jackson",
+"pos": "T",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "alaric-jackson",
+"match": "game roster/team roster",
+"espn_id": 4036135,
+"inactive": false
+},
+{
+"player": "Kamren Kinchens",
+"pos": "S",
+"injury": "Hamstring",
+"practice": "Did Not Participate In Practice",
+"game_status": "Out",
+"nfl_slug": "kamren-kinchens",
+"match": "game roster/team roster",
+"espn_id": 4596363,
+"inactive": true
+},
+{
+"player": "Nate Landman",
+"pos": "LB",
+"injury": "",
+"practice": "Limited Participation in Practice",
+"game_status": "",
+"nfl_slug": "nate-landman",
+"match": "game roster/team roster",
+"espn_id": 4243181,
+"inactive": false
+},
+{
+"player": "Puka Nacua",
+"pos": "WR",
+"injury": "Hip",
+"practice": "Did Not Participate In Practice",
+"game_status": "Questionable",
+"nfl_slug": "puka-nacua",
+"match": "game roster/team roster",
+"espn_id": 4426515,
+"inactive": true
+},
+{
+"player": "Omar Speights",
+"pos": "LB",
+"injury": "",
+"practice": "Full Participation in Practice",
+"game_status": "",
+"nfl_slug": "omar-speights",
+"match": "game roster/team roster",
+"espn_id": 4428550,
+"inactive": false
+},
+{
+"player": "Jordan Whittington",
+"pos": "WR",
+"injury": "Quadricep",
+"practice": "Did Not Participate In Practice",
+"game_status": "Doubtful",
+"nfl_slug": "jordan-whittington",
+"match": "game roster/team roster",
+"espn_id": 4569382,
+"inactive": true
+},
+{
+"player": "Byron Young",
+"pos": "LB",
+"injury": "",
+"practice": "Did Not Participate In Practice",
+"game_status": "",
+"nfl_slug": "byron-young-2",
+"match": "game roster/team roster",
+"espn_id": 4875196,
+"inactive": false
+}
+]
+},
+"inactives": {
+"BUF": {
+"game_id": "401872932",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 3115293,
+"name": "Kyle Allen",
+"pos": "QB"
+},
+{
+"espn_id": 3915411,
+"name": "Ty Johnson",
+"pos": "RB"
+},
+{
+"espn_id": 4039303,
+"name": "Ed Oliver",
+"pos": "DT"
+},
+{
+"espn_id": 4606712,
+"name": "Ar'maj Reed-Adams",
+"pos": "G"
+},
+{
+"espn_id": 4683153,
+"name": "Skyler Bell",
+"pos": "WR"
+},
+{
+"espn_id": 4684527,
+"name": "T.J. Sanders",
+"pos": "DT"
+},
+{
+"espn_id": 4869533,
+"name": "Jude Bowry",
+"pos": "OT"
+},
+{
+"espn_id": 5076951,
+"name": "Jalon Kilgore",
+"pos": "S"
+}
+]
+},
+"DET": {
+"game_id": "401872932",
+"roster_size": 56,
+"did_not_play": [
+{
+"espn_id": 3044720,
+"name": "Joshua Dobbs",
+"pos": "QB"
+},
+{
+"espn_id": 4427864,
+"name": "Christian Mahogany",
+"pos": "G"
+},
+{
+"espn_id": 4429187,
+"name": "Seth McLaughlin",
+"pos": "C"
+},
+{
+"espn_id": 4566092,
+"name": "Ennis Rakestraw Jr.",
+"pos": "CB"
+},
+{
+"espn_id": 4586333,
+"name": "Mekhi Wingo",
+"pos": "DT"
+},
+{
+"espn_id": 4710422,
+"name": "Ahmed Hassanein",
+"pos": "DE"
+},
+{
+"espn_id": 4896353,
+"name": "Jimmy Rolder",
+"pos": "LB"
+},
+{
+"espn_id": 5081450,
+"name": "Blake Miller",
+"pos": "OT"
+},
+{
+"espn_id": 5093004,
+"name": "Keith Abney II",
+"pos": "CB"
+}
+]
+},
+"ATL": {
+"game_id": "401872933",
+"roster_size": 54,
+"did_not_play": [
+{
+"espn_id": 4241479,
+"name": "Tua Tagovailoa",
+"pos": "QB"
+},
+{
+"espn_id": 4360423,
+"name": "Michael Penix Jr.",
+"pos": "QB"
+},
+{
+"espn_id": 4431194,
+"name": "Billy Bowman Jr.",
+"pos": "CB"
+},
+{
+"espn_id": 4683194,
+"name": "Ethan Onianwa",
+"pos": "OT"
+},
+{
+"espn_id": 5225251,
+"name": "Malcolm DeWalt IV",
+"pos": "CB"
+}
+]
+},
+"CAR": {
+"game_id": "401872933",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4035232,
+"name": "Tyrel Dodson",
+"pos": "LB"
+},
+{
+"espn_id": 4036063,
+"name": "Patrick Jones II",
+"pos": "LB"
+},
+{
+"espn_id": 4372518,
+"name": "Bobby Brown III",
+"pos": "DT"
+},
+{
+"espn_id": 4428993,
+"name": "Haynes King",
+"pos": "QB"
+},
+{
+"espn_id": 4431588,
+"name": "Ja'Tavion Sanders",
+"pos": "TE"
+},
+{
+"espn_id": 4683506,
+"name": "Albert Reese IV",
+"pos": "OT"
+},
+{
+"espn_id": 4697636,
+"name": "Chau Smith-Wade",
+"pos": "CB"
+}
+]
+},
+"CHI": {
+"game_id": "401872937",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 15168,
+"name": "Case Keenum",
+"pos": "QB"
+},
+{
+"espn_id": 4360319,
+"name": "Jordan McFadden",
+"pos": "G"
+},
+{
+"espn_id": 4372463,
+"name": "Jamree Kromah",
+"pos": "DE"
+},
+{
+"espn_id": 4431580,
+"name": "Miller Moss",
+"pos": "QB"
+},
+{
+"espn_id": 4432595,
+"name": "Ozzy Trapilo",
+"pos": "OT"
+},
+{
+"espn_id": 4877376,
+"name": "Jayden Loving",
+"pos": "DT"
+}
+]
+},
+"MIN": {
+"game_id": "401872937",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 3886598,
+"name": "Jauan Jennings",
+"pos": "WR"
+},
+{
+"espn_id": 3917315,
+"name": "Kyler Murray",
+"pos": "QB"
+},
+{
+"espn_id": 4428421,
+"name": "Nick Samac",
+"pos": "C"
+},
+{
+"espn_id": 4433970,
+"name": "J.J. McCarthy",
+"pos": "QB"
+},
+{
+"espn_id": 4592836,
+"name": "Caleb Tiernan",
+"pos": "OT"
+},
+{
+"espn_id": 4695609,
+"name": "Zemaiah Vaughn",
+"pos": "CB"
+},
+{
+"espn_id": 4696782,
+"name": "Elijah Williams",
+"pos": "DE"
+},
+{
+"espn_id": 4710865,
+"name": "Jakobe Thomas",
+"pos": "S"
+}
+]
+},
+"TEN": {
+"game_id": "401872939",
+"roster_size": 56,
+"did_not_play": [
+{
+"espn_id": 3039707,
+"name": "Mitchell Trubisky",
+"pos": "QB"
+},
+{
+"espn_id": 4039160,
+"name": "Kylen Granson",
+"pos": "TE"
+},
+{
+"espn_id": 4367202,
+"name": "Atonio Mafi",
+"pos": "G"
+},
+{
+"espn_id": 4426987,
+"name": "Brandon Crenshaw-Dickson",
+"pos": "OT"
+},
+{
+"espn_id": 4429607,
+"name": "Cor'Dale Flott",
+"pos": "CB"
+},
+{
+"espn_id": 4431613,
+"name": "James Williams Sr.",
+"pos": "LB"
+},
+{
+"espn_id": 5081785,
+"name": "Jackie Marshall",
+"pos": "DT"
+}
+]
+},
+"PHI": {
+"game_id": "401872939",
+"roster_size": 53,
+"did_not_play": [
+{
+"espn_id": 14012,
+"name": "Andy Dalton",
+"pos": "QB"
+},
+{
+"espn_id": 3916409,
+"name": "Jonathan Greenard",
+"pos": "LB"
+},
+{
+"espn_id": 4372414,
+"name": "Elijah Moore",
+"pos": "WR"
+},
+{
+"espn_id": 4432738,
+"name": "Micah Morris",
+"pos": "G"
+},
+{
+"espn_id": 4685201,
+"name": "Tanner McKee",
+"pos": "QB"
+},
+{
+"espn_id": 4879250,
+"name": "Cole Payton",
+"pos": "QB"
+}
+]
+},
+"NE": {
+"game_id": "401872946",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 3916923,
+"name": "Carlton Davis III",
+"pos": "CB"
+},
+{
+"espn_id": 4240391,
+"name": "Tommy DeVito",
+"pos": "QB"
+},
+{
+"espn_id": 4428394,
+"name": "Walter Rouse",
+"pos": "OL"
+},
+{
+"espn_id": 4431465,
+"name": "Behren Morton",
+"pos": "QB"
+},
+{
+"espn_id": 4431526,
+"name": "Dametrious Crownover",
+"pos": "OT"
+},
+{
+"espn_id": 4431598,
+"name": "Leonard Taylor III",
+"pos": "DT"
+},
+{
+"espn_id": 4683308,
+"name": "Tanner Arkin",
+"pos": "TE"
+}
+]
+},
+"PIT": {
+"game_id": "401872946",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4035687,
+"name": "Michael Pittman Jr.",
+"pos": "WR"
+},
+{
+"espn_id": 4426506,
+"name": "Joey Porter Jr.",
+"pos": "CB"
+},
+{
+"espn_id": 4429955,
+"name": "Will Howard",
+"pos": "QB"
+},
+{
+"espn_id": 4431258,
+"name": "Gennings Dunker",
+"pos": "G"
+},
+{
+"espn_id": 4431533,
+"name": "Gabriel Rubio",
+"pos": "DE"
+},
+{
+"espn_id": 4714771,
+"name": "Drew Allar",
+"pos": "QB"
+},
+{
+"espn_id": 5084849,
+"name": "Kevin Jobity Jr.",
+"pos": "DT"
+}
+]
+},
+"NYJ": {
+"game_id": "401872936",
+"roster_size": 54,
+"did_not_play": [
+{
+"espn_id": 3925345,
+"name": "Minkah Fitzpatrick",
+"pos": "S"
+},
+{
+"espn_id": 4035537,
+"name": "Kene Nwangwu",
+"pos": "RB"
+},
+{
+"espn_id": 4076803,
+"name": "Jordan Meredith",
+"pos": "C"
+},
+{
+"espn_id": 4259619,
+"name": "Blake Grupe",
+"pos": "PK"
+},
+{
+"espn_id": 4362094,
+"name": "Joseph Ossai",
+"pos": "DE"
+},
+{
+"espn_id": 4683815,
+"name": "Trevin Wallace",
+"pos": "LB"
+},
+{
+"espn_id": 4685413,
+"name": "Cade Klubnik",
+"pos": "QB"
+},
+{
+"espn_id": 5118340,
+"name": "D'Angelo Ponds",
+"pos": "CB"
+}
+]
+},
+"GB": {
+"game_id": "401872936",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 14163,
+"name": "Tyrod Taylor",
+"pos": "QB"
+},
+{
+"espn_id": 2312707,
+"name": "John Williams",
+"pos": "G"
+},
+{
+"espn_id": 2983055,
+"name": "Javon Hargrave",
+"pos": "DT"
+},
+{
+"espn_id": 4258206,
+"name": "Benjamin St-Juste",
+"pos": "CB"
+},
+{
+"espn_id": 4361904,
+"name": "Travis Glover",
+"pos": "OT"
+},
+{
+"espn_id": 4429136,
+"name": "Warren Brinson",
+"pos": "DT"
+}
+]
+},
+"TB": {
+"game_id": "401872935",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 2979482,
+"name": "Dan Feeney",
+"pos": "G"
+},
+{
+"espn_id": 4429007,
+"name": "DeMonte Capehart",
+"pos": "DT"
+},
+{
+"espn_id": 4430478,
+"name": "Elijah Simmons",
+"pos": "DT"
+},
+{
+"espn_id": 4596472,
+"name": "Jalon Daniels",
+"pos": "QB"
+},
+{
+"espn_id": 4685549,
+"name": "Billy Schrauth",
+"pos": "G"
+},
+{
+"espn_id": 4686884,
+"name": "Luke Haggard",
+"pos": "G"
+},
+{
+"espn_id": 4890885,
+"name": "Ayden Garnes",
+"pos": "CB"
+},
+{
+"espn_id": 4912847,
+"name": "Jacob Parrish",
+"pos": "CB"
+}
+]
+},
+"CLE": {
+"game_id": "401872935",
+"roster_size": 54,
+"did_not_play": [
+{
+"espn_id": 4035505,
+"name": "Daniel Thomas",
+"pos": "S"
+},
+{
+"espn_id": 4038457,
+"name": "Teven Jenkins",
+"pos": "G"
+},
+{
+"espn_id": 4431325,
+"name": "Taylen Green",
+"pos": "QB"
+},
+{
+"espn_id": 4432762,
+"name": "Shedeur Sanders",
+"pos": "QB"
+},
+{
+"espn_id": 4698598,
+"name": "Toriano Pride Jr.",
+"pos": "CB"
+},
+{
+"espn_id": 4816090,
+"name": "Parker Brailsford",
+"pos": "C"
+},
+{
+"espn_id": 5150249,
+"name": "Justin Jefferson",
+"pos": "LB"
+}
+]
+},
+"BAL": {
+"game_id": "401872938",
+"roster_size": 54,
+"did_not_play": [
+{
+"espn_id": 4035245,
+"name": "Nnamdi Madubuike",
+"pos": "DT"
+},
+{
+"espn_id": 4035671,
+"name": "Tyler Huntley",
+"pos": "QB"
+},
+{
+"espn_id": 4243220,
+"name": "Andrew Vorhees",
+"pos": "G"
+},
+{
+"espn_id": 4429582,
+"name": "Joe Fagnano",
+"pos": "QB"
+},
+{
+"espn_id": 4429615,
+"name": "Zay Flowers",
+"pos": "WR"
+},
+{
+"espn_id": 4686768,
+"name": "Gerad Lichtenhan",
+"pos": "OT"
+},
+{
+"espn_id": 4698244,
+"name": "Teddye Buchanan",
+"pos": "LB"
+},
+{
+"espn_id": 5088338,
+"name": "Elijah Sarratt",
+"pos": "WR"
+}
+]
+},
+"NO": {
+"game_id": "401872938",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4248047,
+"name": "John Ridgeway III",
+"pos": "DT"
+},
+{
+"espn_id": 4361194,
+"name": "Isaiah Stalbird",
+"pos": "LB"
+},
+{
+"espn_id": 4361259,
+"name": "Zach Wilson",
+"pos": "QB"
+},
+{
+"espn_id": 4426339,
+"name": "Spencer Rattler",
+"pos": "QB"
+},
+{
+"espn_id": 4599739,
+"name": "Kendre Miller",
+"pos": "RB"
+},
+{
+"espn_id": 4605498,
+"name": "Decamerion Richardson",
+"pos": "CB"
+},
+{
+"espn_id": 4682479,
+"name": "Mason Murphy",
+"pos": "OT"
+},
+{
+"espn_id": 4685479,
+"name": "Christen Miller",
+"pos": "DT"
+}
+]
+},
+"HOU": {
+"game_id": "401872934",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 16734,
+"name": "Jadeveon Clowney",
+"pos": "DE"
+},
+{
+"espn_id": 4241250,
+"name": "Jake Hummel",
+"pos": "LB"
+},
+{
+"espn_id": 4242227,
+"name": "Ed Ingram",
+"pos": "G"
+},
+{
+"espn_id": 4242546,
+"name": "Davis Mills",
+"pos": "QB"
+},
+{
+"espn_id": 4258173,
+"name": "Nico Collins",
+"pos": "WR"
+},
+{
+"espn_id": 4362504,
+"name": "Brevin Jordan",
+"pos": "TE"
+},
+{
+"espn_id": 4428656,
+"name": "Nate Thomas",
+"pos": "OT"
+},
+{
+"espn_id": 4833376,
+"name": "Collin Wright",
+"pos": "CB"
+}
+]
+},
+"CIN": {
+"game_id": "401872934",
+"roster_size": 56,
+"did_not_play": [
+{
+"espn_id": 11394,
+"name": "Josh Johnson",
+"pos": "QB"
+},
+{
+"espn_id": 3116748,
+"name": "B.J. Hill",
+"pos": "DT"
+},
+{
+"espn_id": 4365319,
+"name": "Josh Newton",
+"pos": "CB"
+},
+{
+"espn_id": 4429000,
+"name": "Myles Hinton",
+"pos": "OT"
+},
+{
+"espn_id": 4570738,
+"name": "Ke'Shawn Williams",
+"pos": "WR"
+},
+{
+"espn_id": 4870866,
+"name": "Connor Lew",
+"pos": "C"
+},
+{
+"espn_id": 5081542,
+"name": "Landon Robinson",
+"pos": "DT"
+}
+]
+},
+"DEN": {
+"game_id": "401872940",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 3892775,
+"name": "Jarrett Stidham",
+"pos": "QB"
+},
+{
+"espn_id": 4241820,
+"name": "Sam Ehlinger",
+"pos": "QB"
+},
+{
+"espn_id": 4261090,
+"name": "Jordan Jackson",
+"pos": "DT"
+},
+{
+"espn_id": 4568490,
+"name": "RJ Harvey",
+"pos": "RB"
+},
+{
+"espn_id": 4683535,
+"name": "Tyler Onyedim",
+"pos": "DT"
+},
+{
+"espn_id": 4686472,
+"name": "Marvin Mims Jr.",
+"pos": "WR"
+},
+{
+"espn_id": 4868598,
+"name": "Kage Casey",
+"pos": "OT"
+},
+{
+"espn_id": 5159802,
+"name": "Dallen Bentley",
+"pos": "TE"
+}
+]
+},
+"JAX": {
+"game_id": "401872940",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4360964,
+"name": "Daniel Faalele",
+"pos": "G"
+},
+{
+"espn_id": 4427716,
+"name": "Jack Kiser",
+"pos": "LB"
+},
+{
+"espn_id": 4832922,
+"name": "Wesley Williams",
+"pos": "DE"
+},
+{
+"espn_id": 4889929,
+"name": "Quinn Ewers",
+"pos": "QB"
+},
+{
+"espn_id": 4912185,
+"name": "Jalen Huskey",
+"pos": "S"
+},
+{
+"espn_id": 4917427,
+"name": "Tanner Koziol",
+"pos": "TE"
+},
+{
+"espn_id": 5085024,
+"name": "CJ Williams",
+"pos": "WR"
+}
+]
+},
+"LAC": {
+"game_id": "401872941",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4243328,
+"name": "Elijah Molden",
+"pos": "CB"
+},
+{
+"espn_id": 4383351,
+"name": "Trey Lance",
+"pos": "QB"
+},
+{
+"espn_id": 4411189,
+"name": "Trey Pipkins III",
+"pos": "OT"
+},
+{
+"espn_id": 4574105,
+"name": "Isas Waxter",
+"pos": "CB"
+},
+{
+"espn_id": 4682789,
+"name": "Logan Taylor",
+"pos": "G"
+},
+{
+"espn_id": 4690171,
+"name": "Deane Leonard",
+"pos": "CB"
+},
+{
+"espn_id": 5082312,
+"name": "Jacob Spomer",
+"pos": "C"
+},
+{
+"espn_id": 5082660,
+"name": "Alex Harkey",
+"pos": "G"
+}
+]
+},
+"LV": {
+"game_id": "401872941",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4250393,
+"name": "Tristin McCollum",
+"pos": "S"
+},
+{
+"espn_id": 4260394,
+"name": "Aidan O'Connell",
+"pos": "QB"
+},
+{
+"espn_id": 4430330,
+"name": "Darien Porter",
+"pos": "CB"
+},
+{
+"espn_id": 4430896,
+"name": "JJ Pegues",
+"pos": "DT"
+},
+{
+"espn_id": 4432665,
+"name": "Brock Bowers",
+"pos": "TE"
+},
+{
+"espn_id": 4612077,
+"name": "Bryce Cabeldue",
+"pos": "G"
+},
+{
+"espn_id": 4682488,
+"name": "Dalton Johnson",
+"pos": "S"
+}
+]
+},
+"DAL": {
+"game_id": "401872944",
+"roster_size": 56,
+"did_not_play": [
+{
+"espn_id": 3121415,
+"name": "Malik Hooker",
+"pos": "S"
+},
+{
+"espn_id": 4240608,
+"name": "James Houston",
+"pos": "LB"
+},
+{
+"espn_id": 4362088,
+"name": "DeMarvion Overshown",
+"pos": "LB"
+},
+{
+"espn_id": 4426875,
+"name": "Sam Howell",
+"pos": "QB"
+},
+{
+"espn_id": 4429676,
+"name": "Tyler Goodson",
+"pos": "RB"
+},
+{
+"espn_id": 4431006,
+"name": "Caelen Carson",
+"pos": "CB"
+},
+{
+"espn_id": 4568652,
+"name": "Tyler Smith",
+"pos": "G"
+},
+{
+"espn_id": 4696203,
+"name": "Ajani Cornelius",
+"pos": "OT"
+},
+{
+"espn_id": 4808759,
+"name": "Camden Brown",
+"pos": "WR"
+}
+]
+},
+"WSH": {
+"game_id": "401872944",
+"roster_size": 56,
+"did_not_play": [
+{
+"espn_id": 3122797,
+"name": "Isaac Yiadom",
+"pos": "CB"
+},
+{
+"espn_id": 3127273,
+"name": "Frankie Luvu",
+"pos": "LB"
+},
+{
+"espn_id": 4360635,
+"name": "Chig Okonkwo",
+"pos": "TE"
+},
+{
+"espn_id": 4426948,
+"name": "Luke McCaffrey",
+"pos": "WR"
+},
+{
+"espn_id": 4428343,
+"name": "Ricky Barber",
+"pos": "DT"
+},
+{
+"espn_id": 4432722,
+"name": "Athan Kaliakmanis",
+"pos": "QB"
+},
+{
+"espn_id": 4605488,
+"name": "Tanoa Togiai",
+"pos": "G"
+}
+]
+},
+"ARI": {
+"game_id": "401872943",
+"roster_size": 53,
+"did_not_play": [
+{
+"espn_id": 3051775,
+"name": "Andrew Billings",
+"pos": "DT"
+},
+{
+"espn_id": 4038524,
+"name": "Gardner Minshew II",
+"pos": "QB"
+},
+{
+"espn_id": 4429782,
+"name": "Josh Fryar",
+"pos": "OT"
+},
+{
+"espn_id": 4430841,
+"name": "Carson Beck",
+"pos": "QB"
+},
+{
+"espn_id": 4568506,
+"name": "Garrett Williams",
+"pos": "CB"
+},
+{
+"espn_id": 4869132,
+"name": "Reggie Virgil",
+"pos": "WR"
+}
+]
+},
+"SEA": {
+"game_id": "401872943",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 3912547,
+"name": "Sam Darnold",
+"pos": "QB"
+},
+{
+"espn_id": 4247808,
+"name": "Ty Okada",
+"pos": "S"
+},
+{
+"espn_id": 4429211,
+"name": "Anthony Bradford",
+"pos": "G"
+},
+{
+"espn_id": 4432734,
+"name": "Jalen Milroe",
+"pos": "QB"
+},
+{
+"espn_id": 4572055,
+"name": "Mike Morris",
+"pos": "DE"
+},
+{
+"espn_id": 4600597,
+"name": "Montorie Foster Jr.",
+"pos": "WR"
+},
+{
+"espn_id": 4605491,
+"name": "Connor O'Toole",
+"pos": "LB"
+}
+]
+},
+"SF": {
+"game_id": "401872942",
+"roster_size": 54,
+"did_not_play": [
+{
+"espn_id": 4426698,
+"name": "Tatum Bethune",
+"pos": "LB"
+},
+{
+"espn_id": 4430431,
+"name": "Kurtis Rourke",
+"pos": "QB"
+},
+{
+"espn_id": 4431466,
+"name": "Jordan Watkins",
+"pos": "WR"
+},
+{
+"espn_id": 4685523,
+"name": "Ephesians Prysock",
+"pos": "CB"
+},
+{
+"espn_id": 4691556,
+"name": "Enrique Cruz Jr.",
+"pos": "OT"
+}
+]
+},
+"MIA": {
+"game_id": "401872942",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4249417,
+"name": "Jalen Tolbert",
+"pos": "WR"
+},
+{
+"espn_id": 4429435,
+"name": "Brady Cook",
+"pos": "QB"
+},
+{
+"espn_id": 4431586,
+"name": "Chop Robinson",
+"pos": "LB"
+},
+{
+"espn_id": 4875079,
+"name": "Marcellas Dial Jr.",
+"pos": "CB"
+},
+{
+"espn_id": 4912052,
+"name": "Justin Joly",
+"pos": "TE"
+},
+{
+"espn_id": 5081977,
+"name": "DJ Campbell",
+"pos": "G"
+},
+{
+"espn_id": 5144457,
+"name": "Chukwuebuka Godrick",
+"pos": "OT"
+}
+]
+},
+"KC": {
+"game_id": "401872945",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4361964,
+"name": "Chamarri Conner",
+"pos": "S"
+},
+{
+"espn_id": 4362887,
+"name": "Justin Fields",
+"pos": "QB"
+},
+{
+"espn_id": 4430723,
+"name": "Jared Wiley",
+"pos": "TE"
+},
+{
+"espn_id": 4431561,
+"name": "Bryson Eason",
+"pos": "DT"
+},
+{
+"espn_id": 4567747,
+"name": "Garrett Nussmeier",
+"pos": "QB"
+},
+{
+"espn_id": 4569659,
+"name": "Josh Simmons",
+"pos": "OT"
+},
+{
+"espn_id": 4602984,
+"name": "Diego Pounds",
+"pos": "OT"
+},
+{
+"espn_id": 4837252,
+"name": "Jack Pyburn",
+"pos": "LB"
+},
+{
+"espn_id": 4880124,
+"name": "Mansoor Delane",
+"pos": "CB"
+}
+]
+},
+"IND": {
+"game_id": "401872945",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4061956,
+"name": "Ashton Dulin",
+"pos": "WR"
+},
+{
+"espn_id": 4370363,
+"name": "Dalton Tucker",
+"pos": "G"
+},
+{
+"espn_id": 4374171,
+"name": "Austin Ajiake",
+"pos": "LB"
+},
+{
+"espn_id": 4429084,
+"name": "Anthony Richardson Sr.",
+"pos": "QB"
+},
+{
+"espn_id": 4683423,
+"name": "Riley Leonard",
+"pos": "QB"
+},
+{
+"espn_id": 4708238,
+"name": "George Gumbs Jr.",
+"pos": "LB"
+},
+{
+"espn_id": 4874509,
+"name": "DJ Giddens",
+"pos": "RB"
+}
+]
+},
+"LAR": {
+"game_id": "401872947",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 3912189,
+"name": "Bill Murray",
+"pos": "G"
+},
+{
+"espn_id": 4426515,
+"name": "Puka Nacua",
+"pos": "WR"
+},
+{
+"espn_id": 4430155,
+"name": "Dylan McMahon",
+"pos": "C"
+},
+{
+"espn_id": 4569382,
+"name": "Jordan Whittington",
+"pos": "WR"
+},
+{
+"espn_id": 4596363,
+"name": "Kamren Kinchens",
+"pos": "S"
+},
+{
+"espn_id": 4605951,
+"name": "CJ Daniels",
+"pos": "WR"
+},
+{
+"espn_id": 4685522,
+"name": "Ty Simpson",
+"pos": "QB"
+}
+]
+},
+"NYG": {
+"game_id": "401872947",
+"roster_size": 55,
+"did_not_play": [
+{
+"espn_id": 4240706,
+"name": "Jason Pinnock",
+"pos": "S"
+},
+{
+"espn_id": 4371961,
+"name": "Micah McFadden",
+"pos": "LB"
+},
+{
+"espn_id": 4426542,
+"name": "Darius Alexander",
+"pos": "DT"
+},
+{
+"espn_id": 4428328,
+"name": "Deonte Banks",
+"pos": "CB"
+},
+{
+"espn_id": 4590292,
+"name": "Thomas Fidone II",
+"pos": "TE"
+},
+{
+"espn_id": 5082353,
+"name": "J.C. Davis",
+"pos": "OT"
+},
+{
+"espn_id": 5159928,
+"name": "Bobby Jamison-Travis",
+"pos": "DT"
+}
+]
+}
+},
+"unmatched": [
+"JAX Christian Braswell (no status)"
+],
+"checks": {
+"teams_reporting": 32,
+"teams_playing": 32,
+"out_players": 44,
+"failures": [],
+"warnings": []
+},
+"createdAt": "2026-10-07T13:28Z",
+"sha256": "b1d2f4d16e2badb6a9477558c0d1a83a4cca0687d53e90ff391394e2b11fb1d1"
+}
