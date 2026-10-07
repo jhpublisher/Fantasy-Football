@@ -332,6 +332,20 @@ gq = lambda q: "https://news.google.com/rss/search?" + urllib.parse.urlencode({"
 for n in INSIDERS: FEEDS[f"Google News: {n}"] = gq(f'"{n}" NFL')
 for q in ["NFL signs free agent", "NFL waived released", "NFL trade rumors", "NFL injured reserve", "NFL practice squad elevated running back"]: FEEDS[f"Google News: {q}"] = gq(q)
 def rss(src_url):
+    """ESPN's RSS answers an empty body to GitHub's servers (Oct 7: ParseError in the Action only); fall back to ESPN's own news JSON."""
+    r_ = rss_xml(src_url)
+    if src_url[0] != "ESPN" or not (r_[0].get("error") or r_[0].get("empty")): return r_
+    try:
+        d_ = get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=50", UA, timeout=25); out_ = []
+        for a_ in d_.get("articles", []):
+            try: ts = parse_date(a_.get("published"))
+            except ValueError: continue
+            if ts > NOW + FUTURE_SLACK: continue
+            out_.append({"src": "ESPN", "title": re.sub(r"\s+", " ", a_.get("headline") or "").strip(), "link": ((a_.get("links") or {}).get("web") or {}).get("href", ""), "ts": ts, "desc": (a_.get("description") or "")[:300]})
+        if out_: out_[0]["_meta"] = {"badDates": 0, "badDateExample": None, "futureDates": 0}; return out_
+    except Exception: pass
+    return r_
+def rss_xml(src_url):
     src, url = src_url
     try:
         for i_ in range(3):  # Google News answers 503 to some parallel queries: back off and retry before calling it an error
