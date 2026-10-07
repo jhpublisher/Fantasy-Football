@@ -29,13 +29,14 @@ jobs:
           set +e
           python3 tools/bi_refresh.py /tmp/out 20000; BI=$?
           python3 tools/news_sweep.py /tmp/out 48; NS=$?
-          # Return Game chain: box scores, ESPN depth, team sites -> returns.json. Built in a scratch dir;
-          # data/returns.json is replaced only when the whole chain succeeds (else the last good copy stays and is marked stale).
-          rm -rf /tmp/rg && mkdir -p /tmp/rg && cd /tmp/rg
-          RG=0
-          for s in box.py espn_depth.py team_sites.py fill_rg.py; do
-            python3 "$GITHUB_WORKSPACE/legal-troubles/tools/returns/$s" || { RG=$?; echo "::warning::returns chain failed at $s (exit $RG)"; break; }
-          done
+          # Return Game store (Oct 7 redesign, Joe: stored weeks are never touched). data/rg/weeks/ = one locked file per week.
+          #  add_week.py      adds only the next completed week (fetched once, verified vs ESPN per-game team stats + fantasy stats); create-only writes
+          #  refresh_current  depth charts / rosters / team sites / schedule / ownership on their own cadence; a failure keeps the last good file
+          #  assemble_rg.py   builds data/returns.json from stored weeks + current state with NO network
+          T="$GITHUB_WORKSPACE/legal-troubles/tools/returns"; RGS="$GITHUB_WORKSPACE/legal-troubles/data/rg"
+          python3 "$T/add_week.py" "$RGS" "$T"; AW=$?; [ "$AW" = "0" ] || echo "::warning::add_week failed (exit $AW); stored weeks unchanged"
+          python3 "$T/refresh_current.py" "$RGS" "$T"; RC=$?; [ "$RC" = "0" ] || echo "::warning::refresh_current partial (exit $RC); last good current files kept"
+          rm -rf /tmp/rg && python3 "$T/assemble_rg.py" "$RGS" /tmp/rg "$T"; RG=$?
           cd "$GITHUB_WORKSPACE/legal-troubles"
           if [ "$RG" = "0" ] && [ -s /tmp/rg/returns.json ]; then cp /tmp/rg/returns.json data/returns.json; elif [ "$RG" = "0" ]; then RG=1; echo "::warning::returns chain wrote no returns.json"; fi
           echo "{\"bi_refresh\": $BI, \"news_sweep\": $NS, \"returns\": $RG}" > /tmp/run_status.json
@@ -75,6 +76,17 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add legal-troubles/data/validation.json legal-troubles/index.html legal-troubles/briefing.html
           [ -f legal-troubles/data/returns.json ] && git add legal-troubles/data/returns.json
+          # Guard: a stored week (or its raw archive) may be added, never modified or deleted
+          CHG=$(git diff --name-only --diff-filter=MDRT -- legal-troubles/data/rg/weeks legal-troubles/data/rg/raw)
+          if [ -n "$CHG" ]; then echo "::error::stored weeks changed, refusing to commit them: $CHG"; git checkout -- legal-troubles/data/rg/weeks legal-troubles/data/rg/raw legal-troubles/data/rg/index.json; fi
+          python3 - <<'PY' || { echo "::error::index.json lost or changed a stored week; restoring"; git checkout -- legal-troubles/data/rg/index.json; }
+          import json,subprocess
+          try: old=json.loads(subprocess.run(['git','show','HEAD:legal-troubles/data/rg/index.json'],capture_output=True,text=True,check=True).stdout)['weeks']
+          except Exception: old={}
+          new=json.load(open('legal-troubles/data/rg/index.json'))['weeks']
+          assert all(w in new and new[w]['sha256']==e['sha256'] for w,e in old.items())
+          PY
+          git add legal-troubles/data/rg
           if [ "${{ steps.validate.outputs.rc }}" = "0" ]; then git add legal-troubles/data/bundle.json; MSG="Data refresh"; else MSG="Data refresh BLOCKED by validator (last good bundle kept)"; fi
           git diff --cached --quiet || (git commit -m "$MSG $(date -u +%Y-%m-%dT%H:%MZ)" && git pull --rebase && git push)
       - name: Fail the run if validation failed
