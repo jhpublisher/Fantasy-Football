@@ -8,7 +8,8 @@ Fail-loudly rules (Oct 6 org review):
     a fetch error is "error", an empty or all-stale feed is "warning"; nothing is silently []
   - ESPN player news returning 0 items in a game week exits non-zero (outputs are still written)
   - ESPN news items that are not type Rotowire are counted in droppedByType, not silently ignored
-  - practice days are in America/New_York and derived from each NFL team's next kickoff (4 days before through the day before)
+  - practice days are in America/New_York and derived from each NFL team's next kickoff (4 days before through the day before);
+    only reports for the team's CURRENT game are kept, so last week's practice never shows under this week's label
   - curated rumors past expiresWeek are marked expired:true; auto rumors not reviewed by staff get reviewed:false"""
 import json, os, re, sys, urllib.request, concurrent.futures as cf
 from collections import Counter
@@ -39,6 +40,9 @@ def practice_window(team, ts_et):
     nxt = next((k for k in KICK.get(team, []) if k > ts_et), None)
     if not nxt: return None
     return nxt, nxt.date() - timedelta(days=4), nxt.date() - timedelta(days=1)
+# this week's practice window per team = the team's next game from now (12h grace so a game-night run keeps that game); bye/no game -> none
+_now = datetime.now(NY) - timedelta(hours=12)
+CUR_WIN = {t: practice_window(t, _now) for t in KICK}
 flt = {"players": {"limit": 900, "sortPercOwned": {"sortPriority": 1, "sortAsc": False}}}
 allp = get(f"{B}?scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps(flt)})["players"]
 watch = set(json.load(open(WATCH_FILE))["names"]) if os.path.exists(WATCH_FILE) else set()
@@ -74,8 +78,9 @@ with cf.ThreadPoolExecutor(16) as ex:
             item = {"player": p["name"], "pos": p["pos"], "nfl": p["nfl"], "owner": p["owner"], "time": f["published"][:16] + "Z", "headline": f["headline"]}
             if (p["ours"] or p["watch"]) and ("practic" in low or "session" in low or "participant" in low):
                 loc = ts.astimezone(NY); win = practice_window(p["nfl"], loc - timedelta(hours=12))  # a report the night after a game still belongs to that week
+                cur = CUR_WIN.get(p["nfl"])  # only this week's game: last week's reports never carry over (Joe, Oct 7)
                 for rx, lab in PRAC:
-                    if rx.search(hl) and win and win[1] <= loc.date() <= win[2]:
+                    if rx.search(hl) and win and cur and win[0] == cur[0] and win[1] <= loc.date() <= win[2]:
                         rec = practice.setdefault(p["name"], {"pos": p["pos"], "nfl": p["nfl"], "ours": p["ours"], "days": {}})
                         rec["kickoffET"] = win[0].isoformat(); rec["window"] = [win[1].isoformat(), win[2].isoformat()]
                         rec["days"][loc.strftime("%a %m/%d")] = {"status": lab, "note": hl[:160], "date": loc.date().isoformat()}
