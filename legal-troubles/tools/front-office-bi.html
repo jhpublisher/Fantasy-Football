@@ -662,7 +662,7 @@ function rgSingle(R,kind){const W=R.weeks||[],teams={};
   const raw=kind==='kr'?R.players:R.pr?.players;
   const players=(Array.isArray(raw)?raw:[]).filter(p=>p&&p.name).map(p=>{const wk={};
     for(const [w,x] of Object.entries(p.wk&&typeof p.wk==='object'?p.wk:{})){const n=kind==='kr'?x.kr:x.pr,tn=kind==='kr'?x.team_kr:x.team_pr,tfc=kind==='pr'?(teams[p.team]?.weeks?.[w]?.fc??null):0;
-      wk[w]={n:n||0,y:x.y||0,td:x.td||0,fc:kind==='pr'?(x.fc??null):0,pts:x.pts||0,team_n:tn||0,team_fc:tfc,kr:kind==='kr'?n||0:0,pr:kind==='pr'?n||0:0,ptsK:kind==='kr'?x.pts||0:0,ptsP:kind==='pr'?x.pts||0:0}}
+      wk[w]={n:n||0,y:x.y||0,td:x.td||0,fc:kind==='pr'?(x.fc??null):0,pts:x.pts||0,team_n:tn||0,team_fc:tfc,kr:kind==='kr'?n||0:0,pr:kind==='pr'?n||0:0,ptsK:kind==='kr'?x.pts||0:0,ptsP:kind==='pr'?x.pts||0:0,yK:kind==='kr'?x.y||0:0,yP:kind==='pr'?x.y||0:0}}
     return {name:p.name,id:p.id,team:p.team||'NFL team n/a',pos:p.pos||'Pos. n/a',owner:p.owner||'Owner unknown',wk}});
   return {kind,kinds:[kind],W,teams,players}}
 function rgBoth(K,P){const W=K.W,teams={};
@@ -676,7 +676,7 @@ function rgBoth(K,P){const W=K.W,teams={};
     if(!q){const c={...p,wk:{}};for(const [w,x] of Object.entries(p.wk))c.wk[w]={...x};by.set(k,c);by.set(p.team+':'+rgNorm(p.name),c);continue}
     if(q.owner==='Owner unknown'||q.owner==='No ESPN id match')q.owner=p.owner;
     for(const [w,x] of Object.entries(p.wk)){const o=q.wk[w];if(!o){q.wk[w]={...x};continue}
-      q.wk[w]={n:o.n+x.n,y:o.y+x.y,td:o.td+x.td,fc:(o.fc??0)+(x.fc??0),pts:+(o.pts+x.pts).toFixed(1),team_n:o.team_n+x.team_n,team_fc:(o.team_fc??0)+(x.team_fc??0),kr:o.kr+x.kr,pr:o.pr+x.pr,ptsK:o.ptsK+x.ptsK,ptsP:o.ptsP+x.ptsP}}}
+      q.wk[w]={n:o.n+x.n,y:o.y+x.y,td:o.td+x.td,fc:(o.fc??0)+(x.fc??0),pts:+(o.pts+x.pts).toFixed(1),team_n:o.team_n+x.team_n,team_fc:(o.team_fc??0)+(x.team_fc??0),kr:o.kr+x.kr,pr:o.pr+x.pr,ptsK:o.ptsK+x.ptsK,ptsP:o.ptsP+x.ptsP,yK:o.yK+x.yK,yP:o.yP+x.yP}}}
   // team_n for weeks where the player only appears in one kind: use the combined team total
   const players=[...new Set(by.values())];
   for(const p of players)for(const [w,x] of Object.entries(p.wk)){const g=teams[p.team]?.weeks?.[w];if(g&&!g.bye){x.team_n=g.n;x.team_fc=g.fc}}
@@ -702,7 +702,7 @@ function rgRows(M_){const W=M_.W,ours=new Set(Object.values(S.players).filter(p=
     const lwTxt=LW==null?'no games yet':lw?`${lw.n}/${lw.team_n}${M_.kind!=='kr'&&lw.fc?` +${lw.fc} FC`:''}`:`0/${g?.n??0}`;
     const tot=+(wk.reduce((a,x)=>a+(x?x.pts:0),0)).toFixed(1);
     return {...p,ours:ours.has(rgNorm(p.name)),wkA:wk,n3:last3.length,lastW:LW,lwSh:lw?Math.round(rgShare(lw,M_.kind)*100):0,lwPts:lw?lw.pts:0,lwTxt,pts3:+pts3.toFixed(1),sh3:Math.round(sh3*100),fc3,
-      tot,nKr:wk.reduce((a,x)=>a+(x?x.kr||0:0),0),nPr:wk.reduce((a,x)=>a+(x?x.pr||0:0),0),totK:+(wk.reduce((a,x)=>a+(x?x.ptsK||0:0),0)).toFixed(1),totP:+(wk.reduce((a,x)=>a+(x?x.ptsP||0:0),0)).toFixed(1),site,espn,siteMin:minR(site),espnMin:minR(espn),elig:['RB','WR'].includes(p.pos)}})}
+      tot,nKr:wk.reduce((a,x)=>a+(x?x.kr||0:0),0),nPr:wk.reduce((a,x)=>a+(x?x.pr||0:0),0),totK:+(wk.reduce((a,x)=>a+(x?x.ptsK||0:0),0)).toFixed(1),totP:+(wk.reduce((a,x)=>a+(x?x.ptsP||0:0),0)).toFixed(1),yK:wk.reduce((a,x)=>a+(x?x.yK||0:0),0),yP:wk.reduce((a,x)=>a+(x?x.yP||0:0),0),yT:wk.reduce((a,x)=>a+(x?x.y||0:0),0),site,espn,siteMin:minR(site),espnMin:minR(espn),elig:['RB','WR'].includes(p.pos)}})}
 // status for one kind (row computed on that kind's model)
 function rgStatus1(p,M_,k){const L=RG_KIND[k].L,t=M_.teams[p.team]||{src:{site:{},espn:{}}},ss=t.src.site[k],es=t.src.espn[k],siteRead=rgRead(ss),espnRead=rgRead(es),sr=p.site[k],er=p.espn[k];
   if(!siteRead&&espnRead){   // only one source could be read: say so, never "disagree"
@@ -764,10 +764,10 @@ function returnsView(){const R=S.returns;if(!R)return `<div class="empty">No ret
   // our players listed on a depth chart but with no returns yet are in the players list already (fill_rg adds depth-only names); this catches any it missed
   ourNames.forEach(n=>{if(ours.some(p=>rgSame(p.name,n)))return;Object.entries(M_.teams).forEach(([tm,t])=>{const site={},espn={};let hit=false;
     for(const k of M_.kinds){const s=rgIdx(t.src.site[k]?.list,n),e=rgIdx(t.src.espn[k]?.list,n);site[k]=s>=0?s+1:null;espn[k]=e>=0?e+1:null;hit=hit||s>=0||e>=0}
-    if(hit){const pp=Object.values(S.players).find(p=>p.name===n);ours.push({name:n,team:tm,pos:pp?.pos||'Pos. n/a',ours:true,wk:{},wkA:W.map(()=>null),n3:0,pts3:0,sh3:0,fc3:null,lwSh:0,lwTxt:'0/'+(t.weeks?.[W[W.length-1]]?.n??0),tot:0,totK:0,totP:0,site,espn,siteMin:rgMin(site),espnMin:rgMin(espn),elig:true})}})});
+    if(hit){const pp=Object.values(S.players).find(p=>p.name===n);ours.push({name:n,team:tm,pos:pp?.pos||'Pos. n/a',ours:true,wk:{},wkA:W.map(()=>null),n3:0,pts3:0,sh3:0,fc3:null,lwSh:0,lwTxt:'0/'+(t.weeks?.[W[W.length-1]]?.n??0),tot:0,totK:0,totP:0,yK:0,yP:0,yT:0,site,espn,siteMin:rgMin(site),espnMin:rgMin(espn),elig:true})}})});
   const filt={elig:p=>p.elig,fa:p=>p.elig&&p.owner==='Free agent',all:()=>true}[RF.k];
   const base=P.filter(filt).sort((a,b)=>b.pts3-a.pts3||b.tot-a.tot), ix=new Map(base.map((p,i)=>[rgKey(p),i]));
-  const rpVal=(p,k)=>({player:p.name.toLowerCase(),team:p.team,pts3:p.pts3,sh3:p.sh3,lw:p.lwSh,tot:p.tot,totK:p.totK,totP:p.totP,fc3:p.fc3,site:p.siteMin,espn:p.espnMin,owner:p.owner.toLowerCase(),opp:rgOpp(p.team).key,oppk:rgExp(p).k?.ret3??null,oppy:rgExp(p).k?.yd3??null,exp:rgExp(p).ep??null})[k];
+  const rpVal=(p,k)=>({player:p.name.toLowerCase(),team:p.team,pts3:p.pts3,sh3:p.sh3,lw:p.lwSh,tot:p.yT,totK:p.yK,totP:p.yP,fc3:p.fc3,site:p.siteMin,espn:p.espnMin,owner:p.owner.toLowerCase(),opp:rgOpp(p.team).key,oppk:rgExp(p).k?.ret3??null,oppy:rgExp(p).k?.yd3??null,exp:rgExp(p).ep??null})[k];
   const rowsF=sortRows(RF.mine?base.filter(p=>!p.ours):base,'rp',rpVal,(a,b)=>ix.get(rgKey(a))-ix.get(rgKey(b)));
   const mineRows=RF.mine?sortRows(P.filter(p=>p.ours),'rp',rpVal,(a,b)=>b.pts3-a.pts3||b.tot-a.tot):[];
   const rows=[...mineRows,...rowsF];
@@ -911,9 +911,9 @@ const RG_COLS=[
  {k:'sh3',l:'Share (3 games)',num:1,sort:'sh3',cell:p=>`<td class="num">${p.sh3}%</td>`},
  {k:'fc3',l:'Fair catches (3)',num:1,fc:1,sort:'fc3',cell:p=>`<td class="num">${p.fc3??'<span class="note">Unknown</span>'}</td>`},
  {k:'pts3',l:'Pts/game (3)',num:1,sort:'pts3',cell:p=>`<td class="num"><b>${p.pts3}</b></td>`},
- {k:'totK',l:'KR pts',num:1,both:1,sort:'totK',cell:p=>`<td class="num">${p.totK}</td>`},
- {k:'totP',l:'PR pts',num:1,both:1,sort:'totP',cell:p=>`<td class="num">${p.totP}</td>`},
- {k:'tot',l:'Season pts',num:1,sort:'tot',cell:p=>`<td class="num">${p.tot}</td>`},
+ {k:'totK',l:'KR yds',num:1,both:1,sort:'totK',cell:p=>`<td class="num">${p.yK}</td>`},
+ {k:'totP',l:'PR yds',num:1,both:1,sort:'totP',cell:p=>`<td class="num">${p.yP}</td>`},
+ {k:'tot',l:'Total yds',num:1,sort:'tot',cell:p=>`<td class="num">${p.yT}</td>`},
  {k:'weeks',l:'Returns by week',cell:(p,M_)=>`<td>${rgWeeks(M_,p)}</td>`}];
 let RG_HIDE=new Set(RG_COLS.filter(c=>c.off).map(c=>c.k));
 try{const v=localStorage.getItem('lt-rg-hide');if(v)RG_HIDE=new Set(JSON.parse(v))}catch(e){}
@@ -938,7 +938,7 @@ function openRgPlayer(key){const p=RG_ROWMAP.get(key);const M_=rgModel(rgK());if
     <tr><td>Team site</td><td>${rgRank(M_,p,'site')}</td></tr><tr><td>ESPN</td><td>${rgRank(M_,p,'espn')}</td></tr></tbody></table></div>
     <p class="note">Depth charts checked ${esc(S.returns.checked||'date not recorded')}. <button class="link" data-rgteam="${esc(p.team)}">Open ${esc(p.team)} team detail</button></p></section>
   <div class="facts"><div class="fact"><b>${p.lwSh}%</b><span>Last game share (${esc(p.lwTxt)})</span></div><div class="fact"><b>${p.sh3}%</b><span>Share, last ${p.n3??3} games</span></div><div class="fact"><b>${p.pts3}</b><span>Return pts/game, last 3</span></div>
-   <div class="fact"><b>${p.tot}</b><span>Season return pts</span></div>${rgK()!=='pr'&&x.k?`<div class="fact"><b>${rgF(x.er)}</b><span>Expected kick returns vs ${x.opp}</span></div><div class="fact"><b>${rgF(x.ep)}</b><span>Expected kick-return pts</span></div>`:''}</div>
+   <div class="fact"><b>${p.yT}</b><span>Season return yds${rgK()==='both'?` (${p.yK} kick, ${p.yP} punt)`:''}</span></div>${rgK()!=='pr'&&x.k?`<div class="fact"><b>${rgF(x.er)}</b><span>Expected kick returns vs ${x.opp}</span></div><div class="fact"><b>${rgF(x.ep)}</b><span>Expected kick-return pts</span></div>`:''}</div>
   ${rgK()!=='pr'?`<p>Opponent: kick returns allowed/game ${rgOppCell(p)} · return yds allowed/game ${rgYdsCell(p)}</p>`:''}
   <p>${rgWeeks(M_,p)}</p>
   ${c?`<p>Injury check: likely main kick returner <b>${esc(c.predicted||'unknown')}</b> ${rgFlagChips(c.flags)}</p>${(c.flags||[]).map(f=>`<p class="note">• ${esc(f[1])}</p>`).join('')}`:''}`)}
