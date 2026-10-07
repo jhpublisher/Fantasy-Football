@@ -1,0 +1,53 @@
+{
+ "season": 2026,
+ "weeks": {
+  "1": {
+   "file": "weeks/2026-w01.json",
+   "sha256": "ef1a876d2499e0818378edb73cc6382843a747b7247870af8259a784c12989ac",
+   "addedAt": "2026-10-07T12:46Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 224,
+     "player values": 170
+    }
+   }
+  },
+  "2": {
+   "file": "weeks/2026-w02.json",
+   "sha256": "cd1ad4c82bef4a0aefd76cb56193b41ad1ec9a290b7bb24abe527dc802de667a",
+   "addedAt": "2026-10-07T12:46Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 224,
+     "player values": 150
+    }
+   }
+  },
+  "3": {
+   "file": "weeks/2026-w03.json",
+   "sha256": "99746e55c44a0a7d3162d017482156785a7f49e6137febcb8b12a923799b550d",
+   "addedAt": "2026-10-07T12:46Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 224,
+     "player values": 172
+    }
+   }
+  },
+  "4": {
+   "file": "weeks/2026-w04.json",
+   "sha256": "ae1ac3b3eee14cc2c1e49e81eea2be9f42249517bfa94eec1107f95ef73aa0fa",
+   "addedAt": "2026-10-07T12:46Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 224,
+     "player values": 162
+    }
+   }
+  }
+ }
+}
