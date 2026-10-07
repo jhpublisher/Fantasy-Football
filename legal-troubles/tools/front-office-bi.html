@@ -461,15 +461,21 @@ function byeGrid(){if(!Array.isArray(M?.roster)||secProblem(M.roster)?.err)retur
     <tr class="tot"><td colspan="2">Starters on bye</td>${WS.map(w=>{const n=rs.filter(r=>starter(r)&&r.bye===w).length;return `<td class="c">${n}</td>`}).join('')}</tr>
     <tr><td class="note" colspan="2">All rostered players on bye</td>${WS.map(w=>{const n=rs.filter(r=>r.bye===w).length;return `<td class="c note">${n}</td>`}).join('')}</tr>
     </tbody></table></div><p class="note">Starters = today's ESPN lineup. Use it to plan streamers and trades before a crunch week.</p></section>`}
-function playoffGrid(){const PW=LGD().playoffWeeks;if(!Array.isArray(M?.roster)||M.leaguePA==null||secProblem(M.roster)?.err)return missingPanel('Playoff weeks '+PW[0]+'–'+PW[PW.length-1],M?.roster,M?.roster?'league points-allowed average missing':'roster grid');const lg=M.leaguePA;const cls=pa=>pa==null?'':pa>=lg+3?'m-easy':pa<=lg-3?'m-hard':'';
+function playoffGrid(){const PW=LGD().playoffWeeks;if(!Array.isArray(M?.roster)||secProblem(M.roster)?.err)return missingPanel('Playoff weeks '+PW[0]+'–'+PW[PW.length-1],M?.roster,'roster grid');
+  // ESPN opponent rank (OPRK) for the player's position: 1st = toughest (fewest fantasy points allowed), 32nd = easiest. Same numbers as ESPN's roster page.
+  const hasRk=M.roster.some(r=>(r.playoffs||[]).some(x=>x&&x.oprk!=null));
+  const ord2=n=>{const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])};
+  const cls=x=>x?.oprk==null?'':x.oprk>=23?'m-easy':x.oprk<=10?'m-hard':'';
   const ord=['QB','RB','WR','TE','FLEX','D/ST','K','Bench','IR'];const rs=M.roster.slice().sort((a,b)=>ord.indexOf(a.slot)-ord.indexOf(b.slot)||a.name.localeCompare(b.name));
-  const ease=(r,x)=>{if(!x)return null;const ds=r.pos==='D/ST',n=ds?x.ps:x.pa;return n==null?null:ds?-n:n};
-  const easyN=r=>(r.playoffs||[]).filter(x=>{const e=ease(r,x);return e!=null&&(r.pos==='D/ST'?-e<=lg-3:e>=lg+3)}).length;
-  const pix=new Map(rs.map((r,i)=>[r,i])),rowsP=sortRows(rs,'pg',(r,k)=>k==='player'?r.name.toLowerCase():k==='line'?pix.get(r):k==='easy'?easyN(r):k.startsWith('w')?ease(r,(r.playoffs||[])[+k.slice(1)]):null,(a,b)=>pix.get(a)-pix.get(b));
-  return `<section class="panel"><div class="ph"><h2>Playoff weeks ${PW[0]}–${PW[PW.length-1]} ${NW(21)}</h2><span class="phr">${resetBtn('pg')}<span class="eyebrow">Opponent and how many points they allow · click a column to sort (best matchup first)</span></span></div>
+  const easyN=r=>(r.playoffs||[]).filter(x=>cls(x)==='m-easy').length;
+  const pix=new Map(rs.map((r,i)=>[r,i])),rowsP=sortRows(rs,'pg',(r,k)=>k==='player'?r.name.toLowerCase():k==='line'?pix.get(r):k==='easy'?easyN(r):k.startsWith('w')?((r.playoffs||[])[+k.slice(1)]?.oprk??null):null,(a,b)=>pix.get(a)-pix.get(b));
+  const cell=(r,x,w)=>{if(!x)return `<td class="c">${r.bye===w?'Bye':'<span class="dim">No schedule data</span>'}</td>`;if(!x.opp||x.opp==='BYE')return '<td class="c">Bye</td>';
+    return `<td class="c ${cls(x)}" title="${x.oprk!=null?`${esc(x.opp)} is ${ord2(x.oprk)} vs ${esc(r.pos)} (allows ${x.oavg} fantasy pts/game to ${esc(r.pos)}; ESPN OPRK)`:'No ESPN opponent rank'}">${esc(x.opp)}<br>${x.oprk!=null?`<b>${ord2(x.oprk)}</b>`:'<span class="dim">No rank</span>'}</td>`};
+  return `<section class="panel"><div class="ph"><h2>Playoff weeks ${PW[0]}–${PW[PW.length-1]} ${NW(21)}</h2><span class="phr">${resetBtn('pg')}<span class="eyebrow">Opponent and ESPN opponent rank vs the player's position · click a column to sort (easiest first)</span></span></div>
+    ${hasRk?'':'<div class="secmsg">ESPN opponent ranks are not in this refresh yet; they appear after the next data refresh.</div>'}
     <div class="tw"><table class="grid"><thead><tr>${sh('pg','player','Player')}${sh('pg','line','Lineup')}${PW.map((w,i)=>sh('pg','w'+i,'Wk '+w,1)).join('')}${sh('pg','easy','Easy weeks',1)}</tr></thead><tbody>
-    ${rowsP.map(r=>{const ds=r.pos==='D/ST',v=x=>ds?x.ps:x.pa,c=x=>{const n=v(x);return n==null?'':ds?(n<=lg-3?'m-easy':n>=lg+3?'m-hard':''):cls(n)};const ps=r.playoffs||[];const easy=ps.filter(x=>c(x)==='m-easy').length;return `<tr><td><b>${esc(r.name)}</b> <span class="note">${esc(r.pos)} · ${esc(r.nfl)}${ds?' · opp. points scored':''}</span></td><td>${slotChip(r.slot)}</td>${PW.map((w,i)=>{const x=ps[i];return `<td class="c ${x?c(x):''}">${x?esc(x.opp||'Bye')+(v(x)!=null?`<br><span class="note">${v(x)}</span>`:x.opp&&x.opp!=='BYE'?'<br><span class="dim">no avg</span>':''):(r.bye===w?'Bye':'<span class="dim">No schedule data</span>')}</td>`}).join('')}<td class="num">${easy}</td></tr>`}).join('')}
-    </tbody></table></div><div class="legend"><span><i class="m-easy"></i>Allows 3+ more points a game than average (good matchup)</span><span><i class="m-hard"></i>Allows 3+ fewer (tough)</span><span>League average: ${lg} points per game, ${avgWeeksTxt()}. For a D/ST the number is how many points the opponent scores, so lower is better. Early-season numbers; they settle by midseason.</span></div></section>`}
+    ${rowsP.map(r=>{const ps=r.playoffs||[];return `<tr><td><b>${esc(r.name)}</b> <span class="note">${esc(r.pos)} · ${esc(r.nfl)}</span></td><td>${slotChip(r.slot)}</td>${PW.map((w,i)=>cell(r,ps[i],w)).join('')}<td class="num">${easyN(r)}</td></tr>`}).join('')}
+    </tbody></table></div><div class="legend"><span><i class="m-easy"></i>23rd–32nd: easy matchup (allows the most points to that position)</span><span><i class="m-hard"></i>1st–10th: tough matchup</span><span>Rank = ESPN's opponent rank (OPRK) for the player's position, the same number ESPN shows on your roster page; it is season-to-date, so it changes week to week.</span></div></section>`}
 const oddsChip=o=>`<span class="chip o-${o}">${esc(o)}</span>`;
 const claimChip=c=>c.odds==='Hold'?chip('t-roster','On hold'):oddsChip(c.odds);
 const ODDS_RANK={Likely:3,Contested:2,Unlikely:1};
@@ -513,7 +519,7 @@ function dayDate(lbl){const x=Object.values(S.practice?.players||{}).map(p=>p.da
 function practiceNow(){const pr=S.practice,wk=LGD().week;const out={};const ko=M?.dates?.kickoff?new Date(M.dates.kickoff):null;
   const inWeek=d=>{if(!ko||isNaN(ko))return true;const x=dayDate(d);return x>new Date(ko-8*864e5)&&x<new Date(+ko+5*864e5)};
   const prWeekOk=pr&&(pr.week==null||wk==null||+pr.week===+wk);
-  if(prWeekOk)for(const [n,p] of Object.entries(pr?.players||{})){const win=Array.isArray(p.window)&&p.window.length===2?p.window:null;const days=Object.fromEntries(Object.entries(p.days||{}).filter(([d,x])=>win&&x?.date?(x.date>=win[0]&&x.date<=win[1]):inWeek(d)));if(Object.keys(days).length)out[n]={...p,days}}
+  if(prWeekOk)for(const [n,p] of Object.entries(pr?.players||{})){if(p.kickoffET&&new Date(p.kickoffET)<Date.now()-12*36e5)continue;const win=Array.isArray(p.window)&&p.window.length===2?p.window:null;const days=Object.fromEntries(Object.entries(p.days||{}).filter(([d,x])=>win&&x?.date?(x.date>=win[0]&&x.date<=win[1]):inWeek(d)));if(Object.keys(days).length)out[n]={...p,days}}
   for(const p of Object.values(S.players))if(p.ours&&['QUESTIONABLE','DOUBTFUL','OUT','DAY_TO_DAY'].includes(p.status)&&!out[p.name])out[p.name]={pos:p.pos,nfl:p.nfl,ours:true,days:{},noReport:true};
   return out}
 function newsView(){

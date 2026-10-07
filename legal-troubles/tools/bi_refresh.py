@@ -319,8 +319,23 @@ def f_roster_grid():
         c = code.lstrip("@"); v = d.get(c) or d.get({"WSH": "WAS", "WAS": "WSH"}.get(c, c))
         if v is None: raise KeyError(f"no points-allowed for {c}")
         return v
+    # ESPN opponent rank by position (the OPRK column on ESPN's roster page, Oct 7 Joe): view=mPositionalRatings,
+    # positionalRatings[posId].ratingsByOpponent[proTeamId] = {rank, average}; rank 1 = allows the fewest fantasy points to that position
+    PR = get("view=mPositionalRatings").get("positionAgainstOpponent", {}).get("positionalRatings", {})
+    if not PR: raise RuntimeError("ESPN positional ratings (OPRK) empty")
+    POSID = {"QB": "1", "RB": "2", "WR": "3", "TE": "4", "K": "5", "D/ST": "16"}
+    abid = {v.upper(): k for k, v in ab.items()}
+    def oprk(code, pos):
+        c = code.lstrip("@").upper(); tid = abid.get(c) or abid.get({"WSH": "WAS", "WAS": "WSH"}.get(c, c))
+        r_ = PR.get(POSID.get(pos, ""), {}).get("ratingsByOpponent", {}).get(str(tid))
+        if r_ is None: raise KeyError(f"no OPRK for {pos} vs {c}")
+        return int(r_["rank"]), round(float(r_["average"]), 1)
+    def pentry(o_, pos):
+        if o_ == "BYE": return {"opp": o_, "pa": None, "ps": None, "oprk": None, "oavg": None}
+        rk, av = oprk(o_, pos)
+        return {"opp": o_, "pa": opp_v(o_, ppa), "ps": opp_v(o_, ppf), "oprk": rk, "oavg": av}
     grid = [{"name": p["name"], "pos": p["pos"], "nfl": p["nfl"], "slot": p.get("slot"), "bye": p.get("bye"),
-             "playoffs": [{"opp": o_, "pa": opp_v(o_, ppa) if o_ != "BYE" else None, "ps": opp_v(o_, ppf) if o_ != "BYE" else None} for o_ in (p.get("playoffs") or [])]}
+             "playoffs": [pentry(o_, p["pos"]) for o_ in (p.get("playoffs") or [])]}
             for p in players.values() if p.get("ours")]
     return {"grid": grid, "leaguePA": round(statistics.mean(ppa.values()), 1) if ppa else None, "paWeeks": [1, wk - 1] if wk > 1 else None}
 feature("prev", f_prev)
