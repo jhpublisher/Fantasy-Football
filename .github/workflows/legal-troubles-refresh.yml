@@ -41,6 +41,8 @@ jobs:
           rm -rf /tmp/rg && python3 "$T/assemble_rg.py" "$RGS" /tmp/rg "$T"; RG=$?
           cd "$GITHUB_WORKSPACE/legal-troubles"
           if [ "$RG" = "0" ] && [ -s /tmp/rg/returns.json ]; then cp /tmp/rg/returns.json data/returns.json; elif [ "$RG" = "0" ]; then RG=1; echo "::warning::returns chain wrote no returns.json"; fi
+          # Punt coverage for the opponent drawer (Oct 7): ESPN box scores, cross-checked against returns.json; a failure keeps the last good data/punting.json
+          if [ "$RG" = "0" ]; then python3 tools/returns/punting.py data/returns.json /tmp/punting.json && cp /tmp/punting.json data/punting.json || echo "::warning::punting.py failed; last good data/punting.json kept"; fi
           echo "{\"bi_refresh\": $BI, \"news_sweep\": $NS, \"returns\": $RG}" > /tmp/run_status.json
           cat /tmp/run_status.json
       - name: Build candidate bundle (last good data kept and marked stale for any failed section)
@@ -68,7 +70,7 @@ jobs:
           # index.html is generated from tools/front-office-bi.html by tools/mkgithub.py; briefing.html from tools/ceo-briefing.html.
           # A failed page build keeps the committed pages (and is reported); it never touches data or curated files.
           if [ -f tools/front-office-bi.html ] && [ -f tools/ceo-briefing.html ] && [ -f tools/mkgithub.py ]; then
-            python3 tools/mksite.py --bi tools/front-office-bi.html --briefing tools/ceo-briefing.html --site . --mkgithub tools/mkgithub.py --returns-tab tools/returns || echo "::warning::mksite failed; pages not rebuilt"
+            python3 tools/mksite.py --bi tools/front-office-bi.html --briefing tools/ceo-briefing.html --site . --mkgithub tools/mkgithub.py || echo "::warning::mksite failed; pages not rebuilt"
           else
             echo "::warning::page sources missing in tools/; pages not rebuilt"
           fi
@@ -78,6 +80,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add legal-troubles/data/validation.json legal-troubles/index.html legal-troubles/briefing.html
           [ -f legal-troubles/data/returns.json ] && git add legal-troubles/data/returns.json
+          [ -f legal-troubles/data/punting.json ] && git add legal-troubles/data/punting.json
           # Guard: a stored week (or its raw archive) may be added, never modified or deleted
           CHG=$(git diff --name-only --diff-filter=MDRT -- legal-troubles/data/rg/weeks legal-troubles/data/rg/raw ':(glob)legal-troubles/data/rg/injuries/20*.json')
           if [ -n "$CHG" ]; then echo "::error::stored weeks changed, refusing to commit them: $CHG"; git checkout -- legal-troubles/data/rg/weeks legal-troubles/data/rg/raw legal-troubles/data/rg/injuries legal-troubles/data/rg/index.json; fi

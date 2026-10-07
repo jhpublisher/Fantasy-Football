@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head><body>
 <title>Legal Troubles Front Office BI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,6 +139,25 @@ body.nomark .nw{display:none}
 .plan{font:inherit;font-size:.82rem;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer}
 .plan.mine{border-color:var(--brass);box-shadow:inset 3px 0 0 var(--brass)}
 .plan:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.rg-ok{color:var(--good)} .rg-warn{color:var(--warn)} .rg-bad{color:var(--bad)} .rg-muted{color:var(--muted)}
+.rgcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.rgcard{border:1px solid var(--line);border-left:4px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px;background:var(--surface)}
+.rgcard.rg-b-ok{border-left-color:var(--good)} .rgcard.rg-b-warn{border-left-color:var(--warn)} .rgcard.rg-b-bad{border-left-color:var(--bad)}
+.rgrow{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;font-size:.88rem}
+.rgw{display:inline-flex;gap:3px}
+.rgw i{font-style:normal;font-family:var(--mono);font-size:.7rem;min-width:34px;text-align:center;padding:2px 3px;border-radius:4px;background:var(--sunk);color:var(--muted)}
+.rgw i.hi{background:color-mix(in srgb,var(--good) 30%,transparent);color:var(--ink);font-weight:700}
+.rgw i.lo{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--ink)}
+td.rgcell{font-size:.82rem;white-space:normal;min-width:120px}
+.rgtools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.rgcolw{position:relative;display:flex;justify-content:flex-end;margin-left:auto}
+.rgcolbtn{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:5px 12px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.rgcolbtn i{font-style:normal;color:var(--muted)}
+.rgcolpanel{position:absolute;right:0;top:calc(100% + 6px);z-index:6;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px color-mix(in srgb,var(--ink) 18%,transparent);padding:12px 14px;display:grid;gap:8px;min-width:260px;max-width:calc(100vw - 40px)}
+.rgcolpanel label{display:flex;gap:8px;align-items:center;font-size:.88rem;cursor:pointer}
+.rgcolpanel input{accent-color:var(--brass);width:16px;height:16px}
+.rgcolact{display:flex;gap:14px;align-items:center;justify-content:flex-end;border-top:1px solid var(--line);padding-top:8px}
+.rgl{font-family:var(--mono);font-size:.72rem;padding:1px 6px;border-radius:4px;background:var(--sunk);color:var(--muted);margin-left:2px}
 .heat td.h{text-align:center;font-family:var(--mono);font-size:.78rem;border-radius:4px}
 .h100{background:color-mix(in srgb,var(--good) 28%,transparent)}
 .hhigh{background:color-mix(in srgb,var(--good) 50%,transparent);font-weight:700}
@@ -205,6 +227,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
     <div class="brand"><h1>Legal Troubles <span>BI</span></h1><span class="eyebrow" id="stamp">Loading data…</span></div>
     <nav class="tabs" role="tablist" aria-label="Views">
       <button class="tab" role="tab" id="tab-overview" aria-selected="true" data-v="overview">Overview</button>
+      <button class="tab" role="tab" id="tab-returns" aria-selected="false" data-v="returns">Returns</button>
       <button class="tab" role="tab" id="tab-roster" aria-selected="false" data-v="roster">Our roster</button>
       <button class="tab" role="tab" id="tab-market" aria-selected="false" data-v="market">Market</button>
       <button class="tab" role="tab" id="tab-league" aria-selected="false" data-v="league">League</button>
@@ -220,7 +243,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 
 <script>
 (function(){
-const S={league:null,validation:null,sections:null,builtAt:null,returns:null,dbError:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
+const S={league:null,validation:null,sections:null,builtAt:null,returns:null,punting:null,dbError:null,dbErrors:{},dbWait:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
 const PLAN_OPTS=[['','No plan'],['sell','Sell high'],['buy','Buy low'],['target','Target'],['claim','Claim'],['rental','Rental'],['stash','Stash'],['drop','Drop']];
 let savePlan=null;
 function mergePlans(){const wk=S.meta?.week,base={};
@@ -286,8 +309,8 @@ function waiverProcess(){const w=LGD().waiverProcessET,base=M?.dates?.waivers;
 // claims are due 10:30 PM ET the night before waivers process
 function waiverDue(){const w=waiverProcess();if(!w||isNaN(w))return null;const p=etParts(w),prev=new Date(Date.UTC(p.y,p.m-1,p.d)-864e5);return etInstant(prev.getUTCFullYear(),prev.getUTCMonth()+1,prev.getUTCDate(),22,30)}
 /* Validation + freshness (pipeline adds b.validation, section {stale,staleSince,reason} / {error}, curated {expired}) */
-let STALE_H=6;
-function dataTimeMaxAge(){if(S.validation?.maxAgeHours)STALE_H=+S.validation.maxAgeHours}
+let STALE_H=2;
+function dataTimeMaxAge(){}
 function dataTime(){dataTimeMaxAge();for(const t of [S.meta?.updatedAt,S.builtAt,S.extras?.builtAt]){if(!t)continue;const d=new Date(t);if(!isNaN(d))return d}return null}   // ESPN numbers time first
 function sections(){const E=S.extras||{},N=S.news||{};return [['ESPN numbers',S.meta],['Playoff odds',latestOdds()],['Waiver order',S.waivers],['This week',E.matchup],['Seed race',E.race],['Bye and playoff grids',E.roster],['Free agents',E.freeAgents],['Key dates',E.dates],['Extras',S.extras],
   ['Our news',N.ours],['League news',N.league],['Rumors and trending',N.desk],['Practice reports',S.practice],['Returns',S.returns],['Memo',S.memos&&Object.values(S.memos).slice(-1)[0]]]}
@@ -303,17 +326,22 @@ function allProblems(){const seen=new Set(),out=[];const add=(l,p)=>{if(!p)retur
   Object.entries(S.extras?.staleFeatures||{}).forEach(([k,o])=>add(SECNAME['extras.'+k]||k,secProblem(o)));
   (S.validation?.staleSections||[]).forEach(k=>add(SECNAME[k]||k,{err:false,txt:'stale (validator)'}));
   return out}
+const DBNAME={'meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','practice/current':'Practice reports','memos':'Memo','connect':'Database connection'};
 const SECNAME={meta:'ESPN numbers',players:'Players',scores:'Scores',odds:'Playoff odds',waivers:'Waiver order',nfl:'NFL schedule',curated:'Staff notes',extras:'Extras',
   'extras.matchup':'This week','extras.race':'Seed race','extras.roster':'Bye and playoff grids','extras.freeAgents':'Free agents','extras.dates':'Key dates','extras.prev':'Change vs last week',
   news:'News','news.ours':'Our news','news.league':'League news','news.desk':'Rumors and trending',practice:'Practice reports',memos:'Memo',returns:'Returns'};
 function banners(){const V=S.validation,out=[];
-  if(S.dbError)out.push(`<div class="banner red" role="alert"><b>Database read failed:</b> ${esc(S.dbError)}. Some panels may be empty or old.</div>`);
+  const dbe=Object.entries(S.dbErrors||{});
+  if(dbe.length)out.push(`<div class="banner red" role="alert"><b>Database read failed</b> for ${dbe.length} part${dbe.length>1?'s':''} of the page; those panels may be empty or old:<ul>${dbe.map(([k,v])=>`<li>${esc(DBNAME[k]||k)}: ${esc(v)}</li>`).join('')}</ul></div>`);
+  else if(S.dbError)out.push(`<div class="banner red" role="alert"><b>Database read failed:</b> ${esc(S.dbError)}. Some panels may be empty or old.</div>`);
+  if(S.dbWait)out.push(`<div class="banner red" role="alert"><b>No data from the database yet:</b> ${esc(S.dbWait)}. Reload the page; if it persists, the refresh may not have loaded.</div>`);
   if(S.loadError)out.push(`<div class="banner amber" role="status"><b>Couldn't reach the latest data file</b> (${esc(S.loadError)}); showing what loaded earlier.</div>`);
   if(V&&V.ok===false){const f=(V.failures||[]).map(x=>typeof x==='string'?x:(x.msg||x.message||JSON.stringify(x)));
     out.push(`<div class="banner red" role="alert"><b>Data check failed${V.checkedAt?` (${fmtD(V.checkedAt)})`:''}. Data frozen at ${V.bundleBuiltAt||S.builtAt?fmtD(V.bundleBuiltAt||S.builtAt):'the last good refresh'}; do not act on new numbers until Rich clears it.</b>${f.length?`<ul>${f.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<span>The validator gave no details.</span>'}</div>`)}
   const probs=allProblems(),errs=probs.filter(([,p])=>p.err);
   if(errs.length)out.push(`<div class="banner red" role="alert"><b>Sections that failed to load:</b><ul>${errs.map(([l,p])=>`<li>${esc(l)} ${esc(p.txt)}</li>`).join('')}</ul></div>`);
-  const am=[],dt=dataTime();if(dt){const h=(Date.now()-dt)/36e5;if(h>STALE_H)am.push(`Numbers are ${h>=48?Math.round(h/24)+' days':Math.round(h)+' hours'} old (last update ${fmtD(dt)}). The refresh may have stopped.`)}
+  const am=[],dt=dataTime(),age=h=>h>=48?Math.round(h/24)+' days':Math.round(h)+' hours';if(dt){const h=(Date.now()-dt)/36e5;if(h>STALE_H)am.push(`Numbers are ${age(h)} old (last update ${fmtD(dt)}). Open Claude and tell Linda to refresh.`)}
+  for(const [l,t] of [['News and rumors',S.news?.desk?.updatedAt||S.news?.ours?.updatedAt],['Practice reports',S.practice?.updatedAt]]){const d=t?new Date(t):null;if(d&&!isNaN(d)){const h=(Date.now()-d)/36e5;if(h>STALE_H)am.push(`${l}: last sweep ${age(h)} ago (${fmtD(d)}); newer ${l==='Practice reports'?'reports':'news'} may be missing.`)}}
   probs.filter(([,p])=>!p.err).forEach(([l,p])=>am.push(`${l} ${p.txt}.`));if(V?.staleData&&!am.length)am.push('The validator marked this data stale.');
   if(V&&V.ok!==false&&(V.warnings||[]).length)(V.warnings).forEach(x=>am.push(typeof x==='string'?x:(x.msg||x.message||JSON.stringify(x))));
   if(am.length)out.push(`<div class="banner amber" role="status"><b>Stale or partial data${dt&&(Date.now()-dt)/36e5>STALE_H?` · stale since ${fmtD(dt)}`:''}</b><ul>${am.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`);
@@ -402,7 +430,7 @@ function dueList(){const D=M?.dates||{},due=waiverDue(),wp=waiverProcess();const
       <li><span>Trade deadline</span><time>${D.tradeDeadline?whenTxt(D.tradeDeadline,'Passed: no more trades'):'Not in this refresh'}</time></li>`}
 function teamScores(name){const v={};Object.values(S.scores||{}).forEach(s=>{if(s.scores&&name in s.scores)v[s.week]=s.scores[name]});return v}
 function avgPPG(name){const a=Object.values(teamScores(name)).filter(x=>x!=null);return a.length?(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2):'Not played yet'}
-const SORT_DEF={sr:{k:'seed',d:1},st:{k:'seed',d:1},tr:{k:'seed',d:1},ov:{k:'seed',d:1},ro:{k:'line',d:1},cl:{k:'pri',d:1},wo:{k:'rank',d:1},pr:{k:'ord',d:1},by:{k:'line',d:1},pg:{k:'line',d:1}};
+const SORT_DEF={rp:{k:'pts3',d:-1},sr:{k:'seed',d:1},st:{k:'seed',d:1},tr:{k:'seed',d:1},ov:{k:'seed',d:1},ro:{k:'line',d:1},cl:{k:'pri',d:1},wo:{k:'rank',d:1},pr:{k:'ord',d:1},by:{k:'line',d:1},pg:{k:'line',d:1}};
 const ASC=new Set(['site1','espn1','agree']);
 const SORT=JSON.parse(JSON.stringify(SORT_DEF));
 const resetBtn=t=>(SORT[t].k!==SORT_DEF[t].k||SORT[t].d!==SORT_DEF[t].d)?`<button class="rst" data-reset="${t}">↺ Reset sort</button>`:'';
@@ -410,7 +438,7 @@ function sortRows(rows,tbl,val,tie=(a,b)=>a.seed-b.seed){const {k,d}=SORT[tbl];r
   const c=(x==null&&y==null)?0:x==null?1:y==null?-1:typeof x==='string'?x.localeCompare(y):x-y;return (x==null||y==null?c:c*d)||tie(a,b)})}
 function sh(tbl,k,label,num){const s=SORT[tbl],on=s.k===k;
   return `<th class="${num?'num':''}" aria-sort="${on?(s.d>0?'ascending':'descending'):'none'}"><button class="srt${on?' on':''}" data-sort="${tbl}:${k}" title="Sort">${label}<i>${on?(s.d>0?'▲':'▼'):'↕'}</i></button></th>`}
-function setSort(tbl,k){const s=SORT[tbl];if(s.k===k)s.d=-s.d;else{s.k=k;s.d=(['seed','name','line','pos','player','nfl','plan','bye','pri','drop','rank','team','need','ord'].includes(k)||ASC.has(k)||(tbl==='ro'&&k==='status'))?1:-1}render()}
+function setSort(tbl,k){const s=SORT[tbl];if(s.k===k)s.d=-s.d;else{s.k=k;s.d=(['seed','name','line','pos','player','nfl','plan','bye','pri','drop','rank','team','need','ord','owner','site','espn'].includes(k)||ASC.has(k)||(tbl==='ro'&&k==='status'))?1:-1}render()}
 function league(){
   const o=latestOdds(); if(!o) return emptyState(['Playoff odds',o]);const PT=LGD().playoffTeams;
   const wks=Object.values(S.scores).map(s=>s.week).sort((a,b)=>a-b);
@@ -519,7 +547,7 @@ function dayDate(lbl){const x=Object.values(S.practice?.players||{}).map(p=>p.da
 function practiceNow(){const pr=S.practice,wk=LGD().week;const out={};const ko=M?.dates?.kickoff?new Date(M.dates.kickoff):null;
   const inWeek=d=>{if(!ko||isNaN(ko))return true;const x=dayDate(d);return x>new Date(ko-8*864e5)&&x<new Date(+ko+5*864e5)};
   const prWeekOk=pr&&(pr.week==null||wk==null||+pr.week===+wk);
-  if(prWeekOk)for(const [n,p] of Object.entries(pr?.players||{})){if(p.kickoffET&&new Date(p.kickoffET)<Date.now()-12*36e5)continue;const win=Array.isArray(p.window)&&p.window.length===2?p.window:null;const days=Object.fromEntries(Object.entries(p.days||{}).filter(([d,x])=>win&&x?.date?(x.date>=win[0]&&x.date<=win[1]):inWeek(d)));if(Object.keys(days).length)out[n]={...p,days}}
+  if(prWeekOk)for(const [n,p] of Object.entries(pr?.players||{})){if(p.week!=null&&wk!=null&&+p.week!==+wk)continue;if(p.kickoffET&&new Date(p.kickoffET)<Date.now()-12*36e5)continue;const win=Array.isArray(p.window)&&p.window.length===2?p.window:null;const days=Object.fromEntries(Object.entries(p.days||{}).filter(([d,x])=>win&&x?.date?(x.date>=win[0]&&x.date<=win[1]):inWeek(d)));if(Object.keys(days).length)out[n]={...p,days}}
   for(const p of Object.values(S.players))if(p.ours&&['QUESTIONABLE','DOUBTFUL','OUT','DAY_TO_DAY'].includes(p.status)&&!out[p.name])out[p.name]={pos:p.pos,nfl:p.nfl,ours:true,days:{},noReport:true};
   return out}
 function newsView(){
@@ -529,14 +557,14 @@ function newsView(){
   const names=Object.keys(pn), ix=new Map(names.map((n,i)=>[n,i]));
   const rows=sortRows(names,'pr',(n,k)=>k==='player'?n.toLowerCase():k==='gs'?({ACTIVE:0,QUESTIONABLE:1,DAY_TO_DAY:1,DOUBTFUL:2,OUT:3,INJURY_RESERVE:4}[S.players[pid(n)]?.status]??null):k.startsWith('d')?(PSEV[pn[n].days[days[+k.slice(1)]]?.status]??null):ix.get(n),(a,b)=>ix.get(a)-ix.get(b));
   const desk=S.news.desk, H=desk?.health, srcs=desk?(H?Object.entries(H).map(([k,v])=>[k,v.status==='ok'?'ok':`${v.status}${v.error?': '+v.error:''}${v.items!=null?`, ${v.items} items`:''}`]):Object.entries(desk.sources||{})):[], bad=srcs.filter(([,v])=>v!=='ok');
-  return `<section class="panel"><div class="ph"><h2>${wk!=null?'Week '+wk+' p':'P'}ractice report</h2><span class="phr">${resetBtn('pr')}<span class="eyebrow">Our players + watch list · Wed–Sat</span></span></div>${secMsg(pr,'Practice reports','injury reports')}
+  return `<section class="panel"><div class="ph"><h2>${wk!=null?'Week '+wk+' p':'P'}ractice report</h2><span class="phr">${resetBtn('pr')}<span class="eyebrow">Our players + watch list · Mon–Sat, ET</span></span></div>${secMsg(pr,'Practice reports','injury reports')}
     ${names.length?`<div class="tw"><table class="prac"><thead><tr>${sh('pr','player','Player')}${sh('pr','gs','Game status')}${days.map((d,i)=>sh('pr','d'+i,esc(d),1)).join('')}</tr></thead><tbody>
     ${rows.map(n=>{const p=pn[n],sp=S.players[pid(n)];return `<tr><td>${nameBtn(n)} <span class="note">${esc(p.pos)} · ${esc(p.nfl)}${p.ours?' · ours':''}</span></td><td>${sp?stChip(sp.status):'<span class="note">No ESPN status</span>'}</td>${days.map(d=>{const x=p.days[d];return `<td class="d">${x?`<span class="chip p-${x.status}" title="${esc(x.note)}">${x.status}</span>`:'<span class="dim">Not on report</span>'}</td>`}).join('')}</tr>`}).join('')}
     </tbody></table></div>`:''}
-    <p class="note">${days.length?'':pr&&pr.week!=null&&wk!=null&&+pr.week!==+wk?`Practice data is for Week ${pr.week}, not Week ${wk}; waiting for this week's reports. `:`No ${wk!=null?'Week '+wk+' ':''}practice reports yet. Teams report Wednesday through Friday. `}Our injured players are always listed, even before reports come in. DNP = did not practice · Limited · Full. Updated ${pr?fmtT(pr.updatedAt):'never (no practice data in this refresh)'}.</p></section>
+    <p class="note">${days.length?'':pr&&pr.week!=null&&wk!=null&&+pr.week!==+wk?`Practice data is for Week ${pr.week}, not Week ${wk}; waiting for this week's reports. `:`No ${wk!=null?'Week '+wk+' ':''}practice reports yet. Teams report on practice days (usually Wednesday to Friday; Monday to Saturday in short or long weeks). `}Our injured players are always listed, even before reports come in. DNP = did not practice · Limited · Full. Updated ${pr?fmtT(pr.updatedAt):'never (no practice data in this refresh)'}.</p></section>
   ${(()=>{const all=desk?.rumors||[],live=all.filter(r=>!isExpired(r)),nx=all.length-live.length;if(!desk||secProblem(desk)?.err)return missingPanel('Rumor mill',desk,'news desk');if(!live.length)return `<section class="panel"><div class="ph"><h2>Rumor mill</h2></div>${secMsg(desk,'Rumor mill')}<p class="note">No live rumors about players that matter to us${nx?` (${nx} expired hidden)`:''}.</p></section>`;
-  return `<section class="panel"><div class="ph"><h2>Rumor mill</h2><span class="eyebrow">Unconfirmed · only what could matter to us${nx?` · ${nx} expired hidden`:''}</span></div>${secMsg(desk,'Rumor mill')}<ul class="list">${live.map(r=>{const auto=r.reviewed===false,AU='Auto, not reviewed';const c=latestConfirmed(r.player),upd=c&&(!r.time||new Date(c.time)>new Date(r.time));return `<li class="rumor"><div class="meta news">${upd?'<span class="chip k-Confirmed">Confirmed update</span>':'<span class="chip k-Rumor">Rumor</span>'}${r.action&&!auto?`<span class="chip t-roster">${esc(r.action)}</span>`:`<span class="chip s-QUESTIONABLE" title="Found by the news sweep; no staff member has checked it">${AU}</span>`}${r.action&&auto?`<span class="chip t-roster">${esc(r.action)}</span>`:''}<span class="src">${r.sources?`${r.sources} report${r.sources>1?'s':''}`:'1 report'}</span></div><div>${nameBtn(r.player)} <span class="c">${esc(r.claim||r.latest||r.headline||'No summary yet')}</span></div>${upd?`<div class="flag"><b>Newer confirmed report (${fmtT(c.time)}):</b> ${c.link?`<a href="${esc(c.link)}" target="_blank" rel="noopener">${esc(c.headline)}</a>`:esc(c.headline)}</div>`:''}<div class="i"><b>Why it matters:</b> ${r.impact?esc(r.impact):`<i>${AU}</i>: no staff assessment yet.`}</div>${r.link&&!upd?`<div class="i"><a href="${esc(r.link)}" target="_blank" rel="noopener">Latest: ${esc(r.latest||r.headline||'open source')}</a></div>`:''}</li>`}).join('')}</ul></section>`})()}
-  ${desk?`<section class="panel"><div class="ph"><h2>What fantasy is adding</h2><span class="eyebrow">Sleeper · last 24h</span></div><ul class="list trend">${(desk.trending||[]).slice(0,12).map(t=>`<li><span>${nameBtn(t.player)} <span class="note">${metaTxt(t)}</span></span><span class="src">${t.adds24h!=null?Number(t.adds24h).toLocaleString()+' adds':'adds not reported'}</span></li>`).join('')||'<li class="note">Sleeper trending returned no players.</li>'}</ul><p class="note">Tells us which claims will be contested before waivers run. ${desk.healthLine?esc(desk.healthLine)+' ':''}News sources: ${srcs.length-bad.length}/${srcs.length} OK${bad.length?' · down: '+bad.map(([k,v])=>esc(k.replace('Google News: ','Insider: '))+` (${esc(String(v).replace(/^error:\s*/,''))})`).join(', '):''}.</p></section>`:missingPanel('What fantasy is adding',desk,'Sleeper trending')}
+  return `<section class="panel"><div class="ph"><h2>Rumor mill</h2><span class="eyebrow">Unconfirmed · only what could matter to us${nx?` · ${nx} expired hidden`:''}</span></div>${secMsg(desk,'Rumor mill')}<ul class="list">${live.map(r=>{const auto=r.reviewed===false,AU='Auto, not reviewed';const c=r.origin?(r.newerConfirmed||null):latestConfirmed(r.player),upd=!!c&&(r.origin?true:(!r.time||new Date(c.time)>new Date(r.time)));return `<li class="rumor"><div class="meta news">${upd?'<span class="chip k-Confirmed">Confirmed update</span>':'<span class="chip k-Rumor">Rumor</span>'}${r.action&&!auto?`<span class="chip t-roster">${esc(r.action)}</span>`:`<span class="chip s-QUESTIONABLE" title="Found by the news sweep; no staff member has checked it">${AU}</span>`}${r.action&&auto?`<span class="chip t-roster">${esc(r.action)}</span>`:''}<span class="src">${r.sources?`${r.sources} report${r.sources>1?'s':''}`:'1 report'}</span></div><div>${nameBtn(r.player)} <span class="c">${esc(r.claim||r.latest||r.headline||'No summary yet')}</span></div>${upd?`<div class="flag"><b>Newer confirmed report (${fmtT(c.time)}):</b> ${c.link?`<a href="${esc(c.link)}" target="_blank" rel="noopener">${esc(c.headline)}</a>`:esc(c.headline)}</div>`:''}<div class="i"><b>Why it matters:</b> ${r.impact?esc(r.impact):`<i>${AU}</i>: no staff assessment yet.`}</div>${r.link&&!upd?`<div class="i"><a href="${esc(r.link)}" target="_blank" rel="noopener">Latest: ${esc(r.latest||r.headline||'open source')}</a></div>`:''}</li>`}).join('')}</ul></section>`})()}
+  ${desk?`<section class="panel"><div class="ph"><h2>What fantasy is adding</h2><span class="eyebrow">Sleeper · last 24h</span></div><ul class="list trend">${(desk.trending||[]).slice(0,12).map(t=>`<li><span>${nameBtn(t.player)} <span class="note">${metaTxt(t)}</span></span><span class="src">${t.adds24h!=null?Number(t.adds24h).toLocaleString()+' adds':'adds not reported'}</span></li>`).join('')||'<li class="note">Sleeper trending returned no players.</li>'}</ul><p class="note">Tells us which claims will be contested before waivers run. ${desk.healthLine?esc(desk.healthLine)+' ':''}News sources: ${srcs.length-bad.length}/${srcs.length} OK${bad.length?' · issues: '+bad.map(([k,v])=>esc(k.replace('Google News: ','Insider: '))+` (${esc(String(v).replace(/^error:\s*/,''))})`).join(', '):''}.</p></section>`:missingPanel('What fantasy is adding',desk,'Sleeper trending')}
   `+groupedNews(ours,lg);
 }
 const NF={k:'all',n:5,open:{}};
@@ -548,7 +576,7 @@ function groupedNews(ours,lg){
   const grp=Object.entries(g).map(([n,it])=>[n,it.sort((a,b)=>new Date(b.time)-new Date(a.time))]).sort((a,b)=>(b[1][0].why==='Our player')-(a[1][0].why==='Our player')||new Date(b[1][0].time)-new Date(a[1][0].time));
   const cnt=k=>new Set(all.filter({all:()=>true,ours:i=>i.why==='Our player',watch:i=>i.why==='On our watch list',rumor:i=>i.kind==='Rumor',injury:i=>INJ.test(i.headline)}[k]).map(i=>i.player)).size;
   const L=[['all','All'],['ours','Our players'],['watch','Watch list'],['rumor','Rumors'],['injury','Injuries']];
-  const one=i=>`<div class="hl">${i.link?`<a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.headline)}</a>`:esc(i.headline)} <span class="src">${fmtT(i.time)} · ${esc(i.source?i.source.replace('Google News: ','via '):'RotoWire via ESPN')}</span></div>`;
+  const one=i=>`<div class="hl">${i.link?`<a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.headline)}</a>`:esc(i.headline)} <span class="src">${fmtT(i.time)} · ${esc(i.source?i.source.replace('Google News: ','via '):'RotoWire via ESPN')}${i.sources>1?` · ${i.sources} reports, first: ${esc(String(i.firstSource||'').replace('Google News: ','via '))}`:''}</span></div>`;
   return `<section class="panel"><div class="ph"><h2>News by player ${NW(16)}</h2><span class="eyebrow">Updated ${ours?fmtT(ours.updatedAt):'never (no news in this refresh)'} · newest first</span></div>${secMsg(ours,'Our news','news sweep')}${lg?secMsg(lg,'League news'):''}
     <div class="filters">${L.map(([k,l])=>`<button data-nf="${k}" aria-pressed="${NF.k===k}">${l} · ${cnt(k)}</button>`).join('')}</div>
     <div>${grp.slice(0,NF.n).map(([n,it])=>{const p=S.players[pid(n)],i0=it[0],op=NF.open[n];return `<div class="ngroup"><div class="hd">${nameBtn(n)} <span class="note">${metaTxt(i0)}</span>${p?stChip(p.status):''}${i0.kind?`<span class="chip k-${i0.kind}">${esc(i0.kind)}</span>`:''}${i0.why?`<span class="chip t-roster">${esc(i0.why)}</span>`:''}</div>${one(i0)}${it.length>1?`<button class="more" data-ng="${esc(n)}">${op?'Hide':'+'+(it.length-1)+' more'}</button>`:''}${op?`<div class="older">${it.slice(1).map(one).join('')}</div>`:''}</div>`}).join('')||'<p class="note">Nothing in this filter.</p>'}</div>
@@ -594,13 +622,346 @@ function drawer(html){lastFocus=document.activeElement;const d=$('#drawer');d.in
 function closeDrawer(){$('#drawer').hidden=true;$('#scrim').hidden=true;lastFocus?.focus?.()}
 
 /* ---------- wiring ---------- */
+/* ---------- Returns tab (Return Game department): Kick / Punt / Both ---------- */
+// One normalized model per kind so every section renders the same way for kick returns, punt returns, or both combined.
+const RF={k:'elig',open:null,n:25,kind:'kr',mine:false};
+// kind: kr | pr | both (only players with at least one kick AND one punt return) | all (everyone, kick + punt combined). Models only know kr / pr / both.
+const rgK=()=>RF.kind==='all'?'both':RF.kind;
+try{RF.mine=localStorage.getItem('lt-rg-mine')==='1'}catch(e){}
+try{const v=localStorage.getItem('lt-rg-kind');if(['kr','pr','both','all'].includes(v))RF.kind=v}catch(e){}
+SORT_DEF.rt={k:'team',d:1};SORT.rt={k:'team',d:1};
+if(typeof ASC!=='undefined')['site1','espn1','agree','site','espn','opp','lastg'].forEach(k=>ASC.add(k));
+const rgMin=o=>{const v=Object.values(o||{}).filter(x=>x!=null);return v.length?Math.min(...v):null};
+const RG_KIND={kr:{L:'KR',noun:'kick returns',one:'kick returner',short:'kick'},pr:{L:'PR',noun:'punt returns',one:'punt returner',short:'punt'},both:{L:'KR+PR',noun:'kick and punt returns',one:'returner',short:'return'}};
+// Same normalization as fill_rg.py: accents, punctuation and Jr./Sr./II/III/IV/V ignored ("Brian Robinson" == "Brian Robinson Jr.")
+const rgNorm=s=>String(s||'').normalize('NFKD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[.'’`,-]/g,' ').replace(/\b(jr|sr|ii|iii|iv|v)\b/g,' ').replace(/[^a-z]/g,'');
+const rgLast=n=>{const w=String(n||'').split(' ').filter(x=>!/^(jr|sr|ii|iii|iv|v)\.?$/i.test(x));return w[w.length-1]||String(n||'Unknown')};
+const rgSame=(a,b)=>!!a&&!!b&&rgNorm(a)===rgNorm(b);
+const rgIdx=(list,n)=>{const k=rgNorm(n);return (list||[]).findIndex(x=>rgNorm(x)===k)};
+// a source "read" a team when its status is ok or no_kr_row / no_pr_row (read, nobody listed)
+const rgRead=s=>!!s&&(s.status==='ok'||s.status==='no_kr_row'||s.status==='no_pr_row'||(!s.status&&(s.list||[]).length>0));
+const rgKey=p=>p.id?'i'+p.id:p.team+':'+rgNorm(p.name);
+// this week's opponent (schedule from fill_rg.py: whole season stored, only currentWeek shown)
+const rgWk=()=>S.returns?.currentWeek;
+function rgOpp(t){const R=S.returns,w=R?.currentWeek;if(!R?.schedule)return {txt:'Schedule not in this refresh',key:null,miss:true};
+  const g=R.schedule[t]?.[String(w)];if(!g)return {txt:`No Wk ${w} game found for ${t}`,key:null,miss:true};if(g.bye)return {txt:'Bye',key:null,bye:true};
+  let when='';try{when=new Date(g.kickoff).toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})+' ET'}catch(e){when='Kickoff time unknown'}
+  return {txt:`${g.home?'vs':'@'} ${g.opp}`,key:g.opp,when,home:g.home}}
+const rgOppHtml=(t,noTime)=>{const o=rgOpp(t);if(o.bye)return '<span class="chip rg-bad">Bye</span>';if(o.miss)return `<span class="chip rg-bad">${esc(o.txt)}</span>`;
+  const b=`<button class="link" data-rgopp="${esc(o.key)}" title="Tap for ${esc(o.key)}'s kickoffs and punts game by game, with averages and season totals"><b>${esc(o.txt)}</b></button>`;return noTime?b:`${b} <span class="note">${esc(o.when)}</span>`};
+/* ---- model: {kind, kinds:['kr'] | ['pr'] | ['kr','pr'], W, teams:{t:{byes, weeks:{w:{bye,opp,n,y,fc,ret:[{p,n,y,td,fc,kr,pr}]}}, src:{site:{kr,pr}, espn:{kr,pr}}}}, players:[{name,id,team,pos,owner,wk:{w:{n,y,td,fc,pts,team_n,team_fc,kr,pr}}}]} ---- */
+function rgSrc(s,list,kind){if(!s)return null;return {list:(list||[]).filter(Boolean),status:s.status,reason:s.reason,url:s.url,asof:s.asof,label:s.label,kind}}
+function rgSingle(R,kind){const W=R.weeks||[],teams={};
+  for(const [t,x] of Object.entries(R.teams||{})){const k=kind==='kr'?x:x.pr;if(!k)return {error:`team ${t} has no punt-return data`};const weeks={};
+    for(const w of W){const g=k.weeks?.[w];if(!g){weeks[w]=null;continue}
+      if(g.bye){weeks[w]={bye:true,opp:'Bye',n:0,y:0,fc:0,ret:[]};continue}
+      const n=kind==='kr'?g.team_kr:g.team_pr;
+      weeks[w]={opp:g.opp,n:n??0,y:(g.ret||[]).reduce((a,r)=>a+(r.y||0),0),fc:kind==='pr'?(g.fc??null):0,fcReason:g.fcReason,
+        ret:(g.ret||[]).map(r=>({p:r.p,n:kind==='kr'?r.kr:r.pr,y:r.y,td:r.td,fc:kind==='pr'?(r.fc??0):0,kr:kind==='kr'?r.kr:0,pr:kind==='pr'?r.pr:0}))}}
+    teams[t]={byes:x.byes||[],weeks,src:{site:{[kind]:rgSrc(k.site,k.site?.[kind],kind)},espn:{[kind]:rgSrc(k.espn,k.espn?.[kind],kind)}}}}
+  const raw=kind==='kr'?R.players:R.pr?.players;
+  const players=(Array.isArray(raw)?raw:[]).filter(p=>p&&p.name).map(p=>{const wk={};
+    for(const [w,x] of Object.entries(p.wk&&typeof p.wk==='object'?p.wk:{})){const n=kind==='kr'?x.kr:x.pr,tn=kind==='kr'?x.team_kr:x.team_pr,tfc=kind==='pr'?(teams[p.team]?.weeks?.[w]?.fc??null):0;
+      wk[w]={n:n||0,y:x.y||0,td:x.td||0,fc:kind==='pr'?(x.fc??null):0,pts:x.pts||0,team_n:tn||0,team_fc:tfc,kr:kind==='kr'?n||0:0,pr:kind==='pr'?n||0:0,ptsK:kind==='kr'?x.pts||0:0,ptsP:kind==='pr'?x.pts||0:0}}
+    return {name:p.name,id:p.id,team:p.team||'NFL team n/a',pos:p.pos||'Pos. n/a',owner:p.owner||'Owner unknown',wk}});
+  return {kind,kinds:[kind],W,teams,players}}
+function rgBoth(K,P){const W=K.W,teams={};
+  for(const t of Object.keys(K.teams)){const a=K.teams[t],b=P.teams[t]||{weeks:{},src:{site:{},espn:{}}},weeks={};
+    for(const w of W){const x=a.weeks[w],y=b.weeks?.[w];if(!x&&!y){weeks[w]=null;continue}if(x?.bye||y?.bye){weeks[w]={bye:true,opp:'Bye',n:0,y:0,fc:0,ret:[]};continue}
+      const m=new Map();for(const r of [...(x?.ret||[]),...(y?.ret||[])]){const k=rgNorm(r.p),o=m.get(k)||{p:r.p,n:0,y:0,td:0,fc:0,kr:0,pr:0};o.n+=r.n;o.y+=r.y;o.td+=r.td;o.fc+=r.fc||0;o.kr+=r.kr;o.pr+=r.pr;m.set(k,o)}
+      weeks[w]={opp:(x||y).opp,n:(x?.n||0)+(y?.n||0),nK:x?.n||0,nP:y?.n||0,y:(x?.y||0)+(y?.y||0),fc:y?.fc??null,fcReason:y?.fcReason,ret:[...m.values()].sort((p,q)=>q.n-p.n)}}
+    teams[t]={byes:a.byes,weeks,src:{site:{kr:a.src.site.kr,pr:b.src.site.pr},espn:{kr:a.src.espn.kr,pr:b.src.espn.pr}}}}
+  const by=new Map();
+  for(const p of [...K.players,...P.players]){const k=rgKey(p),q=by.get(k)||by.get(p.team+':'+rgNorm(p.name));
+    if(!q){const c={...p,wk:{}};for(const [w,x] of Object.entries(p.wk))c.wk[w]={...x};by.set(k,c);by.set(p.team+':'+rgNorm(p.name),c);continue}
+    if(q.owner==='Owner unknown'||q.owner==='No ESPN id match')q.owner=p.owner;
+    for(const [w,x] of Object.entries(p.wk)){const o=q.wk[w];if(!o){q.wk[w]={...x};continue}
+      q.wk[w]={n:o.n+x.n,y:o.y+x.y,td:o.td+x.td,fc:(o.fc??0)+(x.fc??0),pts:+(o.pts+x.pts).toFixed(1),team_n:o.team_n+x.team_n,team_fc:(o.team_fc??0)+(x.team_fc??0),kr:o.kr+x.kr,pr:o.pr+x.pr,ptsK:o.ptsK+x.ptsK,ptsP:o.ptsP+x.ptsP}}}
+  // team_n for weeks where the player only appears in one kind: use the combined team total
+  const players=[...new Set(by.values())];
+  for(const p of players)for(const [w,x] of Object.entries(p.wk)){const g=teams[p.team]?.weeks?.[w];if(g&&!g.bye){x.team_n=g.n;x.team_fc=g.fc}}
+  return {kind:'both',kinds:['kr','pr'],W,teams,players}}
+function rgModel(kind){const R=S.returns;if(!R)return null;
+  if(kind==='kr')return rgSingle(R,'kr');
+  if(!R.pr||!Array.isArray(R.pr.players))return {error:'Punt returns are not in this refresh (the return data was built before punt tracking started). Ask Rich to re-run the returns refresh.'};
+  const P=rgSingle(R,'pr');if(P.error||kind==='pr')return P;
+  const K=rgSingle(R,'kr');return K.error?K:rgBoth(K,P)}
+const rgBye=(M_,t,w)=>!!M_.teams[t]?.weeks?.[w]?.bye||(M_.teams[t]?.byes||[]).includes(+w);
+// fielded share: punts = returns + fair catches (a fair catch still means he held the job)
+function rgShare(x,kind){if(!x)return 0;if(kind==='kr')return x.team_n?x.n/x.team_n:0;const f=x.fc??0,tf=x.team_fc??0,d=x.team_n+tf;return d?(x.n+f)/d:0}
+function rgRows(M_){const W=M_.W,ours=new Set(Object.values(S.players).filter(p=>p.ours).map(p=>rgNorm(p.name)));
+  return M_.players.map(p=>{const wk=W.map(w=>p.wk[w]||null);
+    const played=W.filter(w=>!rgBye(M_,p.team,w)),last3=played.slice(-3);   // byes never count as a 0
+    const avg=f=>last3.length?last3.reduce((a,w)=>a+f(p.wk[w],w),0)/last3.length:0;
+    const pts3=avg(x=>x?x.pts:0),sh3=avg(x=>rgShare(x,M_.kind));
+    const fc3=M_.kind==='kr'?null:last3.some(w=>(M_.teams[p.team]?.weeks?.[w]?.fc)==null)?null:last3.reduce((a,w)=>a+(p.wk[w]?.fc??0),0);
+    const t=M_.teams[p.team]||{src:{site:{},espn:{}}};
+    const rank=src=>{const o={};for(const k of M_.kinds){const i=rgIdx(t.src[src]?.[k]?.list,p.name);o[k]=i<0?null:i+1}return o};
+    const site=rank('site'),espn=rank('espn'),minR=rgMin;
+    const LW=played[played.length-1],lw=LW!=null?p.wk[LW]:null,g=LW!=null?t.weeks?.[LW]:null;
+    const lwTxt=LW==null?'no games yet':lw?`${lw.n}/${lw.team_n}${M_.kind!=='kr'&&lw.fc?` +${lw.fc} FC`:''}`:`0/${g?.n??0}`;
+    const tot=+(wk.reduce((a,x)=>a+(x?x.pts:0),0)).toFixed(1);
+    return {...p,ours:ours.has(rgNorm(p.name)),wkA:wk,n3:last3.length,lastW:LW,lwSh:lw?Math.round(rgShare(lw,M_.kind)*100):0,lwPts:lw?lw.pts:0,lwTxt,pts3:+pts3.toFixed(1),sh3:Math.round(sh3*100),fc3,
+      tot,nKr:wk.reduce((a,x)=>a+(x?x.kr||0:0),0),nPr:wk.reduce((a,x)=>a+(x?x.pr||0:0),0),totK:+(wk.reduce((a,x)=>a+(x?x.ptsK||0:0),0)).toFixed(1),totP:+(wk.reduce((a,x)=>a+(x?x.ptsP||0:0),0)).toFixed(1),site,espn,siteMin:minR(site),espnMin:minR(espn),elig:['RB','WR'].includes(p.pos)}})}
+// status for one kind (row computed on that kind's model)
+function rgStatus1(p,M_,k){const L=RG_KIND[k].L,t=M_.teams[p.team]||{src:{site:{},espn:{}}},ss=t.src.site[k],es=t.src.espn[k],siteRead=rgRead(ss),espnRead=rgRead(es),sr=p.site[k],er=p.espn[k];
+  if(!siteRead&&espnRead){   // only one source could be read: say so, never "disagree"
+    if(er===1)return[p.sh3>=60?'ok':'warn',p.sh3>=60?`${L}1 (ESPN only), full-time`:`${L}1 (ESPN only), sharing`];
+    return er?['muted',`${L}${er} (ESPN only)`]:['bad','Not on ESPN chart (no team chart)']}
+  if(siteRead&&!espnRead){
+    if(sr===1)return[p.sh3>=60?'ok':'warn',`${L}1 (team site only)`];
+    return sr?['muted',`${L}${sr} (team site only)`]:['bad','Not on team chart (ESPN unread)']}
+  if(!siteRead&&!espnRead)return['bad','No depth chart could be read'];
+  const both=sr===1&&er===1,one=sr===1||er===1;
+  if(both&&p.sh3>=60)return['ok',`Full-time ${RG_KIND[k].one}`];
+  if(both)return['warn',`Listed ${L}1, sharing`];
+  if(one)return['warn',`${L}: sources disagree`];
+  if(sr||er)return['muted',`${L} backup on depth chart`];
+  return['bad',`Not on the ${L} depth chart`]}
+const rgChip=([c,t])=>`<span class="chip rg-${c}">${esc(t)}</span>`;
+// rank cell: listed / read-but-not-listed / verified no chart / couldn't read (reason)
+function rgSrcNote(s,src){if(!s)return `<span class="chip rg-bad" title="No ${src} data in this refresh">Not checked</span>`;
+  if(s.status==='no_chart')return `<span class="note" title="${esc(s.reason||'')}">Team publishes no chart</span>`;
+  if(s.status==='unread'||s.status==='error')return `<span class="chip rg-bad" title="${esc(s.reason||'')}">Couldn't read${s.reason?': '+esc(s.reason):''}</span>`;
+  return null}
+function rgRank(M_,p,src){const t=M_.teams[p.team]||{src:{site:{},espn:{}}},nm=src==='site'?'team site':'ESPN';
+  const one=k=>{const r=p[src][k],s=t.src[src]?.[k],L=RG_KIND[k].L;return r?`<b>${L}${r}</b>`:(rgSrcNote(s,nm)||`<span class="note">${M_.kinds.length>1?L+' not listed':'Not listed'}</span>`)};
+  if(M_.kinds.length===1)return one(M_.kinds[0]);
+  const ks=M_.kinds,a=ks.map(k=>t.src[src]?.[k]);if(a.every(s=>s&&s.status==='no_chart'))return rgSrcNote(a[0],nm);
+  return ks.map(one).join(' · ')}
+function rgWeeks(M_,p){return `<span class="rgw">${M_.W.map((w,i)=>{if(rgBye(M_,p.team,w))return `<i title="Wk ${w}: bye (not counted in averages)">Bye</i>`;
+  const x=p.wkA[i],g=M_.teams[p.team]?.weeks?.[w],n=g?.n??0,fcT=M_.kind!=='kr'&&x?.fc?` + ${x.fc} fair catch${x.fc>1?'es':''}`:'';
+  const det=M_.kind==='both'&&x?` (${x.kr} KR, ${x.pr} PR)`:'';
+  return `<i class="${x?(rgShare(x,M_.kind)>=.6?'hi':'lo'):''}" title="Wk ${w}: ${x?`${x.n} of ${x.team_n} returns${det}${fcT}, ${x.y} yds, ${x.pts} pts`:`0 of the team's ${n} returns`}">${x?x.n+'/'+x.team_n:'0/'+n}</i>`}).join('')}</span>`}
+function rgList(M_,t,src){const nm=src==='site'?'team site':'ESPN',one=(k,lab)=>{const s=M_.teams[t].src[src]?.[k],l=(s?.list||[]).filter(Boolean);
+    const body=l.length?l.map((n,i)=>i?esc(n):`<b>${esc(n)}</b>`).join(' / '):(rgSrcNote(s,nm)||`<span class="note">Chart read; no ${RG_KIND[k].L} listed</span>`);return lab?`<div><span class="dim">${RG_KIND[k].L}</span> ${body}</div>`:body};
+  if(M_.kinds.length===1)return one(M_.kinds[0]);
+  const a=M_.kinds.map(k=>M_.teams[t].src[src]?.[k]);if(a.every(s=>s&&s.status==='no_chart'))return rgSrcNote(a[0],nm);
+  return M_.kinds.map(k=>one(k,true)).join('')}
+function rgAgree1(M_,t,k){const s=M_.teams[t].src.site[k],e=M_.teams[t].src.espn[k],sr=rgRead(s),er=rgRead(e),a=s?.list?.[0],b=e?.list?.[0];
+  if(!sr&&er)return[3,'<span class="note">ESPN only</span>'];if(sr&&!er)return[3,'<span class="note">Team site only</span>'];if(!sr&&!er)return[5,'<span class="chip rg-bad">Neither read</span>'];
+  if(!a||!b)return[4,`<span class="note">${!a&&!b?`Neither lists a ${RG_KIND[k].L}`:!a?`Only ESPN lists a ${RG_KIND[k].L}`:`Only team site lists a ${RG_KIND[k].L}`}</span>`];
+  return rgSame(a,b)?[0,'<span class="chip rg-ok">Yes</span>']:[1,'<span class="chip rg-warn">No</span>']}
+function rgAgree(M_,t){const r=M_.kinds.map(k=>[k,...rgAgree1(M_,t,k)]);return [r.reduce((a,x)=>a+x[1],0),r.length===1?r[0][2]:r.map(([k,,h])=>`<div><span class="dim">${RG_KIND[k].L}</span> ${h}</div>`).join('')]}
+function rgCell(M_,g){if(!g)return '<span class="note">No game data</span>';if(g.bye)return '<span class="note">Bye</span>';
+  const fcN=M_.kind!=='kr'&&g.fc!=null?g.fc:null;
+  const who=g.ret.filter(r=>r.n||r.fc).map(r=>{const b=M_.kind==='both'?[r.kr?`${r.kr} KR`:'',r.pr?`${r.pr} PR`:''].filter(Boolean).join(' · '):`${r.n}/${g.n}`;return `${esc(rgLast(r.p))} ${b||'0 returns'}${M_.kind!=='kr'&&r.fc?` (${r.fc} FC)`:''}`}).join(', ');
+  const none=M_.kind==='pr'?`0 returns${fcN?` · ${fcN} fair catch${fcN>1?'es':''}`:''}`:'0 returns';
+  return (who||`<span class="note">${none}</span>`)+(M_.kind!=='kr'&&g.fc==null?` <span class="note" title="${esc(g.fcReason||'')}">(fair catches unknown)</span>`:'')}
+function rgToggle(){return `<div class="filters rgkind" role="group" aria-label="Return type">${[['kr','Kick returns'],['pr','Punt returns'],['both','Both'],['all','All']].map(([k,l])=>`<button data-rk="${k}" aria-pressed="${RF.kind===k}">${l}</button>`).join('')}</div>`}
+function returnsView(){const R=S.returns;if(!R)return `<div class="empty">No return data loaded: the Returns refresh has not run or failed. Ask Rich to re-run box.py and fill_rg.py.</div>`;
+  if(R.error)return `<div class="empty">Return data failed to load: ${esc(R.error)}</div>`;
+  if(!R.teams||typeof R.teams!=='object'||!Object.keys(R.teams).length)return `<div class="empty">Return data has no team table in this refresh${R.stale?' (stale copy)':''}; ask Rich to re-run fill_rg.py.</div>`;
+  const W=R.weeks||[];if(!W.length)return `<div class="empty">No completed NFL weeks yet; returns fill in after Week 1.</div>`;
+  const M_=rgModel(rgK());if(!M_||M_.error)return `<section class="panel"><div class="ph"><h2>Returns</h2>${rgToggle()}</div><div class="secmsg err">${esc(M_?.error||'No return data')}</div></section>`;
+  const K=RG_KIND[rgK()],L=K.L,Pall=rgRows(M_),sc=R.scoring||{krYd:.1,krTd:6};
+  const perKind=rgK()==='both'?Object.fromEntries(['kr','pr'].map(k=>{const m=rgModel(k);return [k,{M:m,rows:rgRows(m)}]})):null;
+  const kindRow=(k,p)=>perKind[k].rows.find(q=>rgKey(q)===rgKey(p)||(q.team===p.team&&rgSame(q.name,p.name)));
+  const status=p=>rgK()!=='both'?[rgStatus1(p,M_,rgK())]:['kr','pr'].map(k=>{const q=kindRow(k,p);return q&&(q.site[k]||q.espn[k]||q.tot||q.sh3)?rgStatus1(q,perKind[k].M,k):null}).filter(Boolean);
+  const isBoth=RF.kind==='both',P=isBoth?Pall.filter(p=>p.nKr>0&&p.nPr>0):Pall;   // Both: at least one kick return and one punt return this season
+  const ourNames=Object.values(S.players).filter(p=>p.ours).map(p=>p.name);
+  const ours=Pall.filter(p=>p.ours);
+  // our players listed on a depth chart but with no returns yet are in the players list already (fill_rg adds depth-only names); this catches any it missed
+  ourNames.forEach(n=>{if(ours.some(p=>rgSame(p.name,n)))return;Object.entries(M_.teams).forEach(([tm,t])=>{const site={},espn={};let hit=false;
+    for(const k of M_.kinds){const s=rgIdx(t.src.site[k]?.list,n),e=rgIdx(t.src.espn[k]?.list,n);site[k]=s>=0?s+1:null;espn[k]=e>=0?e+1:null;hit=hit||s>=0||e>=0}
+    if(hit){const pp=Object.values(S.players).find(p=>p.name===n);ours.push({name:n,team:tm,pos:pp?.pos||'Pos. n/a',ours:true,wk:{},wkA:W.map(()=>null),n3:0,pts3:0,sh3:0,fc3:null,lwSh:0,lwTxt:'0/'+(t.weeks?.[W[W.length-1]]?.n??0),tot:0,totK:0,totP:0,site,espn,siteMin:rgMin(site),espnMin:rgMin(espn),elig:true})}})});
+  const filt={elig:p=>p.elig,fa:p=>p.elig&&p.owner==='Free agent',all:()=>true}[RF.k];
+  const base=P.filter(filt).sort((a,b)=>b.pts3-a.pts3||b.tot-a.tot), ix=new Map(base.map((p,i)=>[rgKey(p),i]));
+  const rpVal=(p,k)=>({player:p.name.toLowerCase(),team:p.team,pts3:p.pts3,sh3:p.sh3,lw:p.lwSh,tot:p.tot,totK:p.totK,totP:p.totP,fc3:p.fc3,site:p.siteMin,espn:p.espnMin,owner:p.owner.toLowerCase(),opp:rgOpp(p.team).key,oppk:rgExp(p).k?.ret3??null,oppy:rgExp(p).k?.yd3??null,exp:rgExp(p).ep??null})[k];
+  const rowsF=sortRows(RF.mine?base.filter(p=>!p.ours):base,'rp',rpVal,(a,b)=>ix.get(rgKey(a))-ix.get(rgKey(b)));
+  const mineRows=RF.mine?sortRows(P.filter(p=>p.ours),'rp',rpVal,(a,b)=>b.pts3-a.pts3||b.tot-a.tot):[];
+  const rows=[...mineRows,...rowsF];
+  const teams=Object.keys(M_.teams).sort();
+  // disagreement count per kind (both charts read and both list someone)
+  const dis=M_.kinds.map(k=>{const both=teams.filter(t=>{const s=M_.teams[t].src.site[k],e=M_.teams[t].src.espn[k];return rgRead(s)&&rgRead(e)&&s.list[0]&&e.list[0]});
+    return `${both.filter(t=>!rgSame(M_.teams[t].src.site[k].list[0],M_.teams[t].src.espn[k].list[0])).length} of ${both.length} disagree on ${RG_KIND[k].L}1`}).join(' · ');
+  const cant=[],noChart=new Set();
+  teams.forEach(t=>M_.kinds.forEach(k=>{for(const src of ['site','espn']){const s=M_.teams[t].src[src]?.[k];if(s?.status==='no_chart')noChart.add(t);else if(!rgRead(s))cant.push(`${t} ${src==='site'?'team site':'ESPN'} ${RG_KIND[k].L} (${s?.reason||'not checked'})`)}}));
+  const lastN=Math.min(3,W.length),hasFc=rgK()!=='kr';
+  const teamRows=sortRows(teams,'rt',(t,k)=>{const x=M_.teams[t];if(k==='team')return t;if(k==='opp')return rgOpp(t).key;if(k==='split')return rgSplit(M_,t)?.topS??null;if(k==='lastg'){const sp=rgSplit(M_,t);return sp?.LG.list[0]?.p?.toLowerCase()??null}if(k==='trend')return rgSplit(M_,t)?.changed?1:0;if(k==='chk')return (rgChk(t)?.flags?.length||0);
+    const first=src=>{for(const kk of M_.kinds){const n=x.src[src]?.[kk]?.list?.[0];if(n)return n.toLowerCase()}return null};
+    if(k==='site1')return first('site');if(k==='espn1')return first('espn');if(k==='agree')return rgAgree(M_,t)[0];
+    if(k.startsWith('w')){const g=x.weeks?.[k.slice(1)];return !g||g.bye?null:g.n??null}return null},(a,b)=>a.localeCompare(b));
+  const ptsNote=rgK()==='kr'?`${sc.krYd} per kick-return yard + ${sc.krTd} per return TD`:rgK()==='pr'?`${sc.prYd??sc.krYd} per punt-return yard + ${sc.prTd??sc.krTd} per return TD`:`${sc.krYd} per kick-return yard and ${sc.prYd??sc.krYd} per punt-return yard + ${sc.krTd} per return TD`;
+  const chartWord=rgK()==='both'?'KR1–KR3 and PR1–PR3':`${L}1–${L}3`;
+  return `<section class="panel"><div class="ph"><h2>Return type</h2>${rgToggle()}</div><p class="note">${rgK()==='kr'?'Kick returns only.':rgK()==='pr'?'Punt returns only. Fair catches (FC) earn nothing, so they cap a punt returner\'s value; share counts punts he fielded (returns + fair catches).':(RF.kind==='both'?`Both: only players with at least one kick return and one punt return this season (${P.length} of ${Pall.length}). Points, returns and share add both together. Tap All to see everyone.`:`All: everyone with a kick or punt return (${Pall.length}), kick and punt combined: points, returns and share add both together; tap a week chip for the split. Tap Both for only the players who do both.`)} League scoring: ${ptsNote}.</p></section>
+  <section class="panel"><div class="ph"><h2>Our returners</h2><span class="eyebrow">Is our guy the ${K.one} this week?</span></div>
+    ${ours.length?`<div class="rgcards">${ours.map(p=>{const st=status(p),top=st.length?st.reduce((a,b)=>({ok:0,warn:1,muted:2,bad:3}[a[0]]<={ok:0,warn:1,muted:2,bad:3}[b[0]]?a:b)):['muted','Not listed, no returns'];return `<div class="rgcard rg-b-${top[0]}"><div class="ph"><b>${esc(p.name)}</b><span class="chips">${(st.length?st:[top]).map(rgChip).join('')}</span></div>
+      <div class="rgrow"><span>Week ${rgWk()}: ${rgOppHtml(p.team)}</span></div>
+      ${rgK()!=='pr'?`<div class="rgrow"><span>Opp kick returns allowed/game (last 3): ${rgOppCell(p)}</span><span>Return yds allowed/game: ${rgYdsCell(p)}</span></div><div class="rgrow"><span>Expected: <b>${rgExpTxt(p)}</b></span></div>`:''}
+      ${rgChk(p.team)?.flags?.length?`<div class="rgrow"><span>${rgFlagChips(rgChk(p.team).flags)}</span><span class="note">${esc(rgChk(p.team).flags.map(f=>f[1]).join(' · '))}</span></div>`:''}
+      <span class="note">${esc(p.pos||'Pos. n/a')} · ${esc(p.team||'Team n/a')} · Team site ${rgRank(M_,p,'site')} · ESPN ${rgRank(M_,p,'espn')}</span>
+      <div class="rgrow"><span>Last game: <b>${p.lwSh}%</b> · Last ${p.n3??lastN} games: <b>${p.sh3}%</b> of ${K.noun}${hasFc?` · <b>${p.fc3??'unknown'}</b> fair catches`:''} · <b>${p.pts3}</b> return pts/game</span>${rgWeeks(M_,p)}</div></div>`}).join('')}</div>`:`<p class="note">None of our players is listed at ${rgK()==='both'?'kick or punt':K.short} returner or has returned a ${rgK()==='both'?'kick or punt':K.short} this season.</p>`}
+  </section>
+  <section class="panel"><div class="ph"><h2>Returner rankings</h2><span class="phr">${resetBtn('rp')}<span class="eyebrow">${K.noun} · ranked by return points per game, last ${lastN} games played · click a column to sort</span></span></div>
+    <div class="rgtools"><div class="filters">${[['elig','Startable (RB/WR)'],['fa','Free agents only'],['all','Everyone']].map(([k,l])=>`<button data-rf="${k}" aria-pressed="${RF.k===k}">${l}</button>`).join('')}<button data-rmine="1" aria-pressed="${RF.mine}" title="On: our players pinned to the top, then the filter you picked">My team</button></div>${rgColBar(hasFc)}</div>
+    ${rgRankTable(M_,rows,hasFc)}${rows.length>RF.n?`<button class="showmore" data-rmore="1">Show all ${rows.length} returners</button>`:''}<p class="note">Returns by week = his ${K.noun} / team's ${K.noun} (green = 60%+ share${hasFc?' of punts fielded':''}); Bye weeks are skipped, not counted as zero.${hasFc?' Fair catches come from ESPN play-by-play.':''} Team site / ESPN = where each depth chart lists him today (${chartWord}); "Not listed" = chart read and he isn't on it; "Couldn't read" = we failed to read that chart.</p></section>
+  <section class="panel"><div class="ph"><h2>All ${teams.length} teams</h2><span class="phr">${resetBtn('rt')}<span class="eyebrow">${dis} · tap a team for history · click a column to sort</span></span></div>
+    ${cant.length?`<div class="flag"><b>Charts we couldn't read:</b> ${esc(cant.join('; '))}</div>`:''}
+    <div class="tw"><table><thead><tr>${sh('rt','team','Team')}${sh('rt','opp',`Wk ${rgWk()} opponent`)}${sh('rt','split','Split (last 3)',1)}${sh('rt','lastg','Last game')}${sh('rt','trend','Trend')}${sh('rt','chk',`Injury check (wk ${S.returns?.checker?.upcomingWeek??rgWk()})`)}${sh('rt','site1',`Team site ${rgK()==='both'?'KR / PR':L+'1 / '+L+'2 / '+L+'3'}`)}${sh('rt','espn1',`ESPN ${rgK()==='both'?'KR / PR':L+'1 / '+L+'2 / '+L+'3'}`)}${sh('rt','agree','Agree?')}${W.map(w=>sh('rt','w'+w,`Wk ${w} returners`)).join('')}</tr></thead><tbody>
+    ${teamRows.map(t=>{const x=M_.teams[t];return `<tr class="row" tabindex="0" data-rgteam="${t}"><td><b>${t}</b></td><td>${rgOppHtml(t,true)}</td>${(()=>{const sp=rgSplit(M_,t);return sp?`<td class="rgcell">${rgChip(sp.pat)} ${rgShareTxt(sp.L3)}</td><td class="rgcell">${rgShareTxt(sp.LG)} <span class="note">wk ${sp.lw}</span></td><td>${sp.changed?'<span class="chip rg-warn">Changed</span>':'<span class="note">Steady</span>'}</td>`:'<td class="note">No games</td><td class="note">No games</td><td class="note">No games</td>'})()}<td class="rgcell">${rgChkCell(t)}</td><td class="rgcell">${rgList(M_,t,'site')}</td><td class="rgcell">${rgList(M_,t,'espn')}</td>
+      <td>${rgAgree(M_,t)[1]}</td>${W.map(w=>`<td class="rgcell">${rgCell(M_,x.weeks?.[w])}</td>`).join('')}</tr>`}).join('')}
+    </tbody></table></div><p class="note">Opponent = Week ${rgWk()} NFL schedule (vs = home, @ = away; kickoff in Eastern). Depth charts checked ${esc(R.checked||'date not recorded')}.${noChart.size?` ${[...noChart].join(', ')} publish${noChart.size===1?'es':''} no depth chart on the team site (verified), so only ESPN counts there.`:''} Weeks shown: ${W[0]}–${W[W.length-1]} (completed weeks only).${hasFc?' FC = fair catches.':''} Which source is more accurate for each team starts scoring once a week of games is played after we begin checking.</p></section>`;
+}
+function openRgTeam(t){const R=S.returns,M_=rgModel(rgK());if(!M_||M_.error||!M_.teams[t])return;const x=M_.teams[t],nm=s=>s==='site'?'team site':'ESPN';
+  const cell=(k,src,i)=>{const s=x.src[src]?.[k];return s?.list?.[i]?esc(s.list[i]):(rgSrcNote(s,nm(src))||(i===0?`Chart read; no ${RG_KIND[k].L} listed`:'Not listed'))};
+  const link=k=>{const s=x.src.site[k];return s?.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Team site</a> (${s.asof?'as of '+esc(s.asof):'site gives no date'}; checked ${esc(R.checked||'date not recorded')})`:'No team site link'};
+  const espnUrl=x.src.espn.kr?.url||x.src.espn.pr?.url;
+  drawer(`<div class="dh"><div><div class="eyebrow">${esc(RG_KIND[rgK()].noun)} · ${t}</div><h2 id="dtitle">${t}</h2><div class="note">Week ${rgWk()}: ${rgOppHtml(t)}</div></div><button class="x" aria-label="Close" data-close>×</button></div>
+   <section class="panel"><div class="ph"><h2>Depth chart today</h2></div><div class="tw"><table><thead><tr><th>Rank</th><th>Team site</th><th>ESPN</th></tr></thead><tbody>
+   ${M_.kinds.map(k=>[0,1,2].map(i=>`<tr><td>${RG_KIND[k].L}${i+1}</td><td>${cell(k,'site',i)}</td><td>${cell(k,'espn',i)}</td></tr>`).join('')).join('')}</tbody></table></div>
+   <p class="note">${link(M_.kinds[0])} · ${espnUrl?`<a href="${esc(espnUrl)}" target="_blank" rel="noopener">ESPN</a>`:'No ESPN link'}</p></section>
+   ${(()=>{const sp=rgSplit(M_,t);return sp?`<section class="panel"><div class="ph"><h2>Who returns</h2><span class="eyebrow">${esc(RG_KIND[rgK()].noun)}</span></div><div class="tw"><table><thead><tr><th>Span</th><th>Pattern</th><th>Shares</th></tr></thead><tbody>
+     <tr><td>Last game (wk ${sp.lw})</td><td></td><td>${rgShareTxt(sp.LG)}</td></tr><tr><td>Last 3 games</td><td>${rgChip(sp.pat)}</td><td>${rgShareTxt(sp.L3)}</td></tr><tr><td>Season</td><td></td><td>${rgShareTxt(sp.SE)}</td></tr></tbody></table></div>
+     ${sp.changed?'<p class="note">Changed: last game\'s leader or share differs from the last 3 games by 30+ points.</p>':''}</section>`:''})()}
+   ${rgInjTeam(t)}
+   <section class="panel"><div class="ph"><h2>Week by week</h2></div><ul class="list">${M_.W.map(w=>{const g=x.weeks?.[w];if(!g)return `<li><b>Wk ${w}</b> · <span class="note">No game data</span></li>`;if(g.bye)return `<li><b>Wk ${w}</b> · <span class="note">Bye</span></li>`;
+     const head=rgK()==='both'?`${g.nK} kick + ${g.nP} punt returns`:`${g.n} ${rgK()==='kr'?'kick':'punt'} returns`;
+     const fcT=rgK()!=='kr'?(g.fc==null?' · fair catches unknown':` · ${g.fc} fair catch${g.fc===1?'':'es'}`):'';
+     const lines=(g.ret||[]).map(r=>`${esc(r.p)}: ${rgK()==='both'?[r.kr?`${r.kr} KR`:'',r.pr?`${r.pr} PR`:''].filter(Boolean).join(' + ')||'0 returns':r.n} ${rgK()==='both'?'':'for '}${r.y} yds${r.td?`, ${r.td} TD`:''}${rgK()!=='kr'&&r.fc?`, ${r.fc} FC`:''}`).join('<br>');
+     return `<li><b>Wk ${w}</b> vs ${esc(g.opp||'opponent unknown')} · ${head}${fcT}<br>${lines||`<span class="note">${rgK()==='kr'?'No kick returns (all touchbacks or none kicked)':rgK()==='pr'?'No punt returns (fair catches, touchbacks, out of bounds or no punts)':'No returns'}</span>`}</li>`}).join('')}</ul></section>`)}
+
+/* ---------- Opponent kickoffs, team return splits, injury checker (Oct 7, Joe) ---------- */
+// Opponent numbers are kick returns only (kickoff coverage); last 3 games + last game, tap for the season and weekly detail.
+const rgF=(v,d=1)=>v==null||isNaN(v)?'n/a':(+v).toFixed(d);
+function rgKO(t){const K=S.returns?.kickoffs?.[t];if(!K)return null;
+  const ws=Object.keys(K).map(Number).sort((a,b)=>a-b).filter(w=>!K[w].bye);if(!ws.length)return null;
+  const l3=ws.slice(-3),lw=ws[ws.length-1],sum=(a,f)=>a.reduce((s,w)=>s+f(K[w]),0);
+  const r3=sum(l3,x=>x.returned),y3=sum(l3,x=>x.ret_yds_allowed),rS=sum(ws,x=>x.returned),yS=sum(ws,x=>x.ret_yds_allowed);
+  return {K,ws,l3,lw,yd3:y3/l3.length,ydL:K[lw].ret_yds_allowed,ydS:yS/ws.length,ko3:sum(l3,x=>x.kickoffs)/l3.length,ret3:r3/l3.length,ypr3:r3?y3/r3:null,koL:K[lw].kickoffs,retL:K[lw].returned,
+    koS:sum(ws,x=>x.kickoffs)/ws.length,retS:rS/ws.length,yprS:rS?yS/rS:null}}
+let RG_LG=null;function rgLeague(){if(RG_LG)return RG_LG;const v=Object.keys(S.returns?.kickoffs||{}).map(rgKO).filter(Boolean);
+  RG_LG={ret3:v.length?v.reduce((a,x)=>a+x.ret3,0)/v.length:null,ypr3:v.length?v.reduce((a,x)=>a+(x.ypr3||0),0)/v.length:null};return RG_LG}
+function rgLvl(x){const L=rgLeague().ret3;if(x==null||!L)return['muted','n/a'];return x>=L*1.2?['ok','High']:x<=L*0.8?['bad','Low']:['muted','Average']}
+const rgLvlChip=x=>{const[c,t]=rgLvl(x);return `<span class="chip rg-${c}" title="League average ${rgF(rgLeague().ret3)} kick returns allowed per game (last 3)">${t}</span>`};
+// player's kick-return share, last 3 games played (from the kick model regardless of the toggle)
+let RG_KS=null;function rgKrShare(p){if(!RG_KS){RG_KS=new Map();const m=rgModel('kr');if(m&&!m.error)rgRows(m).forEach(q=>{RG_KS.set(rgKey(q),q.sh3);RG_KS.set(q.team+':'+rgNorm(q.name),q.sh3)})}
+  return RG_KS.get(rgKey(p))??RG_KS.get(p.team+':'+rgNorm(p.name))??0}
+function rgExp(p){const o=rgOpp(p.team);if(o.bye)return {bye:true};if(o.miss||!o.key)return {miss:o.txt};const k=rgKO(o.key);if(!k)return {miss:`No kickoff data for ${o.key}`};
+  const sh=rgKrShare(p)/100,er=k.ret3*sh;return {opp:o.key,k,sh,er,ep:er*(k.ypr3||rgLeague().ypr3||0)*(S.returns?.scoring?.krYd??.1)}}
+function rgOppCell(p){const x=rgExp(p);if(x.bye)return '<span class="chip rg-bad">Bye</span>';if(x.miss)return `<span class="chip rg-bad">${esc(x.miss)}</span>`;
+  return `<button class="link" data-rgopp="${x.opp}" title="Tap for ${x.opp}'s kickoffs by week and season average">${rgF(x.k.ret3)}</button> <span class="rgl" title="Last game">${x.k.retL}</span> ${rgLvlChip(x.k.ret3)}`}
+function rgYdsCell(p){const x=rgExp(p);if(x.bye)return '<span class="chip rg-bad">Bye</span>';if(x.miss)return `<span class="chip rg-bad">${esc(x.miss)}</span>`;
+  return `<button class="link" data-rgopp="${x.opp}" title="Return yards allowed per game, last 3 games; second number = last game. Tap for season and week by week">${rgF(x.k.yd3,0)}</button> <span class="rgl" title="Last game">${x.k.ydL}</span>`}
+const rgExpTxt=p=>{const x=rgExp(p);return x.bye?'Bye':x.miss?'n/a':`${rgF(x.er)} returns · ${rgF(x.ep)} pts`};
+/* Opponent drawer: how a team has covered kickoffs and punts, game by game, with per-game averages and season totals.
+   Kickoffs: returns.json kickoffs (ESPN play-by-play + box score). Punts made / punt yards / punt returns allowed: returns/punting (ESPN box score, cross-checked against the punt-return data). Fair catches: the receiving team's punt-return data. */
+function rgGameTable(rows,cols,title,note){const pl=rows.filter(r=>!r.bye&&!r.none),l3=pl.slice(-3);
+  const sum=(set,c)=>{const v=set.map(r=>c.f(r));return v.some(x=>x==null)?null:v.reduce((a,b)=>a+b,0)};
+  const cell=(v,c,d)=>v==null?'<td class="num note" title="Not in the data for every game">n/a</td>':`<td class="num">${c.dec||d?rgF(v,c.dec??1):v}</td>`;
+  const agg=(set,mode)=>cols.map(c=>{if(c.den){const n=sum(set,{f:c.num}),d=sum(set,{f:c.den});return n==null||d==null||!d?'<td class="num note">n/a</td>':`<td class="num">${rgF(n/d,c.dec??1)}</td>`}
+    const t=sum(set,c);return cell(t==null||mode==='tot'?t:t/set.length,c,mode!=='tot')});
+  return `<section class="panel"><div class="ph"><h2>${title}</h2><span class="eyebrow">${pl.length} game${pl.length===1?'':'s'} played</span></div><div class="tw"><table><thead><tr><th>Wk</th><th>Vs</th>${cols.map(c=>`<th class="num" title="${esc(c.tip||c.h)}">${c.h}</th>`).join('')}</tr></thead><tbody>
+  ${rows.map(r=>r.none?`<tr><td>${r.w}</td><td colspan="${cols.length+1}" class="note">No data</td></tr>`:r.bye?`<tr><td>${r.w}</td><td colspan="${cols.length+1}" class="note">Bye</td></tr>`:`<tr><td>${r.w}</td><td>${r.home?'vs':'@'} ${esc(r.opp)}</td>${cols.map(c=>{const v=c.f(r);return v==null?(c.den&&c.den(r)===0?'<td class="num note" title="No returns this game">–</td>':'<td class="num note" title="Not in the data">n/a</td>'):`<td class="num">${c.dec?rgF(v,c.dec):v}</td>`}).join('')}</tr>`).join('')}
+  ${pl.length?`<tr class="tot"><td colspan="2">Season total</td>${agg(pl,'tot').join('')}</tr><tr class="tot"><td colspan="2">Per game</td>${agg(pl,'avg').join('')}</tr>${l3.length>1&&pl.length>3?`<tr class="tot"><td colspan="2">Last ${l3.length} / game</td>${agg(l3,'avg').join('')}</tr>`:''}`:''}
+  </tbody></table></div>${note?`<p class="note">${note}</p>`:''}</section>`}
+function openRgOpp(t){const R=S.returns,k=rgKO(t),PU=S.punting?.teams?.[t],W=R.weeks||[];if(!k&&!PU)return;
+  const rows=W.map(w=>{const x=k?.K?.[w],p=PU?.[w];if(x?.bye)return {w,bye:1};if(!x&&!p)return {w,none:1};const opp=x?.opp||p?.opp,fc=R.teams?.[opp]?.pr?.weeks?.[w]?.fc;
+    return {w,opp,home:x?x.home:null,ko:x?.kickoffs,kr:x?.returned,kry:x?.ret_yds_allowed,krtd:x?.ret_td_allowed,tb:x?.touchback,sz:x?.short_of_landing_zone,oob:x?.out_of_bounds,on:x?.onside_attempts,
+      pu:p?.punts,puy:p?.punt_yds,ptb:p?.tb,in20:p?.in20,pr:p?.ret,pry:p?.ret_yds,prtd:p?.ret_td,fc:fc??null,hasP:!!p}});
+  const pl=rows.filter(r=>!r.bye&&!r.none),l3=pl.slice(-3),av=(set,f)=>{const v=set.map(f);return v.some(x=>x==null)||!set.length?null:v.reduce((a,b)=>a+b,0)/set.length},tt=(set,f)=>{const v=set.map(f);return v.some(x=>x==null)||!set.length?null:v.reduce((a,b)=>a+b,0)};
+  const F=(v,d=1)=>v==null?'n/a':rgF(v,d);
+  const kCols=[{h:'Kickoffs',f:r=>r.ko,tip:'Kickoffs by this team'},{h:'Returned',f:r=>r.kr,tip:'Kickoffs the other team ran back'},{h:'Ret yds',f:r=>r.kry,tip:'Kick-return yards allowed'},{h:'Ret TD',f:r=>r.krtd},{h:'Yds/ret',num:r=>r.kry,den:r=>r.kr,dec:1,f:r=>r.kr?r.kry/r.kr:null,tip:'Yards allowed per return'},{h:'Touchback',f:r=>r.tb},{h:'Short zone',f:r=>r.sz,tip:'Penalty, ball placed at the 40, no return'},{h:'Out of bds',f:r=>r.oob},{h:'Onside',f:r=>r.on,tip:'Onside kick attempts'}];
+  const pCols=[{h:'Punts',f:r=>r.hasP?r.pu:null,tip:'Punts by this team'},{h:'Punt yds',f:r=>r.hasP?r.puy:null},{h:'Avg',num:r=>r.hasP?r.puy:null,den:r=>r.hasP?r.pu:null,dec:1,f:r=>r.hasP&&r.pu?r.puy/r.pu:null,tip:'Gross yards per punt'},{h:'In 20',f:r=>r.hasP?r.in20:null,tip:'Punts downed inside the 20'},{h:'Touchback',f:r=>r.hasP?r.ptb:null},{h:'Returned',f:r=>r.hasP?r.pr:null,tip:'Punts the other team returned'},{h:'Ret yds',f:r=>r.hasP?r.pry:null,tip:'Punt-return yards allowed'},{h:'Ret TD',f:r=>r.hasP?r.prtd:null},{h:'Yds/ret',num:r=>r.hasP?r.pry:null,den:r=>r.hasP?r.pr:null,dec:1,f:r=>r.hasP&&r.pr?r.pry/r.pr:null,tip:'Yards allowed per return'},{h:'Fair catch',f:r=>r.fc,tip:'Fair catches the other team made (ESPN play-by-play)'}];
+  const fcAll=pl.length&&pl.every(r=>r.fc!=null);
+  const facts=[[F(av(pl,r=>r.ko)),'Kickoffs / game'],[F(av(pl,r=>r.kr)),'Kick returns allowed / game'],[F(av(pl,r=>r.kry),0),'Kick-return yds allowed / game'],
+    [F(av(pl,r=>r.hasP?r.pu:null)),'Punts / game'],[F(av(pl,r=>r.hasP?r.pr:null)),'Punt returns allowed / game'],[F(av(pl,r=>r.hasP?r.pry:null),0),'Punt-return yds allowed / game']];
+  const puMiss=!PU?`<div class="secmsg err"><b>Punts made:</b> not in this refresh (the punt coverage data did not load), so punt numbers show n/a. Ask Rich to re-run the punt coverage load.</div>`:'';
+  drawer(`<div class="dh"><div><div class="eyebrow">Opponent · kickoffs and punts</div><h2 id="dtitle">${esc(t)}</h2><div class="note">Game by game, with per-game averages and season totals. Week ${rgWk()}: ${esc(rgOpp(t).bye?'bye':rgOpp(t).miss?'schedule n/a':rgOpp(t).txt)}.</div></div><button class="x" aria-label="Close" data-close>×</button></div>
+  <div class="facts">${facts.map(([v,l])=>`<div class="fact"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
+  <p class="note">${k?`Kick returns allowed: ${rgLvl(k.ret3)[1]} vs the league average of ${rgF(rgLeague().ret3)} per game (last 3).`:''}</p>
+  ${rgGameTable(rows,kCols,'Kickoffs','Returned = kickoffs the other team ran back (what a returner needs). Short zone = penalty, ball at the 40, no return. Source: ESPN play-by-play, checked against ESPN team stats.')}
+  ${puMiss}${PU?rgGameTable(rows,pCols,'Punts','Returned = punts the other team ran back; fair catches earn the returner nothing. Source: ESPN box score (punts, yards, returns allowed) and play-by-play (fair catches).'+(fcAll?'':' Fair catch shows n/a where that game\'s count is not available.')):''}`)}
+// team split from the current model (kick / punt / both)
+function rgSplit(M_,t){const x=M_.teams[t];if(!x)return null;const played=M_.W.filter(w=>{const g=x.weeks?.[w];return g&&!g.bye});if(!played.length)return null;
+  const agg=ws=>{const m=new Map();let n=0;ws.forEach(w=>{const g=x.weeks[w];n+=g.n||0;(g.ret||[]).forEach(r=>{if(r.n)m.set(r.p,(m.get(r.p)||0)+r.n)})});return {n,list:[...m.entries()].sort((a,b)=>b[1]-a[1]).map(([p,c])=>({p,c,s:n?c/n:0}))}};
+  const L3=agg(played.slice(-3)),LG=agg(played.slice(-1)),SE=agg(played),top=L3.list[0];
+  const pat=!top?['muted','No returns']:top.s>=.8?['ok','One man']:top.s>=.5?['warn','Split']:['bad','Committee'];
+  const changed=!!(LG.list[0]&&top&&(LG.list[0].p!==top.p||Math.abs((LG.list.find(z=>z.p===top.p)?.s||0)-top.s)>=.3));
+  return {L3,LG,SE,pat,changed,lw:played[played.length-1],topS:top?top.s:0}}
+const rgShareTxt=a=>a.list.length?a.list.slice(0,3).map(z=>`${esc(rgLast(z.p))} ${Math.round(z.s*100)}%`).join(' / '):`<span class="note">0 returns</span>`;
+// injury checker (official reports + inactives); upcoming = this week
+function rgChk(t){const C=S.returns?.checker;return C?.upcoming?.[t]||null}
+const RG_FL={RETURNER_BACK:['ok','Returner back'],RETURNER_OUT:['bad','Returner out'],OFFENSE_NEED:['warn','Needed on offense'],SHARE_AT_RISK:['warn','Share at risk']};
+const rgFlagChips=fl=>(fl||[]).map(([k,txt])=>`<span class="chip rg-${(RG_FL[k]||['muted'])[0]}" title="${esc(txt)}">${esc((RG_FL[k]||[0,k])[1])}</span>`).join(' ');
+function rgChkCell(t){const c=rgChk(t);if(!c)return S.returns?.checker?.upcomingWeek?'<span class="note">Bye or no report</span>':'<span class="note">This week\'s report not in yet</span>';
+  return `<span>${c.predicted?`Likely: <b>${esc(rgLast(c.predicted))}</b>`:'<span class="note">No returner with history</span>'}</span> ${rgFlagChips(c.flags)}`}
+function rgInjTeam(t){const I=S.returns?.injuries;if(!I)return '<p class="note">No injury data in this refresh.</p>';const C=S.returns.checker,cur=I.current?.teams?.[t]||[],up=rgChk(t);
+  const hist=(C?.history||[]).filter(r=>r.team===t);
+  return `<section class="panel"><div class="ph"><h2>Injury check</h2><span class="eyebrow">Official NFL injury reports + game-day inactives</span></div>
+   ${up?`<p>Week ${C.upcomingWeek}: likely main kick returner <b>${esc(up.predicted||'unknown')}</b> ${rgFlagChips(up.flags)}</p>${(up.flags||[]).map(f=>`<p class="note">• ${esc(f[1])}</p>`).join('')}`:''}
+   <div class="tw"><table><thead><tr><th>Week ${I.current?.week??''} report</th><th>Pos</th><th>Injury</th><th>Practice</th><th>Status</th></tr></thead><tbody>
+   ${cur.length?cur.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2]||'Not listed')}</td><td>${esc(r[3]||'Not listed')}</td><td>${esc(r[4]||'No status')}</td></tr>`).join(''):`<tr><td colspan="5" class="note">No skill-position or DB players on this week's official report yet${I.current?.asOf?` (checked ${esc(I.current.asOf)})`:''}.</td></tr>`}
+   </tbody></table></div>
+   <ul class="list">${hist.map(r=>{const o=I.weeks?.[r.week]?.[t]?.out||[];return `<li><b>Wk ${r.week}</b> · out: ${o.length?o.map(x=>esc(x[0])+' ('+esc(x[1])+')').join(', '):'none at RB/WR/TE/DB'}<br>${r.actual?`Main returner: <b>${esc(r.actual)}</b>${r.predicted?` · checker said ${esc(r.predicted)} ${r.hit?'✓':'✗'}`:''}`:'No kick returns'} ${rgFlagChips(r.flags)}</li>`}).join('')}</ul>
+   <p class="note">Checker record so far: right on ${C?.backtest?.right??'n/a'} of ${C?.backtest?.games??'n/a'} games (main kick returner, weeks 2+, using only what was known before kickoff).</p></section>`}
+
+/* ---------- Returner rankings: column picker + player detail (Oct 7, Joe) ---------- */
+// Every column except Player can be switched off; depth-chart columns start off. Choice remembered in this browser.
+const RG_COLS=[
+ {k:'team',l:'NFL',sort:'team',cell:p=>`<td>${esc(p.team)}</td>`},
+ {k:'opp',l:()=>`Wk ${rgWk()} opponent`,sort:'opp',cell:p=>`<td>${rgOppHtml(p.team,true)}</td>`},
+ {k:'oppk',l:'Opp kick returns/gm (last 3)',num:1,kr:1,sort:'oppk',cell:p=>`<td class="num">${rgOppCell(p)}</td>`},
+ {k:'oppy',l:'Opp return yds/gm (last 3)',num:1,kr:1,sort:'oppy',cell:p=>`<td class="num">${rgYdsCell(p)}</td>`},
+ {k:'exp',l:'Expected this week',num:1,kr:1,sort:'exp',cell:p=>`<td class="num">${rgExpTxt(p)}</td>`},
+ {k:'owner',l:'Owner',sort:'owner',cell:p=>`<td>${p.owner==='Free agent'?'<span class="chip rg-ok">Free agent</span>':p.owner==='Not in ESPN fantasy'?'<span class="note">Not in ESPN fantasy (defender)</span>':p.owner==='No ESPN id match'?'<span class="note">Not matched to an ESPN player</span>':esc(p.owner||'Owner unknown')}</td>`},
+ {k:'site',l:'Team site',sort:'site',off:1,cell:(p,M_)=>`<td>${rgRank(M_,p,'site')}</td>`},
+ {k:'espn',l:'ESPN',sort:'espn',off:1,cell:(p,M_)=>`<td>${rgRank(M_,p,'espn')}</td>`},
+ {k:'lw',l:'Last game',num:1,sort:'lw',cell:p=>`<td class="num">${p.lwSh}% <span class="note">(${p.lwTxt})</span></td>`},
+ {k:'sh3',l:'Share (3 games)',num:1,sort:'sh3',cell:p=>`<td class="num">${p.sh3}%</td>`},
+ {k:'fc3',l:'Fair catches (3)',num:1,fc:1,sort:'fc3',cell:p=>`<td class="num">${p.fc3??'<span class="note">Unknown</span>'}</td>`},
+ {k:'pts3',l:'Pts/game (3)',num:1,sort:'pts3',cell:p=>`<td class="num"><b>${p.pts3}</b></td>`},
+ {k:'totK',l:'KR pts',num:1,both:1,sort:'totK',cell:p=>`<td class="num">${p.totK}</td>`},
+ {k:'totP',l:'PR pts',num:1,both:1,sort:'totP',cell:p=>`<td class="num">${p.totP}</td>`},
+ {k:'tot',l:'Season pts',num:1,sort:'tot',cell:p=>`<td class="num">${p.tot}</td>`},
+ {k:'weeks',l:'Returns by week',cell:(p,M_)=>`<td>${rgWeeks(M_,p)}</td>`}];
+let RG_HIDE=new Set(RG_COLS.filter(c=>c.off).map(c=>c.k));
+try{const v=localStorage.getItem('lt-rg-hide');if(v)RG_HIDE=new Set(JSON.parse(v))}catch(e){}
+const rgColLabel=c=>typeof c.l==='function'?c.l():c.l;
+const rgColsFor=hasFc=>RG_COLS.filter(c=>(!c.kr||rgK()!=='pr')&&(!c.fc||hasFc)&&(!c.both||rgK()==='both'));
+let RG_COLOPEN=false;
+function rgColBar(hasFc){const cs=rgColsFor(hasFc),on=cs.filter(c=>!RG_HIDE.has(c.k)).length;
+  return `<div class="rgcolw"><button class="rgcolbtn" data-rgcolopen="1" aria-expanded="${RG_COLOPEN}">Columns <span class="note">${on} of ${cs.length}</span> <i>${RG_COLOPEN?'▴':'▾'}</i></button>
+  ${RG_COLOPEN?`<div class="rgcolpanel" role="group" aria-label="Show columns">${cs.map(c=>`<label><input type="checkbox" data-rgcol="${c.k}" ${RG_HIDE.has(c.k)?'':'checked'}> ${esc(rgColLabel(c))}</label>`).join('')}
+   <div class="rgcolact"><button class="link" data-rgcolall="1">Show all</button><button class="link" data-rgcoldef="1">Default</button><button class="rst" data-rgcolopen="1">Done</button></div></div>`:''}</div>`}
+let RG_ROWMAP=new Map();
+function rgRankTable(M_,rows,hasFc){const cols=rgColsFor(hasFc).filter(c=>!RG_HIDE.has(c.k));RG_ROWMAP=new Map(rows.map(p=>[rgKey(p),p]));
+  return `<div class="tw"><table><thead><tr>${sh('rp','player','Player')}${cols.map(c=>c.sort?sh('rp',c.sort,rgColLabel(c),c.num?1:0):`<th>${esc(rgColLabel(c))}</th>`).join('')}</tr></thead><tbody>
+  ${rows.slice(0,RF.n).map(p=>`<tr class="row ${p.ours?'me':''}" tabindex="0" data-rgplayer="${esc(rgKey(p))}" title="Tap for depth charts and details"><td><b>${esc(p.name)}</b> <span class="note">${esc(p.pos)}</span></td>${cols.map(c=>c.cell(p,M_)).join('')}</tr>`).join('')||`<tr><td colspan="${cols.length+1}" class="note">No returners match this filter.</td></tr>`}
+  </tbody></table></div>`}
+function openRgPlayer(key){const p=RG_ROWMAP.get(key);const M_=rgModel(rgK());if(!p||!M_||M_.error)return;
+  const st=rgK()!=='both'?[rgStatus1(p,M_,rgK())]:['kr','pr'].map(k=>{const m=rgModel(k),q=rgRows(m).find(q=>rgKey(q)===rgKey(p)||(q.team===p.team&&rgSame(q.name,p.name)));return q&&(q.site[k]||q.espn[k]||q.tot||q.sh3)?rgStatus1(q,m,k):null}).filter(Boolean);
+  const x=rgExp(p),c=rgChk(p.team);
+  drawer(`<div class="dh"><div><div class="eyebrow">${esc(p.pos)} · ${esc(p.team)} · ${esc(p.owner)}</div><h2 id="dtitle">${esc(p.name)}</h2><div class="note">Week ${rgWk()}: ${rgOppHtml(p.team)}</div></div><button class="x" aria-label="Close" data-close>×</button></div>
+  <div class="chips">${st.map(rgChip).join('')}</div>
+  <section class="panel"><div class="ph"><h2>Depth charts today</h2></div><div class="tw"><table><tbody>
+    <tr><td>Team site</td><td>${rgRank(M_,p,'site')}</td></tr><tr><td>ESPN</td><td>${rgRank(M_,p,'espn')}</td></tr></tbody></table></div>
+    <p class="note">Depth charts checked ${esc(S.returns.checked||'date not recorded')}. <button class="link" data-rgteam="${esc(p.team)}">Open ${esc(p.team)} team detail</button></p></section>
+  <div class="facts"><div class="fact"><b>${p.lwSh}%</b><span>Last game share (${esc(p.lwTxt)})</span></div><div class="fact"><b>${p.sh3}%</b><span>Share, last ${p.n3??3} games</span></div><div class="fact"><b>${p.pts3}</b><span>Return pts/game, last 3</span></div>
+   <div class="fact"><b>${p.tot}</b><span>Season return pts</span></div>${rgK()!=='pr'&&x.k?`<div class="fact"><b>${rgF(x.er)}</b><span>Expected kick returns vs ${x.opp}</span></div><div class="fact"><b>${rgF(x.ep)}</b><span>Expected kick-return pts</span></div>`:''}</div>
+  ${rgK()!=='pr'?`<p>Opponent: kick returns allowed/game ${rgOppCell(p)} · return yds allowed/game ${rgYdsCell(p)}</p>`:''}
+  <p>${rgWeeks(M_,p)}</p>
+  ${c?`<p>Injury check: likely main kick returner <b>${esc(c.predicted||'unknown')}</b> ${rgFlagChips(c.flags)}</p>${(c.flags||[]).map(f=>`<p class="note">• ${esc(f[1])}</p>`).join('')}`:''}`)}
+
 function datesStrip(){const D=M?.dates||{},fr=[['ESPN numbers',S.meta?.updatedAt],['News',S.news.ours?.updatedAt],['Practice',S.practice?.updatedAt],['Rumors',S.news.desk?.updatedAt]];
   const el=$('#dates');if(!el)return;const due=waiverDue();el.innerHTML=`${due?`<span>Claims due <b>${whenTxt(due)}</b></span>`:''}${D.kickoff?`<span>Kickoff <b>${whenTxt(D.kickoff)}</b></span>`:''}${D.tradeDeadline?`<span>Trade deadline <b>${whenTxt(D.tradeDeadline)}</b></span>`:''}<span class="fr">Updated: ${fr.map(([k,v])=>`${k} ${v?fmtShort(v):'not loaded'}`).join(' · ')} · ${esc(checksTxt())}</span>`}
-function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,league,roster,market,news:newsView,notes:notesView}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}$('#view').innerHTML=bn+body;
+function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,notes:notesView}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}$('#view').innerHTML=bn+body;
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===S.view));
   if(S.meta){const dt=dataTime();$('#stamp').textContent=`Week ${LGD().week??S.meta.week} · data updated ${dt?fmtShort(dt):'time unknown'}${dt&&(Date.now()-dt)/36e5>STALE_H?' (stale)':''}`}}
 function setView(v){S.view=v;try{localStorage.setItem('lt-bi-view',v)}catch(e){}render()}
 document.addEventListener('click',e=>{if(e.target.closest('select'))return;
+  const rf=e.target.closest('[data-rf]');if(rf){RF.k=rf.dataset.rf;RF.n=25;return render()}
+  const rk=e.target.closest('[data-rk]');if(rk){RF.kind=rk.dataset.rk;RF.n=25;try{localStorage.setItem('lt-rg-kind',RF.kind)}catch(x){}return render()}
+  if(e.target.closest('[data-rmore]')){RF.n=999;return render()}
+  if(e.target.closest('[data-rmine]')){RF.mine=!RF.mine;try{localStorage.setItem('lt-rg-mine',RF.mine?'1':'0')}catch(x){}return render()}
+  const rgo=e.target.closest('[data-rgopp]');if(rgo){e.stopPropagation();return openRgOpp(rgo.dataset.rgopp)}
+  if(e.target.closest('[data-rgcolopen]')){RG_COLOPEN=!RG_COLOPEN;return render()}
+  if(e.target.closest('[data-rgcolall]')){RG_HIDE=new Set();try{localStorage.setItem('lt-rg-hide','[]')}catch(x){}return render()}
+  if(e.target.closest('[data-rgcoldef]')){RG_HIDE=new Set(RG_COLS.filter(c=>c.off).map(c=>c.k));try{localStorage.removeItem('lt-rg-hide')}catch(x){}return render()}
+  if(RG_COLOPEN&&!e.target.closest('.rgcolw')&&document.querySelector('.rgcolpanel')){RG_COLOPEN=false;render()}
+  const rgc=e.target.closest('[data-rgcol]');if(rgc){const k=rgc.dataset.rgcol;RG_HIDE.has(k)?RG_HIDE.delete(k):RG_HIDE.add(k);try{localStorage.setItem('lt-rg-hide',JSON.stringify([...RG_HIDE]))}catch(x){}return render()}
+  const rgp=e.target.closest('[data-rgplayer]');if(rgp&&!e.target.closest('a,button')){return openRgPlayer(rgp.dataset.rgplayer)}
+  const rgt=e.target.closest('[data-rgteam]');if(rgt){return openRgTeam(rgt.dataset.rgteam)}
   const nf=e.target.closest('[data-nf]');if(nf){NF.k=nf.dataset.nf;NF.n=5;return render()}
   const ng=e.target.closest('[data-ng]');if(ng){NF.open[ng.dataset.ng]=!NF.open[ng.dataset.ng];return render()}
   if(e.target.closest('[data-nmore]')){NF.n+=10;return render()}
@@ -619,27 +980,35 @@ document.addEventListener('change',async e=>{const sel=e.target.closest('select[
   if(tag==='__staff')delete S.plans[id];else S.plans[id]={tag,week:S.meta?.week,name:S.raw[id]?.name||'',setAt:new Date().toISOString()};render();
   try{await savePlan(id,S.plans[id]||null)}catch(err){console.warn('plan save failed',err);if(prev)S.plans[id]=prev;else delete S.plans[id];render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeDrawer();
-  if(e.key==='Enter'&&e.target.matches('tr.row')){const t=e.target;t.dataset.player?openPlayer(t.dataset.player):openTeam(t.dataset.team)}});
-try{const v=localStorage.getItem('lt-bi-view');if(v&&['overview','league','roster','market','news','notes'].includes(v))S.view=v}catch(e){}
+  if(e.key==='Enter'&&e.target.matches('tr.row')){const t=e.target;t.dataset.rgplayer?openRgPlayer(t.dataset.rgplayer):t.dataset.rgteam?openRgTeam(t.dataset.rgteam):t.dataset.player?openPlayer(t.dataset.player):openTeam(t.dataset.team)}});
+try{const v=localStorage.getItem('lt-bi-view');if(v&&['overview','returns','league','roster','market','news','notes'].includes(v))S.view=v}catch(e){}
 render();
 
 (async()=>{
-  const db=window.claude?await window.claude.use('db'):null;
+  let db=null;
+  try{db=window.claude?await window.claude.use('db'):null}catch(e){console.warn('db connect failed',e);S.dbErrors.connect=String(e?.message||e);render();return}
   if(!db){$('#view').innerHTML='<div class="empty">Open this page signed in to claude.ai to see the live numbers.</div>';$('#stamp').textContent='Offline';return}
   let t=null;const soon=()=>{clearTimeout(t);t=setTimeout(render,60)};
-  const err=e=>{console.warn('db read failed',e);S.dbError=String(e?.message||e);soon()};
-  db.doc('meta/current').onSnapshot(s=>{S.meta=s.exists?s.data():null;if(S.meta?.sections)S.sections=S.meta.sections;if(S.meta?.validation&&!S.validation)S.validation=S.meta.validation;soon()},err);
-  db.collection('odds').onSnapshot(q=>{S.odds={};q.docs.forEach(d=>S.odds[d.id]=d.data());soon()},err);
-  db.collection('scores').onSnapshot(q=>{S.scores={};q.docs.forEach(d=>S.scores[d.id]=d.data());soon()},err);
-  db.collection('players').onSnapshot(q=>{S.raw={};q.docs.forEach(d=>S.raw[d.id]=d.data());soon()},err);
-  db.collection('plans').onSnapshot(q=>{S.plans={};q.docs.forEach(d=>S.plans[d.id]=d.data());soon()},err);
+  // every listener reports its own failure, so the banner names the broken part instead of a blank panel
+  const ok=k=>{if(S.dbErrors[k]){delete S.dbErrors[k];if(!Object.keys(S.dbErrors).length)S.dbError=null}S.dbWait=null};
+  const err=k=>e=>{console.warn('db read failed',k,e);S.dbError=String(e?.message||e);S.dbErrors[k]=String(e?.message||e);soon()};
+  setTimeout(()=>{if(!S.meta&&!Object.keys(S.dbErrors).length){S.dbWait='nothing arrived within 20 seconds';render()}},20000);
+  db.doc('meta/current').onSnapshot(s=>{ok('meta/current');S.meta=s.exists?s.data():null;if(S.meta?.sections)S.sections=S.meta.sections;if(S.meta?.validation&&!S.validation)S.validation=S.meta.validation;soon()},err('meta/current'));
+  db.collection('odds').onSnapshot(q=>{ok('odds');S.odds={};q.docs.forEach(d=>S.odds[d.id]=d.data());soon()},err('odds'));
+  db.collection('scores').onSnapshot(q=>{ok('scores');S.scores={};q.docs.forEach(d=>S.scores[d.id]=d.data());soon()},err('scores'));
+  db.collection('players').onSnapshot(q=>{ok('players');S.raw={};q.docs.forEach(d=>S.raw[d.id]=d.data());soon()},err('players'));
+  db.collection('plans').onSnapshot(q=>{ok('plans');S.plans={};q.docs.forEach(d=>S.plans[d.id]=d.data());soon()},err('plans'));
   savePlan=(id,v)=>v?db.doc('plans/'+id).set(v):db.doc('plans/'+id).delete();
-  db.doc('waivers/current').onSnapshot(s=>{S.waivers=s.exists?s.data():null;soon()},err);
-  db.collection('news').onSnapshot(q=>{S.news={};q.docs.forEach(d=>S.news[d.id]=d.data());soon()},err);
-  db.doc('extras/current').onSnapshot(s=>{S.extras=s.exists?s.data():null;S.league=S.extras?.league||null;if(S.extras?.validation)S.validation=S.extras.validation;soon()},err);
-  db.doc('validation/current').onSnapshot(s=>{if(s.exists)S.validation=s.data();soon()},err);
-  db.doc('practice/current').onSnapshot(s=>{S.practice=s.exists?s.data():null;soon()},err);
-  db.collection('memos').onSnapshot(q=>{S.memos={};q.docs.forEach(d=>S.memos[d.id]=d.data());soon()},err);
+  db.doc('waivers/current').onSnapshot(s=>{ok('waivers/current');S.waivers=s.exists?s.data():null;soon()},err('waivers/current'));
+  db.collection('news').onSnapshot(q=>{ok('news');S.news={};q.docs.forEach(d=>S.news[d.id]=d.data());soon()},err('news'));
+  db.doc('extras/current').onSnapshot(s=>{ok('extras/current');S.extras=s.exists?s.data():null;S.league=S.extras?.league||null;if(S.extras?.validation)S.validation=S.extras.validation;soon()},err('extras/current'));
+  db.doc('validation/current').onSnapshot(s=>{ok('validation/current');if(s.exists)S.validation=s.data();soon()},err('validation/current'));
+  db.doc('returns/current').onSnapshot(s=>{ok('returns/current');S.returns=s.exists?s.data():null;soon()},err('returns/current'));
+  db.doc('returns/punting').onSnapshot(s=>{ok('returns/punting');S.punting=s.exists?s.data():null;soon()},err('returns/punting'));
+  db.doc('practice/current').onSnapshot(s=>{ok('practice/current');S.practice=s.exists?s.data():null;soon()},err('practice/current'));
+  db.collection('memos').onSnapshot(q=>{ok('memos');S.memos={};q.docs.forEach(d=>S.memos[d.id]=d.data());soon()},err('memos'));
 })();
 })();
 </script>
+
+</body></html>
