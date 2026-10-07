@@ -17,18 +17,68 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - name: Pull ESPN data, odds, news
+      # Fail-loudly pipeline (Oct 6 org review): every tool reports its own failures; the validator decides
+      # whether the new bundle is published. A failed run never overwrites the last good data/bundle.json.
+      - name: Pull ESPN data, odds, news, Return Game
         working-directory: legal-troubles
         env:
           LT_CURATED: ${{ github.workspace }}/legal-troubles/curated
           LT_WATCHLIST: ${{ github.workspace }}/legal-troubles/curated/watchlist.json
+          LT_TEAM_ID: "31"
         run: |
-          python3 tools/bi_refresh.py /tmp/out 20000
-          python3 tools/news_sweep.py /tmp/out 48
-          python3 tools/build_bundle.py /tmp/out data/bundle.json curated
-      - name: Commit if changed
+          set +e
+          python3 tools/bi_refresh.py /tmp/out 20000; BI=$?
+          python3 tools/news_sweep.py /tmp/out 48; NS=$?
+          # Return Game chain: box scores, ESPN depth, team sites -> returns.json. Built in a scratch dir;
+          # data/returns.json is replaced only when the whole chain succeeds (else the last good copy stays and is marked stale).
+          rm -rf /tmp/rg && mkdir -p /tmp/rg && cd /tmp/rg
+          RG=0
+          for s in box.py espn_depth.py team_sites.py fill_rg.py; do
+            python3 "$GITHUB_WORKSPACE/legal-troubles/tools/returns/$s" || { RG=$?; echo "::warning::returns chain failed at $s (exit $RG)"; break; }
+          done
+          cd "$GITHUB_WORKSPACE/legal-troubles"
+          if [ "$RG" = "0" ] && [ -s /tmp/rg/returns.json ]; then cp /tmp/rg/returns.json data/returns.json; elif [ "$RG" = "0" ]; then RG=1; echo "::warning::returns chain wrote no returns.json"; fi
+          echo "{\"bi_refresh\": $BI, \"news_sweep\": $NS, \"returns\": $RG}" > /tmp/run_status.json
+          cat /tmp/run_status.json
+      - name: Build candidate bundle (last good data kept and marked stale for any failed section)
+        working-directory: legal-troubles
+        run: |
+          set +e
+          rm -f /tmp/candidate.json
+          python3 tools/build_bundle.py /tmp/out /tmp/candidate.json curated --prev data/bundle.json --returns data/returns.json --status /tmp/run_status.json
+          echo "build_bundle exit $?"
+      - name: Validate candidate
+        id: validate
+        working-directory: legal-troubles
+        run: |
+          set +e
+          python3 tools/validate_bundle.py /tmp/candidate.json --out data/validation.json
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+      - name: Publish candidate only if valid
+        if: steps.validate.outputs.rc == '0'
+        working-directory: legal-troubles
+        run: cp /tmp/candidate.json data/bundle.json
+      - name: Rebuild site pages from the dashboard source (mkgithub.py via mksite.py)
+        working-directory: legal-troubles
+        run: |
+          set +e
+          # index.html is generated from tools/front-office-bi.html by tools/mkgithub.py; briefing.html from tools/ceo-briefing.html.
+          # A failed page build keeps the committed pages (and is reported); it never touches data or curated files.
+          if [ -f tools/front-office-bi.html ] && [ -f tools/ceo-briefing.html ] && [ -f tools/mkgithub.py ]; then
+            python3 tools/mksite.py --bi tools/front-office-bi.html --briefing tools/ceo-briefing.html --site . --mkgithub tools/mkgithub.py --returns-tab tools/returns || echo "::warning::mksite failed; pages not rebuilt"
+          else
+            echo "::warning::page sources missing in tools/; pages not rebuilt"
+          fi
+      - name: Commit (bundle only when valid; validation result and pages always)
         run: |
           git config user.name "Legal Troubles Front Office"
           git config user.email "actions@users.noreply.github.com"
-          git add legal-troubles/data/bundle.json
-          git diff --cached --quiet || (git commit -m "Data refresh $(date -u +%Y-%m-%dT%H:%MZ)" && git pull --rebase && git push)
+          git add legal-troubles/data/validation.json legal-troubles/index.html legal-troubles/briefing.html
+          [ -f legal-troubles/data/returns.json ] && git add legal-troubles/data/returns.json
+          if [ "${{ steps.validate.outputs.rc }}" = "0" ]; then git add legal-troubles/data/bundle.json; MSG="Data refresh"; else MSG="Data refresh BLOCKED by validator (last good bundle kept)"; fi
+          git diff --cached --quiet || (git commit -m "$MSG $(date -u +%Y-%m-%dT%H:%MZ)" && git pull --rebase && git push)
+      - name: Fail the run if validation failed
+        if: steps.validate.outputs.rc != '0'
+        run: |
+          echo "::error::Validator failed; data/bundle.json was NOT updated. See legal-troubles/data/validation.json"
+          exit 1
