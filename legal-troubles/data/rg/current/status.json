@@ -1,0 +1,27 @@
+{
+ "espn_depth": {
+  "ok": true,
+  "asOf": "2026-10-07T12:48+00:00",
+  "ageHours": 0.0
+ },
+ "rosters": {
+  "ok": true,
+  "asOf": "2026-10-07T12:48+00:00",
+  "ageHours": 0.0
+ },
+ "team_sites": {
+  "ok": true,
+  "asOf": "2026-10-07T12:48+00:00",
+  "ageHours": 0.0
+ },
+ "schedule": {
+  "ok": true,
+  "asOf": "2026-10-07T12:48+00:00",
+  "ageHours": 0.0
+ },
+ "ownership": {
+  "ok": true,
+  "asOf": "2026-10-07T12:48+00:00",
+  "ageHours": 0.0
+ }
+}
