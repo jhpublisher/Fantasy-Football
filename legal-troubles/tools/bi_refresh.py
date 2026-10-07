@@ -1,10 +1,17 @@
 """Legal Troubles BI refresh (Rich/Maya). Run: python3 bi_refresh.py <out_dir> [sims]
-Env: LT_CURATED=<curated dir> (tags.json, claims.json, needs.json; required), LT_TEAM_ID (default 31 = Legal Troubles).
-Pulls live ESPN data, runs the playoff sim, and writes one JSON file per dashboard document:
-  meta/current (incl. `league` block), odds/wNN, scores/wNN (every completed week), players/<espnId>,
+Env: LT_CURATED=<curated dir> (tags.json, claims.json, needs.json; required; ir_returns.json optional),
+     LT_TEAM_ID (default 31 = Legal Troubles), LT_ODDS_HISTORY=<json file> (odds history kept across runs; project copy claude/data/odds_history.json; unset = history not written).
+Pulls live ESPN data, runs the playoff sim (odds_model.py, model v2), and writes one JSON file per dashboard document:
+  meta/current (incl. `league` and `model` blocks), odds/wNN, odds/history, scores/wNN (every completed week), players/<espnId>,
   waivers/current, extras/current, nfl/current, curated/current
-Fail-loudly rules (Oct 6 org review):
+Odds model v2 (Oct 7 outside-review item 1; details in odds_model.py): ESPN per-game projections week by week
+  (this week = ESPN weekly projection; later weeks = rest-of-season projection / games left), byes, IR return weeks,
+  free-agent streamers at replacement level, team-strength uncertainty, seeding = record -> head-to-head (two teams) ->
+  points for (multi-team ties head-to-head can't settle). odds/history keeps every run (week, time, model, per-team odds).
+Fail-loudly rules (Oct 6 org review; Oct 7 quality gates):
   - core ESPN pulls raise (no output written -> build_bundle keeps last good copy, marked stale)
+  - quality gates raise: all-zero ESPN weekly projections, any team with a 0 projection this week or any remaining week,
+    no free agents with a projection (no replacement level), team count != league size
   - each extras feature is wrapped on its own; a failure writes {"error": "<reason>"} for that feature
     and the run exits non-zero after writing everything else
   - league facts (playoff teams/weeks, season length, starters) come from ESPN mSettings, never hard-coded
@@ -21,6 +28,8 @@ import json, os, sys, random, statistics, urllib.request, math
 from collections import defaultdict
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import odds_model as om
 LG = 293318; YR = 2026; ET = ZoneInfo("America/New_York")
 TEAM_ID = int(os.environ.get("LT_TEAM_ID", "31"))
 B = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/{YR}/segments/0/leagues/{LG}"
@@ -47,6 +56,7 @@ me = TEAM_ID
 ab = {p["id"]: p["abbrev"] for p in pro["settings"]["proTeams"] if p["id"] != 0}
 bye = {p["id"]: p["byeWeek"] for p in pro["settings"]["proTeams"] if p["id"] != 0}
 if len(ab) != 32: raise SystemExit(f"expected 32 NFL teams from proTeamSchedules, got {len(ab)}")
+if len(r["teams"]) != len(names): raise SystemExit(f"mRoster has {len(r['teams'])} teams, league has {len(names)}")
 def abbr(tid):
     """NFL abbreviation for an ESPN proTeamId. 0/None = genuinely unsigned (FA). Anything else unknown raises."""
     if tid in (0, None): return "FA"
@@ -71,7 +81,9 @@ def load_cur(fname, fields):
         outd[k] = d
     return outd
 cur_status = {}
-def cur_feature(name, fname, fields):
+def cur_feature(name, fname, fields, optional=False):
+    if optional and not (CUR and os.path.exists(os.path.join(CUR, fname))):
+        cur_status[name] = {"total": 0, "expired": 0, "legacy": 0, "note": f"no {fname} (optional): return weeks inferred from ESPN status"}; return {}
     try:
         d = load_cur(fname, fields)
         cur_status[name] = {"total": len(d), "expired": sum(1 for x in d.values() if x["expired"]), "legacy": sum(1 for x in d.values() if x.get("legacy")), "legacyNames": [k for k, x in d.items() if x.get("legacy")],
@@ -82,6 +94,7 @@ def cur_feature(name, fname, fields):
 TAGS = cur_feature("tags", "tags.json", ["tag", "note", "ret"])
 CLAIMS = cur_feature("claims", "claims.json", ["priority", "odds", "note", "drop"])
 NEEDS = cur_feature("needs", "needs.json", ["need"])
+IR_RET = cur_feature("irReturns", "ir_returns.json", ["returnWeek", "note"], optional=True)
 def po_sched(tid):
     if tid in (0, None): return []
     g = next((p for p in pro["settings"]["proTeams"] if p["id"] == tid), None)
@@ -94,7 +107,7 @@ def po_sched(tid):
         s.append(("@" if x["awayProTeamId"] == tid else "") + abbr(o))
     return s
 # ---- scores + standings (ties are ties: not wins, not losses) ----
-POS = {1:"QB",2:"RB",3:"WR",4:"TE",5:"K",16:"D/ST"}
+POS = om.POS
 weekly = defaultdict(dict); nmatch = defaultdict(int)
 W = defaultdict(int); L = defaultdict(int); T = defaultdict(int); PF = defaultdict(float); H = defaultdict(int); rem = []; sc = defaultdict(list)
 def result(g):
@@ -113,70 +126,66 @@ for g in m["schedule"]:
         res = result(g)
         if res: W[res[0]] += 1; L[res[1]] += 1; H[res] += 1
         else: T[h] += 1; T[a] += 1
-    else: rem.append((h, a))
+    else: rem.append((p, h, a))
 done_weeks = sorted(weekly)
-# ---- strength + sim ----
-# best lineup from the league's own slot counts (ESPN slot ids)
-SLOT_POS = {0: ("QB",), 2: ("RB",), 4: ("WR",), 6: ("TE",), 16: ("D/ST",), 17: ("K",), 3: ("RB", "WR"), 5: ("WR", "TE"), 23: ("RB", "WR", "TE"), 7: ("QB", "RB", "WR", "TE")}
-for k in SLOT_COUNTS:
-    if k not in SLOT_POS and k not in (20, 21): raise KeyError(f"unknown lineup slot id {k} in league settings")
-def best(pl):
-    by = defaultdict(list)
-    for p, v in pl: by[p].append(v)
-    for k in by: by[k].sort(reverse=True)
-    tot = 0.0
-    for sid in sorted(SLOT_COUNTS, key=lambda s: len(SLOT_POS.get(s, ())) or 99):  # fixed slots first, then flex
-        if sid in (20, 21): continue
-        for _ in range(SLOT_COUNTS[sid]):
-            cand = [(by[p][0], p) for p in SLOT_POS[sid] if by[p]]
-            if not cand: continue
-            v, p = max(cand); tot += v; by[p].pop(0)
-    return tot
-def played(p): return {s["scoringPeriodId"] for s in p.get("stats", []) if s.get("seasonId", YR) == YR and s["statSourceId"] == 0 and s["statSplitTypeId"] == 1 and s.get("stats")}
-def stats(p): return {(s["statSourceId"], s["statSplitTypeId"], s["scoringPeriodId"]): s.get("appliedTotal", 0) for s in p.get("stats", []) if s.get("seasonId", YR) == YR}
-proj = {}
+def stats(p): return om.stats_map(p, YR)
+def played(p): return om.played_weeks(p, YR)
+# ---- player pool (weekly stats for every rostered player; used for return weeks and the players docs) ----
+FLT_STATS = {"value": 17, "additionalValue": [f"00{YR}", f"10{YR}", f"01{YR}", f"11{YR}", f"11{YR}{wk}"]}
+all_p = get(f"scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps({"players": {"limit": 800, "sortPercOwned": {"sortPriority": 1, "sortAsc": False}, "filterStatsForTopScoringPeriodIds": FLT_STATS}})})["players"]
+league_ids = [e["playerId"] for tm in r["teams"] for e in tm["roster"]["entries"]]
+seen_ids = {pe["player"]["id"] for pe in all_p}
+missing_any = [i for i in league_ids if i not in seen_ids]
+for i in range(0, len(missing_any), 50):  # rostered player outside the top-800 pull: fetch by id, never drop silently
+    all_p += get(f"scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps({"players": {"filterIds": {"value": missing_any[i:i + 50]}, "filterStatsForTopScoringPeriodIds": FLT_STATS}})})["players"]
+PLAYED = {pe["player"]["id"]: played(pe["player"]) for pe in all_p}
+still_missing = [i for i in league_ids if i not in PLAYED]
+fa_cache = {}
+def fa_raw():
+    if "x" not in fa_cache:
+        fa_cache["x"] = get(f"scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps({"players": {"filterStatus": {"value": ["FREEAGENT", "WAIVERS"]}, "limit": 400, "sortPercOwned": {"sortPriority": 1, "sortAsc": False}}})})["players"]
+    return fa_cache["x"]
+# ---- odds model v2: week-by-week strength from per-game projections ----
+if not any(stats(e["playerPoolEntry"]["player"]).get((1, 1, wk)) for tm in r["teams"] for e in tm["roster"]["entries"]):
+    raise SystemExit(f"all-zero projections for week {wk}: ESPN projections missing")
+fa_by = defaultdict(list)
+for x in fa_raw():
+    q = x["player"]; pos = POS.get(q["defaultPositionId"])
+    if pos and bye.get(q.get("proTeamId")) != wk: fa_by[pos].append(stats(q).get((1, 1, wk), 0) or 0)
+REPL = {pos: round(sorted(v, reverse=True)[2], 2) for pos, v in fa_by.items() if len(v) > 2}
+missing_repl = [p for p in POS.values() if p not in REPL]
+if missing_repl: raise SystemExit(f"quality gate: no free-agent replacement level for {missing_repl} (free-agent pull returned {len(fa_raw())} players)")
+GW = om.nfl_game_weeks(pro)
+last_nfl = max(w for v in GW.values() for w in v)
+wproj, full, injured = {}, {}, {}
 for tm in r["teams"]:
-    proj[tm["id"]] = best([(POS[e["playerPoolEntry"]["player"]["defaultPositionId"]], stats(e["playerPoolEntry"]["player"]).get((1,1,wk), 0) or 0)
-                         for e in tm["roster"]["entries"] if e["playerPoolEntry"]["player"]["defaultPositionId"] in POS])
-if not any(proj.values()): raise SystemExit(f"all-zero projections for week {wk}: ESPN projections missing")
-lg = statistics.mean(x for v in sc.values() for x in v)
-mu = {k: 0.35*statistics.mean(sc[k]) + 0.65*proj[k] if sc[k] else proj[k] for k in names}; adj = lg - statistics.mean(mu.values()); mu = {k: v+adj for k, v in mu.items()}
-def rank(w, pf, hh):
-    """w = win-equivalents (wins + 0.5*ties); then H2H wins among tied teams; then points for."""
-    gr = defaultdict(list)
-    for k in names: gr[w.get(k, 0)].append(k)
-    o = []
-    for x in sorted(gr, reverse=True):
-        g = gr[x]; o += sorted(g, key=lambda k: (-sum(hh.get((k, z), 0) for z in g), -pf.get(k, 0)))
-    return o
-def wpct(Wd, Td): return {k: Wd.get(k, 0) + 0.5 * Td.get(k, 0) for k in names}
-def sim(Wd, Td, PFd, Hd, remd, n_, rng):
-    made_ = defaultdict(int); top_ = defaultdict(int); cush_ = []
-    for _ in range(n_):
-        w = wpct(Wd, Td); pf = dict(PFd); hh = dict(Hd)
-        for h, a in remd:
-            hs, as_ = rng.gauss(mu[h], 21), rng.gauss(mu[a], 21); pf[h] = pf.get(h, 0) + hs; pf[a] = pf.get(a, 0) + as_
-            x, y = (h, a) if hs > as_ else (a, h); w[x] += 1; hh[(x, y)] = hh.get((x, y), 0) + 1
-        o = rank(w, pf, hh)
-        for k in o[:PO]: made_[k] += 1
-        top_[o[0]] += 1; cush_.append(w[me] - w[o[PO]])
-    return made_, top_, cush_
-made, top, cush = sim(W, T, PF, H, rem, N, random.Random())
-order = rank(wpct(W, T), PF, H)
+    wproj[tm["id"]], full[tm["id"]], injured[tm["id"]] = om.team_week_projections(tm["roster"]["entries"], wk, REG, SLOT_COUNTS, GW, YR, IR_RET, PLAYED, REPL, last_nfl)
+zero = [f"{names[k]} wk {w}" for k, v in wproj.items() for w, x in v.items() if x <= 0]
+if zero: raise SystemExit(f"quality gate: zero team projection for {zero}")
+mu, calib = om.strengths(list(names), wproj, full, sc)
+SD = om.weekly_sd(sc)
+GP = statistics.mean(len(v) for v in sc.values()) if sc else 0
+made, top, cush, seeds = om.simulate(list(names), me, PO, W, T, PF, H, rem, mu, SD, GP, N, random.Random())
+order = om.rank(list(names), {k: W[k] + 0.5 * T[k] for k in names}, PF, H)
+esp_seed = {x["id"]: x.get("playoffSeed") for x in t["teams"]}
+seed_check = {"matchesEspn": all(esp_seed.get(k) in (None, i + 1) for i, k in enumerate(order)),
+              "mismatch": [f"{names[k]}: ours {i + 1}, ESPN {esp_seed.get(k)}" for i, k in enumerate(order) if esp_seed.get(k) not in (None, i + 1)]}
+def strength(k): return round(statistics.mean(mu[k].values()), 1)
 teams = [{"id": k, "name": names[k], "w": W[k], "l": L[k], "t": T[k], "pf": round(PF[k], 2), "seed": order.index(k)+1,
-          "playoffPct": round(100*made[k]/N), "byePct": round(100*top[k]/N), "strength": round(mu[k], 1),
+          "playoffPct": round(100*made[k]/N), "byePct": round(100*top[k]/N), "strength": strength(k), "strengthNow": round(mu[k][wk], 1),
+          "strengthByWeek": {str(w): round(v, 1) for w, v in mu[k].items()}, "fullStrength": round(full[k] + calib["bias"] + calib["adj"][k], 1),
+          "seedPct": {str(s): round(100 * c / N, 1) for s, c in sorted(seeds[k].items())},
           "hundreds": sum(1 for x in sc[k] if x >= 100)} for k in names]
 rec = lambda k: f"{W[k]}-{L[k]}" + (f"-{T[k]}" if T[k] else "")
+MODEL = {"name": om.MODEL, "sd": round(SD, 2), "teamSd": round(SD / math.sqrt(GP + om.K_SHRINK), 2), "bias": calib["bias"], "leagueActualMean": calib["leagueActualMean"],
+         "replacement": REPL, "seedCheck": seed_check, "sims": N, "irOverrides": sorted(k for k, v in IR_RET.items() if not v.get("expired")),
+         "returns": {names[k]: v for k, v in injured.items() if v}}
 # ---- players: our roster + every tagged player ----
-all_p = get(f"scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps({"players": {"limit": 800, "sortPercOwned": {"sortPriority": 1, "sortAsc": False}, "filterStatsForTopScoringPeriodIds": {"value": 17, "additionalValue": [f"00{YR}", f"10{YR}", f"01{YR}", f"11{YR}", f"11{YR}{wk}"]}}})})["players"]
 SLOTS = {0: "QB", 2: "RB", 3: "RB/WR", 4: "WR", 5: "WR/TE", 6: "TE", 7: "OP", 23: "FLEX", 16: "D/ST", 17: "K", 20: "Bench", 21: "IR"}
 my_entries = [e for tm in r["teams"] if tm["id"] == me for e in tm["roster"]["entries"]]
 roster_ids = [e["playerId"] for e in my_entries]
 slot_of = {e["playerId"]: SLOTS.get(e["lineupSlotId"], str(e["lineupSlotId"])) for e in my_entries}
-seen_ids = {pe["player"]["id"] for pe in all_p}
-missing = [i for i in roster_ids if i not in seen_ids]
-if missing:  # our player outside the top-800 pull: fetch by id, never drop silently
-    all_p += get(f"scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps({"players": {"filterIds": {"value": missing}, "filterStatsForTopScoringPeriodIds": {"value": 17, "additionalValue": [f"00{YR}", f"10{YR}", f"01{YR}", f"11{YR}", f"11{YR}{wk}"]}}})})["players"]
+ret_of = {d["name"]: d for v in injured.values() for d in v}
 players = {}
 for pe in all_p:
     p = pe["player"]; own = pe.get("onTeamId", 0)
@@ -191,6 +200,7 @@ for pe in all_p:
         "total": round(st.get((0, 0, YR)) or st.get((0, 0, 0)) or 0, 1),
         "nextProj": round(st.get((1, 1, wk), 0) or 0, 1), "seasonProj": round(st.get((1, 0, YR)) or st.get((1, 0, 0)) or 0, 1),
         "bye": bye.get(nfl), "playoffs": po_sched(nfl)}
+    if p["fullName"] in ret_of: d["modelReturnWeek"] = ret_of[p["fullName"]]["returnWeek"]; d["modelReturnWhy"] = ret_of[p["fullName"]]["why"]
     if p["fullName"] in TAGS:
         d.update({"tagAsOf": tg.get("asOf"), "tagExpiresWeek": tg.get("expiresWeek"), "tagExpired": tg["expired"], "tagLegacy": bool(tg.get("legacy"))})
     if p["fullName"] in CLAIMS and own != me:
@@ -224,11 +234,14 @@ def res_through(w_):
         else: T_[h_] += 1; T_[a_] += 1
     return W_, L_, T_, PF_, H_
 def f_prev():
+    """Last week's odds re-run with today's strengths (weeks already played use each team's full-strength level)."""
     if wk <= 2: return None
     w_done = wk - 2
-    W_, L_, T_, PF_, H_ = res_through(w_done); rem_ = [(g_["home"]["teamId"], g_["away"]["teamId"]) for g_ in games if g_["matchupPeriodId"] > w_done]
-    made_, top_, _ = sim(W_, T_, PF_, H_, rem_, N, random.Random(7))
-    wp_ = wpct(W_, T_); o_ = rank(wp_, PF_, H_)
+    W_, L_, T_, PF_, H_ = res_through(w_done); rem_ = [(g_["matchupPeriodId"], g_["home"]["teamId"], g_["away"]["teamId"]) for g_ in games if g_["matchupPeriodId"] > w_done]
+    mu_p = {k: {w_: mu[k].get(w_, full[k] + calib["bias"] + calib["adj"][k]) for w_ in range(w_done + 1, REG + 1)} for k in names}
+    gp_ = statistics.mean(sum(1 for g_ in games if g_["matchupPeriodId"] <= w_done and k in (g_["home"]["teamId"], g_["away"]["teamId"])) for k in names)
+    made_, top_, _, _ = om.simulate(list(names), me, PO, W_, T_, PF_, H_, rem_, mu_p, SD, gp_, N, random.Random(7))
+    wp_ = {k: W_[k] + 0.5 * T_[k] for k in names}; o_ = om.rank(list(names), wp_, PF_, H_)
     return {"record": f"{W_[me]}-{L_[me]}" + (f"-{T_[me]}" if T_[me] else ""), "seed": o_.index(me) + 1, "playoffPct": round(100 * made_[me] / N), "byePct": round(100 * top_[me] / N),
             "pf": round(PF_[me], 2), "gamesAhead8": wp_[me] - wp_[o_[PO]], "throughWeek": w_done}
 def starters(tid):
@@ -248,7 +261,7 @@ def f_matchup():
         raise LookupError(f"no week {wk} matchup for team {me}")
     opp = g0["away"]["teamId"] if g0["home"]["teamId"] == me else g0["home"]["teamId"]
     us_s, op_s = starters(me), starters(opp); pu, po_ = sum(x["proj"] for x in us_s), sum(x["proj"] for x in op_s)
-    wp = 0.5 * (1 + math.erf((pu - po_) / (21 * math.sqrt(2)) / math.sqrt(2)))
+    wp = 0.5 * (1 + math.erf((pu - po_) / (SD * math.sqrt(2)) / math.sqrt(2)))
     return {"week": wk, "opp": names[opp], "oppRecord": rec(opp), "oppSeed": tby[opp]["seed"], "projUs": round(pu, 1), "projOpp": round(po_, 1),
             "winPct": round(100 * wp), "flags": [x for x in us_s if x["bye"] or x["status"] in ("OUT", "INJURY_RESERVE", "DOUBTFUL", "SUSPENSION", "QUESTIONABLE")],
             "usStarters": us_s, "oppStarters": op_s, "starterCount": len(us_s), "starterSlots": STARTERS}
@@ -265,11 +278,6 @@ def f_nfl():
         weeks[str(w_)] = {"scheduled": len(sched[w_]), "scoreboard": len(s_["events"]), "completed": sum(1 for e in s_["events"] if e["status"]["type"]["completed"]),
                           "final": w_ < wk}
     return weeks
-fa_cache = {}
-def fa_raw():
-    if "x" not in fa_cache:
-        fa_cache["x"] = get(f"scoringPeriodId={wk}&view=kona_player_info", {"X-Fantasy-Filter": json.dumps({"players": {"filterStatus": {"value": ["FREEAGENT", "WAIVERS"]}, "limit": 400, "sortPercOwned": {"sortPriority": 1, "sortAsc": False}}})})["players"]
-    return fa_cache["x"]
 def f_dates():
     fr = fa_raw(); wpd = [x.get("waiverProcessDate") for x in fr if x.get("waiverProcessDate")]
     sb = SB.get(wk) or _get(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week={wk}&dates={YR}")
@@ -290,11 +298,11 @@ def f_free_agents():
     if not fas: raise ValueError("no free agents with a projection > 0")
     return {k: sorted(v, key=lambda z: -z["proj"])[:4] for k, v in fas.items()}
 def f_race():
-    wp = wpct(W, T); first, last_in, first_out = order[0], order[PO - 1], order[PO]
+    wp = {k: W[k] + 0.5 * T[k] for k in names}; first, last_in, first_out = order[0], order[PO - 1], order[PO]
     remaining = defaultdict(list); h2h = {}
     for g_ in games:
         h_, a_ = g_["home"]["teamId"], g_["away"]["teamId"]
-        if g_["winner"] == "UNDECIDED": remaining[h_].append(a_); remaining[a_].append(h_)
+        if g_["winner"] == "UNDECIDED": remaining[h_].append((g_["matchupPeriodId"], a_)); remaining[a_].append((g_["matchupPeriodId"], h_))
         if me in (h_, a_):
             o_ = a_ if h_ == me else h_
             if g_["winner"] == "UNDECIDED": h2h[o_] = f'Wk {g_["matchupPeriodId"]}'
@@ -303,7 +311,7 @@ def f_race():
     gb = lambda a_, b_: wp[a_] - wp[b_]
     return [{"name": names[k], "seed": i + 1, "w": W[k], "l": L[k], "t": T[k], "gb1": gb(first, k), "vsCut": gb(k, first_out) if i < PO else -gb(last_in, k),
              "vs7": gb(k, first_out) if i < PO else -gb(last_in, k),  # legacy key; same as vsCut
-             "sos": round(statistics.mean(mu[o_] for o_ in remaining[k]), 1) if remaining[k] else None, "h2h": h2h.get(k, "—" if k == me else ""),
+             "sos": round(statistics.mean(mu[o_][w_] for w_, o_ in remaining[k]), 1) if remaining[k] else None, "h2h": h2h.get(k, "—" if k == me else ""),
              "po": tby[k]["playoffPct"], "bye": tby[k]["byePct"]} for i, k in enumerate(order)]
 def f_roster_grid():
     if "error" in (extras.get("nfl") or {}): raise RuntimeError("needs nfl scoreboards: " + extras["nfl"]["error"])
@@ -353,6 +361,10 @@ league = {"playoffTeams": PO, "regSeasonWeeks": REG, "playoffWeeks": PLAYOFF_WEE
           "avgWeeksRange": [done_weeks[0], done_weeks[-1]] if done_weeks else None, "completedWeeks": done_weeks,
           "seedingRule": SS.get("playoffSeedingRule"), "tradeDeadlineET": (extras["dates"] or {}).get("tradeDeadlineET") if "error" not in (extras["dates"] or {}) else None}
 if unresolved_roster: ERRORS["players.unresolvedRoster"] = f"{len(unresolved_roster)} rostered ids not resolved: {unresolved_roster}"
+if still_missing: ERRORS["players.leaguePool"] = f"{len(still_missing)} league-rostered ids missing from the weekly-stats pull: {still_missing[:10]}"
+# ESPN's league setting breaks every tie by points for; our rule (Joe, Oct 6) settles two-team ties head-to-head first, so a
+# mismatch can be correct. It is reported (meta.model.seedCheck + a printed note), not failed.
+if not seed_check["matchesEspn"]: print("NOTE seeding differs from ESPN's playoffSeed (two-team head-to-head rule?): " + "; ".join(seed_check["mismatch"]), file=sys.stderr)
 stamp = now_iso()
 sections = {k: {"ok": True, "stale": False, "updatedAt": stamp} for k in ("meta", "players", "scores", "odds", "waivers", "nfl")}
 sections["curated"] = {"ok": not any(k.startswith("curated.") for k in ERRORS), "stale": False, "updatedAt": stamp, **({"error": "; ".join(v for k, v in ERRORS.items() if k.startswith("curated."))} if any(k.startswith("curated.") for k in ERRORS) else {})}
@@ -363,9 +375,20 @@ for k, v in [(k, v) for k, v in extras.items() if k not in ("nfl", "rosterGrid")
 sections["extras"] = {"ok": all(v["ok"] for k, v in sections.items() if k.startswith("extras.")), "stale": False, "updatedAt": stamp}
 dump("meta", "current", {"week": wk, "updatedAt": stamp, "team": names[me], "teamId": me,
      "record": rec(me), "seed": mine["seed"], "playoffPct": mine["playoffPct"], "byePct": mine["byePct"],
-     "cushion": round(statistics.mean(cush), 1), "pf": mine["pf"], "sims": N, "league": league,
+     "cushion": round(statistics.mean(cush), 1), "pf": mine["pf"], "sims": N, "league": league, "model": MODEL,
      "rosterIds": roster_ids, "unresolvedRoster": unresolved_roster, "unresolvedTags": unresolved_tags, "errors": ERRORS, "sections": sections})
-dump("odds", f"w{wk:02d}", {"week": wk, "updatedAt": stamp, "teams": teams})
+dump("odds", f"w{wk:02d}", {"week": wk, "updatedAt": stamp, "model": om.MODEL, "sd": MODEL["sd"], "teamSd": MODEL["teamSd"], "sims": N, "teams": teams})
+# ---- odds history: one entry per run, kept across runs (LT_ODDS_HISTORY), never rewritten ----
+HIST = os.environ.get("LT_ODDS_HISTORY")  # project copy: claude/data/odds_history.json (read it in, write it back after the run)
+hist = {"runs": []}
+if not HIST: print("NOTE LT_ODDS_HISTORY not set: odds/history not written this run (a fresh file would overwrite the stored history)", file=sys.stderr)
+if HIST and os.path.exists(HIST):
+    hist = json.load(open(HIST))
+    if not isinstance(hist.get("runs"), list): raise SystemExit(f"odds history file {HIST} has no runs list")
+hist["runs"].append({"at": stamp, "week": wk, "model": om.MODEL, "sims": N,
+                     "teams": {names[k]: {"po": tby[k]["playoffPct"], "bye": tby[k]["byePct"], "seed": tby[k]["seed"], "rec": rec(k)} for k in names}})
+hist["updatedAt"] = stamp
+if HIST: json.dump(hist, open(HIST, "w"), indent=1); dump("odds", "history", hist)
 for w, s in weekly.items(): dump("scores", f"w{w:02d}", {"week": w, "updatedAt": stamp, "matchups": nmatch[w], "scores": s})
 def need_of(team):
     n = NEEDS.get(team)
@@ -382,6 +405,6 @@ dump("extras", "current", {"week": wk, "updatedAt": stamp, "builtAt": stamp, **e
      "regWeeks": REG, "league": league,
      "scouting": {"week": wk, "asOf": datetime.now(ET).date().isoformat(), "usSeed": mine["seed"], "regWeeks": REG, "league": league},
      "errors": {k.split(".", 1)[1]: v for k, v in ERRORS.items() if k.startswith("extras.")}})
-print(f"week {wk}: {len(players)} players, {len(weekly)} score weeks, me={me} ({names[me]}) -> {out}")
+print(f"week {wk}: {len(players)} players, {len(weekly)} score weeks, me={me} ({names[me]}) -> {out} | model sd {SD:.1f}, bias {calib['bias']:+.1f}, seeds match ESPN: {seed_check['matchesEspn']}")
 if ERRORS:
     print("FAILED features: " + "; ".join(f"{k}: {v}" for k, v in ERRORS.items()), file=sys.stderr); sys.exit(2)

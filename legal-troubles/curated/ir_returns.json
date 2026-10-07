@@ -1,0 +1,7 @@
+{
+ "Jadarian Price": {"returnWeek": 8, "note": "IR (chest). Eligible Wk 8 (tags.json, Oct 6)", "asOf": "2026-10-06", "expiresWeek": 8},
+ "Zach Charbonnet": {"returnWeek": 7, "note": "ACL recovery; practice window opened Oct 1; activation ~Wk 7 (tags.json, Oct 6)", "asOf": "2026-10-06", "expiresWeek": 7},
+ "Jordyn Tyson": {"returnWeek": 7, "note": "IR (hamstring). Week 7 at the soonest (tags.json, Oct 6)", "asOf": "2026-10-06", "expiresWeek": 7},
+ "A.J. Brown": {"returnWeek": 8, "note": "IR, high-ankle sprain; back Wk 7-8, later week used (tags.json, Oct 6)", "asOf": "2026-10-06", "expiresWeek": 8},
+ "Jordan Mason": {"returnWeek": 7, "note": "Thumb surgery, IR; eligible Wk 7 (tags.json Aaron Jones note, Oct 6)", "asOf": "2026-10-06", "expiresWeek": 7}
+}
