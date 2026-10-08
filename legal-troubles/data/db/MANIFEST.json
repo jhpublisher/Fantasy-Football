@@ -1,0 +1,122 @@
+{
+ "league_id": 293318,
+ "season": 2026,
+ "built": "2026-10-08",
+ "frozen_weeks": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "in_progress_week": 5,
+ "files": {
+  "weeks/w01/boxscore.json": {
+   "bytes": 724972,
+   "sha256": "4f9823f80008f7e5c9f5f940df2e637269c35b871535ba772a741734f5da6b50"
+  },
+  "weeks/w01/matchups_all.json": {
+   "bytes": 2989107,
+   "sha256": "b86911fa5c56c74903ae87d831bbfc29a1e466c2e400e86835686f8663e958f6"
+  },
+  "weeks/w01/pool.json": {
+   "bytes": 5037681,
+   "sha256": "cb4216fcd03e190ad81bfa224397a3ad0586c036cb9a0465285a6c13f704af8a"
+  },
+  "weeks/w01/roster.json": {
+   "bytes": 2968364,
+   "sha256": "bdced80db41b3b189e89898fb451808b98d19d8d5a157062b8ccf7aa87e586a4"
+  },
+  "weeks/w02/boxscore.json": {
+   "bytes": 731561,
+   "sha256": "81b1d961830ba9cc909ef2363d90aff70ee2f59c7d758fc379ebe523e8d0db2f"
+  },
+  "weeks/w02/matchups_all.json": {
+   "bytes": 3052957,
+   "sha256": "64ac6663e85859f48a8e7b5b48080ec737f4ba97e8b95881279edea4529f01d5"
+  },
+  "weeks/w02/pool.json": {
+   "bytes": 5267232,
+   "sha256": "04cac1a82bd40311285ab139686fb7bd5e1c93157cd9bdb896c4479846bcf6da"
+  },
+  "weeks/w02/roster.json": {
+   "bytes": 3322859,
+   "sha256": "17c0d1a3076b35458b2a517a2dd32b65121a97e00d43639667a733459ba7f7e1"
+  },
+  "weeks/w03/boxscore.json": {
+   "bytes": 731258,
+   "sha256": "9c5fdc2567c28365d63dc273a4ec278e7f56ce898cbbf25de9c7b82e89eb7882"
+  },
+  "weeks/w03/matchups_all.json": {
+   "bytes": 3066240,
+   "sha256": "b4fcaf90a3978d385041ba28b0f6062a3dd3d222b154ad02430d016562b3f90e"
+  },
+  "weeks/w03/pool.json": {
+   "bytes": 5494561,
+   "sha256": "168d71d82d7ce57af6cafa9a3c53da02b04a2b80ddeea2099ad02c281001724f"
+  },
+  "weeks/w03/roster.json": {
+   "bytes": 3309551,
+   "sha256": "367dfab98cfb503dcf3a6da78f9d46ede41928e08d2990e27b4e8937148b6cb2"
+  },
+  "weeks/w04/boxscore.json": {
+   "bytes": 726260,
+   "sha256": "847e44b816f26b7bc184444bd0ecb944b95b8d94caec06f126de1d5cf3217209"
+  },
+  "weeks/w04/matchups_all.json": {
+   "bytes": 3112336,
+   "sha256": "d4b9b27d95b99b034eb19f4759bdbd6c9ed1771b2fb53aa6fbc0794dec8f9472"
+  },
+  "weeks/w04/pool.json": {
+   "bytes": 5719096,
+   "sha256": "681ae14ce0f2d37c017fda77e319cebcd4088e8afd7ededfe97f62bafb8befa8"
+  },
+  "weeks/w04/roster.json": {
+   "bytes": 3370074,
+   "sha256": "cb58d7187a5a72a1e24e8ddf66c1e2709f11f255ce1161e85a255bec073aa4f1"
+  },
+  "league/mDraftDetail.json": {
+   "bytes": 51958,
+   "sha256": "41f34a82063f585a9fedc4f27e82fed266d5b22aebd316367978f7cea4b06a49"
+  },
+  "league/mNav.json": {
+   "bytes": 7115,
+   "sha256": "db32bbf5edd61039eca1ab97ff083b520b64e32fe520c19bd3a7d6c88cf1a6fe"
+  },
+  "league/mPositionalRatings.json": {
+   "bytes": 8130,
+   "sha256": "56d71bdf8722c73796ffb5fb70aa6da4a1cec8a822a89a77f3f0dd68c242932a"
+  },
+  "league/mSettings.json": {
+   "bytes": 10116,
+   "sha256": "a87dae91711d7f4f763d0709613870cca28147d59db6873777a00db87456f247"
+  },
+  "league/mStandings.json": {
+   "bytes": 19488,
+   "sha256": "21a37290b8c87701e358d7974e269094c2085789558868c2764672008bd09cc0"
+  },
+  "league/mStatus.json": {
+   "bytes": 1231,
+   "sha256": "1c05d0b71b04560f60842744b2c1b2e340725097ab5f601498a82ac5549a6dae"
+  },
+  "league/mTeam.json": {
+   "bytes": 54450,
+   "sha256": "0066dbb2117737f4ea03bc7767607b59c04d9a229951fde4ca06dc0622b49b01"
+  },
+  "league/mTransactions2.json": {
+   "bytes": 99220,
+   "sha256": "cd1500824482d368fd575c933970c0e656baa10b49ef53e7e215bc605c577606"
+  },
+  "league/nfl_schedule.json": {
+   "bytes": 109035,
+   "sha256": "e3c63650bb09d1f75eb93c0201ffd98ff22b7bec58cebd3a2a01f3550c420412"
+  },
+  "current/boxscore_wk5.json": {
+   "bytes": 550459,
+   "sha256": "61195777333c27f4525e0b174fd5d43af467344d8b665feb8abcc517cb8a060a"
+  },
+  "current/roster_wk5.json": {
+   "bytes": 3236173,
+   "sha256": "edd64370424a2c0a54bf6101094754cc7a6e007ce1c147f5c0e2856e53e953bc"
+  }
+ }
+}

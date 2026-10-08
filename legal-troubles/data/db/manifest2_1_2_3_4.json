@@ -1,0 +1,26 @@
+{
+ "1": {
+  "roster_entries": 189,
+  "roster_sha256": "bdced80db41b3b189e89898fb451808b98d19d8d5a157062b8ccf7aa87e586a4",
+  "box_teams_with_points": 56,
+  "box_sha256": "4f9823f80008f7e5c9f5f940df2e637269c35b871535ba772a741734f5da6b50"
+ },
+ "2": {
+  "roster_entries": 195,
+  "roster_sha256": "17c0d1a3076b35458b2a517a2dd32b65121a97e00d43639667a733459ba7f7e1",
+  "box_teams_with_points": 56,
+  "box_sha256": "81b1d961830ba9cc909ef2363d90aff70ee2f59c7d758fc379ebe523e8d0db2f"
+ },
+ "3": {
+  "roster_entries": 197,
+  "roster_sha256": "367dfab98cfb503dcf3a6da78f9d46ede41928e08d2990e27b4e8937148b6cb2",
+  "box_teams_with_points": 56,
+  "box_sha256": "9c5fdc2567c28365d63dc273a4ec278e7f56ce898cbbf25de9c7b82e89eb7882"
+ },
+ "4": {
+  "roster_entries": 200,
+  "roster_sha256": "cb58d7187a5a72a1e24e8ddf66c1e2709f11f255ce1161e85a255bec073aa4f1",
+  "box_teams_with_points": 56,
+  "box_sha256": "847e44b816f26b7bc184444bd0ecb944b95b8d94caec06f126de1d5cf3217209"
+ }
+}

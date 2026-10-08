@@ -1,0 +1,62 @@
+{
+ "1": {
+  "pool_players": 1052,
+  "pool_sha256": "cb4216fcd03e190ad81bfa224397a3ad0586c036cb9a0465285a6c13f704af8a",
+  "matchups_this_week": 7,
+  "matchups_sha256": "b86911fa5c56c74903ae87d831bbfc29a1e466c2e400e86835686f8663e958f6",
+  "matchup_winners": [
+   "AWAY",
+   "HOME",
+   "AWAY",
+   "AWAY",
+   "AWAY",
+   "AWAY",
+   "HOME"
+  ]
+ },
+ "2": {
+  "pool_players": 1052,
+  "pool_sha256": "04cac1a82bd40311285ab139686fb7bd5e1c93157cd9bdb896c4479846bcf6da",
+  "matchups_this_week": 7,
+  "matchups_sha256": "64ac6663e85859f48a8e7b5b48080ec737f4ba97e8b95881279edea4529f01d5",
+  "matchup_winners": [
+   "AWAY",
+   "AWAY",
+   "AWAY",
+   "HOME",
+   "AWAY",
+   "HOME",
+   "HOME"
+  ]
+ },
+ "3": {
+  "pool_players": 1052,
+  "pool_sha256": "168d71d82d7ce57af6cafa9a3c53da02b04a2b80ddeea2099ad02c281001724f",
+  "matchups_this_week": 7,
+  "matchups_sha256": "b4fcaf90a3978d385041ba28b0f6062a3dd3d222b154ad02430d016562b3f90e",
+  "matchup_winners": [
+   "AWAY",
+   "HOME",
+   "AWAY",
+   "AWAY",
+   "AWAY",
+   "HOME",
+   "HOME"
+  ]
+ },
+ "4": {
+  "pool_players": 1052,
+  "pool_sha256": "681ae14ce0f2d37c017fda77e319cebcd4088e8afd7ededfe97f62bafb8befa8",
+  "matchups_this_week": 7,
+  "matchups_sha256": "d4b9b27d95b99b034eb19f4759bdbd6c9ed1771b2fb53aa6fbc0794dec8f9472",
+  "matchup_winners": [
+   "AWAY",
+   "HOME",
+   "AWAY",
+   "HOME",
+   "HOME",
+   "AWAY",
+   "AWAY"
+  ]
+ }
+}
