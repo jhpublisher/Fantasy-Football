@@ -1,1 +1,97 @@
-{"week": 5, "title": "Strategy Memo – Week 5", "author": "John (GM)", "date": "2026-10-06 (revised after outside review)", "mode": "INVEST + BYE HUNT", "modeWhy": "99% playoff odds. The #1 seed's bye lifts title odds from ~22% to ~36%, so we invest AND hunt the bye. Points scored matter: they break multi-team ties.", "huddle": "Revised with the outside consultants' findings; verified Mixon news and claim targets with live ESPN data.", "sections": [{"h": "Playoff picture", "items": ["4-0, #1 seed, 410.5 points for (2nd).", "Playoffs 99%, #1 seed 56%, +4.0 wins over 8th place.", "Bye rivals: Liddle' Schitty (3-1) and Oviedo (3-1). We play Oviedo Wk 10 and Liddle' Wk 13: full lineup both weeks (head-to-head is the first tiebreaker).", "Bye crunch: Wk 6 (Washington, Jones), Wk 7 (Allen), Wk 11 (6 starters). Accept a Wk 11 loss rather than spend assets."]}, {"h": "Waivers: we pick last", "items": ["We pick 14th of 14; every free agent is on waivers.", "Claims: 1) Meyers (unlikely, drop Mariota), 2) Kaden Wetjen, returner (likely, drop Schultz), 3) Cowboys D/ST stream (likely, drop Rams D/ST).", "Return yards are free here: Wetjen, Raheim Sanders and Greg Dortch score about 10 a week and are under 2% owned.", "QB isn't scarce: stream Rodgers, Watson or Geno for Allen's Wk 7 bye. Maye is off the list.", "Edge as the last pick: the free-agent sprint when waivers clear."]}, {"h": "Seattle backfield", "items": ["Seattle decided NOT to sign Joe Mixon after his physical (Oct 6). Off our list.", "Rumor: Seattle linked to a Tony Pollard trade (Liddle' owns him).", "Keep Charbonnet as the playoff RB (@PHI, LAR, @CAR). Decide at Wk 8 whether to sell Price after activation."]}, {"h": "Trades", "items": ["Shaheed offer is off: 63% of his points are returns we can get free.", "Offer Aaron Jones + Brian Robinson (+ Kyle Williams if needed) to JV Squad for Justin Jefferson before he plays Sunday.", "Deadline plan: lock targets by Nov 1; daily trade sweeps Dec 1-9 (deadline Dec 9, noon ET)."]}, {"h": "Watch list", "items": ["Josh Jacobs: suspension risk. Cut if it covers Wks 15-17.", "Tyreek Hill: Chiefs reached out (Oct 5). Oviedo owns him; a KC deal strengthens a bye rival and hits Rashee Rice and Xavier Worthy values.", "Ja'Marr Chase concussion timeline drives Meyers' value.", "Saquon Barkley back in 1-3 weeks ends any Shipley rental.", "Flip to WIN NOW if the cushion over 8th falls to 2 wins."]}, {"h": "Staff", "items": ["Outside review graded us: strategy B-, org C+, data C+. Report in the project.", "Hired Quinn (QA) for an independent check before anything reaches Joe.", "Rich now owns data pipelines; Maya owns the numbers and playoff planning; Tony's trade duties end Dec 9.", "Weekly scorecard starts next Tuesday."]}, {"h": "Sources and confidence", "items": ["ESPN fantasy API (league 293318), ESPN/Rotowire player news through Oct 6.", "Confidence: high on facts and moves, medium on odds and claim outcomes."]}]}
+{
+  "week": 5,
+  "title": "Strategy Memo – Week 5",
+  "author": "John (GM)",
+  "date": "2026-10-08 (revised after the Jones-for-Moore trade)",
+  "asOf": "2026-10-08",
+  "mode": "INVEST + BYE HUNT",
+  "modeWhy": "95.5% playoff odds. The #1 seed's bye lifts title odds from ~22% to ~36%, so we invest AND hunt the bye (#1 seed 44.9% after the trade). Points scored matter: they break multi-team ties.",
+  "huddle": "Revised Oct 8 for the Jones-for-Moore trade. Waiver order, Moore's team, Atlanta's kickoff and Jacobs' status per live ESPN, Oct 8.",
+  "sections": [
+    {
+      "h": "Playoff picture",
+      "items": [
+        "4-0, #1 seed, 410.5 points for (2nd).",
+        "Playoffs 95.5%, #1 seed 44.9% after the trade (95.7% / 45.7% before). We are 2 wins ahead of 8th place today.",
+        "Week 5 is the test: Mahomies (2-2) project 113.4 to our 105.9, a 39.5% win chance. A loss likely cuts the cushion over 8th to 1 game, which flips us to WIN NOW.",
+        "Bye rivals at 3-1: D'ez Nutz (seed 2), Liddle' Schitty (seed 3), El' Político (seed 4) and Oviedo (seed 5). We play Oviedo Wk 10 and Liddle' Wk 13: full lineup both weeks (head-to-head is the first tiebreaker)."
+      ]
+    },
+    {
+      "h": "Waivers: we pick 6th",
+      "items": [
+        "We pick 6th of 14 (ESPN waiver order, Oct 8). The order is rolling, not inverse standings. Only 8 players are on waivers (Kyle Williams, Miller, Schultz, Harrison Jr., Black, Mariota, Henry Jr., Baker Mayfield); they process Fri 3 AM ET.",
+        "Both Week 5 moves are free agents, so they are instant adds with no waiver fight: 1) Falcons D/ST, drop Rams D/ST (likely); 2) Kaden Wetjen, drop Ekeler (likely).",
+        "Rams D/ST face Buffalo, our own QB Allen: never stream against our own QB. Falcons D/ST project 5.4 vs 2.6, home vs Baltimore Sun 8:20 PM ET, with Lamar Jackson out of Wed practice (ankle).",
+        "Return yards are free here (0.1 a yard, 6 per TD). Wetjen (PIT kick and punt returner, 0.1% owned) scored 4.0, 11.3, 10.7, 12.6 in Wks 1-4, projects 11.5, and covers Moore's Wk 11 bye and any kick-return job risk.",
+        "Wetjen: Steelers vs Colts locks 1:00 PM ET; act by Sunday 12:45 PM ET. Source: Oct 8 snapshot.",
+        "Ekeler: planned drop for Joe (ESPN: still rostered, bench) to make room for Wetjen; he was added Oct 7 in place of Kyle Williams.",
+        "Ekeler rest-of-season projection: 41.7 (ESPN, Oct 8).",
+        "Keep Jalen Brooks (a real kick returner: 341 yds Wk 2-4). ARI kick returner by usage (13 of 16), not on either depth chart; HOLD. Keep Alex Bachman as a return option: punt returner per Rams coach Oct 2; one kick-return game (89 yds Wk 4), so his kick-return role rests on one game.",
+        "Kyle Williams (NE, waivers): pass. His actual average is 8.2 vs 12.8 projected, the matchup is tough, his bye is Wk 11 like Green Bay's, and he is only +1.2 over Moore. If Joe wants him: watch only, not in claims; the claim deadline would be Thu 10:30 PM ET.",
+        "QB isn't scarce: stream a QB for Allen's Wk 7 bye (Deshaun Watson, free agent, 18.6 projected today). Maye is off the list.",
+        "Watch only (not in claims): Bears D/ST, 4.5 projected (plays at Green Bay, so it touches Moore). Source: ESPN feed, Oct 8.",
+        "Keep Moore in FLEX: Moore 11.6 vs Bachman 11.1 projected; the floor decides. Moore locks Sun 1:00 PM ET, not Thursday. Source: ESPN feed, Oct 8.",
+        "We stream D/ST weekly and pick a playoff D/ST by Week 12. Source: Oct 8 snapshot."
+      ]
+    },
+    {
+      "h": "Seattle backfield",
+      "items": [
+        "Joe Mixon: off our list. Reports conflict: Oct 5 reports had Seattle signing him to the practice squad after a physical; an Oct 6 Newsweek report (citing Schefter) says Seattle did not sign him. We have no second current source, so neither is treated as fact.",
+        "Rumor: Seattle linked to a Tony Pollard trade (Liddle' owns him).",
+        "Keep Charbonnet as the playoff RB (@PHI, LAR, @CAR). Decide at Wk 8 whether to sell Price after activation."
+      ]
+    },
+    {
+      "h": "Trades",
+      "items": [
+        "Done Oct 8: Aaron Jones Sr. to Brown Friday! (0-4) for Skyy Moore (Packers WR, kick and punt returner).",
+        "Verdict: it costs us 5.2 points in Week 5 (lineup 111.1 to 105.9; win chance vs Mahomies 46.8% to 39.5%). Season odds barely move: playoffs -0.2 points, #1 seed -0.8.",
+        "Weeks 15-17 are neutral: our best lineup is identical before and after (111.6). Moore is playoff depth behind Washington and Charbonnet.",
+        "Weeks 15-17: single-week playoff rounds; Moore faces MIA, @CHI, HOU (ESPN schedule, Oct 8).",
+        "Moore is a return-yard floor: 43.0 of his 49.5 points so far (87%) are returns. It helps byes (Wk 6 +2.1, Wk 14 +1.1) and hurts Wk 11 (-1.0, Green Bay's bye; Wetjen covers it).",
+        "Week 11 byes: Green Bay and LAR both. Four starters are out that week: Moore (GB), Kraft, Puka Nacua (LAR WR) and the Rams D/ST (LAR). Jacobs is a bench player and does not count as a starter.",
+        "Why it works: Jones was at peak volume only while Mason (thumb, IR) is out; Mason is due back about Wk 7. ESPN rest-of-season: Moore 155.6 vs Jones 140.9. The cost is Week 5 only.",
+        "Watch: RB depth is thin. Javonte Williams is our only healthy lead back, then Robinson Jr. (9.7); a Williams injury costs about 7 points and no free-agent RB projects above 8.9.",
+        "Brian Robinson Jr. is the one chip left to shop (3 TDs Wk 4, projects 9.7, Atlanta plays Sun 8:20 PM ET). Sell only for a starter-level return; no offer unless Joe asks.",
+        "Seth McGowan (IND RB, free agent, projects 8.9): the add if Brian Robinson Jr. is sold. Source: Oct 8 snapshot.",
+        "Justin Jefferson (JV Squad) stays a target for the playoffs (DET, WSH, @NYJ). The Jones package is gone; any new build waits for Joe.",
+        "Deadline plan: lock targets by Nov 1; daily trade sweeps Dec 1-9 (deadline Dec 9, noon ET).",
+        "Target: A.J. Brown (NE WR, on D'ez Nutz, IR ankle, back Wk 8). Buy low for the playoff weeks; no offer unless Joe asks. Source: ESPN feed, Oct 8.",
+        "Brian Robinson Jr.: 25.2 points in Wk 4 (3 TDs). Source: ESPN feed, Oct 8.",
+        "Target: Justin Jefferson (MIN WR, JV Squad): ESPN lists him questionable; projected 15.5. No offer unless Joe asks. Source: ESPN feed, Oct 8."
+      ]
+    },
+    {
+      "h": "Watch list",
+      "items": [
+        "Josh Jacobs: a bench player, not a starter. Source: RotoWire Exempt List (Sep 13): on the Commissioner's Exempt List since Aug 30, 0 games played. ESPN tags him DAY_TO_DAY, which conflicts with that list; no newer ruling found as of Oct 8. Treated as out for Wk 5 (not confirmed by a newer source); earliest return Wk 7 only if the ban is 6 games (Yahoo gives the length as an 'if', not a ruling). Cut if the ban covers Wks 15-17 or there is no ruling by Wk 8.",
+        "Moore's role: Savion Williams (ankle) is on IR with a 21-day window that opened Oct 7; not activated; NFL.com lists him Limited. If he is activated, it cuts Moore's snaps. ESPN's chart lists Bo Melton as kick returner 1; Packers.com and actual use say Moore. Re-check Friday.",
+        "Risk: Bo Melton could take 1 to 3 kicks; fair catches score zero. Source: Oct 8 snapshot.",
+        "Tyreek Hill: ESPN lists him on Oviedo with no NFL team (proTeamId 0), OUT. Reported: Chiefs reached out (Oct 5); no second current source. If a KC deal happens, it strengthens a bye rival and hits Rashee Rice and Xavier Worthy values.",
+        "Jones now on Brown Friday! bench (ESPN slot 20), limited Wed.",
+        "Mason (Team Waters, IR thumb) returns about Wk 7; a buy-low for the playoffs only if Joe asks.",
+        "Flip to WIN NOW if the cushion over 8th falls to 1 game (it is 2 today).",
+        "Week 7: Tyson can return (curated, unverified). Source: Oct 8 snapshot.",
+        "Lineup: Javonte Williams and Brandon Aubrey (DAL K) are set and active, with no injury listing; both lock Thu 8:15 PM ET. Source: Oct 8 snapshot."
+      ]
+    },
+    {
+      "h": "Staff",
+      "items": [
+        "Outside review graded us: strategy B-, org C+, data C+. Report in the project.",
+        "Rich now owns data pipelines; Maya owns the numbers and playoff planning; Tony's trade duties end Dec 9.",
+        "Weekly scorecard starts next Tuesday."
+      ]
+    },
+    {
+      "h": "Sources and confidence",
+      "items": [
+        "ESPN fantasy API (league 293318) live Oct 8; ESPN/RotoWire player news through Oct 6; NFL.com Wk 5 injury report; Packers.com depth chart (Oct 6) and injury report (Oct 7). Mixon: Newsweek Oct 6 (citing Schefter) and Clutchpoints / Fantasy Footballers Oct 5. Jacobs: RotoWire Exempt List Sep 13; ESPN DAY_TO_DAY tag.",
+        "Odds: 40,000 sims, Oct 8 2026 12:42 UTC, Week 5, post-trade roster; Legal Troubles 95.5% playoffs, 44.9% #1 seed.",
+        "Confidence: high on facts and moves, medium on odds (simulation, +/-0.3) and on Moore's kick-return share. Mixon: unconfirmed by a second current source, so dropped as a fact."
+      ]
+    }
+  ]
+}

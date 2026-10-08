@@ -1,34 +1,50 @@
 {
- "Dohnte Meyers": {
+ "Falcons D/ST": {
   "priority": 1,
-  "odds": "Unlikely",
-  "note": "Fantasy's #2 add today (1.6M Sleeper adds); WR-needy teams pick ahead of us. Free try.",
-  "drop": "Marcus Mariota",
-  "asOf": "2026-10-06",
+  "odds": "Likely",
+  "note": "FA, instant add (not a waiver claim). Wk 5 proj 5.4 vs Rams 2.6 (+2.8); Rams face our QB. Atlanta vs BAL Sun 8:20 PM ET, Lamar Jackson DNP Wed (ankle). Backup: Bears D/ST (4.5, FA) or Browns D/ST (4.1, FA).",
+  "drop": "Rams D/ST",
+  "asOf": "2026-10-08",
   "expiresWeek": 5
  },
  "Kaden Wetjen": {
   "priority": 2,
   "odds": "Likely",
-  "note": "0.1% owned. Nobody is chasing return yards except us.",
-  "drop": "Dalton Schultz",
-  "asOf": "2026-10-06",
-  "expiresWeek": 5
+  "note": "FA, instant add, 0.1% owned. PIT KR+PR; ROS 148.5; plays Wk 11 when GB is on bye; Wk 5 vs IND (soft vs WRs). Bench cover for Moore. Backup: Josh Cameron (JAX, FA, 9.8).",
+  "drop": "Austin Ekeler",
+  "asOf": "2026-10-08",
+  "expiresWeek": 6
  },
- "Cowboys D/ST": {
-  "priority": 3,
-  "odds": "Likely",
-  "note": "6.5% owned; streaming D/ST draws little competition.",
-  "drop": "Rams D/ST",
-  "asOf": "2026-10-06",
-  "expiresWeek": 5
- },
- "Will Shipley": {
+ "Kyle Williams": {
   "priority": null,
-  "odds": "Unlikely",
-  "note": "#5 add in fantasy; Team RM picks 3rd with no healthy RB. Watch only.",
+  "odds": "Likely",
+  "note": "WATCH ONLY (not recommended). On WAIVERS, processes Fri Oct 9 3 AM ET; claims due tonight 10:30 PM ET. We pick 6th of 14; teams ahead (JV, Monty's, Pop A TD, De'Von, Liddle') made no claim on Oct 7 except De'Von's failed Maye claim; 0.4% owned, not on Sleeper trending. Why pass: Joe dropped him Wed for Ekeler; his actual avg is 8.2 (5.8, 4.4, 14.4, 8.1) vs 12.8 proj; LV is 4th-toughest vs WRs; NE bye is Wk 11 like GB; only +1.2 over Moore. If Joe wants him: drop Ekeler and skip Wetjen. Backup: Wetjen.",
+  "drop": "Austin Ekeler",
+  "asOf": "2026-10-08",
+  "expiresWeek": 5
+ },
+ "Bo Melton": {
+  "priority": null,
+  "odds": "Likely",
+  "note": "WATCH ONLY. FA, instant add, proj 5.1, ROS 71.5. GB KR1 on ESPN's chart, KR2 on packers.com; Moore took 11 of 19 GB kick returns. Not needed as a Moore handcuff: Bachman (11.1) is already on our bench. Add only if Melton takes the KR job from Moore (then Moore's value drops, Melton does not fix it).",
   "drop": "",
-  "asOf": "2026-10-06",
+  "asOf": "2026-10-08",
+  "expiresWeek": 6
+ },
+ "Bears D/ST": {
+  "priority": null,
+  "odds": "Likely",
+  "note": "Backup stream. Now a FA (waivers cleared Thu 3 AM ET), instant add, proj 4.5. Plays at GB (our Moore): small conflict. Take only if Falcons D/ST is gone.",
+  "drop": "Rams D/ST",
+  "asOf": "2026-10-08",
+  "expiresWeek": 5
+ },
+ "Seth McGowan": {
+  "priority": null,
+  "odds": "Likely",
+  "note": "CONDITIONAL. FA, instant add, proj 8.9, ROS 117.7. IND RB2 behind Jonathan Taylor and a kick returner (4 KR for 102 yds Wk 4). Add only if Joe sells Brian Robinson Jr., so RB2 is not empty. Backup: Raheim Sanders (CLE, FA, 8.9).",
+  "drop": "Brian Robinson Jr. (only after he is sold)",
+  "asOf": "2026-10-08",
   "expiresWeek": 5
  }
 }
