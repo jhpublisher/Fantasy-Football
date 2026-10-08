@@ -24,7 +24,7 @@
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45}
 button{font:inherit;color:inherit}
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-.top-in{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:12px 0;display:grid;gap:10px}
+.top-in{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:12px 0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
 .brand{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
 .brand h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:1.7rem;margin:0;line-height:1}
 .brand h1 span{color:var(--brass)}
@@ -33,7 +33,7 @@ button{font:inherit;color:inherit}
 .tab{background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;cursor:pointer;font-weight:600;color:var(--muted);white-space:nowrap}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brass)}
 .tab:focus-visible,.link:focus-visible,.row:focus-visible,.card:focus-visible,.x:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
-main{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:22px 60px;display:grid;gap:22px}
+main{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:22px 60px;display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
 .kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:2px}
 .kpi .v{font-family:var(--display);font-weight:800;font-size:2.1rem;line-height:1;font-variant-numeric:tabular-nums}
@@ -93,7 +93,7 @@ body.nomark .nw{display:none}
 .due{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:.9rem}
 .due li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
 .due li:last-child{border-bottom:0}
-.due time{font-family:var(--mono);font-size:.78rem;color:var(--muted);white-space:nowrap}
+.due time{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-align:right}
 /* 25: KPI deltas */
 .kpi .d{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
 .kpi .d.up{color:var(--good)} .kpi .d.dn{color:var(--bad)}
@@ -121,7 +121,7 @@ body.nomark .nw{display:none}
 .ngroup .older{display:grid;gap:8px;padding-left:12px;border-left:2px solid var(--line)}
 .ngroup .older .hl{font-size:.88rem}
 .showmore{justify-self:center;font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 16px;cursor:pointer}
-@media (max-width:900px){.week{grid-template-columns:1fr}.fa{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.week{grid-template-columns:minmax(0,1fr)}.fa{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 .bar{height:8px;border-radius:4px;background:var(--sunk);position:relative;min-width:80px}
 .bar i{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--field)}
@@ -220,6 +220,81 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .memo-pick button[aria-pressed="true"]{border-color:var(--ink);background:var(--sunk)}
 @media (max-width:900px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.market{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.market{grid-template-columns:1fr}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Schedule tab: scoped to .sch so nothing else on the page changes */
+.sch{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;min-width:0;--field-soft:#dcefe3; --bye:#6b5b95; --bye-soft:#e9e4f3; --now:#e9f3ec; --chip:#e8ece9; --opp:#8a5428; --opp-soft:#f3e6d9; --me-in-bg:#cfe8da; --me-in-fg:#17583a; --me-out-bg:#eaf4ee; --me-out-fg:#5f8c75; --op-in-bg:#ecd5bf; --op-in-fg:#6e3f17; --op-out-bg:#f7ede3; --op-out-fg:#a07d5c;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sch{--field-soft:#1d3a2a; --bye:#b9aae3; --bye-soft:#2a2540; --now:#1b2c22; --chip:#232d27; --opp:#d9a679; --opp-soft:#3a2a1c; --me-in-bg:#24503a; --me-in-fg:#8ad3a9; --me-out-bg:#1a2b22; --me-out-fg:#6f9a82; --op-in-bg:#4a3422; --op-in-fg:#e3b88f; --op-out-bg:#2a2019; --op-out-fg:#a8855f;}}
+:root[data-theme="dark"] .sch{--field-soft:#1d3a2a; --bye:#b9aae3; --bye-soft:#2a2540; --now:#1b2c22; --chip:#232d27; --opp:#d9a679; --opp-soft:#3a2a1c; --me-in-bg:#24503a; --me-in-fg:#8ad3a9; --me-out-bg:#1a2b22; --me-out-fg:#6f9a82; --op-in-bg:#4a3422; --op-in-fg:#e3b88f; --op-out-bg:#2a2019; --op-out-fg:#a8855f;}
+.sch .sub{color:var(--muted);font-size:13px}
+.sch header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:6px 16px}
+.sch .scweeks{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.sch .scweeks button{flex:0 0 auto;min-width:40px;height:40px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;font:600 17px var(--display);cursor:pointer}
+.sch .scweeks button[aria-pressed="true"]{background:var(--field);border-color:var(--field);color:#fff}
+.sch .scweeks button.cur:not([aria-pressed="true"]){border-color:var(--field);color:var(--field)}
+.sch .sctabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.sch .sctabs button{border:0;background:none;color:var(--muted);font:600 18px var(--display);letter-spacing:.04em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.sch .sctabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--field)}
+.sch button:focus-visible{outline:2px solid var(--field);outline-offset:2px}
+.sch .summary{display:flex;flex-wrap:wrap;gap:8px}
+.sch .pill{background:var(--chip);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:500}
+.sch .pill.mine{background:var(--field-soft);color:var(--field)}
+.sch .pill.bye{background:var(--bye-soft);color:var(--bye)}
+.sch .day{display:flex;flex-direction:column;gap:6px}
+.sch .day h2{font:600 18px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:8px 0 0}
+.sch .game{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:6px 18px;align-items:start;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:6px;padding:10px 12px}
+.sch .game.mine{border-left-color:var(--field)}
+.sch .game.oppg{border-left-color:var(--opp)}
+.sch .time{font:600 20px var(--display);font-variant-numeric:tabular-nums}
+.sch .time small{display:block;font:500 12px var(--body);color:var(--muted)}
+.sch .tv{display:inline-block;margin-top:4px;font:600 12px var(--body);letter-spacing:.03em;background:var(--chip);color:var(--ink);border-radius:4px;padding:1px 7px}
+.sch .tv.none{color:var(--muted);font-weight:500}
+.sch .mu .tn{font:600 26px/1.1 var(--display);letter-spacing:.02em}
+.sch .mu .tn i{font:500 14px var(--body);font-style:normal;color:var(--muted);margin:0 8px}
+.sch .mu .full{color:var(--muted);font-size:13px;margin-top:2px}
+.sch .players{display:grid;grid-template-columns:minmax(0,236px) minmax(0,236px);gap:28px;justify-content:end;text-align:right}
+.sch .grp.empty{visibility:hidden}
+.sch .grp{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.sch .gh{font:600 14px var(--display);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1px}
+.sch .noplayers{color:var(--muted);font-size:13px;text-align:right;align-self:center}
+.sch .gh.me{color:var(--field)}
+.sch .gh.op{color:var(--opp)}
+.sch .pl{font-size:12px;border-radius:4px;padding:1px 7px;background:var(--me-in-bg);color:var(--me-in-fg);font-weight:600;white-space:nowrap}
+.sch .pl.B,.sch .pl.IR{background:var(--me-out-bg);color:var(--me-out-fg);font-weight:500}
+.sch .pl.IR{text-decoration:line-through}
+.sch .pl.o{background:var(--op-in-bg);color:var(--op-in-fg)}
+.sch .pl.o.B,.sch .pl.o.IR{background:var(--op-out-bg);color:var(--op-out-fg)}
+.sch .pill.opp{background:var(--opp-soft);color:var(--opp)}
+.sch .scvs{font-size:14px}
+.sch .scvs b{font:600 18px var(--display);letter-spacing:.02em}
+.sch .empty{color:var(--muted);padding:20px;text-align:center}
+.sch .tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:14px}
+.sch .tools label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.sch .tools select{font:inherit;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.sch .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.sch table{border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums;width:100%}
+.sch th,.sch td{padding:5px 6px;text-align:center;font-size:13px;white-space:nowrap;border-bottom:1px solid var(--line)}
+.sch th{font:600 14px var(--display);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);position:sticky;top:0;background:var(--surface)}
+.sch th:first-child,.sch td:first-child{position:sticky;left:0;background:var(--surface);text-align:left;padding-left:12px;min-width:92px;z-index:1;border-right:1px solid var(--line)}
+.sch td:first-child{font:600 17px var(--display)}
+.sch td:first-child small{font:500 11px var(--body);color:var(--field);margin-left:4px}
+.sch .cur-col{background:var(--now)}
+.sch td.by{background:var(--bye-soft);color:var(--bye);font-weight:600}
+.sch td.aw{color:var(--muted)}
+.sch tr.mine td:first-child{box-shadow:inset 4px 0 0 var(--field)}
+.sch .byeweek{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
+.sch .byeweek .wk{font:700 24px var(--display)}
+.sch .byeweek.cur{border-color:var(--field)}
+.sch .byeweek .tm{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.sch .byeweek b{font:600 18px var(--display)}
+.sch .foot{color:var(--muted);font-size:12px}
+@media (max-width:640px){
+.sch .game{grid-template-columns:1fr}
+.sch .players{grid-template-columns:1fr;justify-content:stretch;text-align:left;gap:12px}
+.sch .grp.empty{display:none}
+.sch .noplayers{text-align:left}
+.sch .grp{align-items:flex-start}
+.sch .byeweek{grid-template-columns:1fr}
+}
 </style>
 
 <header class="top">
@@ -227,12 +302,12 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
     <div class="brand"><h1>Legal Troubles <span>BI</span></h1><span class="eyebrow" id="stamp">Loading data…</span></div>
     <nav class="tabs" role="tablist" aria-label="Views">
       <button class="tab" role="tab" id="tab-overview" aria-selected="true" data-v="overview">Overview</button>
-      <button class="tab" role="tab" id="tab-returns" aria-selected="false" data-v="returns">Returns</button>
+      <button class="tab" role="tab" id="tab-returns" aria-selected="false" data-v="returns">Returners</button>
       <button class="tab" role="tab" id="tab-roster" aria-selected="false" data-v="roster">Our roster</button>
-      <button class="tab" role="tab" id="tab-market" aria-selected="false" data-v="market">Market</button>
+      <button class="tab" role="tab" id="tab-market" aria-selected="false" data-v="market">Free agents</button>
       <button class="tab" role="tab" id="tab-league" aria-selected="false" data-v="league">League</button>
+      <button class="tab" role="tab" id="tab-schedule" aria-selected="false" data-v="schedule">Schedule</button>
       <button class="tab" role="tab" id="tab-news" aria-selected="false" data-v="news">News</button>
-      <button class="tab" role="tab" id="tab-notes" aria-selected="false" data-v="notes">Memo</button>
     </nav>
     <div class="dates" id="dates"></div>
   </div>
@@ -243,18 +318,13 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 
 <script>
 (function(){
-const S={league:null,validation:null,sections:null,builtAt:null,returns:null,punting:null,dbError:null,dbErrors:{},dbWait:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
+const S={sched:null,league:null,validation:null,sections:null,builtAt:null,returns:null,punting:null,dbError:null,dbErrors:{},dbWait:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
 const PLAN_OPTS=[['','No plan'],['sell','Sell high'],['buy','Buy low'],['target','Target'],['claim','Claim'],['rental','Rental'],['stash','Stash'],['drop','Drop']];
 let savePlan=null;
-function mergePlans(){const wk=S.meta?.week,base={};
-  for(const [id,p] of Object.entries(S.raw)){const q={...p};if(isExpired(q.claim)){q.claimExpired=q.claim;delete q.claim}if(q.tag&&q.tag!=='roster'&&(q.tagExpired||isExpired(q.tagMeta))){q.expiredTag=q.tag;q.tag='roster'}if(q.note&&(q.noteExpired||q.expired)){q.expiredNote=q.note;delete q.note}base[id]={...q,staffTag:q.tag}}
-  const byName=Object.fromEntries(Object.entries(base).map(([id,p])=>[p.name,id]));
-  for(const p of Object.values(base)){const c=p.claim;if(!c||!c.drop||c.odds==='Hold')continue;const d=base[byName[c.drop]];if(!d||!d.ours)continue;
-    if(!d.tag||d.tag==='roster'){d.tag='drop';d.staffTag='drop'}if(d.tag==='drop')d.dropFor=(d.dropFor?d.dropFor+', ':'')+p.name}
-  S.players={};for(const [id,p] of Object.entries(base)){const o=S.plans[id];S.players[id]=(o&&wk!=null&&o.week===wk)?{...p,tag:o.tag||'roster',mine:true}:p}}
-function planSel(id,p){const cur=p.tag==='roster'?'':p.tag;if(!savePlan)return p.tag&&p.tag!=='roster'?tagChip(p.tag):'';
-  const st=p.staffTag, stL=st&&st!=='roster'?(TAGS[st]||st):'none';
-  return `<div class="planw"><select class="plan${p.mine?' mine':''}" data-plan="${id}" aria-label="Plan for ${esc(p.name)}" title="${p.mine?'Your pick for this week (resets at next week\'s refresh)':'Staff plan. Change to set your own for this week'}">${p.mine?`<option value="__staff">↺ Undo</option>`:''}${PLAN_OPTS.map(([v,l])=>`<option value="${v}"${v===cur?' selected':''}>${l}</option>`).join('')}</select>${p.mine?`<span class="was"><b>Your pick</b> · staff: ${esc(stL)}</span>`:''}</div>`}
+function mergePlans(){const wk=S.meta?.week;S.players={};
+  for(const [id,p] of Object.entries(S.raw)){const o=S.plans[id],mine=!!(o&&wk!=null&&o.week===wk&&o.tag);S.players[id]={...p,tag:mine?o.tag:'roster',mine}}}
+function planSel(id,p){const cur=p.mine?p.tag:'';if(!savePlan)return cur?tagChip(cur):'';
+  return `<select class="plan${p.mine?' mine':''}" data-plan="${id}" aria-label="Plan for ${esc(p.name)}" title="Your pick for this week (resets at next week's refresh)">${PLAN_OPTS.map(([v,l])=>`<option value="${v}"${v===cur?' selected':''}>${l}</option>`).join('')}</select>`}
 const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const STATUS={ACTIVE:'Healthy',QUESTIONABLE:'Questionable',DAY_TO_DAY:'Day-to-day',OUT:'Out',DOUBTFUL:'Doubtful',INJURY_RESERVE:'IR',SUSPENSION:'Suspended'};
 const TAGS={sell:'Sell high',claim:'Claim',rental:'Rental',buy:'Buy low',target:'Target',drop:'Drop',stash:'Stash',roster:'Roster'};
@@ -278,7 +348,7 @@ const fx=(v,d=1,r='n/a')=>v==null||v===''||isNaN(+v)?r:(+v).toFixed(d);
 // Fill missing fields once so every view sees the same shape; strings get a plain reason, lists become empty lists.
 function normalize(){
   for(const p of Object.values(S.raw||{})){if(!p||typeof p!=='object')continue;p.name=p.name||'Unnamed player';p.pos=p.pos||'Pos. n/a';if(!p.nfl)p.nfl='NFL team n/a';if(!p.ours&&!p.owner)p.owner='Owner unknown';
-    if(!p.status)p.status='UNKNOWN';if(!isObj(p.weekly))p.weekly={};if(!Array.isArray(p.playoffs))p.playoffs=[];if(p.claim&&!isObj(p.claim))p.claim=null}
+    if(!p.status)p.status='UNKNOWN';if(!isObj(p.weekly))p.weekly={};if(!Array.isArray(p.playoffs))p.playoffs=[];}
   for(const o of Object.values(S.odds||{}))(Array.isArray(o?.teams)?o.teams:[]).forEach((t,i)=>{t.name=t.name||'Unnamed team';if(t.seed==null)t.seed=i+1});
   if(S.meta)S.meta.team=S.meta.team||'Legal Troubles';
   const E=S.extras;if(E){if(Array.isArray(E.roster))E.roster.forEach(r=>{r.name=r.name||'Unnamed player';r.pos=r.pos||'Pos. n/a';r.nfl=r.nfl||'NFL team n/a';if(!Array.isArray(r.playoffs))r.playoffs=[]});
@@ -313,7 +383,7 @@ let STALE_H=2;
 function dataTimeMaxAge(){}
 function dataTime(){dataTimeMaxAge();for(const t of [S.meta?.updatedAt,S.builtAt,S.extras?.builtAt]){if(!t)continue;const d=new Date(t);if(!isNaN(d))return d}return null}   // ESPN numbers time first
 function sections(){const E=S.extras||{},N=S.news||{};return [['ESPN numbers',S.meta],['Playoff odds',latestOdds()],['Waiver order',S.waivers],['This week',E.matchup],['Seed race',E.race],['Bye and playoff grids',E.roster],['Free agents',E.freeAgents],['Key dates',E.dates],['Extras',S.extras],
-  ['Our news',N.ours],['League news',N.league],['Rumors and trending',N.desk],['Practice reports',S.practice],['Returns',S.returns],['Memo',S.memos&&Object.values(S.memos).slice(-1)[0]]]}
+  ['Our news',N.ours],['League news',N.league],['Rumors and trending',N.desk],['Practice reports',S.practice],['Returns',S.returns]]}
 const isObj=o=>o&&typeof o==='object'&&!Array.isArray(o);
 function secProblem(o){if(!isObj(o))return null;if(o.ok===false&&!o.error&&!o.stale)return {err:true,txt:`failed${o.reason?': '+o.reason:''}`};if(o.error)return {err:true,txt:`failed: ${o.error}`};if(o.stale)return {err:false,txt:`stale since ${o.staleSince?fmtD(o.staleSince):'an earlier refresh'}${o.reason?` (${o.reason})`:''}`};return null}
 // short message that replaces an empty or broken panel
@@ -326,7 +396,7 @@ function allProblems(){const seen=new Set(),out=[];const add=(l,p)=>{if(!p)retur
   Object.entries(S.extras?.staleFeatures||{}).forEach(([k,o])=>add(SECNAME['extras.'+k]||k,secProblem(o)));
   (S.validation?.staleSections||[]).forEach(k=>add(SECNAME[k]||k,{err:false,txt:'stale (validator)'}));
   return out}
-const DBNAME={'meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','practice/current':'Practice reports','memos':'Memo','connect':'Database connection'};
+const DBNAME={'meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','practice/current':'Practice reports','schedule/current':'NFL schedule','memos':'Memo','connect':'Database connection'};
 const SECNAME={meta:'ESPN numbers',players:'Players',scores:'Scores',odds:'Playoff odds',waivers:'Waiver order',nfl:'NFL schedule',curated:'Staff notes',extras:'Extras',
   'extras.matchup':'This week','extras.race':'Seed race','extras.roster':'Bye and playoff grids','extras.freeAgents':'Free agents','extras.dates':'Key dates','extras.prev':'Change vs last week',
   news:'News','news.ours':'Our news','news.league':'League news','news.desk':'Rumors and trending',practice:'Practice reports',memos:'Memo',returns:'Returns'};
@@ -351,6 +421,7 @@ const fmtShort=t=>{try{return new Date(t).toLocaleString('en-US',{timeZone:TZ,mo
 const isExpired=x=>!!(x&&(x.expired===true||(x.expires&&new Date(x.expires)<new Date())));
 const fmtD=t=>{try{const d=new Date(t);if(isNaN(d))return String(t||'date unknown');return d.toLocaleString('en-US', {timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET'}catch(e){return String(t)}};
 const delta=(now,was,unit='',dec=0)=>{const d=+(now-was).toFixed(dec);return d===0?'<span class="d">— same as last wk</span>':`<span class="d ${d>0?'up':'dn'}">${d>0?'▲':'▼'} ${Math.abs(d)}${unit} vs last wk</span>`};
+function oddsAsOf(){const o=latestOdds();if(!o)return '';const t=o.updatedAt||o.builtAt||o.asOf||o.date||o.createdAt;const d=t?new Date(t):null;return 'As of '+(o.week!=null?'Week '+o.week:'last run')+(d&&!isNaN(d)?' ('+fmtShort(d)+')':'')+'. Odds are re-run on request.'}
 function latestOdds(){const ks=Object.keys(S.odds||{}).filter(k=>Array.isArray(S.odds[k]?.teams)).sort();return ks.length?S.odds[ks[ks.length-1]]:null}
 function teamByName(n){const o=latestOdds();return o&&o.teams.find(t=>t.name===n)}
 
@@ -400,17 +471,13 @@ function overview(){
     <div class="kpi"><span class="v">${m.pf!=null?Math.round(m.pf):'n/a'}</span><span class="k">Points for</span>${P?`<span class="d up">▲ ${wLast} last week</span>`:''}</div></div>
   ${P?`<p class="note" style="margin-top:-12px">Change since last week. Last week's odds are re-run with today's team strengths, so treat them as close, not exact.</p>`:''}
   <div class="grid2">
-    <section class="panel"><div class="ph"><h2>Playoff odds</h2><span class="phr">${resetBtn('ov')}<span class="eyebrow">Top ${PT} make it · tap a team · click a column to sort</span></span></div>
+    <section class="panel"><div class="ph"><h2>Playoff odds</h2><span class="phr">${resetBtn('ov')}<span class="eyebrow">Top ${PT} make it · tap a team · click a column to sort · ${esc(oddsAsOf())}</span></span></div>
       <div class="tw"><table><thead><tr>${sh('ov','seed','Seed')}${sh('ov','name','Team')}${sh('ov','wl','W-L')}${sh('ov','po','Playoffs')}${sh('ov','first','1st%',1)}</tr></thead><tbody>
       ${st.map(t=>`<tr class="row ${t.name===m.team?'me':''} ${seedView&&t.seed===PT?'cut':''}" tabindex="0" data-team="${esc(t.name)}"><td>${t.seed}</td><td>${esc(t.name)}</td><td>${wlt(t)}</td><td><div class="pbar"><div class="bar"><i style="width:${+t.playoffPct||0}%"></i></div><span>${pct(t.playoffPct)}</span></div></td><td class="num">${pct(t.byePct)}</td></tr>`).join('')}
       </tbody></table></div><p class="note">${seedView?'Dashed line = playoff cutoff. ':'Click Seed to return to standings order. '}${m.sims?m.sims.toLocaleString()+' simulations':'Simulation count not recorded'} in our scoring.</p></section>
     <div style="display:grid;gap:18px">
-      ${Object.values(S.odds).filter(x=>Array.isArray(x?.teams)).length>=2?`<section class="panel"><div class="ph"><h2>Odds trend</h2><span class="eyebrow">Us vs top rivals</span></div>${trendSVG()}</section>`:''}
+      ${Object.values(S.odds).filter(x=>Array.isArray(x?.teams)).length>=2?`<section class="panel"><div class="ph"><h2>Odds trend</h2><span class="eyebrow">Us vs top rivals · ${esc(oddsAsOf())}</span></div>${trendSVG()}</section>`:''}
       <section class="panel"><div class="ph"><h2>Our weekly scores</h2><span class="eyebrow">100 line</span></div>${barsSVG(teamScores(m.team),{line:100,hi:100})}</section>
-      <section class="panel"><div class="ph"><h2>Action items ${NW(17)}</h2><button class="link" data-goto="market">Open market →</button></div>
-        ${(()=>{const RANK={sell:1,target:2,drop:3};const it=Object.entries(S.players).filter(([,p])=>RANK[p.tag]).sort((a,b)=>RANK[a[1].tag]-RANK[b[1].tag]);const nc=Object.values(S.players).filter(p=>p.claim&&p.claim.priority).length;
-          return `<ol class="list" style="padding-left:20px;list-style:decimal">${it.map(([id,p])=>`<li>${tagChip(p.tag)} <button class="link" data-player="${id}">${esc(p.name)}</button> <span class="note">${esc(p.pos)} · ${esc(p.nfl)}</span></li>`).join('')}
-          <li>${tagChip('claim')} <button class="link" data-goto="market">${nc} waiver claims</button> <span class="note">details on the Market tab</span></li></ol>`})()}</section>
     </div></div>`;
 }
 function thisWeek(){if(!M?.matchup||secProblem(M.matchup)?.err)return `<section class="week"><div style="display:grid;gap:12px;min-width:0"><h2 style="font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:1.35rem;margin:0">This week</h2>${secMsg(M?.matchup,'This week','matchup, projections and win chance')}</div><div style="display:grid;gap:8px;align-content:start"><span class="eyebrow">Due this week</span><ul class="due">${dueList()}</ul></div></section>`;const mu=M.matchup,D=M.dates||{},L=LGD();
@@ -505,32 +572,17 @@ function playoffGrid(){const PW=LGD().playoffWeeks;if(!Array.isArray(M?.roster)|
     ${rowsP.map(r=>{const ps=r.playoffs||[];return `<tr><td><b>${esc(r.name)}</b> <span class="note">${esc(r.pos)} · ${esc(r.nfl)}</span></td><td>${slotChip(r.slot)}</td>${PW.map((w,i)=>cell(r,ps[i],w)).join('')}<td class="num">${easyN(r)}</td></tr>`}).join('')}
     </tbody></table></div><div class="legend"><span><i class="m-easy"></i>23rd–32nd: easy matchup (allows the most points to that position)</span><span><i class="m-hard"></i>1st–10th: tough matchup</span><span>Rank = ESPN's opponent rank (OPRK) for the player's position, the same number ESPN shows on your roster page; it is season-to-date, so it changes week to week.</span></div></section>`}
 const oddsChip=o=>`<span class="chip o-${o}">${esc(o)}</span>`;
-const claimChip=c=>c.odds==='Hold'?chip('t-roster','On hold'):oddsChip(c.odds);
 const ODDS_RANK={Likely:3,Contested:2,Unlikely:1};
 const allNews=()=>[...(S.news.ours?.items||[]),...(S.news.league?.items||[])];
 function latestConfirmed(name){return allNews().filter(i=>i.player===name&&i.kind==='Confirmed').sort((a,b)=>new Date(b.time)-new Date(a.time))[0]||null}
-function claimNews(p){const c=latestConfirmed(p.name),asOf=S.meta?.updatedAt;return c&&(!asOf||new Date(c.time)>new Date(asOf))?c:null}
-function claimsPanel(){
-  let cl=Object.entries(S.players).filter(([,p])=>p.claim); const nExp=Object.values(S.players).filter(p=>p.claimExpired).length; if(!cl.length) return `<section class="panel"><div class="ph"><h2>Waiver claims</h2></div><p class="note">No claims planned this week${nExp?` (${nExp} expired claim${nExp>1?'s':''} hidden)`:''}.</p></section>`;
-  const base=cl.sort((a,b)=>(a[1].claim.priority??99)-(b[1].claim.priority??99)), ix=new Map(base.map((e,i)=>[e[0],i]));
-  cl=sortRows(base,'cl',([id,p],k)=>({pri:p.claim.priority??null,player:p.name.toLowerCase(),drop:p.claim.drop?p.claim.drop.toLowerCase():null,status:p.claim.odds==='Hold'?1:claimNews(p)?2:0,odds:ODDS_RANK[p.claim.odds]??null})[k],(a,b)=>ix.get(a[0])-ix.get(b[0]));
-  const w=Array.isArray(S.waivers?.order)?S.waivers:null, myRank=w?.order?.find(x=>x.team===S.meta?.team)?.rank;
-  const wo=w?sortRows(w.order,'wo',(x,k)=>({rank:x.rank??null,team:x.team.toLowerCase(),need:x.need?x.need.toLowerCase():null})[k],(a,b)=>(a.rank??99)-(b.rank??99)):[];
-  return `<div class="grid2"><section class="panel"><div class="ph"><h2>Waiver claims</h2><span class="phr">${resetBtn('cl')}<span class="eyebrow">${myRank?`We pick ${myRank} of ${w.order.length}`:w?'Our waiver spot not listed':'No waiver order in this refresh'}</span></span></div>
-    <div class="tw"><table><thead><tr>${sh('cl','pri','#')}${sh('cl','player','Claim')}${sh('cl','drop','Drop')}${sh('cl','status','Status')}${sh('cl','odds','Odds')}</tr></thead><tbody>
-    ${cl.map(([id,p])=>{const n=claimNews(p);return `<tr class="row" tabindex="0" data-player="${id}"><td>${p.claim.priority??'Watch'}</td><td><b>${esc(p.name)}</b> <span class="note">${esc(p.pos)}</span></td><td>${esc(p.claim.drop||'Watch only')}</td><td>${p.claim.odds==='Hold'?chip('t-roster','On hold'):n?chip('s-QUESTIONABLE','Check news'):chip('s-ACTIVE','Active')}</td><td>${p.claim.odds==='Hold'?'<span class="note">On hold</span>':p.claim.odds?oddsChip(p.claim.odds):'<span class="note">Not rated</span>'}</td></tr>`}).join('')}
-    </tbody></table></div><p class="note">Odds = chance the player reaches us, given who picks ahead and what they need. "Check news" = a confirmed report came out after this plan was set. Tap for the reasoning.${nExp?` ${nExp} expired claim${nExp>1?'s':''} hidden.`:''}</p></section>
-  ${w?`<section class="panel"><div class="ph"><h2>Waiver order</h2><span class="phr">${resetBtn('wo')}<span class="eyebrow">Inverse standings</span></span></div><div class="tw"><table><thead><tr>${sh('wo','rank','#')}${sh('wo','team','Team')}${sh('wo','need','Need')}</tr></thead><tbody>
-    ${wo.map(x=>`<tr class="row ${x.team===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(x.team)}"><td>${x.rank??'n/a'}</td><td>${esc(x.team)} <span class="note">${esc(x.record||'record n/a')}</span></td><td class="note">${x.needExpired?`<i>Expired</i>${x.need?': '+esc(x.need):''}`:esc(x.need||'Not assessed')}</td></tr>`).join('')}
-    </tbody></table></div></section>`:missingPanel('Waiver order',S.waivers,'pick order')}</div>`;
-}
-function market(){
-  const cols=[['sell','Sell high'],['rental','Rentals'],['buy','Buy low / targets'],['drop','Drop'],['stash','Stash']];
-  const by=t=>Object.entries(S.players).filter(([,p])=>t==='buy'?['buy','target'].includes(p.tag):p.tag===t);
-  if(!Object.keys(S.players).length) return emptyState(['Players',null]);
-  return claimsPanel()+`<section class="panel"><div class="ph"><h2>Market ${NW(17)}</h2><span class="eyebrow">Weekly market watch · claims live in the table above · tap a card</span></div>
-    <div class="market">${cols.map(([t,lab])=>`<div class="mcol"><h3 class="n">${TAG_ICON[t]} ${lab}</h3>${by(t).map(([id,p])=>`<button class="card" data-player="${id}"><span class="n">${esc(p.name)}</span><span class="m">${esc(p.pos)} · ${esc(p.nfl||'FA')} · ${esc(p.ours?'Ours':p.owner||'Owner unknown')}</span>${p.ret?`<span class="r">${esc(p.ret)}</span>`:''}</button>`).join('')||'<p class="note">None this week.</p>'}</div>`).join('')}</div></section>`+freeAgents();
-}
+function waiverPanel(){
+  const w=Array.isArray(S.waivers?.order)?S.waivers:null;if(!w)return missingPanel('Waiver order',S.waivers,'pick order');
+  const myRank=w.order.find(x=>x.team===S.meta?.team)?.rank;
+  const wo=sortRows(w.order,'wo',(x,k)=>({rank:x.rank??null,team:x.team.toLowerCase()})[k],(a,b)=>(a.rank??99)-(b.rank??99));
+  return `<section class="panel"><div class="ph"><h2>Waiver order</h2><span class="phr">${resetBtn('wo')}<span class="eyebrow">${myRank?`We pick ${myRank} of ${w.order.length} · `:''}Inverse standings</span></span></div><div class="tw"><table><thead><tr>${sh('wo','rank','#')}${sh('wo','team','Team')}</tr></thead><tbody>
+    ${wo.map(x=>`<tr class="row ${x.team===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(x.team)}"><td>${x.rank??'n/a'}</td><td>${esc(x.team)} <span class="note">${esc(x.record||'record n/a')}</span></td></tr>`).join('')}
+    </tbody></table></div></section>`}
+function market(){return waiverPanel()+freeAgents()}
 function freeAgents(){if(!M?.freeAgents||secProblem(M.freeAgents)?.err)return missingPanel('Best free agents available',M?.freeAgents,'waiver-wire projections');const F=M.freeAgents,ord=['QB','RB','WR','TE','K','D/ST'];
   return `<section class="panel"><div class="ph"><h2>Best free agents available ${NW(23)}</h2><span class="eyebrow">By this week's projection · our fallback when claims miss</span></div>${secMsg(F,'Free agents')}
     <div class="fa">${ord.map(p=>`<div style="display:grid;gap:8px;align-content:start;min-width:0"><h3>${p}</h3><ol>${(F[p]||[]).map(x=>`<li>${nameBtn(x.name)}<span>${esc(x.nfl||'FA')} · ${x.proj!=null?(+x.proj).toFixed(1)+' proj':'no proj.'} · ${x.pct!=null?x.pct+'%':'n/a'} owned · ${x.status==='WAIVERS'?'on waivers':'free agent'}${x.inj&&x.inj!=='ACTIVE'?' · '+(STATUS[x.inj]||x.inj):''}</span></li>`).join('')||'<li class="note">None worth listing (bye or no projection)</li>'}</ol></div>`).join('')}</div>
@@ -563,7 +615,7 @@ function newsView(){
     </tbody></table></div>`:''}
     <p class="note">${days.length?'':pr&&pr.week!=null&&wk!=null&&+pr.week!==+wk?`Practice data is for Week ${pr.week}, not Week ${wk}; waiting for this week's reports. `:`No ${wk!=null?'Week '+wk+' ':''}practice reports yet. Teams report on practice days (usually Wednesday to Friday; Monday to Saturday in short or long weeks). `}Our injured players are always listed, even before reports come in. DNP = did not practice · Limited · Full. Updated ${pr?fmtT(pr.updatedAt):'never (no practice data in this refresh)'}.</p></section>
   ${(()=>{const all=desk?.rumors||[],live=all.filter(r=>!isExpired(r)),nx=all.length-live.length;if(!desk||secProblem(desk)?.err)return missingPanel('Rumor mill',desk,'news desk');if(!live.length)return `<section class="panel"><div class="ph"><h2>Rumor mill</h2></div>${secMsg(desk,'Rumor mill')}<p class="note">No live rumors about players that matter to us${nx?` (${nx} expired hidden)`:''}.</p></section>`;
-  return `<section class="panel"><div class="ph"><h2>Rumor mill</h2><span class="eyebrow">Unconfirmed · only what could matter to us${nx?` · ${nx} expired hidden`:''}</span></div>${secMsg(desk,'Rumor mill')}<ul class="list">${live.map(r=>{const auto=r.reviewed===false,AU='Auto, not reviewed';const c=r.origin?(r.newerConfirmed||null):latestConfirmed(r.player),upd=!!c&&(r.origin?true:(!r.time||new Date(c.time)>new Date(r.time)));return `<li class="rumor"><div class="meta news">${upd?'<span class="chip k-Confirmed">Confirmed update</span>':'<span class="chip k-Rumor">Rumor</span>'}${r.action&&!auto?`<span class="chip t-roster">${esc(r.action)}</span>`:`<span class="chip s-QUESTIONABLE" title="Found by the news sweep; no staff member has checked it">${AU}</span>`}${r.action&&auto?`<span class="chip t-roster">${esc(r.action)}</span>`:''}<span class="src">${r.sources?`${r.sources} report${r.sources>1?'s':''}`:'1 report'}</span></div><div>${nameBtn(r.player)} <span class="c">${esc(r.claim||r.latest||r.headline||'No summary yet')}</span></div>${upd?`<div class="flag"><b>Newer confirmed report (${fmtT(c.time)}):</b> ${c.link?`<a href="${esc(c.link)}" target="_blank" rel="noopener">${esc(c.headline)}</a>`:esc(c.headline)}</div>`:''}<div class="i"><b>Why it matters:</b> ${r.impact?esc(r.impact):`<i>${AU}</i>: no staff assessment yet.`}</div>${r.link&&!upd?`<div class="i"><a href="${esc(r.link)}" target="_blank" rel="noopener">Latest: ${esc(r.latest||r.headline||'open source')}</a></div>`:''}</li>`}).join('')}</ul></section>`})()}
+  return `<section class="panel"><div class="ph"><h2>Rumor mill</h2><span class="eyebrow">Unconfirmed · only what could matter to us${nx?` · ${nx} expired hidden`:''}</span></div>${secMsg(desk,'Rumor mill')}<ul class="list">${live.map(r=>{const c=r.origin?(r.newerConfirmed||null):latestConfirmed(r.player),upd=!!c&&(r.origin?true:(!r.time||new Date(c.time)>new Date(r.time)));return `<li class="rumor"><div class="meta news">${upd?'<span class="chip k-Confirmed">Confirmed update</span>':'<span class="chip k-Rumor">Rumor</span>'}<span class="src">${r.sources?`${r.sources} report${r.sources>1?'s':''}`:'1 report'}</span></div><div>${nameBtn(r.player)} <span class="c">${esc(r.claim||r.latest||r.headline||'No summary yet')}</span></div>${upd?`<div class="flag"><b>Newer confirmed report (${fmtT(c.time)}):</b> ${c.link?`<a href="${esc(c.link)}" target="_blank" rel="noopener">${esc(c.headline)}</a>`:esc(c.headline)}</div>`:''}${r.link&&!upd?`<div class="i"><a href="${esc(r.link)}" target="_blank" rel="noopener">Latest: ${esc(r.latest||r.headline||'open source')}</a></div>`:''}</li>`}).join('')}</ul></section>`})()}
   ${desk?`<section class="panel"><div class="ph"><h2>What fantasy is adding</h2><span class="eyebrow">Sleeper · last 24h</span></div><ul class="list trend">${(desk.trending||[]).slice(0,12).map(t=>`<li><span>${nameBtn(t.player)} <span class="note">${metaTxt(t)}</span></span><span class="src">${t.adds24h!=null?Number(t.adds24h).toLocaleString()+' adds':'adds not reported'}</span></li>`).join('')||'<li class="note">Sleeper trending returned no players.</li>'}</ul><p class="note">Tells us which claims will be contested before waivers run. ${desk.healthLine?esc(desk.healthLine)+' ':''}News sources: ${srcs.length-bad.length}/${srcs.length} OK${bad.length?' · issues: '+bad.map(([k,v])=>esc(k.replace('Google News: ','Insider: '))+` (${esc(String(v).replace(/^error:\s*/,''))})`).join(', '):''}.</p></section>`:missingPanel('What fantasy is adding',desk,'Sleeper trending')}
   `+groupedNews(ours,lg);
 }
@@ -598,10 +650,7 @@ function openPlayer(id){try{openPlayer_(id)}catch(e){console.warn('drawer failed
 function openPlayer_(id){const p=S.players[id];if(!p)return;
   const t=p.ours?null:teamByName(p.owner);
   drawer(`<div class="dh"><div><div class="eyebrow">${esc(p.pos)} · ${esc(p.nfl||'FA')} · bye ${p.bye??'not listed'}</div><h2 id="dtitle">${esc(p.name)}</h2></div><button class="x" aria-label="Close" data-close>×</button></div>
-   <div class="chips">${stChip(p.status)} ${p.tag&&p.tag!=='roster'?tagChip(p.tag):''} ${p.ours?slotChip(p.slot):''}</div>
-   ${p.dropFor?`<div class="why"><b>Planned drop</b> if we land ${esc(p.dropFor)}.</div>`:''}
-   ${p.expiredTag?`<div class="why"><b>Expired:</b> staff plan “${esc(TAGS[p.expiredTag]||p.expiredTag)}” passed its expiry and is no longer applied.</div>`:''}${p.expiredNote?`<div class="why"><b>Expired note:</b> ${esc(p.expiredNote)}</div>`:''}${p.claimExpired?`<div class="claimbox"><b>Expired claim</b><div class="note">${esc(p.claimExpired.note||'')}</div></div>`:''}${p.note?`<div class="why"><b>Why:</b> ${esc(p.note)}${p.ret?`<br><b>Timing:</b> ${esc(p.ret)}`:''}</div>`:''}
-   ${p.claim?`<div class="claimbox"><div class="ph"><b>Waiver claim${p.claim.priority?' #'+p.claim.priority:''}</b>${claimChip(p.claim)}</div><div class="note">${esc(p.claim.note||'No reasoning recorded')}</div>${(()=>{const c=claimNews(p);return c?`<div class="flag"><b>Newer confirmed report (${fmtT(c.time)}):</b> ${esc(c.headline)}</div>`:''})()}${p.claim.drop?`<div class="note">Drop: <b>${esc(p.claim.drop)}</b></div>`:''}</div>`:''}
+   <div class="chips">${stChip(p.status)} ${p.ours?slotChip(p.slot):''}</div>
    <div class="facts"><div class="fact"><b>${(+p.total||0).toFixed(1)}</b><span>Points so far</span></div><div class="fact"><b>${projTxt(p)}</b><span>Proj. this week</span></div><div class="fact"><b>${p.seasonProj?(+p.seasonProj).toFixed(1):'None'}</b><span>Rest-of-season proj.</span></div></div>
    <section class="panel"><div class="ph"><h2>Weekly points</h2><span class="eyebrow">Our scoring</span></div>${barsSVG(p.weekly||{},{bye:p.bye})}</section>
    ${(()=>{const pr=practiceNow()[p.name];return pr&&Object.keys(pr.days).length?`<section class="panel"><div class="ph"><h2>Practice</h2></div><div class="chips">${Object.entries(pr.days).map(([d,x])=>`<span class="chip p-${x.status}" title="${esc(x.note)}">${esc(d)} ${x.status}</span>`).join('')}</div></section>`:''})()}
@@ -611,11 +660,9 @@ function openPlayer_(id){const p=S.players[id];if(!p)return;
 }
 function openTeam(name){try{openTeam_(name)}catch(e){console.warn('drawer failed',e);drawer(`<div class="dh"><h2 id="dtitle">${esc(name)}</h2><button class="x" aria-label="Close" data-close>×</button></div><p class="note">This team's details couldn't be shown (${esc(e.message||e)}).</p>`)}}
 function openTeam_(name){const t=teamByName(name);if(!t)return;const s=teamScores(name);
-  const ours=Object.entries(S.players).filter(([,p])=>p.owner===name&&!p.ours);
   drawer(`<div class="dh"><div><div class="eyebrow">Seed ${t.seed} · ${wlt(t)}</div><h2 id="dtitle">${esc(name)}</h2></div><button class="x" aria-label="Close" data-close>×</button></div>
    <div class="facts"><div class="fact"><b>${pct(t.playoffPct)}</b><span>Playoff odds</span></div><div class="fact"><b>${pct(t.byePct)}</b><span>#1 seed</span></div><div class="fact"><b>${t.pf!=null?t.pf.toFixed(0):'n/a'}</b><span>Points for</span></div><div class="fact"><b>${avgPPG(t.name)}</b><span>Avg PPG</span></div><div class="fact"><b>${t.strength??'n/a'}</b><span>Strength</span></div><div class="fact"><b>${t.hundreds??'n/a'}</b><span>100+ games</span></div></div>
-   <section class="panel"><div class="ph"><h2>Weekly scores</h2><span class="eyebrow">100 line</span></div>${barsSVG(s,{line:100,hi:100})}</section>
-   ${ours.length?`<section class="panel"><div class="ph"><h2>Players we're watching</h2></div><ul class="list">${ours.map(([id,p])=>`<li>${tagChip(p.tag)} <button class="link" data-player="${id}">${esc(p.name)}</button> <span class="note">${esc(p.pos)}</span></li>`).join('')}</ul></section>`:''}`);
+   <section class="panel"><div class="ph"><h2>Weekly scores</h2><span class="eyebrow">100 line</span></div>${barsSVG(s,{line:100,hi:100})}</section>`);
 }
 let lastFocus=null;
 function drawer(html){lastFocus=document.activeElement;const d=$('#drawer');d.innerHTML=html;d.hidden=false;$('#scrim').hidden=false;d.querySelector('[data-close]')?.focus()}
@@ -950,7 +997,116 @@ function openRgPlayer(key){const p=RG_ROWMAP.get(key);const M_=rgModel(rgK());if
 
 function datesStrip(){const D=M?.dates||{},fr=[['ESPN numbers',S.meta?.updatedAt],['News',S.news.ours?.updatedAt],['Practice',S.practice?.updatedAt],['Rumors',S.news.desk?.updatedAt]];
   const el=$('#dates');if(!el)return;const due=waiverDue();el.innerHTML=`${due?`<span>Claims due <b>${whenTxt(due)}</b></span>`:''}${D.kickoff?`<span>Kickoff <b>${whenTxt(D.kickoff)}</b></span>`:''}${D.tradeDeadline?`<span>Trade deadline <b>${whenTxt(D.tradeDeadline)}</b></span>`:''}<span class="fr">Updated: ${fr.map(([k,v])=>`${k} ${v?fmtShort(v):'not loaded'}`).join(' · ')} · ${esc(checksTxt())}</span>`}
-function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,notes:notesView}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}$('#view').innerHTML=bn+body;
+
+const SC={D:null,T:null,mine:null,cur:1,week:null,view:'week',onlyMine:false,sortBy:'team',key:null};
+const scFmtDay=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'short',day:'numeric',timeZone:'America/New_York'});
+const scFmtTime=new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'});
+const scDayKey=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'});
+function scCurrentWeek(){
+  const now=Date.now(); let w=null;
+  for(const g of SC.D.games){ if(g[3]+4*3600e3>=now){ w=g[0]; break; } }
+  return w||SC.D.defaultWeek||1;
+}
+
+
+const scGamesOf=w=>SC.D.games.map((g,i)=>g.concat([i])).filter(g=>g[0]===w);
+const scTvOf=i=>SC.D.tv[i]&&SC.D.tv[i].length?SC.D.tv[i].join(' / '):'';
+const scOppFor=w=>SC.D.opp[String(w)]||null;
+const scOppBy=(w)=>{const o=scOppFor(w),m={};if(o)o.pl.forEach(p=>{(m[p.t]=m[p.t]||[]).push(p)});return m};
+const scByesOf=w=>Object.keys(SC.T).filter(id=>SC.T[id].b===w).sort((a,b)=>SC.T[a].a.localeCompare(SC.T[b].a));
+const scSlotTip=s=>s==='S'?'Starter':s==='B'?'Bench':'Injured reserve';
+function scPlist(list,cls){return list.map(p=>'<span class="pl '+cls+' '+p.s+'" title="'+scSlotTip(p.s)+'">'+esc(p.n)+' · '+p.p+' · '+p.tm+'</span>').join('')}
+function scPlayers(ids,om,o){
+  const me=[],op=[];
+  ids.forEach(id=>{(SC.mine[id]||[]).forEach(p=>me.push(Object.assign({tm:SC.T[id].a},p)));((om&&om[id])||[]).forEach(p=>op.push(Object.assign({tm:SC.T[id].a},p)))});
+  if(!me.length&&!op.length) return '<div class="noplayers">No players</div>';
+  return '<div class="players">'+(me.length?'<div class="grp"><div class="gh me">Legal Troubles</div>'+scPlist(me,'')+'</div>':'<div class="grp empty"></div>')+
+    (op.length?'<div class="grp"><div class="gh op">'+esc(o?o.team:'Opponent')+'</div>'+scPlist(op,'o')+'</div>':'<div class="grp empty"></div>')+'</div>';
+}
+function scWeekView(){
+  const gs=scGamesOf(SC.week), byes=scByesOf(SC.week), o=scOppFor(SC.week), om=scOppBy(SC.week);
+  const hasM=id=>SC.mine[id], hasO=id=>om[id];
+  const mineGames=gs.filter(g=>hasM(g[1])||hasM(g[2])).length;
+  const oppGames=gs.filter(g=>hasO(g[1])||hasO(g[2])).length;
+  let h='<div class="summary"><span class="pill">'+gs.length+' games</span>'+
+    '<span class="pill mine">'+mineGames+' with your players</span>'+
+    (o?'<span class="pill opp">'+oppGames+' with '+esc(o.team)+' players</span>':'')+
+    '<span class="pill bye">Bye: '+(byes.length?byes.map(id=>SC.T[id].a).join(', '):'none')+'</span></div>';
+  if(o) h+='<div class="scvs">Your opponent: <b>'+esc(o.team)+'</b> <span class="sub">('+o.src+(o.src==='current roster'&&SC.week>SC.cur?', may change before the game':'')+')</span></div>';
+  else h+='<div class="scvs sub">No opponent listed for this week (playoff matchups are not set yet).</div>';
+  const byeMine=byes.filter(id=>hasM(id)||hasO(id));
+  if(byeMine.length){
+    h+='<div class="day"><h2>Players on bye</h2>'+byeMine.map(id=>'<div class="game '+(hasM(id)?'mine':'oppg')+'"><div class="time">Bye</div><div class="mu"><div class="tn">'+SC.T[id].a+'</div><div class="full">'+esc(SC.T[id].n)+'</div></div>'+scPlayers([id],om,o)+'</div>').join('')+'</div>';
+  }
+  let last='';
+  for(const g of gs){
+    const dt=new Date(g[3]), k=scDayKey.format(dt);
+    if(k!==last){ if(last) h+='</div>'; h+='<div class="day"><h2>'+scFmtDay.format(dt)+'</h2>'; last=k; }
+    const a=SC.T[g[1]], hm=SC.T[g[2]], m=hasM(g[1])||hasM(g[2]), op=hasO(g[1])||hasO(g[2]);
+    const tv=scTvOf(g[4]);
+    h+='<div class="game'+(m?' mine':op?' oppg':'')+'"><div class="time">'+scFmtTime.format(dt).replace(' ','&nbsp;')+'<small>ET</small>'+
+       (tv?'<span class="tv">'+esc(tv)+'</span>':'<span class="tv none">TV to be announced</span>')+'</div>'+
+       '<div class="mu"><div class="tn">'+a.a+'<i>at</i>'+hm.a+'</div><div class="full">'+esc(a.n)+' at '+esc(hm.n)+'</div></div>'+
+       scPlayers([g[1],g[2]],om,o)+'</div>';
+  }
+  if(last) h+='</div>';
+  if(!gs.length) h+='<div class="empty">No games this week.</div>';
+  return h;
+}
+function scOppCell(id,w){
+  const t=SC.T[id];
+  if(t.b===w) return '<td class="by'+(w===SC.cur?' cur-col':'')+'">BYE</td>';
+  const gi=SC.D.games.findIndex(x=>x[0]===w&&(String(x[1])===id||String(x[2])===id)), g=SC.D.games[gi];
+  if(!g) return '<td>–</td>';
+  const away=String(g[1])===id, opp=SC.T[away?g[2]:g[1]].a;
+  return '<td class="'+(away?'aw':'')+(w===SC.cur?' cur-col':'')+'" title="'+esc(scFmtDay.format(new Date(g[3]))+' '+scFmtTime.format(new Date(g[3]))+' ET'+(scTvOf(gi)?' · '+scTvOf(gi):''))+'">'+(away?'@':'')+opp+'</td>';
+}
+function scGridView(){
+  let ids=Object.keys(SC.T);
+  if(SC.onlyMine) ids=ids.filter(id=>SC.mine[id]);
+  ids.sort((a,b)=>SC.sortBy==='bye'?(SC.T[a].b-SC.T[b].b)||SC.T[a].a.localeCompare(SC.T[b].a):SC.T[a].a.localeCompare(SC.T[b].a));
+  let h='<div class="tools"><label><input type="checkbox" data-scom'+(SC.onlyMine?' checked':'')+'> Only teams with my players</label>'+
+    '<label>Sort <select data-scsb><option value="team"'+(SC.sortBy==='team'?' selected':'')+'>Team</option><option value="bye"'+(SC.sortBy==='bye'?' selected':'')+'>Bye week</option></select></label>'+
+    '<span class="sub">@ means away. Hover a cell for kickoff and TV.</span></div>';
+  h+='<div class="tablewrap"><table><thead><tr><th>Team</th>';
+  for(let w=1;w<=18;w++) h+='<th class="'+(w===SC.cur?'cur-col':'')+'">'+w+'</th>';
+  h+='</tr></thead><tbody>';
+  for(const id of ids){
+    h+='<tr class="'+(SC.mine[id]?'mine':'')+'"><td>'+SC.T[id].a+(SC.mine[id]?'<small>'+SC.mine[id].length+'</small>':'')+'</td>';
+    for(let w=1;w<=18;w++) h+=scOppCell(id,w);
+    h+='</tr>';
+  }
+  h+='</tbody></table></div>';
+  if(!ids.length) h+='<div class="empty">No teams match.</div>';
+  return h;
+}
+function scByeView(){
+  let h='<div class="tools"><span class="sub">Teams off in each week. Your players on those teams are listed.</span></div>';
+  for(let w=1;w<=18;w++){
+    const b=scByesOf(w);
+    h+='<div class="byeweek'+(w===SC.cur?' cur':'')+'"><div class="wk">Wk '+w+'</div><div class="tm">'+
+      b.map(id=>'<span><b>'+SC.T[id].a+'</b>'+(SC.mine[id]?' <span class="sub">'+SC.mine[id].map(p=>esc(p.n)+(p.s==='S'?'':' ('+(p.s==='B'?'bench':'IR')+')')).join(', ')+'</span>':'')+'</span>').join('')+(b.length?'':'<span class="sub">No byes</span>')+'</div></div>';
+  }
+  return h;
+}
+
+function scheduleView(){
+  const d=S.sched;
+  if(!d||!d.games||!d.teams) return '<div class="empty">The NFL schedule has not been loaded into the database yet.</div>';
+  if(SC.D!==d){SC.D=d;SC.T=d.teams;SC.mine=d.mine||{};SC.cur=scCurrentWeek();if(SC.week==null||SC.week<1||SC.week>18)SC.week=SC.cur}
+  const weeks=Array.from({length:18},(_,i)=>i+1).map(w=>'<button data-scw="'+w+'" class="'+(w===SC.cur?'cur':'')+'" aria-pressed="'+(w===SC.week)+'">'+w+'</button>').join('');
+  const tabs=[['week',SC.week===SC.cur?'This week':'Week '+SC.week],['grid','Team grid'],['byes','Byes']].map(([k,l])=>'<button role="tab" data-scv="'+k+'" aria-selected="'+(SC.view===k)+'">'+l+'</button>').join('');
+  const v=SC.view==='week'?scWeekView():SC.view==='grid'?scGridView():scByeView();
+  return '<div class="sch"><div class="ph"><h2>NFL Schedule</h2><span class="sub">Snapshot of '+esc(d.asOf||'')+'. Current week: '+SC.cur+'. Kickoffs in Eastern. Green is your team, orange is this week\'s opponent.</span></div>'+
+    (SC.view==='week'?'<nav class="scweeks" aria-label="Week">'+weeks+'</nav>':'')+
+    '<div class="sctabs" role="tablist">'+tabs+'</div><div>'+v+'</div>'+
+    '<div class="foot">Source: ESPN fantasy API, regular season, weeks 1 to 18. Refreshes with the weekly database freeze. TV listings come from ESPN and are not final for weeks 16 to 18.</div></div>';
+}
+document.addEventListener('click',e=>{const w=e.target.closest('[data-scw]');if(w){SC.week=+w.dataset.scw;SC.view='week';return render()}
+  const v=e.target.closest('[data-scv]');if(v){SC.view=v.dataset.scv;return render()}});
+document.addEventListener('change',e=>{if(e.target.matches('[data-scom]')){SC.onlyMine=e.target.checked;render()}else if(e.target.matches('[data-scsb]')){SC.sortBy=e.target.value;render()}});
+
+function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,schedule:scheduleView}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}$('#view').innerHTML=bn+body;
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===S.view));
   if(S.meta){const dt=dataTime();$('#stamp').textContent=`Week ${LGD().week??S.meta.week} · data updated ${dt?fmtShort(dt):'time unknown'}${dt&&(Date.now()-dt)/36e5>STALE_H?' (stale)':''}`}}
 function setView(v){S.view=v;try{localStorage.setItem('lt-bi-view',v)}catch(e){}render()}
@@ -982,11 +1138,11 @@ document.addEventListener('click',e=>{if(e.target.closest('select'))return;
   if(el.dataset.player)return openPlayer(el.dataset.player);
   if(el.dataset.team)return openTeam(el.dataset.team);});
 document.addEventListener('change',async e=>{const sel=e.target.closest('select[data-plan]');if(!sel||!savePlan)return;const id=sel.dataset.plan,tag=sel.value,prev=S.plans[id];
-  if(tag==='__staff')delete S.plans[id];else S.plans[id]={tag,week:S.meta?.week,name:S.raw[id]?.name||'',setAt:new Date().toISOString()};render();
+  if(!tag)delete S.plans[id];else S.plans[id]={tag,week:S.meta?.week,name:S.raw[id]?.name||'',setAt:new Date().toISOString()};render();
   try{await savePlan(id,S.plans[id]||null)}catch(err){console.warn('plan save failed',err);if(prev)S.plans[id]=prev;else delete S.plans[id];render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeDrawer();
   if(e.key==='Enter'&&e.target.matches('tr.row')){const t=e.target;t.dataset.rgplayer?openRgPlayer(t.dataset.rgplayer):t.dataset.rgteam?openRgTeam(t.dataset.rgteam):t.dataset.player?openPlayer(t.dataset.player):openTeam(t.dataset.team)}});
-try{const v=localStorage.getItem('lt-bi-view');if(v&&['overview','returns','league','roster','market','news','notes'].includes(v))S.view=v}catch(e){}
+try{const v=localStorage.getItem('lt-bi-view');if(v&&['overview','returns','league','roster','market','news','schedule'].includes(v))S.view=v}catch(e){}
 render();
 
 (async()=>{
@@ -1010,6 +1166,7 @@ render();
   db.doc('validation/current').onSnapshot(s=>{ok('validation/current');if(s.exists)S.validation=s.data();soon()},err('validation/current'));
   db.doc('returns/current').onSnapshot(s=>{ok('returns/current');S.returns=s.exists?s.data():null;soon()},err('returns/current'));
   db.doc('returns/punting').onSnapshot(s=>{ok('returns/punting');S.punting=s.exists?s.data():null;soon()},err('returns/punting'));
+  db.doc('schedule/current').onSnapshot(s=>{ok('schedule/current');S.sched=s.exists?s.data():null;soon()},err('schedule/current'));
   db.doc('practice/current').onSnapshot(s=>{ok('practice/current');S.practice=s.exists?s.data():null;soon()},err('practice/current'));
   db.collection('memos').onSnapshot(q=>{ok('memos');S.memos={};q.docs.forEach(d=>S.memos[d.id]=d.data());soon()},err('memos'));
 })();
