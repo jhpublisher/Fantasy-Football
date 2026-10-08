@@ -35,6 +35,7 @@ jobs:
           #  assemble_rg.py   builds data/returns.json from stored weeks + current state with NO network
           T="$GITHUB_WORKSPACE/legal-troubles/tools/returns"; RGS="$GITHUB_WORKSPACE/legal-troubles/data/rg"
           python3 "$T/add_week.py" "$RGS" "$T"; AW=$?; [ "$AW" = "0" ] || echo "::warning::add_week failed (exit $AW); stored weeks unchanged"
+          python3 "$T/add_scores.py" "$RGS" "$T"; AS=$?; [ "$AS" = "0" ] || echo "::warning::add_scores failed (exit $AS); stored scores unchanged"
           python3 "$T/add_injury_week.py" "$RGS" "$T"; AI=$?; [ "$AI" = "0" ] || echo "::warning::add_injury_week failed (exit $AI); stored injury weeks unchanged"
           python3 "$T/build_prior_returners.py" "$RGS" 2025 --add || echo "::warning::prior-season returner reference not extended"
           python3 "$T/refresh_current.py" "$RGS" "$T"; RC=$?; [ "$RC" = "0" ] || echo "::warning::refresh_current partial (exit $RC); last good current files kept"

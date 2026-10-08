@@ -24,6 +24,17 @@ r=subprocess.run([sys.executable,os.path.join(TD,'fill_rg.py')],cwd=OUT,env={**o
 print(r.stdout[-800:],r.stderr[-800:])
 if r.returncode: sys.exit(f'FAIL: fill_rg.py exit {r.returncode}')
 R=json.load(open(os.path.join(OUT,'returns.json'),encoding='utf-8'))
+# game scores (Oct 8, Joe): scores[team][week] = {id, opp, home, pts, oppPts, result W/L/T, winner, loser}; from data/rg/scores.json (add_scores.py)
+SP=os.path.join(STORE,'scores.json');SC={}
+if os.path.exists(SP):
+    for gid,g in json.load(open(SP,encoding='utf-8'))['games'].items():
+        for side,o in (('home','away'),('away','home')):
+            pts,op=g[side+'Score'],g[o+'Score']
+            SC.setdefault(g[side],{})[str(g['week'])]={'id':gid,'opp':g[o],'home':side=='home','pts':pts,'oppPts':op,'result':'T' if g['tie'] else ('W' if pts>op else 'L'),'winner':g['winner'],'loser':g['loser']}
+R['scores']=SC
+for w in weeks:   # every played game in a stored week must have its score
+    miss=[t for t,x in R['kickoffs'].items() if str(w) in x and not x[str(w)].get('bye') and str(w) not in SC.get(t,{})]
+    if miss: sys.exit(f'FAIL: week {w} has no score for {miss[:6]} (run add_scores.py)')
 R['store']={'weeks':weeks,'sha256':{str(w):idx['weeks'][str(w)]['sha256'] for w in weeks}}
 # injuries (official) + injury checker, compact for the page
 POSK={'WR','RB','TE','FB','CB','S','DB'}
