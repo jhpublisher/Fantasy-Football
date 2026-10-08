@@ -20,7 +20,7 @@ if os.path.exists(os.path.join(d,"boxscore.json")) and not dry: fail(f"week {w} 
 rost=get(f"{B}?view=mRoster&scoringPeriodId={w}"); box=get(f"{B}?view=mBoxscore&scoringPeriodId={w}")
 mat=get(f"{B}?view=mMatchup&scoringPeriodId={w}")
 # Pool pulled at the CURRENT period so completed weeks' stats are included (pulling at period w omits them).
-flt=lambda: {"players":{"limit":4000,"sortPercOwned":{"sortPriority":1,"sortAsc":False},"filterStatsForTopScoringPeriodIds":{"value":w,"additionalValue":["002026","102026",f"112026{w}"]}}}
+flt=lambda: {"players":{"limit":4000,"sortPercOwned":{"sortPriority":1,"sortAsc":False},"filterStatsForTopScoringPeriodIds":{"value":cur,"additionalValue":["002026","102026",f"112026{w}"]}}}
 pool=get(f"{B}?view=kona_player_info&scoringPeriodId={cur}",flt())
 pj=json.loads(pool)["players"]
 if len(pj)<1000: fail(f"pool only {len(pj)} players")

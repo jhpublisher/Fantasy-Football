@@ -16,7 +16,8 @@ Rule: ESPN corrections after a week is frozen are ignored (Joe, Oct 8).
 
 ## Notes (Oct 8, 2026)
 - `players_week.json` per week: every player's actual (and ESPN projection as returned Oct 8) in league scoring. Starter actuals reconcile to ESPN's team score for all 56 team-games in weeks 1–4.
-- Known defect: `pool.json` for weeks 1 and 2 carries almost no weekly stats (pulled at the wrong period). Use `players_week.json` instead. Files are frozen, so the defect is documented, not rewritten.
+- Known defect: `pool.json` for weeks 1 and 2 carries almost no weekly stats (pulled with too short a stats window). Fixed by adding `pool_full.json` to w01 and w02 (668 and 671 players with that week's actuals, identical to `players_week.json`). The original `pool.json` files are frozen and left as they were. `players_week.json` is the easiest file to use.
+- ESPN's stats filter `value=N` returns the N most recent scoring periods, so `db_pull.py` now asks for all periods up to the current one.
 - Projections for weeks 1–3 are ESPN's current stored values, not necessarily the pre-game projections.
 - Per-game box scores and play-by-play for weeks 1–4: `../rg/raw/2026-wNN-summaries.json.gz`.
 - `plans.json`: Joe's plan picks (empty).

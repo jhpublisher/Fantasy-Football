@@ -133,6 +133,14 @@
   "weeks/w04/players_week.json": {
    "bytes": 75430,
    "sha256": "0b21193ff38ec329ecd48fe13e90364e717b0aac851edbc632ec5474519d71ae"
+  },
+  "weeks/w01/pool_full.json": {
+   "bytes": 6549478,
+   "sha256": "cd1074697261ff376a4282ef2a07199a481532d75e525ce8cefb721fd9e35931"
+  },
+  "weeks/w02/pool_full.json": {
+   "bytes": 6549478,
+   "sha256": "194456529b5b678d598699b700de72cb2e9755f7a51fe8d18a5293cb210aafbc"
   }
  }
 }
