@@ -31,7 +31,7 @@ def fail(m): fails.append(m)
 # ---- 1) live feed merged into raw.json (never delete)
 live = get(B + "?view=mTransactions2")["transactions"]
 # The default feed is ONLY the current scoring week (verified Oct 8). scoringPeriodId=N returns week N (week 1 includes the draft).
-cur = max(t["scoringPeriodId"] for t in live)
+cur = max(t["scoringPeriodId"] for t in live if t["type"] != "FUTURE_ROSTER")
 _ids = {t["id"] for t in live}
 for _w in range(1, cur):
     for t in get(B + "?view=mTransactions2&scoringPeriodId=%d" % _w)["transactions"]:
@@ -143,7 +143,7 @@ for t in sorted(raw.values(), key=lambda x: x["proposedDate"]):
     else:
         skipped[ty] = skipped.get(ty, 0) + 1
         rows.append(dict(base, kind="other", result=(st or "").lower()))
-rows.sort(key=lambda r: r["ts"], reverse=True)
+rows.sort(key=lambda r: (r["ts"], -(r.get("pick") or 0)), reverse=True)
 
 # ---- 4) checks
 kinds = {}
