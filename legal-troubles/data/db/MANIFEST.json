@@ -117,6 +117,22 @@
   "current/roster_wk5.json": {
    "bytes": 3236173,
    "sha256": "edd64370424a2c0a54bf6101094754cc7a6e007ce1c147f5c0e2856e53e953bc"
+  },
+  "weeks/w01/players_week.json": {
+   "bytes": 74684,
+   "sha256": "123e19ab26df3388bc114cea88462d27dc34643e401c5d302a81271a147921e2"
+  },
+  "weeks/w02/players_week.json": {
+   "bytes": 74780,
+   "sha256": "779786987e3bdf18619215e3ded2d8a30c81ac269d8c3957aa702a777a1fd934"
+  },
+  "weeks/w03/players_week.json": {
+   "bytes": 75163,
+   "sha256": "d4d315deebdd1b1bcd6fa8f6d24699737414ddc38cd39a465d8e594ada65773d"
+  },
+  "weeks/w04/players_week.json": {
+   "bytes": 75430,
+   "sha256": "0b21193ff38ec329ecd48fe13e90364e717b0aac851edbc632ec5474519d71ae"
   }
  }
 }
