@@ -14,6 +14,7 @@ s=s[:a]+"""  async function load(){
       S.meta=b.meta;S.odds=b.odds||{};S.scores=b.scores||{};S.raw=b.players||{};S.extras=b.extras?.current||null;S.waivers=b.waivers;S.news=b.news||{};S.practice=b.practice;S.memos=b.memos||{};
       S.league=b.league||b.meta?.league||b.extras?.current?.league||null;S.validation=b.validation||null;S.sections=b.sections||null;S.builtAt=b.builtAt||null;S.returns=b.returns?.current||S.returns||null;S.loadError=null;S.dbError=null;S.dbErrors={};S.dbWait=null;
       try{const pr=await fetch('data/punting.json?t='+Date.now(),{cache:'no-store'});S.punting=pr.ok?await pr.json():S.punting||null}catch(e){}
+      try{const tr=await fetch('data/db/transactions/log.json?t='+Date.now(),{cache:'no-store'});S.tx=tr.ok?await tr.json():S.tx||null}catch(e){}
       try{const sr=await fetch('data/schedule.json?t='+Date.now(),{cache:'no-store'});S.sched=sr.ok?await sr.json():S.sched||null}catch(e){}
       // data/validation.json is written every run, even when a run was blocked, so it can be newer than bundle.validation
       try{const v=await fetch('data/validation.json?t='+Date.now(),{cache:'no-store'});if(v.ok){const V=await v.json();if(!S.validation||!S.validation.checkedAt||(V.checkedAt&&new Date(V.checkedAt)>=new Date(S.validation.checkedAt)))S.validation=V}}catch(e){}
