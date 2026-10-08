@@ -262,7 +262,11 @@ def f_matchup():
     opp = g0["away"]["teamId"] if g0["home"]["teamId"] == me else g0["home"]["teamId"]
     us_s, op_s = starters(me), starters(opp); pu, po_ = sum(x["proj"] for x in us_s), sum(x["proj"] for x in op_s)
     wp = 0.5 * (1 + math.erf((pu - po_) / (SD * math.sqrt(2)) / math.sqrt(2)))
-    return {"week": wk, "opp": names[opp], "oppRecord": rec(opp), "oppSeed": tby[opp]["seed"], "projUs": round(pu, 1), "projOpp": round(po_, 1),
+    # ESPN's own win probability and projected totals (Joe, Oct 8: the Overview shows ESPN's number only; winPct stays as our model's, unused by the page)
+    side = lambda t_: g0["home"] if g0["home"]["teamId"] == t_ else g0["away"]
+    ew = side(me).get("winProbability"); ep_us = side(me).get("totalProjectedPoints"); ep_op = side(opp).get("totalProjectedPoints")
+    if ew is None: raise ValueError("ESPN matchup has no winProbability")
+    return {"espnWinPct": round(100 * ew), "espnProjUs": round(ep_us, 2) if ep_us is not None else None, "espnProjOpp": round(ep_op, 2) if ep_op is not None else None, "espnWinAsOf": now_iso(), "week": wk, "opp": names[opp], "oppRecord": rec(opp), "oppSeed": tby[opp]["seed"], "projUs": round(pu, 1), "projOpp": round(po_, 1),
             "winPct": round(100 * wp), "flags": [x for x in us_s if x["bye"] or x["status"] in ("OUT", "INJURY_RESERVE", "DOUBTFUL", "SUSPENSION", "QUESTIONABLE")],
             "usStarters": us_s, "oppStarters": op_s, "starterCount": len(us_s), "starterSlots": STARTERS}
 SB = {}
@@ -399,6 +403,11 @@ dump("curated", "current", {"updatedAt": stamp, "week": wk, **cur_status})
 nfl_weeks = extras.pop("nfl")  # team list comes from the core schedule pull; game counts need the scoreboards
 dump("nfl", "current", {"updatedAt": stamp, "teams": sorted(ab.values()), "byes": {ab[k]: v for k, v in bye.items()},
      **({"weeks": {}, "weeksError": nfl_weeks["error"]} if "error" in nfl_weeks else {"weeks": nfl_weeks})})
+POSN = {1: "QB", 2: "RB", 3: "WR", 4: "TE", 5: "K", 16: "D/ST"}
+dump("rosters", "current", {"week": wk, "updatedAt": stamp, "teams": {names[x["id"]]: [
+    {"id": e["playerId"], "name": e["playerPoolEntry"]["player"]["fullName"], "pos": POSN.get(e["playerPoolEntry"]["player"]["defaultPositionId"], "?"),
+     "nfl": abbr(e["playerPoolEntry"]["player"].get("proTeamId")), "slot": SLOTS.get(e["lineupSlotId"], str(e["lineupSlotId"])),
+     "status": e["playerPoolEntry"]["player"].get("injuryStatus") or "ACTIVE"} for e in x["roster"]["entries"]] for x in r["teams"]}})
 g = extras.pop("rosterGrid")
 dump("extras", "current", {"week": wk, "updatedAt": stamp, "builtAt": stamp, **extras,
      "roster": g if "error" in g else g["grid"], "leaguePA": None if "error" in g else g["leaguePA"], "paWeeks": None if "error" in g else g["paWeeks"],

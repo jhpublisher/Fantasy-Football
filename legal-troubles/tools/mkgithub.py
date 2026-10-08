@@ -5,14 +5,14 @@ s=open(SRC,encoding='utf-8').read()
 def rep(a,b):
     global s
     assert s.count(a)==1,(s.count(a),a[:100]); s=s.replace(a,b)
-rep('<div class="brand"><h1>Legal Troubles <span>BI</span></h1><span class="eyebrow" id="stamp">Loading data…</span></div>',
-    '<div class="brand"><h1>Legal Troubles <span>BI</span></h1><span class="eyebrow"><a href="briefing.html" style="color:var(--brass);font-weight:600;margin-right:12px">CEO Briefing →</a><span id="stamp">Loading data…</span></span></div>')
+rep('<div class="brand"><h1>Legal Troubles <span>Dashboard</span></h1><span class="eyebrow" id="stamp">Loading data…</span></div>',
+    '<div class="brand"><h1>Legal Troubles <span>Dashboard</span></h1><span class="eyebrow"><a href="briefing.html" style="color:var(--brass);font-weight:600;margin-right:12px">CEO Briefing →</a><span id="stamp">Loading data…</span></span></div>')
 NEW="(async()=>{\n  let db=null;" in s   # newer page (Oct 7): db listeners report their own errors; punting loaded separately
 a=s.index("  let db=null;\n  try{db=window.claude") if NEW else s.index("  const db=window.claude?await window.claude.use('db'):null;");b=s.index("})();\n})();\n</script>")
 s=s[:a]+"""  async function load(){
     try{const r=await fetch('data/bundle.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const b=await r.json();
       S.meta=b.meta;S.odds=b.odds||{};S.scores=b.scores||{};S.raw=b.players||{};S.extras=b.extras?.current||null;S.waivers=b.waivers;S.news=b.news||{};S.practice=b.practice;S.memos=b.memos||{};
-      S.league=b.league||b.meta?.league||b.extras?.current?.league||null;S.validation=b.validation||null;S.sections=b.sections||null;S.builtAt=b.builtAt||null;S.returns=b.returns?.current||S.returns||null;S.loadError=null;S.dbError=null;S.dbErrors={};S.dbWait=null;
+      S.league=b.league||b.meta?.league||b.extras?.current?.league||null;S.validation=b.validation||null;S.sections=b.sections||null;S.builtAt=b.builtAt||null;S.returns=b.returns?.current||S.returns||null;S.rosters=b.rosters?.current||S.rosters||null;S.loadError=null;S.dbError=null;S.dbErrors={};S.dbWait=null;
       try{const pr=await fetch('data/punting.json?t='+Date.now(),{cache:'no-store'});S.punting=pr.ok?await pr.json():S.punting||null}catch(e){}
       try{const tr=await fetch('data/db/transactions/log.json?t='+Date.now(),{cache:'no-store'});S.tx=tr.ok?await tr.json():S.tx||null}catch(e){}
       try{const sr=await fetch('data/schedule.json?t='+Date.now(),{cache:'no-store'});S.sched=sr.ok?await sr.json():S.sched||null}catch(e){}

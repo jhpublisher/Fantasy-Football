@@ -1,7 +1,8 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head><body>
-<title>Legal Troubles Front Office BI</title>
+<title>Legal Troubles Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -153,7 +154,8 @@ body.nomark .nw{display:none}
 .rgbxs{display:grid;gap:4px}.rgbx{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .rgbl{font-family:var(--mono);font-size:.64rem;min-width:3.2em;text-transform:uppercase;letter-spacing:.06em}.rgbl.k{color:var(--good)}.rgbl.p{color:var(--info)}
 .rgw i.hi,.rgw i.lo{color:var(--ink)}
-.og{background:color-mix(in srgb,var(--brass) 9%,transparent)}th.ogh{text-align:center;color:var(--brass);border-bottom:2px solid var(--brass)}tr.grprow th{border-bottom:0;padding-bottom:0}tr.grprow th:not(.ogh){border-bottom:0}
+.og{background:color-mix(in srgb,var(--brass) 9%,transparent)}th.ogh{text-align:center;color:var(--brass);border-bottom:2px solid var(--brass);font-family:var(--display);font-size:1.15rem;letter-spacing:.14em;font-weight:800}
+.banner.fresh{border:1px solid #cfcfcf;background:#fff;color:#111}.banner.fresh *{color:#111}.banner.red.fresh2{border:2px solid #c0182b;background:#fdecee;color:#111}.banner.fresh2 li{color:#111}.banner.fresh2 li.fs,.banner.fresh2 li.fs *{color:#c0182b!important;font-weight:800}.rgsearch{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}.rgsearch input[type=search]{flex:1 1 180px;min-width:0;padding:7px 10px;border:1px solid var(--line,#8886);border-radius:8px;background:var(--bg);color:inherit;font:inherit}.tmsel{position:relative}.tmbox{position:absolute;z-index:20;top:100%;left:0;max-height:260px;overflow:auto;background:var(--bg);border:1px solid var(--line,#8886);border-radius:8px;padding:6px 10px;display:grid;gap:4px;min-width:130px;box-shadow:0 6px 18px #0004}.tmbox label{display:flex;gap:6px;align-items:center;white-space:nowrap}.ctr{text-align:center!important}tr.grprow th{border-bottom:0;padding-bottom:0}tr.grprow th:not(.ogh){border-bottom:0}
 .rgw i{font-style:normal;font-family:var(--mono);font-size:.7rem;min-width:34px;text-align:center;padding:2px 3px;border-radius:4px;background:var(--sunk);color:var(--muted)}
 .rgw i.hi{background:color-mix(in srgb,var(--good) 30%,transparent);color:var(--ink);font-weight:700}
 .rgw i.lo{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--ink)}
@@ -308,7 +310,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 
 <header class="top">
   <div class="top-in">
-    <div class="brand"><h1>Legal Troubles <span>BI</span></h1><span class="eyebrow" id="stamp">Loading data…</span></div>
+    <div class="brand"><h1>Legal Troubles <span>Dashboard</span></h1><span class="eyebrow" id="stamp">Loading data…</span></div>
     <nav class="tabs" role="tablist" aria-label="Views">
       <button class="tab" role="tab" id="tab-overview" aria-selected="true" data-v="overview">Overview</button>
       <button class="tab" role="tab" id="tab-returns" aria-selected="false" data-v="returns">Returners</button>
@@ -389,7 +391,7 @@ function waiverProcess(){const w=LGD().waiverProcessET,base=M?.dates?.waivers;
 // claims are due 10:30 PM ET the night before waivers process
 function waiverDue(){const w=waiverProcess();if(!w||isNaN(w))return null;const p=etParts(w),prev=new Date(Date.UTC(p.y,p.m-1,p.d)-864e5);return etInstant(prev.getUTCFullYear(),prev.getUTCMonth()+1,prev.getUTCDate(),22,30)}
 /* Validation + freshness (pipeline adds b.validation, section {stale,staleSince,reason} / {error}, curated {expired}) */
-let STALE_H=2;
+let STALE_H=6;
 function dataTimeMaxAge(){}
 function dataTime(){dataTimeMaxAge();for(const t of [S.meta?.updatedAt,S.builtAt,S.extras?.builtAt]){if(!t)continue;const d=new Date(t);if(!isNaN(d))return d}return null}   // ESPN numbers time first
 function sections(){const E=S.extras||{},N=S.news||{};return [['ESPN numbers',S.meta],['Playoff odds',latestOdds()],['Waiver order',S.waivers],['This week',E.matchup],['Seed race',E.race],['Bye and playoff grids',E.roster],['Free agents',E.freeAgents],['Key dates',E.dates],['Extras',S.extras],
@@ -406,7 +408,7 @@ function allProblems(){const seen=new Set(),out=[];const add=(l,p)=>{if(!p)retur
   Object.entries(S.extras?.staleFeatures||{}).forEach(([k,o])=>add(SECNAME['extras.'+k]||k,secProblem(o)));
   (S.validation?.staleSections||[]).forEach(k=>add(SECNAME[k]||k,{err:false,txt:'stale (validator)'}));
   return out}
-const DBNAME={'transactions/current':'Waiver report','meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','practice/current':'Practice reports','schedule/current':'NFL schedule','memos':'Memo','connect':'Database connection'};
+const DBNAME={'rosters/current':'Team rosters','transactions/current':'Waiver report','meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','practice/current':'Practice reports','schedule/current':'NFL schedule','memos':'Memo','connect':'Database connection'};
 const SECNAME={meta:'ESPN numbers',players:'Players',scores:'Scores',odds:'Playoff odds',waivers:'Waiver order',nfl:'NFL schedule',curated:'Staff notes',extras:'Extras',
   'extras.matchup':'This week','extras.race':'Seed race','extras.roster':'Bye and playoff grids','extras.freeAgents':'Free agents','extras.dates':'Key dates','extras.prev':'Change vs last week',
   news:'News','news.ours':'Our news','news.league':'League news','news.desk':'Rumors and trending',practice:'Practice reports',memos:'Memo',returns:'Returns'};
@@ -420,12 +422,33 @@ function banners(){const V=S.validation,out=[];
     out.push(`<div class="banner red" role="alert"><b>Data check failed${V.checkedAt?` (${fmtD(V.checkedAt)})`:''}. Data frozen at ${V.bundleBuiltAt||S.builtAt?fmtD(V.bundleBuiltAt||S.builtAt):'the last good refresh'}; do not act on new numbers until Rich clears it.</b>${f.length?`<ul>${f.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<span>The validator gave no details.</span>'}</div>`)}
   const probs=allProblems(),errs=probs.filter(([,p])=>p.err);
   if(errs.length)out.push(`<div class="banner red" role="alert"><b>Sections that failed to load:</b><ul>${errs.map(([l,p])=>`<li>${esc(l)} ${esc(p.txt)}</li>`).join('')}</ul></div>`);
-  const am=[],dt=dataTime(),age=h=>h>=48?Math.round(h/24)+' days':Math.round(h)+' hours';if(dt){const h=(Date.now()-dt)/36e5;if(h>STALE_H)am.push(`Numbers are ${age(h)} old (last update ${fmtD(dt)}). Open Claude and tell Linda to refresh.`)}
-  for(const [l,t] of [['News and rumors',S.news?.desk?.updatedAt||S.news?.ours?.updatedAt],['Practice reports',S.practice?.updatedAt]]){const d=t?new Date(t):null;if(d&&!isNaN(d)){const h=(Date.now()-d)/36e5;if(h>STALE_H)am.push(`${l}: last sweep ${age(h)} ago (${fmtD(d)}); newer ${l==='Practice reports'?'reports':'news'} may be missing.`)}}
+  const am=[],dt=null,age=h=>h;
   probs.filter(([,p])=>!p.err).forEach(([l,p])=>am.push(`${l} ${p.txt}.`));if(V?.staleData&&!am.length)am.push('The validator marked this data stale.');
   if(V&&V.ok!==false&&(V.warnings||[]).length)(V.warnings).forEach(x=>am.push(typeof x==='string'?x:(x.msg||x.message||JSON.stringify(x))));
-  if(am.length)out.push(`<div class="banner amber" role="status"><b>Stale or partial data${dt&&(Date.now()-dt)/36e5>STALE_H?` · stale since ${fmtD(dt)}`:''}</b><ul>${am.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`);
+  if(am.length)out.push(`<div class="banner amber" role="status"><b>Partial data</b><ul>${am.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`);
   return out.join('')}
+
+function freshSrc(){const o=latestOdds();return {
+ num:['ESPN numbers','standings, scores, our roster and this week\'s matchup',S.meta?.updatedAt],
+ odds:['Playoff odds','simulated playoff and #1-seed chances',o?.updatedAt||o?.at],
+ xtra:['Weekly extras','this week\'s matchup, seed race, bye and playoff grids, free agents',S.extras?.builtAt||S.extras?.updatedAt],
+ fa:['Free agents list','best available free agents by projection',S.extras?.builtAt||S.extras?.updatedAt],
+ wo:['Waiver order','the pick order',S.waivers?.updatedAt],
+ ros:['Fantasy team rosters','who is on each of the 14 fantasy teams',S.rosters?.updatedAt],
+ tx:['Transaction log','claims, adds and drops from ESPN',S.tx?.asOf],
+ dep:['NFL depth charts','who each team lists as its kick and punt returners today',S.returns?.updatedAt],
+ pun:['Punt coverage','punts made by each team',S.punting?.builtAt||S.punting?.updatedAt],
+ news:['News and rumors','news desk sweep',S.news?.desk?.updatedAt||S.news?.ours?.updatedAt],
+ prac:['Practice reports','Wed-Fri practice participation',S.practice?.updatedAt],
+ sch:['NFL schedule','kickoff times, byes and opponents',S.sched?.asOf||S.sched?.updatedAt]}}
+const FRESH_VIEW={overview:['num','odds','xtra','news','prac'],returns:['dep','num','ros'],roster:['num','xtra','prac'],market:['fa','wo'],waivers:['tx','ros'],league:['num','odds','xtra','ros'],schedule:['num'],news:['news','prac']};
+const FRESH_H=48;
+function freshBanner(v){const F=freshSrc(),ks=FRESH_VIEW[v]||[];if(!ks.length)return '';
+  const age=h=>h<1?Math.max(1,Math.round(h*60))+' min':h<48?(Math.round(h)===1?'1 hour':Math.round(h)+' hours'):Math.round(h/24)+' days';
+  const rows=ks.map(k=>{const [l,what,t]=F[k],d=t?new Date(t):null,ok=d&&!isNaN(d),h=ok?(Date.now()-d)/36e5:null,stale=ok&&h>FRESH_H;
+    return `<li class="${!ok||stale?'fs':''}"><b title="${esc(what)}" style="cursor:help">${esc(l)}</b> · ${ok?`${k==='sch'?esc(String(t))+' (date only, no time recorded)':esc(fmtD(d))+' · '+age(h)+' ago'}${stale?' · <b>stale</b>':''}`:'<b>no pull time recorded</b>'}</li>`}).join('');
+  const bad=ks.some(k=>{const t=F[k][2],d=t?new Date(t):null;return !d||isNaN(d)||(Date.now()-d)/36e5>FRESH_H});
+  return `<div class="banner ${bad?'red fresh2':'fresh'}" role="status"><b>When this page's data was last pulled into the database</b><ul>${rows}</ul></div>`}
 function checksTxt(){const V=S.validation;return !V?'Checks: no validation result in this refresh':V.ok===false?`Checks: FAILED (${(V.failures||[]).length})`:`Checks: passed${V.checkedAt?' '+fmtShort(V.checkedAt):''}`}
 const fmtShort=t=>{try{return new Date(t).toLocaleString('en-US',{timeZone:TZ,month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET'}catch(e){return String(t)}};
 const isExpired=x=>!!(x&&(x.expired===true||(x.expires&&new Date(x.expires)<new Date())));
@@ -595,7 +618,7 @@ function waiverPanel(){
 function market(){return waiverPanel()+freeAgents()}
 function freeAgents(){if(!M?.freeAgents||secProblem(M.freeAgents)?.err)return missingPanel('Best free agents available',M?.freeAgents,'waiver-wire projections');const F=M.freeAgents,ord=['QB','RB','WR','TE','K','D/ST'];
   return `<section class="panel"><div class="ph"><h2>Best free agents available ${NW(23)}</h2><span class="eyebrow">By this week's projection · our fallback when claims miss</span></div>${secMsg(F,'Free agents')}
-    <div class="fa">${ord.map(p=>`<div style="display:grid;gap:8px;align-content:start;min-width:0"><h3>${p}</h3><ol>${(F[p]||[]).map(x=>`<li>${nameBtn(x.name)}<span>${esc(x.nfl||'FA')} · ${x.proj!=null?(+x.proj).toFixed(1)+' proj':'no proj.'} · ${x.pct!=null?x.pct+'%':'n/a'} owned · ${x.status==='WAIVERS'?'on waivers':'free agent'}${x.inj&&x.inj!=='ACTIVE'?' · '+(STATUS[x.inj]||x.inj):''}</span></li>`).join('')||'<li class="note">None worth listing (bye or no projection)</li>'}</ol></div>`).join('')}</div>
+    <div class="fa">${ord.map(p=>`<div style="display:grid;gap:8px;align-content:start;min-width:0"><h3>${p}</h3><ol>${(F[p]||[]).map(x=>`<li>${plink(x.name,{pos:p,nfl:x.nfl,proj:x.proj,pct:x.pct,inj:x.inj,status:x.status,wv:x.status==='WAIVERS'})}<span>${esc(x.nfl||'FA')} · ${x.proj!=null?(+x.proj).toFixed(1)+' proj':'no proj.'} · ${x.pct!=null?x.pct+'%':'n/a'} owned · ${x.status==='WAIVERS'?'on waivers':'free agent'}${x.inj&&x.inj!=='ACTIVE'?' · '+(STATUS[x.inj]||x.inj):''}</span></li>`).join('')||'<li class="note">None worth listing (bye or no projection)</li>'}</ol></div>`).join('')}</div>
     <p class="note">Players still on waivers become free agents after claims process. Projections are ESPN's, in our scoring; players on bye this week are left out.</p></section>`}
 const fmtT=t=>t?fmtD(t):'time unknown';
 const pid=name=>{const e=Object.entries(S.players).find(([,p])=>p.name===name);return e?e[0]:null};
@@ -668,11 +691,26 @@ function openPlayer_(id){const p=S.players[id];if(!p)return;
    <section class="panel"><div class="ph"><h2>Playoff schedule</h2></div><div class="chips">${(p.playoffs||[]).length?(p.playoffs).map((o,i)=>chip('t-roster','Wk '+(LGD().playoffWeeks[i]??'?')+' '+(typeof o==='object'?o.opp:o))).join(''):'<span class="note">No playoff schedule in this refresh</span>'}</div></section>
    ${!p.ours?`<section class="panel"><div class="ph"><h2>Owner</h2></div><div>${p.owner==='Free agent'?'Free agent':`<button class="link" data-team="${esc(p.owner)}">${esc(p.owner)}</button>${t?` <span class="note">${wlt(t)} · playoffs ${pct(t.playoffPct)}</span>`:''}`}</div></section>`:''}`);
 }
+
+const FAINFO={};
+function plink(n,i){i=i||{};if(n&&i&&(i.pos||i.nfl))FAINFO[n]=Object.assign(FAINFO[n]||{},i);const id=pid(n);return id?`<button class="link" data-player="${id}">${esc(n)}</button>`:`<button class="link" data-fa="${esc(n)}">${esc(n)}</button>`}
+function rosterOwner(id,name){const T=S.rosters?.teams;if(!T)return null;for(const [t,l] of Object.entries(T))if(l.some(x=>x.id===id||(!id&&x.name===name)))return t;return ''}
+function openFa(n){const i=FAINFO[n]||{};const own=rosterOwner(i.id,n);
+  const rgp=(()=>{try{return rgWith('both',()=>rgRowsC('both')).find(p=>p.name===n)}catch(e){return null}})();
+  drawer(`<div class="dh"><div><div class="eyebrow">${esc(i.pos||'')} · ${esc(i.nfl||'')}</div><h2 id="dtitle">${esc(n)}</h2></div><button class="x" aria-label="Close" data-close>×</button></div>
+  <div class="facts">${i.proj!=null?`<div class="fact"><b>${(+i.proj).toFixed(1)}</b><span>Proj. this week</span></div>`:''}${i.pct!=null?`<div class="fact"><b>${i.pct}%</b><span>Owned</span></div>`:''}<div class="fact"><b>${esc(STATUS[i.inj||i.status]||i.inj||i.status||'Healthy')}</b><span>Health</span></div><div class="fact"><b>${own===null?'n/a':own||(i.wv?'Waivers':'Free agent')}</b><span>Now with</span></div></div>
+  ${rgp?`<p><button class="showmore" data-fartn="${esc(rgKey(rgp))}">See return stats</button></p>`:''}
+  <p class="note">Full game logs are kept only for our own players. This card shows what we track for everyone else.</p>`)}
+function rosterPanel(name){const L=S.rosters?.teams?.[name];if(!L)return `<section class="panel"><div class="ph"><h2>Roster</h2></div><p class="note">Rosters have not been loaded yet.</p></section>`;
+  const ord=['QB','RB','RB/WR','WR','WR/TE','TE','OP','FLEX','K','D/ST','Bench','IR'],ix=x=>{const i=ord.indexOf(x.slot);return i<0?99:i};
+  const rs=L.slice().sort((a,b)=>ix(a)-ix(b)||a.name.localeCompare(b.name));
+  return `<section class="panel"><div class="ph"><h2>Roster</h2><span class="eyebrow">${rs.length} players · as of ${esc(fmtShort(Date.parse(S.rosters.updatedAt)))}</span></div><div class="tw"><table><thead><tr><th>Slot</th><th>Player</th><th>Pos</th><th>NFL</th><th>Health</th></tr></thead><tbody>
+  ${rs.map(x=>`<tr><td class="note">${esc(x.slot)}</td><td>${plink(x.name,{id:x.id,pos:x.pos,nfl:x.nfl,status:x.status})}</td><td>${esc(x.pos)}</td><td>${esc(x.nfl)}</td><td>${esc(STATUS[x.status]||(x.status==='NORMAL'?'Healthy':x.status))}</td></tr>`).join('')}</tbody></table></div></section>`}
 function openTeam(name){try{openTeam_(name)}catch(e){console.warn('drawer failed',e);drawer(`<div class="dh"><h2 id="dtitle">${esc(name)}</h2><button class="x" aria-label="Close" data-close>×</button></div><p class="note">This team's details couldn't be shown (${esc(e.message||e)}).</p>`)}}
 function openTeam_(name){const t=teamByName(name);if(!t)return;const s=teamScores(name);
   drawer(`<div class="dh"><div><div class="eyebrow">Seed ${t.seed} · ${wlt(t)}</div><h2 id="dtitle">${esc(name)}</h2></div><button class="x" aria-label="Close" data-close>×</button></div>
    <div class="facts"><div class="fact"><b>${pct(t.playoffPct)}</b><span>Playoff odds</span></div><div class="fact"><b>${pct(t.byePct)}</b><span>#1 seed</span></div><div class="fact"><b>${t.pf!=null?t.pf.toFixed(0):'n/a'}</b><span>Points for</span></div><div class="fact"><b>${avgPPG(t.name)}</b><span>Avg PPG</span></div><div class="fact"><b>${t.strength??'n/a'}</b><span>Strength</span></div><div class="fact"><b>${t.hundreds??'n/a'}</b><span>100+ games</span></div></div>
-   <section class="panel"><div class="ph"><h2>Weekly scores</h2><span class="eyebrow">100 line</span></div>${barsSVG(s,{line:100,hi:100})}</section>`);
+   <section class="panel"><div class="ph"><h2>Weekly scores</h2><span class="eyebrow">100 line</span></div>${barsSVG(s,{line:100,hi:100})}</section>${rosterPanel(name)}`);
 }
 let lastFocus=null;
 function drawer(html){lastFocus=document.activeElement;const d=$('#drawer');d.innerHTML=html;d.hidden=false;$('#scrim').hidden=false;d.querySelector('[data-close]')?.focus()}
@@ -681,7 +719,7 @@ function closeDrawer(){$('#drawer').hidden=true;$('#scrim').hidden=true;lastFocu
 /* ---------- wiring ---------- */
 /* ---------- Returns tab (Return Game department): Kick / Punt / Both ---------- */
 // One normalized model per kind so every section renders the same way for kick returns, punt returns, or both combined.
-const RF={k:'elig',open:null,n:25,kind:'kr',mine:false};
+const RF={q:'',teams:[],tmOpen:false,k:'elig',open:null,n:25,kind:'kr',mine:false};
 // kind: kr | pr | both (only players with at least one kick AND one punt return) | all (everyone, kick + punt combined). Models only know kr / pr / both.
 let RG_OVR=null;const rgK=()=>RG_OVR||(RF.kind==='all'?'both':RF.kind);
 function rgWith(k,f){const o=RG_OVR;RG_OVR=k;try{return f()}finally{RG_OVR=o}}
@@ -848,11 +886,12 @@ function rgRankHtml(R,W){const M_=rgMod(rgK());
   if(!M_||M_.error)return `<section class="panel"><div class="ph"><h2>Returner rankings</h2></div>${rgToggle()}<div class="secmsg err">${esc(M_?.error||'No return data')}</div></section>`;
   const K=RG_KIND[rgK()],L=K.L,Pall=rgRowsC(rgK()),sc=R.scoring||{krYd:.1,krTd:6};
   const isBoth=RF.kind==='both',P=isBoth?Pall.filter(p=>p.nKr>0&&p.nPr>0):Pall;   // Both: at least one kick return and one punt return this season
-  const filt={elig:p=>p.elig,fa:p=>p.elig&&p.owner==='Free agent',all:()=>true}[RF.k];
+  const qq=RF.q.trim().toLowerCase(),tmOK=p=>!RF.teams.length||RF.teams.includes(p.team),qOK=p=>!qq||p.name.toLowerCase().includes(qq);
+  const filt0={elig:p=>p.elig,fa:p=>p.elig&&p.owner==='Free agent',all:()=>true}[RF.k],filt=p=>tmOK(p)&&qOK(p)&&(qq?true:filt0(p));
   const base=P.filter(filt).sort((a,b)=>b.pts3-a.pts3||b.tot-a.tot), ix=new Map(base.map((p,i)=>[rgKey(p),i]));
   const rpVal=(p,k)=>({player:p.name.toLowerCase(),team:p.team,pts3:p.pts3,sh3:p.sh3,lw:p.lwSh,tot:p.yT,totK:p.yK,totP:p.yP,fc3:p.fc3,site:p.siteMin,espn:p.espnMin,owner:p.owner.toLowerCase(),opp:rgOpp(p.team).key,oppk:rgExp(p).k?.ret3??null,oppy:rgExp(p).k?.yd3??null,exp:rgExp(p).ep??null,expr:rgExp(p).er??null,pkr:rgPct(p,'kr'),ppr:rgPct(p,'pr'),avgK:rgAvgK(p),avgP:rgAvgP(p)})[k];
   const rowsF=sortRows(RF.mine?base.filter(p=>!p.ours):base,'rp',rpVal,(a,b)=>ix.get(rgKey(a))-ix.get(rgKey(b)));
-  const mineRows=RF.mine?sortRows(P.filter(p=>p.ours),'rp',rpVal,(a,b)=>b.pts3-a.pts3||b.tot-a.tot):[];
+  const mineRows=RF.mine?sortRows(P.filter(p=>p.ours&&tmOK(p)&&qOK(p)),'rp',rpVal,(a,b)=>b.pts3-a.pts3||b.tot-a.tot):[];
   const rows=[...mineRows,...rowsF];
   const lastN=Math.min(3,W.length),hasFc=rgK()!=='kr';
   const ptsNote=rgK()==='kr'?`${sc.krYd} per kick-return yard + ${sc.krTd} per return TD`:rgK()==='pr'?`${sc.prYd??sc.krYd} per punt-return yard + ${sc.prTd??sc.krTd} per return TD`:`${sc.krYd} per kick-return yard and ${sc.prYd??sc.krYd} per punt-return yard + ${sc.krTd} per return TD`;
@@ -861,8 +900,9 @@ function rgRankHtml(R,W){const M_=rgMod(rgK());
   return `<section class="panel"><div class="ph"><h2>Returner rankings</h2><span class="phr">${resetBtn('rp')}<span class="eyebrow">${K.noun} · ranked by return points per game, last ${lastN} games played · click a column to sort</span></span></div>
     <div class="rgtools">${rgToggle()}</div>
     <p class="note">${rgK()==='kr'?'Kick returners only.':rgK()==='pr'?'Punt returners only. Fair catches (FC) earn nothing, so they cap a punt returner\'s value; share counts punts he fielded (returns + fair catches).':(RF.kind==='both'?`Both: only players with at least one kick return and one punt return this season (${P.length} of ${Pall.length}). Points, returns and share add both together. Tap All to see everyone.`:`All: everyone with a kick or punt return (${Pall.length}), kick and punt combined: points, returns and share add both together. Tap Both for only the players who do both.`)} League scoring: ${ptsNote}.</p>
+    <div class="rgsearch"><input id="rgq" type="search" placeholder="Search players" aria-label="Search returners" value="${esc(RF.q)}"><div class="tmsel"><button data-tmtoggle="1" aria-expanded="${RF.tmOpen}">Teams${RF.teams.length?' ('+RF.teams.length+')':': all'} ▾</button>${RF.tmOpen?`<div class="tmbox">${[...new Set(Pall.map(p=>p.team))].sort().map(t=>`<label><input type="checkbox" data-tmck="${esc(t)}"${RF.teams.includes(t)?' checked':''}> ${esc(t)}</label>`).join('')}</div>`:''}</div>${RF.q||RF.teams.length?'<button data-rclear="1">Clear</button>':''}</div>
     <div class="rgtools"><div class="filters">${[['elig','Startable (RB/WR)'],['fa','Free agents only'],['all','Everyone']].map(([k,l])=>`<button data-rf="${k}" aria-pressed="${RF.k===k}">${l}</button>`).join('')}<button data-rmine="1" aria-pressed="${RF.mine}" title="On: our players pinned to the top, then the filter you picked">My team</button></div>${rgColBar(hasFc)}</div>
-    ${rgRankTable(M_,rows,hasFc)}${rows.length>RF.n?`<button class="showmore" data-rmore="1">Show all ${rows.length} returners</button>`:''}<p class="note">Returns by week = his ${K.noun} / team's ${K.noun}. Green boxes = kick returns, blue = punt returns (kick first); the darker the box, the bigger his share${hasFc?' (punt share counts punts fielded)':''}. Bye weeks are skipped, not counted as zero.${hasFc?' Fair catches come from ESPN play-by-play.':''} Team site / ESPN = where each depth chart lists him today (${chartWord}); "Not listed" = chart read and he isn't on it; "Couldn't read" = we failed to read that chart. Tap a name for the player card.</p></section>`}
+    ${rgRankTable(M_,rows,hasFc)}${rows.length>RF.n?`<button class="showmore" data-rmore="1">Show all ${rows.length} returners</button>`:''}<p class="note">Returns by week = his ${K.noun} / team's ${K.noun}. Green boxes = kick returns, blue = punt returns (kick first); the darker the box, the bigger his share${hasFc?' (punt share counts punts fielded)':''}. Bye weeks are skipped, not counted as zero.${hasFc?' Fair catches come from ESPN play-by-play.':''} Team site / ESPN = where each depth chart lists him today (${chartWord}); "Not listed" = chart read and he isn't on it; "Couldn't read" = we failed to read that chart. Tap a name for the player card. Searching looks at everyone on the list, whatever the Startable / Free agents filter says.</p></section>`}
 function rgTeamsHtml(R,W){const M_=rgMod('both');if(!M_||M_.error)return '';
   const teams=Object.keys(M_.teams).sort(),L='KR+PR',hasFc=true;
   // disagreement count per kind (both charts read and both list someone)
@@ -988,11 +1028,11 @@ const rgAvgP=p=>{const q=rgKindRow(p,'pr');return q&&q.nPr?q.yP/q.nPr:null};
 const rgPct=(p,k)=>{const q=rgKindRow(p,k);return q?q.sh3:null};
 const RG_COLS=[
  {k:'team',l:'NFL',sort:'team',tip:'NFL team',cell:p=>`<td>${esc(p.team)}</td>`},
- {k:'opp',l:()=>`Wk ${rgWk()} opp`,pl:'Opponent this week',grp:1,sort:'opp',tip:'This week\'s opponent and kickoff time. Click it for their kickoffs and punts game by game, with season totals',cell:p=>`<td>${rgOppHtml(p.team,true)}</td>`},
- {k:'oppk',l:'KR/GM',pl:'Opponent KR/GM',grp:1,num:1,kr:1,sort:'oppk',tip:'Opponent kick returns allowed per game, last 3 games. The small number beside it is last game. Click it for their full season',cell:p=>`<td class="num">${rgOppCell(p)}</td>`},
- {k:'oppy',l:'Yds/GM',pl:'Opponent return Yds/GM',grp:1,num:1,kr:1,sort:'oppy',tip:'Opponent kick-return yards allowed per game, last 3 games. The small number beside it is last game. Click it for their full season',cell:p=>`<td class="num">${rgYdsCell(p)}</td>`},
- {k:'expr',l:'Exp returns',pl:'Opponent: expected returns',grp:1,num:1,kr:1,sort:'expr',tip:'Expected kick returns for him this week = opponent kick returns allowed per game (last 3) × his share of his team\'s kick returns (last 3)',cell:p=>`<td class="num">${rgExpCell(p,x=>rgF(x.er))}</td>`},
- {k:'exp',l:'Exp pts',pl:'Opponent: expected points',grp:1,num:1,kr:1,sort:'exp',tip:'Expected kick-return points = expected returns × opponent yards allowed per return × league scoring per yard',cell:p=>`<td class="num">${rgExpCell(p,x=>rgF(x.ep))}</td>`},
+ {k:'opp',l:()=>`Wk ${rgWk()} opponent`,pl:'Opponent this week',grp:1,sort:'opp',tip:'This week\'s opponent and kickoff time. Click it for their kickoffs and punts game by game, with season totals',cell:p=>`<td>${rgOppHtml(p.team,true)}</td>`},
+ {k:'oppk',l:'KR allowed / GM',pl:'Opponent KR allowed / GM',grp:1,ctr:1,num:1,kr:1,sort:'oppk',tip:'Opponent kick returns allowed per game, last 3 games. The small number beside it is last game. Click it for their full season',cell:p=>`<td class="num">${rgOppCell(p)}</td>`},
+ {k:'oppy',l:'Yds allowed / GM',pl:'Opponent return Yds allowed / GM',grp:1,ctr:1,num:1,kr:1,sort:'oppy',tip:'Opponent kick-return yards allowed per game, last 3 games. The small number beside it is last game. Click it for their full season',cell:p=>`<td class="num">${rgYdsCell(p)}</td>`},
+ {k:'expr',l:'Exp returns',pl:'Expected returns (this week)',ctr:1,num:1,kr:1,sort:'expr',tip:'Expected kick returns for him this week = opponent kick returns allowed per game (last 3) × his share of his team\'s kick returns (last 3)',cell:p=>`<td class="num">${rgExpCell(p,x=>rgF(x.er))}</td>`},
+ {k:'exp',l:'Exp pts',pl:'Expected points (this week)',ctr:1,num:1,kr:1,sort:'exp',tip:'Expected kick-return points = expected returns × opponent yards allowed per return × league scoring per yard',cell:p=>`<td class="num">${rgExpCell(p,x=>rgF(x.ep))}</td>`},
  {k:'owner',l:'Owner',sort:'owner',tip:'Who owns him in our ESPN league',cell:p=>`<td>${p.owner==='Free agent'?'<span class="chip rg-ok">Free agent</span>':p.owner==='Not in ESPN fantasy'?'<span class="note">Not in ESPN fantasy (defender)</span>':p.owner==='No ESPN id match'?'<span class="note">Not matched to an ESPN player</span>':esc(p.owner||'Owner unknown')}</td>`},
  {k:'site',l:'Team site',sort:'site',off:1,tip:'Where the team\'s own website depth chart lists him (KR1 = first kick returner)',cell:(p,M_)=>`<td>${rgRank(M_,p,'site')}</td>`},
  {k:'espn',l:'ESPN',sort:'espn',off:1,tip:'Where ESPN\'s depth chart lists him (KR1 = first kick returner)',cell:(p,M_)=>`<td>${rgRank(M_,p,'espn')}</td>`},
@@ -1019,7 +1059,7 @@ function rgColBar(hasFc){const cs=rgColsFor(hasFc),on=cs.filter(c=>!RG_HIDE.has(
    <div class="rgcolact"><button class="link" data-rgcolall="1">Show all</button><button class="link" data-rgcoldef="1">Default</button><button class="rst" data-rgcolopen="1">Done</button></div></div>`:''}</div>`}
 let RG_ROWMAP=new Map();
 function rgRankTable(M_,rows,hasFc){const cols=rgColsFor(hasFc).filter(c=>!RG_HIDE.has(c.k));RG_ROWMAP=new Map(rows.map(p=>[rgKey(p),p]));
-  const og=(h,c)=>c.grp?h.replace(/^<(t[hd])(?: class="([^"]*)")?/,(m,t,cl)=>`<${t} class="${(cl?cl+' ':'')}og"`):h;
+  const og=(h,c)=>(c.grp||c.ctr)?h.replace(/^<(t[hd])(?: class="([^"]*)")?/,(m,t,cl)=>`<${t} class="${(cl?cl+' ':'')}${c.grp?'og ':''}${c.ctr?'ctr':''}"`):h;
   const segs=[{g:false,n:1}];cols.forEach(c=>{const g=!!c.grp,l=segs[segs.length-1];if(l.g===g)l.n++;else segs.push({g,n:1})});
   const grpRow=cols.some(c=>c.grp)?`<tr class="grprow">${segs.map(x=>x.g?`<th class="og ogh" colspan="${x.n}" title="Everything in this block is about this week's opponent">Wk ${rgWk()} opponent</th>`:`<th colspan="${x.n}"></th>`).join('')}</tr>`:'';
   return `<div class="tw"><table><thead>${grpRow}<tr>${sh('rp','player','Player')}${cols.map(c=>og(c.sort?sh('rp',c.sort,rgColLabel(c),c.num?1:0,c.tip):`<th title="${esc(c.tip||'')}">${esc(rgColLabel(c))}</th>`,c)).join('')}</tr></thead><tbody>
@@ -1097,7 +1137,7 @@ function scWeekView(){
   else h+='<div class="scvs sub">No opponent listed for this week (playoff matchups are not set yet).</div>';
   const byeMine=byes.filter(id=>hasM(id)||hasO(id));
   if(byeMine.length){
-    h+='<div class="day"><h2>Players on bye</h2>'+byeMine.map(id=>'<div class="game '+(hasM(id)?'mine':'oppg')+'"><div class="time">Bye</div><div class="mu"><div class="tn">'+SC.T[id].a+'</div><div class="full">'+esc(SC.T[id].n)+'</div></div>'+scPlayers([id],om,o)+'</div>').join('')+'</div>';
+    h+='<div class="day"><h2>Teams on bye</h2>'+byeMine.map(id=>'<div class="game '+(hasM(id)?'mine':'oppg')+'"><div class="time">Bye</div><div class="mu"><div class="tn">'+SC.T[id].a+'</div><div class="full">'+esc(SC.T[id].n)+'</div></div>'+scPlayers([id],om,o)+'</div>').join('')+'</div>';
   }
   let last='';
   for(const g of gs){
@@ -1181,7 +1221,7 @@ function txMatch(r){if(TX.team&&r.team.name!==TX.team)return false;const k=TX.ki
   if(k==='draft')return r.kind==='draft';if(k==='fa')return r.kind==='fa_add';if(k==='drop')return r.kind==='drop';if(k==='trade')return r.kind==='trade'||r.kind==='trade_event';return true}
 function txNote(r){if(r.kind==='draft')return 'Pick #'+esc(r.pick)+(r.keeper?' (keeper)':'');if(r.kind==='claim')return esc(r.reason||'')+(r.wonBy?` <b>Winner: ${esc(r.wonBy.name)}</b>`:'');
   if(r.kind==='trade')return esc((r.moves||[]).map(m=>`${m.player.name} (${m.from.name} → ${m.to.name})`).join('; '));
-  if(r.kind==='trade_event')return '<span class="note">ESPN removes the players from its feed once a trade is decided</span>';return ''}
+  if(r.kind==='trade_event')return '<span class="note">Trade decided; ESPN deletes the proposal and its players once it is accepted or declined, so they are no longer available</span>';return ''}
 function txRunView(rows){
   const cl=rows.filter(r=>r.kind==='claim');if(!cl.length)return '<p class="note">No claims match this filter.</p>';
   const runs={};cl.forEach(r=>{(runs[r.run]=runs[r.run]||[]).push(r)});
@@ -1206,6 +1246,15 @@ function txAllView(rows){
   <div class="tw"><table><thead><tr>${sh('tx','ts','When')}${sh('tx','team','Team')}${sh('tx','kind','Type')}${sh('tx','player','Player')}${sh('tx','drop','Dropped')}<th>Detail</th></tr></thead><tbody>
   ${st.slice(0,TX.n).map(r=>`<tr class="${txMine(r)?'me':''}"><td class="note">${esc(r.when)}</td><td>${esc(r.team.name)}</td><td>${txChip(r)}</td><td>${r.add?txPlayer(r.add):r.kind==='trade'?'<span class="note">'+(r.moves||[]).length+' players</span>':r.kind==='drop'?'':''}</td><td>${r.drop?txPlayer(r.drop):''}</td><td class="note" style="white-space:normal;min-width:240px">${txNote(r)}</td></tr>`).join('')||'<tr><td colspan="6" class="note">No moves match this filter.</td></tr>'}
   </tbody></table></div>${st.length>TX.n?`<button class="showmore" data-txmore="1">Show more (${st.length-TX.n})</button>`:''}</section>`}
+function droppedPanel(rows){
+  const seen=new Map();rows.filter(r=>r.drop&&r.result!=='lost'&&r.result!=='canceled').sort((a,b)=>a.ts.localeCompare(b.ts)).forEach(r=>seen.set(r.drop.id,r));
+  let L=[...seen.values()].filter(r=>!TX.team||r.team.name===TX.team).map(r=>{const o=rosterOwner(r.drop.id,r.drop.name);return {r,o}});
+  L.sort((a,b)=>((a.o===''?0:1)-(b.o===''?0:1))||b.r.ts.localeCompare(a.r.ts));
+  const avail=L.filter(x=>x.o==='').length;
+  return `<section class="panel"><div class="ph"><h2>Players dropped</h2><span class="eyebrow">${L.length} dropped · ${S.rosters?avail+' not on any roster now (pickup targets)':'roster check pending'}</span></div>
+  <div class="tw"><table class="wrt"><thead><tr><th>Player</th><th>Pos</th><th>NFL</th><th>Dropped by</th><th>When</th><th>Now</th></tr></thead><tbody>
+  ${L.map(({r,o})=>`<tr class="${o===''?'me':''}"><td>${plink(r.drop.name,{id:r.drop.id,pos:r.drop.pos,nfl:r.drop.nfl})}</td><td>${esc(r.drop.pos)}</td><td>${esc(r.drop.nfl)}</td><td>${esc(r.team.name)}</td><td class="note">${esc(r.when)}</td><td>${o===null?'<span class="note">n/a</span>':o===''?'<b>Available (free agent or waivers)</b>':'<span class="note">On '+esc(o)+'</span>'}</td></tr>`).join('')||'<tr><td colspan="6" class="note">No drops match this filter.</td></tr>'}
+  </tbody></table></div><p class="note">Highlighted = not on any team's roster right now. Includes drops made with a waiver claim or free-agent add.</p></section>`}
 function waiverReport(){
   const d=S.tx;if(!d||!Array.isArray(d.rows))return '<div class="empty">The transaction log has not been loaded into the database yet.</div>';
   const rows=d.rows,teams=Object.values(d.teams||{}).sort(),c=d.claims||{};
@@ -1216,16 +1265,21 @@ function waiverReport(){
   <div class="txtools"><div style="display:flex;gap:6px">${tabs}</div>
   ${sel('team',[['','All teams'],...teams.map(t=>[t,t])],TX.team)}${TX.view==='all'?sel('kind',[['','All types'],['claims','All claims'],['won','Claims won'],['lost','Claims lost'],['draft','Draft picks'],['fa','Free-agent adds'],['drop','Drops'],['trade','Trades']],TX.kind):''}</div>
   <p class="note">Claims appear once ESPN processes or cancels them (the nightly run is about 3 AM ET); pending claims are invisible to everyone. ${(d.notes||[]).slice(1).map(esc).join(' ')} ${d.agedOutOfEspnFeed?d.agedOutOfEspnFeed+' older rows are kept here but no longer in ESPN\'s feed.':''}</p></section>
-  ${TX.view==='runs'?txRunView(rows):txAllView(rows)}`}
+  ${droppedPanel(rows)}${TX.view==='runs'?txRunView(rows):txAllView(rows)}`}
 document.addEventListener('click',e=>{const v=e.target.closest('[data-txv]');if(v){TX.view=v.dataset.txv;return render()}
   if(e.target.closest('[data-txmore]')){TX.n+=60;return render()}});
 document.addEventListener('change',e=>{const s=e.target.closest('select[data-tx]');if(!s)return;TX[s.dataset.tx]=s.value;TX.n=60;render()});
 
-function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,schedule:scheduleView,waivers:waiverReport}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}$('#view').innerHTML=bn+body;
+function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,schedule:scheduleView,waivers:waiverReport}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}let fb='';try{fb=freshBanner(S.view)}catch(e){console.warn('fresh failed',e)}$('#view').innerHTML=bn+fb+body;
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===S.view));
   if(S.meta){const dt=dataTime();$('#stamp').textContent=`Week ${LGD().week??S.meta.week} · data updated ${dt?fmtShort(dt):'time unknown'}${dt&&(Date.now()-dt)/36e5>STALE_H?' (stale)':''}`}}
 function setView(v){S.view=v;try{localStorage.setItem('lt-bi-view',v)}catch(e){}render()}
+document.addEventListener('input',e=>{if(e.target.id!=='rgq')return;RF.q=e.target.value;RF.n=25;const c=e.target.selectionStart;render();const n=$('#rgq');if(n){n.focus();try{n.setSelectionRange(c,c)}catch(x){}}});
+document.addEventListener('change',e=>{const c=e.target.closest('[data-tmck]');if(!c)return;const t=c.dataset.tmck;RF.teams=c.checked?[...RF.teams,t]:RF.teams.filter(x=>x!==t);RF.n=25;render()});
 document.addEventListener('click',e=>{if(e.target.closest('select'))return;
+  if(RF.tmOpen&&!e.target.closest('.tmsel')){RF.tmOpen=false;render()}
+  if(e.target.closest('[data-tmtoggle]')){RF.tmOpen=!RF.tmOpen;return render()}
+  if(e.target.closest('[data-rclear]')){RF.q='';RF.teams=[];return render()}
   const rf=e.target.closest('[data-rf]');if(rf){RF.k=rf.dataset.rf;RF.n=25;return render()}
   const rk=e.target.closest('[data-rk]');if(rk){RF.kind=rk.dataset.rk;RF.n=25;try{localStorage.setItem('lt-rg-kind',RF.kind)}catch(x){}return render()}
   if(e.target.closest('[data-rmore]')){RF.n=999;return render()}
@@ -1245,11 +1299,13 @@ document.addEventListener('click',e=>{if(e.target.closest('select'))return;
   const rs=e.target.closest('[data-reset]');if(rs){Object.assign(SORT[rs.dataset.reset],SORT_DEF[rs.dataset.reset]);return render()}
   const so=e.target.closest('[data-sort]');if(so){const [t,k]=so.dataset.sort.split(':');return setSort(t,k)}
   const mb=e.target.closest('[data-memo]');if(mb){S.memoSel=mb.dataset.memo;return render()}
-  const el=e.target.closest('[data-v],[data-player],[data-team],[data-goto],[data-close]');
+  const el=e.target.closest('[data-v],[data-player],[data-team],[data-goto],[data-close],[data-fa],[data-fartn]');
   if(e.target.id==='scrim')return closeDrawer(); if(!el)return;
   if(el.dataset.v)return setView(el.dataset.v);
   if(el.dataset.goto){closeDrawer();return setView(el.dataset.goto)}
   if('close' in el.dataset)return closeDrawer();
+  if(el.dataset.fa!==undefined)return openFa(el.dataset.fa);
+  if(el.dataset.fartn){const p=rgWith('both',()=>rgRowsC('both')).find(q=>rgKey(q)===el.dataset.fartn);if(p){RG_ROWMAP.set(rgKey(p),p);return openRgPlayer(rgKey(p))}}
   if(el.dataset.player)return openPlayer(el.dataset.player);
   if(el.dataset.team)return openTeam(el.dataset.team);});
 document.addEventListener('change',async e=>{const sel=e.target.closest('select[data-plan]');if(!sel||!savePlan)return;const id=sel.dataset.plan,tag=sel.value,prev=S.plans[id];
@@ -1281,6 +1337,7 @@ render();
   db.doc('validation/current').onSnapshot(s=>{ok('validation/current');if(s.exists)S.validation=s.data();soon()},err('validation/current'));
   db.doc('returns/current').onSnapshot(s=>{ok('returns/current');S.returns=s.exists?s.data():null;soon()},err('returns/current'));
   db.doc('returns/punting').onSnapshot(s=>{ok('returns/punting');S.punting=s.exists?s.data():null;soon()},err('returns/punting'));
+  db.doc('rosters/current').onSnapshot(s=>{ok('rosters/current');S.rosters=s.exists?s.data():null;soon()},err('rosters/current'));
   db.doc('transactions/current').onSnapshot(s=>{ok('transactions/current');S.tx=s.exists?s.data():null;soon()},err('transactions/current'));
   db.doc('schedule/current').onSnapshot(s=>{ok('schedule/current');S.sched=s.exists?s.data():null;soon()},err('schedule/current'));
   db.doc('practice/current').onSnapshot(s=>{ok('practice/current');S.practice=s.exists?s.data():null;soon()},err('practice/current'));
@@ -1288,5 +1345,7 @@ render();
 })();
 })();
 </script>
+
+</body></html>
 
 </body></html>
