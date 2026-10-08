@@ -30,6 +30,12 @@ def fail(m): fails.append(m)
 
 # ---- 1) live feed merged into raw.json (never delete)
 live = get(B + "?view=mTransactions2")["transactions"]
+# The default feed is ONLY the current scoring week (verified Oct 8). scoringPeriodId=N returns week N (week 1 includes the draft).
+cur = max(t["scoringPeriodId"] for t in live)
+_ids = {t["id"] for t in live}
+for _w in range(1, cur):
+    for t in get(B + "?view=mTransactions2&scoringPeriodId=%d" % _w)["transactions"]:
+        if t["id"] not in _ids: _ids.add(t["id"]); live.append(t)
 if len(live) < 50: print("FAIL: feed returned only", len(live), "transactions"); sys.exit(1)
 rp = os.path.join(OUT, "raw.json")
 raw = json.load(open(rp)) if os.path.exists(rp) else {}
@@ -59,7 +65,7 @@ if os.path.isdir(wd):
 need = set()
 for t in raw.values():
     for i in t.get("items", []):
-        if i.get("type") in ("ADD", "DROP", "TRADE") and i["playerId"] not in NAME: need.add(i["playerId"])
+        if i.get("type") in ("ADD", "DROP", "TRADE", "DRAFT") and i["playerId"] not in NAME: need.add(i["playerId"])
 need = sorted(need)
 for a in range(0, len(need), 50):
     chunk = need[a:a + 50]
@@ -115,6 +121,7 @@ for t in sorted(raw.values(), key=lambda x: x["proposedDate"]):
                 r["reason"] = ("Failed: the player to drop was already released by this team's earlier claim in the same run" if used
                                else "Failed: the player to drop was already off the roster")
                 if not used: r["unproven"] = True
+            elif st == "FAILED_ROSTERLIMIT": r["reason"] = "Failed: roster was full (no drop made)"
             else: r["reason"] = "Failed: " + st; r["unproven"] = True
         elif t.get("isPending"): r["result"] = "pending"; r["reason"] = "Not processed yet"
         else: r["result"] = (st or "unknown").lower(); r["unproven"] = True
@@ -130,6 +137,9 @@ for t in sorted(raw.values(), key=lambda x: x["proposedDate"]):
                          related=[o["type"] for o in raw.values() if o.get("relatedTransactionId") == t["id"]]))
     elif ty in ("TRADE_ACCEPT", "TRADE_UPHOLD", "TRADE_DECLINE"):
         rows.append(dict(base, kind="trade_event", result=ty.replace("TRADE_", "").lower(), relatedTo=t.get("relatedTransactionId")))
+    elif ty == "DRAFT":
+        d = items[0]
+        rows.append(dict(base, kind="draft", result="drafted", pick=d.get("overallPickNumber"), keeper=d.get("isKeeper", False), add=P(d["playerId"])))
     else:
         skipped[ty] = skipped.get(ty, 0) + 1
         rows.append(dict(base, kind="other", result=(st or "").lower()))

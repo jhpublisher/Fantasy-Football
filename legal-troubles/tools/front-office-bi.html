@@ -1171,15 +1171,15 @@ document.addEventListener('change',e=>{if(e.target.matches('[data-scom]')){SC.on
 /* ---- Waiver report tab: ESPN transaction feed (claims won/lost/canceled, free-agent adds, drops, trades) ---- */
 SORT_DEF.tx={k:'ts',d:-1};SORT.tx={k:'ts',d:-1};
 const TX={view:'runs',team:'',kind:'',n:60};
-const TXK={claim_won:['Claim won','good'],claim_lost:['Claim lost','bad'],claim_canceled:['Claim canceled','muted'],claim_pending:['Claim pending','warn'],fa_add:['Free-agent add','info'],drop:['Drop','warn'],trade_canceled:['Trade proposal canceled','muted'],trade_event:['Trade event','info']};
+const TXK={claim_won:['Claim won','good'],claim_lost:['Claim lost','bad'],claim_canceled:['Claim canceled','muted'],claim_pending:['Claim pending','warn'],fa_add:['Free-agent add','info'],drop:['Drop','warn'],draft:['Draft pick','info'],trade_canceled:['Trade proposal canceled','muted'],trade_event:['Trade event','info']};
 function txKey(r){return r.kind==='claim'?'claim_'+r.result:r.kind==='trade'?'trade_canceled':r.kind==='trade_event'?'trade_event':r.kind}
 function txChip(r){const k=txKey(r),[l,c]=TXK[k]||[r.kind,'muted'];let lab=l;if(k==='trade_event')lab={accept:'Trade accepted',uphold:'Trade upheld by league',decline:'Trade declined'}[r.result]||'Trade event';return `<span class="chip" style="color:var(--${c})">${esc(lab)}</span>`}
 function txPlayer(p){return p?`<b>${esc(p.name)}</b> <span class="note">${esc(p.pos)} · ${esc(p.nfl)}</span>`:'<span class="note">none</span>'}
 function txMine(r){return r.team&&r.team.name===S.meta?.team}
 function txMatch(r){if(TX.team&&r.team.name!==TX.team)return false;const k=TX.kind;if(!k)return true;
   if(k==='claims')return r.kind==='claim';if(k==='lost')return r.kind==='claim'&&r.result==='lost';if(k==='won')return r.kind==='claim'&&r.result==='won';
-  if(k==='fa')return r.kind==='fa_add';if(k==='drop')return r.kind==='drop';if(k==='trade')return r.kind==='trade'||r.kind==='trade_event';return true}
-function txNote(r){if(r.kind==='claim')return esc(r.reason||'')+(r.wonBy?` <b>Winner: ${esc(r.wonBy.name)}</b>`:'');
+  if(k==='draft')return r.kind==='draft';if(k==='fa')return r.kind==='fa_add';if(k==='drop')return r.kind==='drop';if(k==='trade')return r.kind==='trade'||r.kind==='trade_event';return true}
+function txNote(r){if(r.kind==='draft')return 'Pick #'+esc(r.pick)+(r.keeper?' (keeper)':'');if(r.kind==='claim')return esc(r.reason||'')+(r.wonBy?` <b>Winner: ${esc(r.wonBy.name)}</b>`:'');
   if(r.kind==='trade')return esc((r.moves||[]).map(m=>`${m.player.name} (${m.from.name} → ${m.to.name})`).join('; '));
   if(r.kind==='trade_event')return '<span class="note">ESPN removes the players from its feed once a trade is decided</span>';return ''}
 function txRunView(rows){
@@ -1214,7 +1214,7 @@ function waiverReport(){
   return `<section class="panel"><div class="ph"><h2>Waiver report</h2><span class="eyebrow">ESPN transaction feed as of ${esc(fmtShort(Date.parse(d.asOf)))}</span></div>
   <div class="chips"><span class="chip" style="color:var(--good)">${c.won??0} claims won</span><span class="chip" style="color:var(--bad)">${c.lost??0} claims lost</span><span class="chip" style="color:var(--muted)">${c.canceled??0} canceled</span><span class="chip" style="color:var(--info)">${d.kinds?.fa_add??0} free-agent adds</span><span class="chip" style="color:var(--warn)">${d.kinds?.drop??0} drops</span></div>
   <div class="txtools"><div style="display:flex;gap:6px">${tabs}</div>
-  ${sel('team',[['','All teams'],...teams.map(t=>[t,t])],TX.team)}${TX.view==='all'?sel('kind',[['','All types'],['claims','All claims'],['won','Claims won'],['lost','Claims lost'],['fa','Free-agent adds'],['drop','Drops'],['trade','Trades']],TX.kind):''}</div>
+  ${sel('team',[['','All teams'],...teams.map(t=>[t,t])],TX.team)}${TX.view==='all'?sel('kind',[['','All types'],['claims','All claims'],['won','Claims won'],['lost','Claims lost'],['draft','Draft picks'],['fa','Free-agent adds'],['drop','Drops'],['trade','Trades']],TX.kind):''}</div>
   <p class="note">Claims appear once ESPN processes or cancels them (the nightly run is about 3 AM ET); pending claims are invisible to everyone. ${(d.notes||[]).slice(1).map(esc).join(' ')} ${d.agedOutOfEspnFeed?d.agedOutOfEspnFeed+' older rows are kept here but no longer in ESPN\'s feed.':''}</p></section>
   ${TX.view==='runs'?txRunView(rows):txAllView(rows)}`}
 document.addEventListener('click',e=>{const v=e.target.closest('[data-txv]');if(v){TX.view=v.dataset.txv;return render()}
