@@ -705,6 +705,17 @@
 "winner": "ATL",
 "loser": "NO",
 "tie": false
+},
+"401872980": {
+"week": 5,
+"date": "2026-10-09T00:15Z",
+"home": "DAL",
+"away": "TB",
+"homeScore": 16,
+"awayScore": 24,
+"winner": "TB",
+"loser": "DAL",
+"tie": false
 }
 }
 }

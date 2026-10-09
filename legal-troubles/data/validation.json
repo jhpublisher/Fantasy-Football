@@ -2,26 +2,11 @@
  "ok": true,
  "failures": [],
  "warnings": [
-  "news source 'Google News: Adam Schefter': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Ian Rapoport': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Tom Pelissero': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Mike Garafolo': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Jeremy Fowler': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Jordan Schultz': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Mike Silver': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Jay Glazer': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Dianna Russini': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: Albert Breer': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: NFL signs free agent': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: NFL waived released': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: NFL trade rumors': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: NFL injured reserve': error: HTTPError: HTTP Error 503: Service Unavailable",
-  "news source 'Google News: NFL practice squad elevated running back': error: HTTPError: HTTP Error 503: Service Unavailable",
   "news source 'Practice reports': practice days have passed with no report found for our injured players: Zach Charbonnet (Frank: check the official injury report)"
  ],
- "checkedAt": "2026-10-09T02:20+00:00",
+ "checkedAt": "2026-10-09T10:32+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-10-09T02:20+00:00"
+ "bundleBuiltAt": "2026-10-09T10:32+00:00"
 }
