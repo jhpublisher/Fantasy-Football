@@ -809,8 +809,10 @@ function rgRows(M_){const W=M_.W,ours=new Set(Object.values(S.players).filter(p=
     const site=rank('site'),espn=rank('espn'),minR=rgMin;
     const LW=played[played.length-1],lw=LW!=null?p.wk[LW]:null,g=LW!=null?t.weeks?.[LW]:null;
     const lwTxt=LW==null?'no games yet':lw?`${lw.n}/${lw.team_n}${M_.kind!=='kr'&&lw.fc?` +${lw.fc} FC`:''}`:`0/${g?.n??0}`;
+    // pooled share over his last 3 games WITH returns (2 if only 2, 1 if only 1): sum his returns / sum team returns
+    const rg=played.filter(w=>(p.wk[w]?.n||0)>0).slice(-3),pn=rg.reduce((a,w)=>a+p.wk[w].n,0),pt=rg.reduce((a,w)=>a+(p.wk[w].team_n||0),0),pool={g:rg.length,sh:pt?pn/pt:0,txt:rg.length?`${pn}/${pt} in wk ${rg.join(', ')}`:'no returns yet'};
     const tot=+(wk.reduce((a,x)=>a+(x?x.pts:0),0)).toFixed(1);
-    return {...p,ours:ours.has(rgNorm(p.name)),wkA:wk,n3:last3.length,lastW:LW,lwSh:lw?Math.round(rgShare(lw,M_.kind)*100):0,lwPts:lw?lw.pts:0,lwTxt,pts3:+pts3.toFixed(1),sh3:Math.round(sh3*100),fc3,
+    return {...p,ours:ours.has(rgNorm(p.name)),wkA:wk,n3:last3.length,lastW:LW,lwSh:lw?Math.round(rgShare(lw,M_.kind)*100):0,lwPts:lw?lw.pts:0,lwTxt,poolSh:pool.sh,poolN:pool.g,poolTxt:pool.txt,pts3:+pts3.toFixed(1),sh3:Math.round(sh3*100),fc3,
       tot,nKr:wk.reduce((a,x)=>a+(x?x.kr||0:0),0),nPr:wk.reduce((a,x)=>a+(x?x.pr||0:0),0),totK:+(wk.reduce((a,x)=>a+(x?x.ptsK||0:0),0)).toFixed(1),totP:+(wk.reduce((a,x)=>a+(x?x.ptsP||0:0),0)).toFixed(1),yK:wk.reduce((a,x)=>a+(x?x.yK||0:0),0),yP:wk.reduce((a,x)=>a+(x?x.yP||0:0),0),yT:wk.reduce((a,x)=>a+(x?x.y||0:0),0),site,espn,siteMin:minR(site),espnMin:minR(espn),elig:['RB','WR'].includes(p.pos)}})}
 // status for one kind (row computed on that kind's model)
 function rgStatus1(p,M_,k){const L=RG_KIND[k].L,t=M_.teams[p.team]||{src:{site:{},espn:{}}},ss=t.src.site[k],es=t.src.espn[k],siteRead=rgRead(ss),espnRead=rgRead(es),sr=p.site[k],er=p.espn[k];
@@ -961,7 +963,7 @@ const rgLvlChip=x=>{const[c,t]=rgLvl(x);return `<span class="chip rg-${c}" title
 let RG_KS=null;function rgKrShare(p){if(!RG_KS){RG_KS=new Map();const m=rgModel('kr');if(m&&!m.error)rgRows(m).forEach(q=>{RG_KS.set(rgKey(q),q.sh3);RG_KS.set(q.team+':'+rgNorm(q.name),q.sh3)})}
   return RG_KS.get(rgKey(p))??RG_KS.get(p.team+':'+rgNorm(p.name))??0}
 function rgExp(p){const o=rgOpp(p.team);if(o.bye)return {bye:true};if(o.miss||!o.key)return {miss:o.txt};const k=rgKO(o.key);if(!k)return {miss:`No kickoff data for ${o.key}`};
-  const q=rgKindRow(p,'kr'),sh=(q?q.lwSh:0)/100,er=k.ret3*sh,avg=rgAvgK(p);return {opp:o.key,k,sh,er,avg,ep:er*(avg||0)*(S.returns?.scoring?.krYd??.1)}}
+  const q=rgKindRow(p,'kr'),sh=q?q.poolSh:0,er=k.ret3*sh,avg=rgAvgK(p);return {opp:o.key,k,sh,er,avg,ep:er*(avg||0)*(S.returns?.scoring?.krYd??.1)}}
 function rgOppCell(p){const x=rgExp(p);if(x.bye)return '<span class="chip rg-bad">Bye</span>';if(x.miss)return `<span class="chip rg-bad">${esc(x.miss)}</span>`;
   return `<button class="link" data-rgopp="${x.opp}" title="Tap for ${x.opp}'s kickoffs by week and season average">${rgF(x.k.ret3)}</button> <span class="rgl" title="Last game">${x.k.retL}</span> ${rgLvlChip(x.k.ret3)}`}
 function rgYdsCell(p){const x=rgExp(p);if(x.bye)return '<span class="chip rg-bad">Bye</span>';if(x.miss)return `<span class="chip rg-bad">${esc(x.miss)}</span>`;
@@ -1036,8 +1038,8 @@ const rgAvgP=p=>{const q=rgKindRow(p,'pr');return q&&q.nPr?q.yP/q.nPr:null};
 const rgPct=(p,k)=>{const q=rgKindRow(p,k);return q?q.sh3:null};
 const RG_COLS=[
  {k:'team',l:'NFL',sort:'team',tip:'NFL team',cell:p=>`<td>${esc(p.team)}</td>`},
- {k:'expr',l:'Exp returns',pl:'Expected returns (this week)',ctr:1,num:1,kr:1,sort:'expr',tip:'Expected kick returns for him this week = opponent kick returns allowed per game (last 3 games) × his share of his team\'s kick returns in his last game',cell:p=>`<td class="num"${rgHeat(p,'er')}>${rgExpCell(p,x=>rgF(x.er))}</td>`},
- {k:'exp',l:'Exp pts',pl:'Expected points (this week)',ctr:1,num:1,kr:1,sort:'exp',tip:'Expected kick-return points = expected returns × his own average yards per kick return this season × league scoring per yard (0.1)',cell:p=>`<td class="num"${rgHeat(p,'ep')}>${rgExpCell(p,x=>rgF(x.ep))}</td>`},
+ {k:'expr',l:'Exp returns',pl:'Expected returns (this week)',ctr:1,num:1,kr:1,sort:'expr',tip:'Expected kick returns for him this week = opponent kick returns allowed per game (last 3 games) × his pooled share of his team\'s kick returns over his last 3 games with returns (fewer if he has had fewer)',cell:p=>`<td class="num"${rgHeat(p,'er')}>${rgExpCell(p,x=>rgF(x.er))}</td>`},
+ {k:'exp',l:'Exp pts',pl:'Expected points (this week)',ctr:1,num:1,kr:1,sort:'exp',tip:'Expected kick-return points = expected returns (opponent kick returns allowed per game, last 3 games × his pooled share of team returns over his last 3 games with returns) × his own average yards per kick return this season × league scoring per yard (0.1)',cell:p=>`<td class="num"${rgHeat(p,'ep')}>${rgExpCell(p,x=>rgF(x.ep))}</td>`},
  {k:'opp',l:()=>`Wk ${rgWk()} opponent`,pl:'Opponent this week',grp:1,sort:'opp',tip:'This week\'s opponent and kickoff time. Click it for their kickoffs and punts game by game, with season totals',cell:p=>`<td>${rgOppHtml(p.team,true)}</td>`},
  {k:'oppk',l:'KR allowed / GM',pl:'Opponent KR allowed / GM',grp:1,ctr:1,num:1,kr:1,sort:'oppk',tip:'Opponent kick returns allowed per game, last 3 games. The small number beside it is last game. Click it for their full season',cell:p=>`<td class="num">${rgOppCell(p)}</td>`},
  {k:'oppy',l:'Yds allowed / GM',pl:'Opponent return Yds allowed / GM',grp:1,ctr:1,num:1,kr:1,sort:'oppy',tip:'Opponent kick-return yards allowed per game, last 3 games. The small number beside it is last game. Click it for their full season',cell:p=>`<td class="num">${rgYdsCell(p)}</td>`},
@@ -1120,7 +1122,7 @@ function scCurrentWeek(){
 
 const scGamesOf=w=>SC.D.games.map((g,i)=>g.concat([i])).filter(g=>g[0]===w);
 const scTvOf=i=>SC.D.tv[i]&&SC.D.tv[i].length?SC.D.tv[i].join(' / '):'';
-const scOppFor=w=>SC.D.opp[String(w)]||null;
+const scOppFor=w=>((SC.live?SC.live.opp:SC.D.opp)||{})[String(w)]||null;
 const scOppBy=(w)=>{const o=scOppFor(w),m={};if(o)o.pl.forEach(p=>{(m[p.t]=m[p.t]||[]).push(p)});return m};
 const scByesOf=w=>Object.keys(SC.T).filter(id=>SC.T[id].b===w).sort((a,b)=>SC.T[a].a.localeCompare(SC.T[b].a));
 const scSlotTip=s=>s==='S'?'Starter':s==='B'?'Bench':'Injured reserve';
@@ -1199,14 +1201,23 @@ function scByeView(){
   return h;
 }
 
+// Our players and each week's opponent players are built from the live rosters/current doc, never from the weekly schedule snapshot, so drops, adds and trades show up as soon as the roster loads
+function scLive(d){const R=S.rosters?.teams,me=S.meta?.team;if(!R||!me||!R[me])return null;
+  const abId={};Object.entries(d.teams).forEach(([id,t])=>{abId[t.a]=id});
+  const sl=x=>x.slot==='IR'?'IR':x.slot==='Bench'?'B':'S',ord={S:0,B:1,IR:2};
+  const pl=L=>(L||[]).filter(x=>abId[x.nfl]).map(x=>({n:x.name,p:x.pos,s:sl(x),t:+abId[x.nfl]})).sort((a,b)=>ord[a.s]-ord[b.s]);
+  const mine={};pl(R[me]).forEach(p=>{(mine[p.t]=mine[p.t]||[]).push({n:p.n,p:p.p,s:p.s})});
+  const opp={};Object.entries(d.opp||{}).forEach(([w,o])=>{opp[w]=Object.assign({},o,{pl:R[o.team]?pl(R[o.team]):o.pl,src:R[o.team]?'live roster':o.src})});
+  return {mine,opp,asOf:S.rosters.updatedAt}}
 function scheduleView(){
   const d=S.sched;
   if(!d||!d.games||!d.teams) return '<div class="empty">The NFL schedule has not been loaded into the database yet.</div>';
-  if(SC.D!==d){SC.D=d;SC.T=d.teams;SC.mine=d.mine||{};SC.cur=scCurrentWeek();if(SC.week==null||SC.week<1||SC.week>18)SC.week=SC.cur}
+  const RK=S.rosters?.updatedAt||'';
+  if(SC.D!==d||SC.RK!==RK){SC.D=d;SC.RK=RK;SC.T=d.teams;SC.live=scLive(d);SC.mine=SC.live?SC.live.mine:(d.mine||{});SC.cur=scCurrentWeek();if(SC.week==null||SC.week<1||SC.week>18)SC.week=SC.cur}
   const weeks=Array.from({length:18},(_,i)=>i+1).map(w=>'<button data-scw="'+w+'" class="'+(w===SC.cur?'cur':'')+'" aria-pressed="'+(w===SC.week)+'">'+w+'</button>').join('');
   const tabs=[['week',SC.week===SC.cur?'This week':'Week '+SC.week],['grid','Team grid'],['byes','Byes']].map(([k,l])=>'<button role="tab" data-scv="'+k+'" aria-selected="'+(SC.view===k)+'">'+l+'</button>').join('');
   const v=SC.view==='week'?scWeekView():SC.view==='grid'?scGridView():scByeView();
-  return '<div class="sch"><div class="ph"><h2>NFL Schedule</h2><span class="sub">Snapshot of '+esc(d.asOf||'')+'. Current week: '+SC.cur+'. Kickoffs in Eastern. Green is your team, orange is this week\'s opponent.</span></div>'+
+  return '<div class="sch"><div class="ph"><h2>NFL Schedule</h2><span class="sub">Schedule snapshot of '+esc(d.asOf||'')+'; '+(SC.live?'player lists from rosters as of '+esc(fmtShort(Date.parse(SC.live.asOf)))+'.':'player lists from the snapshot (live rosters not loaded).')+' Current week: '+SC.cur+'. Kickoffs in Eastern. Green is your team, orange is this week\'s opponent.</span></div>'+
     (SC.view==='week'?'<nav class="scweeks" aria-label="Week">'+weeks+'</nav>':'')+
     '<div class="sctabs" role="tablist">'+tabs+'</div><div>'+v+'</div>'+
     '<div class="foot">Source: ESPN fantasy API, regular season, weeks 1 to 18. Refreshes with the weekly database freeze. TV listings come from ESPN and are not final for weeks 16 to 18.</div></div>';
