@@ -156,7 +156,46 @@ if b is not None:
                 if s_ == "unread" and not (v.get("reason") or "").strip(): fail(f"returns {t} {k}: unread with no reason")
                 for n in v.get("kr") or []:
                     if not str(n or "").strip(): fail(f"returns {t} {k}: empty returner name")
-        for p in rt.get("players") or []:
+        RW = [str(w) for w in rt.get("weeks") or []]
+        # kick returns: each team-game's player returns add up to the team total
+        for t, x in T.items():
+            for w in RW:
+                g = (x.get("weeks") or {}).get(w)
+                if g is None: fail(f"returns {t} wk {w}: no kick-return game and no bye")
+                elif not g.get("bye") and sum(int(r.get("kr") or 0) for r in g.get("ret") or []) != int(g.get("team_kr") or 0):
+                    fail(f"returns {t} wk {w}: kick returns by player != team total {g.get('team_kr')}")
+        # punt returns (Oct 7): 32 teams, both sources with a state, team totals = player sums = ESPN totals
+        PR = rt.get("pr")
+        if PR is None:
+            if "pr" in (rt.get("kinds") or []): fail("returns: kinds lists pr but there is no punt-return data")
+            else: warn("returns: no punt-return data (returns.json built before punt tracking)")
+        else:
+            if not isinstance(PR.get("players"), list): fail("returns pr: players missing")
+            npr = 0
+            for t, x in T.items():
+                xp = x.get("pr")
+                if not isinstance(xp, dict): fail(f"returns {t}: no punt-return block"); continue
+                npr += 1
+                for src in ("site", "espn"):
+                    v = xp.get(src)
+                    if not isinstance(v, dict): fail(f"returns {t} pr.{src}: missing"); continue
+                    s_ = v.get("status")
+                    if s_ not in ("ok", "no_pr_row", "no_chart", "unread"): fail(f"returns {t} pr.{src}: status {s_!r} (must be ok / no_pr_row / no_chart / unread)")
+                    if s_ != "ok" and not (v.get("reason") or "").strip(): fail(f"returns {t} pr.{src}: {s_} with no reason")
+                    for n in v.get("pr") or []:
+                        if not str(n or "").strip(): fail(f"returns {t} pr.{src}: empty returner name")
+                for w in RW:
+                    g = (xp.get("weeks") or {}).get(w)
+                    if g is None: fail(f"returns {t} wk {w}: no punt-return game and no bye"); continue
+                    if g.get("bye"): continue
+                    n = sum(int(r.get("pr") or 0) for r in g.get("ret") or []); y = sum(int(r.get("y") or 0) for r in g.get("ret") or [])
+                    if (n, y) != (g.get("team_pr"), g.get("team_pr_yds")) or (n, y) != (g.get("espn_pr"), g.get("espn_pr_yds")):
+                        fail(f"returns {t} wk {w}: punt returns {n}/{y} yds vs team {g.get('team_pr')}/{g.get('team_pr_yds')} vs ESPN {g.get('espn_pr')}/{g.get('espn_pr_yds')}")
+                    if g.get("fc") is None and not g.get("fcReason"): fail(f"returns {t} wk {w}: fair catches unknown with no reason")
+            if npr != 32: fail(f"returns pr: {npr} teams (expected 32)")
+            fcu = (PR.get("fairCatches") or {}).get("unmatched") or []
+            if fcu: warn(f"returns pr: {len(fcu)} fair catches not matched to a player (team totals still counted): {fcu[:3]}")
+        for p in (rt.get("players") or []) + ((PR or {}).get("players") or []):
             if not str(p.get("name") or "").strip(): fail(f"returns players: empty name (team {p.get('team')})")
             for k in ("team", "pos", "owner"):
                 if not str(p.get(k) or "").strip() or p.get(k) == "—": fail(f"returns player {p.get('name')}: blank {k}")

@@ -46,6 +46,11 @@ jobs:
           if [ "$RG" = "0" ]; then python3 tools/returns/punting.py data/returns.json /tmp/punting.json && cp /tmp/punting.json data/punting.json || echo "::warning::punting.py failed; last good data/punting.json kept"; fi
           echo "{\"bi_refresh\": $BI, \"news_sweep\": $NS, \"returns\": $RG}" > /tmp/run_status.json
           cat /tmp/run_status.json
+      - name: Refresh NFL schedule board data (every run; a failure keeps the last good data/schedule.json)
+        working-directory: legal-troubles
+        run: |
+          set +e
+          if python3 tools/db/schedule_pull.py /tmp/schedule.json --prev data/schedule.json; then cp /tmp/schedule.json data/schedule.json; else echo "::warning::schedule_pull failed; last good data/schedule.json kept"; fi
       - name: Build candidate bundle (last good data kept and marked stale for any failed section)
         working-directory: legal-troubles
         run: |
@@ -82,6 +87,7 @@ jobs:
           git add legal-troubles/data/validation.json legal-troubles/index.html legal-troubles/briefing.html
           [ -f legal-troubles/data/returns.json ] && git add legal-troubles/data/returns.json
           [ -f legal-troubles/data/punting.json ] && git add legal-troubles/data/punting.json
+          [ -f legal-troubles/data/schedule.json ] && git add legal-troubles/data/schedule.json
           # Guard: a stored week (or its raw archive) may be added, never modified or deleted
           CHG=$(git diff --name-only --diff-filter=MDRT -- legal-troubles/data/rg/weeks legal-troubles/data/rg/raw ':(glob)legal-troubles/data/rg/injuries/20*.json')
           if [ -n "$CHG" ]; then echo "::error::stored weeks changed, refusing to commit them: $CHG"; git checkout -- legal-troubles/data/rg/weeks legal-troubles/data/rg/raw legal-troubles/data/rg/injuries legal-troubles/data/rg/index.json; fi
