@@ -2,35 +2,35 @@
  "espn_depth": {
   "ok": true,
   "asOf": "2026-10-11T10:33+00:00",
-  "ageHours": 6.4,
-  "skipped": "not due (6h old)"
+  "ageHours": 9.0,
+  "skipped": "not due (9h old)"
  },
  "rosters": {
   "ok": true,
   "asOf": "2026-10-11T10:33+00:00",
-  "ageHours": 6.4,
-  "skipped": "not due (6h old)"
+  "ageHours": 9.0,
+  "skipped": "not due (9h old)"
  },
  "team_sites": {
   "ok": true,
   "asOf": "2026-10-10T09:52+00:00",
-  "ageHours": 31.1,
-  "skipped": "not due (31h old)"
+  "ageHours": 33.7,
+  "skipped": "not due (34h old)"
  },
  "schedule": {
   "ok": true,
   "asOf": "2026-10-07T12:48+00:00",
-  "ageHours": 100.1,
-  "skipped": "not due (100h old)"
+  "ageHours": 102.8,
+  "skipped": "not due (103h old)"
  },
  "ownership": {
   "ok": true,
-  "asOf": "2026-10-11T16:55+00:00",
+  "asOf": "2026-10-11T19:34+00:00",
   "ageHours": 0.0
  },
  "injury_report": {
   "ok": true,
-  "asOf": "2026-10-11T16:55+00:00",
+  "asOf": "2026-10-11T19:34+00:00",
   "ageHours": 0.0
  }
 }

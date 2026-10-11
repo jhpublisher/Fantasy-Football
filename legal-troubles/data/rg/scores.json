@@ -716,6 +716,17 @@
 "winner": "TB",
 "loser": "DAL",
 "tie": false
+},
+"401872981": {
+"week": 5,
+"date": "2026-10-11T13:30Z",
+"home": "JAX",
+"away": "PHI",
+"homeScore": 19,
+"awayScore": 17,
+"winner": "JAX",
+"loser": "PHI",
+"tie": false
 }
 }
 }
