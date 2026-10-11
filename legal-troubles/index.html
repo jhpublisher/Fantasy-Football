@@ -292,6 +292,18 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .sch td.by{background:var(--bye-soft);color:var(--bye);font-weight:600}
 .sch td.aw{color:var(--muted)}
 .sch tr.mine td:first-child{box-shadow:inset 4px 0 0 var(--field)}
+.sch .wtslot{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.sch .wth{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:8px 12px;background:var(--chip)}
+.sch .wth b{font:600 22px var(--display);font-variant-numeric:tabular-nums}
+.sch .wth .st{font:600 12px var(--body);letter-spacing:.04em;text-transform:uppercase;border-radius:4px;padding:1px 7px;background:var(--field-soft);color:var(--field)}
+.sch .wth .st.done{background:var(--chip);color:var(--muted);border:1px solid var(--line)}
+.sch .wtc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+.sch .wtc>div{padding:8px 12px;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.sch .wtc>div+div{border-left:1px solid var(--line)}
+.sch .wtc .pl{white-space:normal}
+.sch .wtc .vs{font-weight:400;opacity:.85}
+.sch .wtnone{color:var(--muted);font-size:13px}
+@media (max-width:560px){.sch .wtc{grid-template-columns:minmax(0,1fr)}.sch .wtc>div+div{border-left:0;border-top:1px solid var(--line)}}
 .sch .byeweek{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
 .sch .byeweek .wk{font:700 24px var(--display)}
 .sch .byeweek.cur{border-color:var(--field)}
@@ -1145,9 +1157,9 @@ function scWeekView(){
     '<span class="pill bye">Bye: '+(byes.length?byes.map(id=>SC.T[id].a).join(', '):'none')+'</span></div>';
   if(o) h+='<div class="scvs">Your opponent: <b>'+esc(o.team)+'</b> <span class="sub">('+o.src+(o.src==='current roster'&&SC.week>SC.cur?', may change before the game':'')+')</span></div>';
   else h+='<div class="scvs sub">No opponent listed for this week (playoff matchups are not set yet).</div>';
-  const byeMine=byes.filter(id=>hasM(id)||hasO(id));
+  const byeMine=byes.slice().sort((a,b)=>((hasM(b)||hasO(b))?1:0)-((hasM(a)||hasO(a))?1:0));   // every bye team is listed; teams with our/opponent players first, the rest show No players
   if(byeMine.length){
-    h+='<div class="day"><h2>Teams on bye</h2>'+byeMine.map(id=>'<div class="game '+(hasM(id)?'mine':'oppg')+'"><div class="time">Bye</div><div class="mu"><div class="tn">'+SC.T[id].a+'</div><div class="full">'+esc(SC.T[id].n)+'</div></div>'+scPlayers([id],om,o)+'</div>').join('')+'</div>';
+    h+='<div class="day"><h2>Teams on bye</h2>'+byeMine.map(id=>'<div class="game '+(hasM(id)?'mine':hasO(id)?'oppg':'')+'"><div class="time">Bye</div><div class="mu"><div class="tn">'+SC.T[id].a+'</div><div class="full">'+esc(SC.T[id].n)+'</div></div>'+scPlayers([id],om,o)+'</div>').join('')+'</div>';
   }
   let last='';
   for(const g of gs){
@@ -1162,6 +1174,31 @@ function scWeekView(){
   }
   if(last) h+='</div>';
   if(!gs.length) h+='<div class="empty">No games this week.</div>';
+  return h;
+}
+// What to watch: per kickoff slot, who of ours and the opponent's is playing (no live scores; "Kicked off" is by the clock)
+function scWatchView(){
+  const gs=scGamesOf(SC.week), o=scOppFor(SC.week), om=scOppBy(SC.week), byes=scByesOf(SC.week), now=Date.now();
+  const slots={};
+  gs.forEach(g=>{(slots[g[3]]=slots[g[3]]||[]).push(g)});
+  const ords=Object.keys(slots).map(Number).sort((a,b)=>a-b);
+  const line=(id,p,cls,opp)=>'<span class="pl '+cls+' '+p.s+'" title="'+scSlotTip(p.s)+'">'+esc(p.n)+' · '+p.p+' · '+SC.T[id].a+' <span class="vs">'+opp+'</span></span>';
+  const col=(src,cls,gl)=>{const out=[];gl.forEach(g=>[[g[1],g[2],'at '],[g[2],g[1],'vs ']].forEach(([id,oid,w])=>{(src[id]||[]).forEach(p=>out.push(line(id,p,cls,(w==='at '?'at ':'vs ')+SC.T[oid].a)))}));return out};
+  let h='<div class="summary"><span class="pill">Starters, bench and IR are shown; bench and IR are dimmed.</span></div>';
+  if(o) h+='<div class="scvs">Your opponent: <b>'+esc(o.team)+'</b> <span class="sub">('+o.src+')</span></div>';
+  let shown=0,emptySlots=0;
+  ords.forEach(ms=>{
+    const gl=slots[ms],me=col(SC.mine,'',gl),op=col(om,'o',gl);
+    if(!me.length&&!op.length){emptySlots++;return}
+    shown++;const dt=new Date(ms),started=ms<=now;
+    h+='<div class="wtslot"><div class="wth"><b>'+scFmtTime.format(dt).replace(' ','&nbsp;')+' ET</b><span>'+scFmtDay.format(dt)+'</span><span class="sub">'+gl.length+' game'+(gl.length>1?'s':'')+': '+gl.map(g=>SC.T[g[1]].a+' at '+SC.T[g[2]].a).join(', ')+'</span><span class="st'+(started?' done':'')+'">'+(started?'Kicked off':'Upcoming')+'</span></div>'+
+      '<div class="wtc"><div><div class="gh me">Legal Troubles</div>'+(me.join('')||'<span class="wtnone">None in this slot</span>')+'</div>'+
+      '<div><div class="gh op">'+esc(o?o.team:'Opponent')+'</div>'+(op.join('')||'<span class="wtnone">None in this slot</span>')+'</div></div></div>';
+  });
+  const bm=[],bo=[];byes.forEach(id=>{(SC.mine[id]||[]).forEach(p=>bm.push(line(id,p,'','bye')));((om[id])||[]).forEach(p=>bo.push(line(id,p,'o','bye')))});
+  if(bm.length||bo.length) h+='<div class="wtslot"><div class="wth"><b>On bye</b><span class="sub">Not playing this week</span></div><div class="wtc"><div><div class="gh me">Legal Troubles</div>'+(bm.join('')||'<span class="wtnone">None</span>')+'</div><div><div class="gh op">'+esc(o?o.team:'Opponent')+'</div>'+(bo.join('')||'<span class="wtnone">None</span>')+'</div></div></div>';
+  if(!shown&&!bm.length&&!bo.length) h+='<div class="empty">No games with your or your opponent\'s players this week.</div>';
+  if(emptySlots) h+='<p class="sub">'+emptySlots+' other kickoff slot'+(emptySlots>1?'s have':' has')+' none of your or your opponent\'s players, so '+(emptySlots>1?'they are':'it is')+' left out. No live scores here; "Kicked off" is based on the clock.</p>';
   return h;
 }
 function scOppCell(id,w){
@@ -1215,14 +1252,14 @@ function scheduleView(){
   const RK=S.rosters?.updatedAt||'';
   if(SC.D!==d||SC.RK!==RK){SC.D=d;SC.RK=RK;SC.T=d.teams;SC.live=scLive(d);SC.mine=SC.live?SC.live.mine:(d.mine||{});SC.cur=scCurrentWeek();if(SC.week==null||SC.week<1||SC.week>18)SC.week=SC.cur}
   const weeks=Array.from({length:18},(_,i)=>i+1).map(w=>'<button data-scw="'+w+'" class="'+(w===SC.cur?'cur':'')+'" aria-pressed="'+(w===SC.week)+'">'+w+'</button>').join('');
-  const tabs=[['week',SC.week===SC.cur?'This week':'Week '+SC.week],['grid','Team grid'],['byes','Byes']].map(([k,l])=>'<button role="tab" data-scv="'+k+'" aria-selected="'+(SC.view===k)+'">'+l+'</button>').join('');
-  const v=SC.view==='week'?scWeekView():SC.view==='grid'?scGridView():scByeView();
+  const tabs=[['week',SC.week===SC.cur?'This week':'Week '+SC.week],['watch','What to watch'],['grid','Team grid'],['byes','Byes']].map(([k,l])=>'<button role="tab" data-scv="'+k+'" aria-selected="'+(SC.view===k)+'">'+l+'</button>').join('');
+  const v=SC.view==='week'?scWeekView():SC.view==='watch'?scWatchView():SC.view==='grid'?scGridView():scByeView();
   return '<div class="sch"><div class="ph"><h2>NFL Schedule</h2><span class="sub">Schedule snapshot of '+esc(d.asOf||'')+'; '+(SC.live?'player lists from rosters as of '+esc(fmtShort(Date.parse(SC.live.asOf)))+'.':'player lists from the snapshot (live rosters not loaded).')+' Current week: '+SC.cur+'. Kickoffs in Eastern. Green is your team, orange is this week\'s opponent.</span></div>'+
-    (SC.view==='week'?'<nav class="scweeks" aria-label="Week">'+weeks+'</nav>':'')+
+    (SC.view==='week'||SC.view==='watch'?'<nav class="scweeks" aria-label="Week">'+weeks+'</nav>':'')+
     '<div class="sctabs" role="tablist">'+tabs+'</div><div>'+v+'</div>'+
     '<div class="foot">Source: ESPN fantasy API, regular season, weeks 1 to 18. Refreshes with the weekly database freeze. TV listings come from ESPN and are not final for weeks 16 to 18.</div></div>';
 }
-document.addEventListener('click',e=>{const w=e.target.closest('[data-scw]');if(w){SC.week=+w.dataset.scw;SC.view='week';return render()}
+document.addEventListener('click',e=>{const w=e.target.closest('[data-scw]');if(w){SC.week=+w.dataset.scw;if(SC.view!=='watch')SC.view='week';return render()}
   const v=e.target.closest('[data-scv]');if(v){SC.view=v.dataset.scv;return render()}});
 document.addEventListener('change',e=>{if(e.target.matches('[data-scom]')){SC.onlyMine=e.target.checked;render()}else if(e.target.matches('[data-scsb]')){SC.sortBy=e.target.value;render()}});
 
