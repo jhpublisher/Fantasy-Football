@@ -727,6 +727,127 @@
 "winner": "JAX",
 "loser": "PHI",
 "tie": false
+},
+"401872982": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "MIA",
+"away": "CIN",
+"homeScore": 24,
+"awayScore": 31,
+"winner": "CIN",
+"loser": "MIA",
+"tie": false
+},
+"401872983": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "NYJ",
+"away": "CLE",
+"homeScore": 17,
+"awayScore": 12,
+"winner": "NYJ",
+"loser": "CLE",
+"tie": false
+},
+"401872984": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "TEN",
+"away": "HOU",
+"homeScore": 3,
+"awayScore": 26,
+"winner": "HOU",
+"loser": "TEN",
+"tie": false
+},
+"401872985": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "PIT",
+"away": "IND",
+"homeScore": 34,
+"awayScore": 22,
+"winner": "PIT",
+"loser": "IND",
+"tie": false
+},
+"401872986": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "NE",
+"away": "LV",
+"homeScore": 45,
+"awayScore": 17,
+"winner": "NE",
+"loser": "LV",
+"tie": false
+},
+"401872987": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "NO",
+"away": "MIN",
+"homeScore": 13,
+"awayScore": 23,
+"winner": "MIN",
+"loser": "NO",
+"tie": false
+},
+"401872988": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "WSH",
+"away": "NYG",
+"homeScore": 27,
+"awayScore": 27,
+"winner": null,
+"loser": null,
+"tie": true
+},
+"401872989": {
+"week": 5,
+"date": "2026-10-11T20:05Z",
+"home": "LAC",
+"away": "DEN",
+"homeScore": 17,
+"awayScore": 23,
+"winner": "DEN",
+"loser": "LAC",
+"tie": false
+},
+"401872990": {
+"week": 5,
+"date": "2026-10-11T17:00Z",
+"home": "GB",
+"away": "CHI",
+"homeScore": 31,
+"awayScore": 7,
+"winner": "GB",
+"loser": "CHI",
+"tie": false
+},
+"401872991": {
+"week": 5,
+"date": "2026-10-11T20:25Z",
+"home": "ARI",
+"away": "DET",
+"homeScore": 21,
+"awayScore": 45,
+"winner": "DET",
+"loser": "ARI",
+"tie": false
+},
+"401872992": {
+"week": 5,
+"date": "2026-10-11T20:25Z",
+"home": "SEA",
+"away": "SF",
+"homeScore": 29,
+"awayScore": 32,
+"winner": "SF",
+"loser": "SEA",
+"tie": false
 }
 }
 }
