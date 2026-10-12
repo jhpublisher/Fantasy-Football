@@ -848,6 +848,17 @@
 "winner": "SF",
 "loser": "SEA",
 "tie": false
+},
+"401872993": {
+"week": 5,
+"date": "2026-10-12T00:20Z",
+"home": "ATL",
+"away": "BAL",
+"homeScore": 23,
+"awayScore": 30,
+"winner": "BAL",
+"loser": "ATL",
+"tie": false
 }
 }
 }
