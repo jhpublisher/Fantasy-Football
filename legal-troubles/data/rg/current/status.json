@@ -20,17 +20,18 @@
  "schedule": {
   "ok": true,
   "asOf": "2026-10-07T12:48+00:00",
-  "ageHours": 107.7,
+  "ageHours": 107.8,
   "skipped": "not due (108h old)"
  },
  "ownership": {
   "ok": true,
-  "asOf": "2026-10-12T00:32+00:00",
+  "asOf": "2026-10-12T00:33+00:00",
   "ageHours": 0.0
  },
  "injury_report": {
   "ok": true,
   "asOf": "2026-10-12T00:32+00:00",
-  "ageHours": 0.0
+  "ageHours": 0.0,
+  "skipped": "not due (0h old)"
  }
 }
