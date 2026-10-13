@@ -303,7 +303,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .sch .wtc>div+div{border-left:1px solid var(--line)}
 .sch .wtc .pl{white-space:normal}
 .sch .wtc .vs{font-weight:400;opacity:.85}
-.sch .wtg{display:grid;gap:0}.sch .wtgame{padding:8px 12px;border-top:1px solid var(--line);display:grid;gap:6px}.sch .wtm{font:600 20px var(--display);letter-spacing:.02em}.sch .wtm i{font:500 13px var(--body);font-style:normal;color:var(--muted);margin:0 6px}.sch .wtm .sub{font:500 12px var(--body);margin-left:8px}.sch .wtp{display:flex;flex-wrap:wrap;gap:6px}.sch .wtnop{padding:3px 12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.sch .wtg{display:grid;gap:0}.sch .wtgame{padding:8px 12px;border-top:1px solid var(--line);display:grid;gap:6px}.sch .wtm{font:600 20px var(--display);letter-spacing:.02em}.sch .wtm i{font:500 13px var(--body);font-style:normal;color:var(--muted);margin:0 6px}.sch .wtm .tv{margin:0 0 0 8px;vertical-align:middle}.sch .wtm .sub{font:500 12px var(--body);margin-left:8px}.sch .wtp{display:flex;flex-wrap:wrap;gap:6px}.sch .wtnop{padding:3px 12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
 .sch .wtnone{color:var(--muted);font-size:13px}
 @media (max-width:560px){.sch .wtc{grid-template-columns:minmax(0,1fr)}.sch .wtc>div+div{border-left:0;border-top:1px solid var(--line)}}
 .sch .byeweek{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
@@ -1190,6 +1190,7 @@ function scWatchView(){
   gs.forEach(g=>{(slots[g[3]]=slots[g[3]]||[]).push(g)});
   const ords=Object.keys(slots).map(Number).sort((a,b)=>a-b);
   const pl=(id,p,cls)=>'<span class="pl '+cls+' '+p.s+'" title="'+(cls==='o'?esc(o?o.team:'Opponent')+': ':'Legal Troubles: ')+scSlotTip(p.s)+'">'+esc(p.n)+' · '+p.p+' · '+SC.T[id].a+'</span>';
+  const tvT=g=>{const t=scTvOf(g[4]);return t?'<span class="tv">'+esc(t)+'</span>':'<span class="tv none">TV to be announced</span>'};
   const gamePl=g=>{const out=[];[g[1],g[2]].forEach(id=>{(SC.mine[id]||[]).forEach(p=>out.push([0,p.s,pl(id,p,'')]));((om[id])||[]).forEach(p=>out.push([1,p.s,pl(id,p,'o')]))});const so={S:0,B:1,IR:2};return out.sort((a,b)=>so[a[1]]-so[b[1]]||a[0]-b[0]).map(x=>x[2])};
   let h='<div class="summary"><span class="pill">Every game, with your players (green) and '+esc(o?o.team:'your opponent')+'\'s players (orange) together. Bench and IR are dimmed.</span></div>';
   if(o) h+='<div class="scvs">Your opponent: <b>'+esc(o.team)+'</b> <span class="sub">('+o.src+')</span></div>';
@@ -1197,8 +1198,8 @@ function scWatchView(){
     const dt=new Date(ms),started=ms<=now,gl=slots[ms];
     const withP=gl.map(g=>[g,gamePl(g)]).filter(x=>x[1].length),none=gl.filter(g=>!gamePl(g).length);
     h+='<div class="wtslot"><div class="wth"><b>'+scFmtTime.format(dt).replace(' ','&nbsp;')+' ET</b><span>'+scFmtDay.format(dt)+'</span><span class="st'+(started?' done':'')+'">'+(started?'Kicked off':'Upcoming')+'</span></div><div class="wtg">'+
-      withP.map(([g,L])=>'<div class="wtgame"><div class="wtm">'+SC.T[g[1]].a+' <i>at</i> '+SC.T[g[2]].a+'<span class="sub"> '+esc(SC.T[g[1]].n)+' at '+esc(SC.T[g[2]].n)+'</span></div><div class="wtp">'+L.join('')+'</div></div>').join('')+
-      none.map(g=>'<div class="wtnop">'+SC.T[g[1]].a+' at '+SC.T[g[2]].a+' · no players</div>').join('')+'</div></div>';
+      withP.map(([g,L])=>'<div class="wtgame"><div class="wtm">'+SC.T[g[1]].a+' <i>at</i> '+SC.T[g[2]].a+'<span class="sub"> '+esc(SC.T[g[1]].n)+' at '+esc(SC.T[g[2]].n)+'</span>'+tvT(g)+'</div><div class="wtp">'+L.join('')+'</div></div>').join('')+
+      none.map(g=>'<div class="wtnop">'+SC.T[g[1]].a+' at '+SC.T[g[2]].a+' · no players'+(scTvOf(g[4])?' · '+esc(scTvOf(g[4])):' · TV to be announced')+'</div>').join('')+'</div></div>';
   });
   const bl=[];byes.forEach(id=>{(SC.mine[id]||[]).forEach(p=>bl.push(pl(id,p,'')+' <span class="vs">bye</span>'));((om[id])||[]).forEach(p=>bl.push(pl(id,p,'o')+' <span class="vs">bye</span>'))});
   if(bl.length||byes.length) h+='<div class="wtslot"><div class="wth"><b>On bye</b><span class="sub">Not playing this week: '+byes.map(id=>SC.T[id].a).join(', ')+'</span></div><div class="wtg">'+(bl.length?'<div class="wtgame"><div class="wtp">'+bl.join('')+'</div></div>':'<div class="wtnop">No players on bye</div>')+'</div></div>';
