@@ -584,6 +584,7 @@ function league(){
 }
 const slotChip=sl=>!sl?'<span class="note">Not in lineup data</span>':`<span class="chip ${sl==='IR'?'s-INJURY_RESERVE':sl==='Bench'?'t-roster':'s-ACTIVE'}">${esc(sl==='Bench'?'Bench':sl==='IR'?'IR':'Starter · '+sl)}</span>`;
 function projTxt(p){if(p.nextProj)return (+p.nextProj).toFixed(1);if(p.bye!=null&&p.bye===LGD().week)return 'Bye';if(['OUT','INJURY_RESERVE','SUSPENSION'].includes(p.status))return STATUS[p.status]||'Out';return p.nextProj===0?'0.0':'No proj.'}
+function rosterOpp(p){const w=LGD().week,g=S.returns?.schedule?.[p.nfl]?.[String(w)];if(p.bye!=null&&p.bye===w)return {txt:'BYE',k:'bye'};if(g&&g.bye)return {txt:'BYE',k:'bye'};if(g&&g.opp)return {txt:(g.home?'vs ':'@ ')+g.opp,k:g.opp};return {txt:S.returns?.schedule?'No game found':'Schedule not loaded',k:null,miss:1}}
 function roster(){
   let ours=Object.entries(S.players).filter(([,p])=>p.ours); if(!ours.length) return emptyState(['Players',null]);
   const SLOT_ORDER=['QB','RB','WR','TE','FLEX','D/ST','K','Bench','IR'];
@@ -591,13 +592,13 @@ function roster(){
   const grp=p=>p.slot==='IR'?2:p.slot==='Bench'?1:0;
   ours.sort((a,b)=>so(a[1])-so(b[1])||POS_ORDER.indexOf(a[1].pos)-POS_ORDER.indexOf(b[1].pos)||b[1].total-a[1].total);
   const idx=new Map(ours.map((e,i)=>[e[0],i])), SEV={ACTIVE:0,QUESTIONABLE:1,DAY_TO_DAY:1,DOUBTFUL:2,OUT:3,SUSPENSION:4,INJURY_RESERVE:5};
-  const rv=([id,p],k)=>({line:idx.get(id),pos:POS_ORDER.indexOf(p.pos),player:p.name.toLowerCase(),nfl:p.nfl||null,status:SEV[p.status]??6,plan:p.tag&&p.tag!=='roster'?(TAGS[p.tag]||p.tag):null,total:+p.total||0,proj:p.nextProj?+p.nextProj:null,bye:p.bye??null})[k];
+  const rv=([id,p],k)=>({line:idx.get(id),pos:POS_ORDER.indexOf(p.pos),player:p.name.toLowerCase(),nfl:p.nfl||null,status:SEV[p.status]??6,plan:p.tag&&p.tag!=='roster'?(TAGS[p.tag]||p.tag):null,total:+p.total||0,proj:p.nextProj?+p.nextProj:null,bye:p.bye??null,opp:rosterOpp(p).k})[k];
   const lineView=SORT.ro.k==='line'&&SORT.ro.d>0;
   ours=sortRows(ours,'ro',rv,(a,b)=>idx.get(a[0])-idx.get(b[0]));
   return `<section class="panel"><div class="ph"><h2>Our roster</h2><span class="phr">${resetBtn('ro')}<span class="eyebrow">Tap a player · click a column to sort</span></span></div>
-    <div class="tw"><table><thead><tr>${sh('ro','line','Lineup')}${sh('ro','pos','Pos')}${sh('ro','player','Player')}${sh('ro','nfl','NFL')}${sh('ro','status','Status')}${sh('ro','plan','Plan')}${sh('ro','total','Total',1)}${sh('ro','proj','This wk',1)}${sh('ro','bye','Bye',1)}</tr></thead><tbody>
-    ${ours.map(([id,p],i)=>`<tr class="row ${lineView&&ours[i+1]&&grp(ours[i+1][1])!==grp(p)?'cut':''}" tabindex="0" data-player="${id}"><td>${slotChip(p.slot)}</td><td>${esc(p.pos)}</td><td><b>${esc(p.name)}</b></td><td>${esc(p.nfl||'FA')}</td><td>${stChip(p.status)}</td><td>${planSel(id,p)||'<span class="note">No plan</span>'}</td><td class="num">${(+p.total||0).toFixed(1)}</td><td class="num">${projTxt(p)}</td><td class="num">${p.bye??'Not listed'}</td></tr>`).join('')}
-    </tbody></table></div><p class="note">Lineup = where the player sits in our ESPN lineup right now. ${lineView?'Dashed line = starters above, bench and IR below.':'Click Lineup to return to lineup order.'} This wk = ESPN projection in our scoring. Plan: pick from the menu to set your own for this week. Your picks get a gold edge and show what staff recommended; pick “↺ Undo” to go back. Staff plans take over again at the next weekly refresh.</p></section>`+byeGrid()+playoffGrid();
+    <div class="tw"><table><thead><tr>${sh('ro','line','Lineup')}${sh('ro','pos','Pos')}${sh('ro','player','Player')}${sh('ro','nfl','NFL')}${sh('ro','status','Status')}${sh('ro','proj','Projected',1)}${sh('ro','opp','Opponent')}${sh('ro','total','Total',1)}${sh('ro','bye','Bye',1)}${sh('ro','plan','Plan')}</tr></thead><tbody>
+    ${ours.map(([id,p],i)=>`<tr class="row ${lineView&&ours[i+1]&&grp(ours[i+1][1])!==grp(p)?'cut':''}" tabindex="0" data-player="${id}"><td>${slotChip(p.slot)}</td><td>${esc(p.pos)}</td><td><b>${esc(p.name)}</b></td><td>${esc(p.nfl||'FA')}</td><td>${stChip(p.status)}</td><td class="num">${projTxt(p)}</td><td>${(()=>{const o=rosterOpp(p);return o.miss?`<span class="note">${o.txt}</span>`:o.k==='bye'?'<span class="chip rg-bad">BYE</span>':esc(o.txt)})()}</td><td class="num">${(+p.total||0).toFixed(1)}</td><td class="num">${p.bye??'Not listed'}</td><td>${planSel(id,p)||'<span class="note">No plan</span>'}</td></tr>`).join('')}
+    </tbody></table></div><p class="note">Lineup = where the player sits in our ESPN lineup right now. ${lineView?'Dashed line = starters above, bench and IR below.':'Click Lineup to return to lineup order.'} Projected = ESPN projection for this week in our scoring. Opponent = this week's NFL opponent (vs = home, @ = away). Plan: pick from the menu to set your own for this week. Your picks get a gold edge and show what staff recommended; pick “↺ Undo” to go back. Staff plans take over again at the next weekly refresh.</p></section>`+byeGrid()+playoffGrid();
 }
 function byeGrid(){if(!Array.isArray(M?.roster)||secProblem(M.roster)?.err)return missingPanel('Opponents by week',M?.roster,'roster grid');const L=LGD(),W0=L.week??M.week,WE=L.regSeasonWeeks,WS=range(W0,WE);if(!WS.length)return `<section class="panel"><div class="ph"><h2>Opponents by week</h2></div><p class="note">Regular season is over (Week ${WE} was the last); no byes left.</p></section>`;
   const ord=['QB','RB','WR','TE','FLEX','D/ST','K','Bench','IR'];const rs=M.roster.slice().sort((a,b)=>ord.indexOf(a.slot)-ord.indexOf(b.slot)||a.name.localeCompare(b.name));
@@ -1417,6 +1418,8 @@ const HT=[
 [/^status$/,null,null,'ESPN’s current injury or availability status for the player (Active, Questionable, Doubtful, Out, IR and so on).'],
 [/^plan$/,null,null,'Your own pick for this player this week, chosen from the menu. Picks get a gold edge and are saved in the dashboard database. Staff recommendations are retired.'],
 [/^total$/,null,null,'The player’s total fantasy points this season in our league scoring.'],
+[/^projected$/,/our roster/,null,'ESPN’s projected fantasy points for this player this week, in our league scoring. “Bye” or “Out” shows when he cannot play.'],
+[/^opponent$/,/our roster/,null,'The NFL team this player’s team plays this week (vs = home, @ = away). BYE means no game this week.'],
 [/^this wk$/,null,null,'ESPN’s projected fantasy points for this player this week, in our league scoring.'],
 [/^bye$/,null,null,'The NFL week this player’s team has its bye (no game, no points).'],
 [/^wk \d+$/,/opponents by week/,null,'The player’s NFL opponent that week (@ = away). BYE is highlighted: the player scores nothing that week.'],
