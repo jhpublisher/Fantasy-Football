@@ -303,6 +303,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .sch .wtc>div+div{border-left:1px solid var(--line)}
 .sch .wtc .pl{white-space:normal}
 .sch .wtc .vs{font-weight:400;opacity:.85}
+.sch .wtg{display:grid;gap:0}.sch .wtgame{padding:8px 12px;border-top:1px solid var(--line);display:grid;gap:6px}.sch .wtm{font:600 20px var(--display);letter-spacing:.02em}.sch .wtm i{font:500 13px var(--body);font-style:normal;color:var(--muted);margin:0 6px}.sch .wtm .sub{font:500 12px var(--body);margin-left:8px}.sch .wtp{display:flex;flex-wrap:wrap;gap:6px}.sch .wtnop{padding:3px 12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
 .sch .wtnone{color:var(--muted);font-size:13px}
 @media (max-width:560px){.sch .wtc{grid-template-columns:minmax(0,1fr)}.sch .wtc>div+div{border-left:0;border-top:1px solid var(--line)}}
 .sch .byeweek{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;grid-template-columns:70px 1fr;gap:4px 12px}
@@ -1188,23 +1189,21 @@ function scWatchView(){
   const slots={};
   gs.forEach(g=>{(slots[g[3]]=slots[g[3]]||[]).push(g)});
   const ords=Object.keys(slots).map(Number).sort((a,b)=>a-b);
-  const line=(id,p,cls,opp)=>'<span class="pl '+cls+' '+p.s+'" title="'+scSlotTip(p.s)+'">'+esc(p.n)+' · '+p.p+' · '+SC.T[id].a+' <span class="vs">'+opp+'</span></span>';
-  const col=(src,cls,gl)=>{const out=[];gl.forEach(g=>[[g[1],g[2],'at '],[g[2],g[1],'vs ']].forEach(([id,oid,w])=>{(src[id]||[]).forEach(p=>out.push(line(id,p,cls,(w==='at '?'at ':'vs ')+SC.T[oid].a)))}));return out};
-  let h='<div class="summary"><span class="pill">Starters, bench and IR are shown; bench and IR are dimmed.</span></div>';
+  const pl=(id,p,cls)=>'<span class="pl '+cls+' '+p.s+'" title="'+(cls==='o'?esc(o?o.team:'Opponent')+': ':'Legal Troubles: ')+scSlotTip(p.s)+'">'+esc(p.n)+' · '+p.p+' · '+SC.T[id].a+'</span>';
+  const gamePl=g=>{const out=[];[g[1],g[2]].forEach(id=>{(SC.mine[id]||[]).forEach(p=>out.push([0,p.s,pl(id,p,'')]));((om[id])||[]).forEach(p=>out.push([1,p.s,pl(id,p,'o')]))});const so={S:0,B:1,IR:2};return out.sort((a,b)=>so[a[1]]-so[b[1]]||a[0]-b[0]).map(x=>x[2])};
+  let h='<div class="summary"><span class="pill">Every game, with your players (green) and '+esc(o?o.team:'your opponent')+'\'s players (orange) together. Bench and IR are dimmed.</span></div>';
   if(o) h+='<div class="scvs">Your opponent: <b>'+esc(o.team)+'</b> <span class="sub">('+o.src+')</span></div>';
-  let shown=0,emptySlots=0;
   ords.forEach(ms=>{
-    const gl=slots[ms],me=col(SC.mine,'',gl),op=col(om,'o',gl);
-    if(!me.length&&!op.length){emptySlots++;return}
-    shown++;const dt=new Date(ms),started=ms<=now;
-    h+='<div class="wtslot"><div class="wth"><b>'+scFmtTime.format(dt).replace(' ','&nbsp;')+' ET</b><span>'+scFmtDay.format(dt)+'</span><span class="sub">'+gl.length+' game'+(gl.length>1?'s':'')+': '+gl.map(g=>SC.T[g[1]].a+' at '+SC.T[g[2]].a).join(', ')+'</span><span class="st'+(started?' done':'')+'">'+(started?'Kicked off':'Upcoming')+'</span></div>'+
-      '<div class="wtc"><div><div class="gh me">Legal Troubles</div>'+(me.join('')||'<span class="wtnone">None in this slot</span>')+'</div>'+
-      '<div><div class="gh op">'+esc(o?o.team:'Opponent')+'</div>'+(op.join('')||'<span class="wtnone">None in this slot</span>')+'</div></div></div>';
+    const dt=new Date(ms),started=ms<=now,gl=slots[ms];
+    const withP=gl.map(g=>[g,gamePl(g)]).filter(x=>x[1].length),none=gl.filter(g=>!gamePl(g).length);
+    h+='<div class="wtslot"><div class="wth"><b>'+scFmtTime.format(dt).replace(' ','&nbsp;')+' ET</b><span>'+scFmtDay.format(dt)+'</span><span class="st'+(started?' done':'')+'">'+(started?'Kicked off':'Upcoming')+'</span></div><div class="wtg">'+
+      withP.map(([g,L])=>'<div class="wtgame"><div class="wtm">'+SC.T[g[1]].a+' <i>at</i> '+SC.T[g[2]].a+'<span class="sub"> '+esc(SC.T[g[1]].n)+' at '+esc(SC.T[g[2]].n)+'</span></div><div class="wtp">'+L.join('')+'</div></div>').join('')+
+      none.map(g=>'<div class="wtnop">'+SC.T[g[1]].a+' at '+SC.T[g[2]].a+' · no players</div>').join('')+'</div></div>';
   });
-  const bm=[],bo=[];byes.forEach(id=>{(SC.mine[id]||[]).forEach(p=>bm.push(line(id,p,'','bye')));((om[id])||[]).forEach(p=>bo.push(line(id,p,'o','bye')))});
-  if(bm.length||bo.length) h+='<div class="wtslot"><div class="wth"><b>On bye</b><span class="sub">Not playing this week</span></div><div class="wtc"><div><div class="gh me">Legal Troubles</div>'+(bm.join('')||'<span class="wtnone">None</span>')+'</div><div><div class="gh op">'+esc(o?o.team:'Opponent')+'</div>'+(bo.join('')||'<span class="wtnone">None</span>')+'</div></div></div>';
-  if(!shown&&!bm.length&&!bo.length) h+='<div class="empty">No games with your or your opponent\'s players this week.</div>';
-  if(emptySlots) h+='<p class="sub">'+emptySlots+' other kickoff slot'+(emptySlots>1?'s have':' has')+' none of your or your opponent\'s players, so '+(emptySlots>1?'they are':'it is')+' left out. No live scores here; "Kicked off" is based on the clock.</p>';
+  const bl=[];byes.forEach(id=>{(SC.mine[id]||[]).forEach(p=>bl.push(pl(id,p,'')+' <span class="vs">bye</span>'));((om[id])||[]).forEach(p=>bl.push(pl(id,p,'o')+' <span class="vs">bye</span>'))});
+  if(bl.length||byes.length) h+='<div class="wtslot"><div class="wth"><b>On bye</b><span class="sub">Not playing this week: '+byes.map(id=>SC.T[id].a).join(', ')+'</span></div><div class="wtg">'+(bl.length?'<div class="wtgame"><div class="wtp">'+bl.join('')+'</div></div>':'<div class="wtnop">No players on bye</div>')+'</div></div>';
+  if(!gs.length) h+='<div class="empty">No games this week.</div>';
+  h+='<p class="sub">No live scores here; "Kicked off" is based on the clock.</p>';
   return h;
 }
 function scOppCell(id,w){
