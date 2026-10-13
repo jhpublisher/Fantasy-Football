@@ -2,11 +2,30 @@
  "ok": true,
  "failures": [],
  "warnings": [
-  "our lineup has 7 starters, league uses 8"
+  "tag for Alex Bachman expired (week 5); page must not show it as current",
+  "tag for Puka Nacua expired (week 5); page must not show it as current",
+  "tag for Malik Washington expired (week 5); page must not show it as current",
+  "tag for Justin Jefferson expired (week 5); page must not show it as current",
+  "tag for Austin Ekeler expired (week 5); page must not show it as current",
+  "tag for Skyy Moore expired (week 5); page must not show it as current",
+  "tag for Javonte Williams expired (week 5); page must not show it as current",
+  "tag for Brian Robinson Jr. expired (week 5); page must not show it as current",
+  "tag for Rams D/ST expired (week 5); page must not show it as current",
+  "tag for Falcons D/ST expired (week 5); page must not show it as current",
+  "tag for Jalen Brooks expired (week 5); page must not show it as current",
+  "rumor Tyreek Hill expired (week 5)",
+  "rumor Tony Pollard expired (week 5)",
+  "rumor DJ Moore expired (week 5)",
+  "rumor Saquon Barkley expired (week 5)",
+  "rumor Jayden Daniels expired (week 5)",
+  "rumor Marvin Harrison Jr. expired (week 5)",
+  "curated tags: 11 expired: Skyy Moore, Malik Washington, Puka Nacua, Javonte Williams, Brian Robinson Jr., Austin Ekeler, Jalen Brooks, Alex Bachman, Rams D/ST, Falcons D/ST, Justin Jefferson",
+  "curated claims: 4 expired: Falcons D/ST, Kyle Williams, Bears D/ST, Seth McGowan",
+  "curated needs: 6 expired: Monty's, Pop A TD, Oviedo Roosters, El' Pol\u00edtico, Team RM, JV Squad"
  ],
- "checkedAt": "2026-10-13T02:37+00:00",
+ "checkedAt": "2026-10-13T10:34+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-10-13T02:37+00:00"
+ "bundleBuiltAt": "2026-10-13T10:34+00:00"
 }

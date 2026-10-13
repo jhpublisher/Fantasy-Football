@@ -859,6 +859,17 @@
 "winner": "BAL",
 "loser": "ATL",
 "tie": false
+},
+"401872994": {
+"week": 5,
+"date": "2026-10-13T00:15Z",
+"home": "LAR",
+"away": "BUF",
+"homeScore": 34,
+"awayScore": 37,
+"winner": "BUF",
+"loser": "LAR",
+"tie": false
 }
 }
 }
