@@ -1373,6 +1373,175 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidde
 try{const v=localStorage.getItem('lt-bi-view');if(v&&['overview','returns','league','roster','market','news','schedule','waivers'].includes(v))S.view=v}catch(e){}
 render();
 
+/* ---------- Header hover help (Oct 13, Joe: explain every header on hover; headers themselves unchanged) ----------
+   Each rule: [text regex (lower case, arrows removed), panel-title regex or null, tab regex or null, explanation].
+   First match wins, so panel/tab-specific rules come before the general ones. Applied to every th, h2 and h3 after each render
+   (MutationObserver), so drawers and re-sorted tables get them too. Only a title attribute is added; no header text or style changes. */
+const HT=[
+/* Column headers: league tables */
+[/^#$/,/waiver order/,null,'Waiver priority this week. 1 picks first. The order resets every week to inverse standings (worst record picks first), so with the best record we pick last.'],
+[/^seed$/,null,null,'Current playoff seed. Teams are ranked by record, then head-to-head for a two-team tie, then total points for. The top 7 make the playoffs and seed 1 gets the bye. A dashed line marks the cutoff.'],
+[/^team$/,/all \d+ teams|returner rankings/,null,'NFL team. Click a row to open that team’s kickoff and punt history, game by game.'],
+[/^team$/,null,/schedule/,'NFL team (all 32, one row each). The cells to the right show who the team plays each week, with a BYE marked.'],
+[/^team$/,null,null,'Fantasy team in our league (Jort Wranglers). Our team, Legal Troubles, is highlighted.'],
+[/^w-l$/,null,null,'Win-loss record (ties count as half a win). Regular season is Weeks 1–14.'],
+[/^playoffs$/,null,null,'Chance this team finishes in the top 7 and makes the playoffs, from the playoff-odds simulation (many simulated seasons using each team’s projected points).'],
+[/^1st%$/,null,null,'Chance this team finishes as the #1 seed, which earns the first-round bye. From the same playoff-odds simulation.'],
+[/^pf$/,null,null,'Points For: total fantasy points this team has scored so far this season. It is the last tiebreaker for seeding.'],
+[/^avg ppg$/,null,null,'Average points per game actually scored this season (total points for divided by games played).'],
+[/^strength$/,null,null,'Projected points per week for this team’s roster, the number the odds model uses to simulate its games. Higher is a stronger team.'],
+[/^100\+ games$/,null,null,'Number of games this team has scored 100 or more points.'],
+[/^games back of #1$/,null,null,'How many games behind the #1 seed this team is. “Leader” means it holds the #1 seed; “0 (tied)” means level on record.'],
+[/^playoff line$/,null,null,'Games ahead of (or behind) the playoff cutoff. Seeds inside the top 7 show how far they are ahead of 8th place; teams outside show how far they are behind 7th place.'],
+[/^remaining schedule$/,null,null,'How hard this team’s remaining games are: the average Strength (projected points per week) of the opponents left. Higher means a harder schedule.'],
+[/^vs us$/,null,null,'Our head-to-head with this team: the result if we have played, or the week we play them. “Not scheduled” means we do not meet in the regular season.'],
+[/^avg$/,/100\+/,null,'Average points per game this team has scored this season.'],
+[/^100\+$/,null,null,'Number of games this team has scored 100 or more points. Green cells are 100+, bold are 120+.'],
+[/^wk \d+$/,/100\+|weekly (points|scores)/,null,'Points this team scored that week. Green = 100 or more, bold = 120 or more.'],
+/* Our roster */
+[/^lineup$/,null,null,'Where the player sits in our ESPN lineup right now (starting slot, Bench or IR). Click to sort by lineup order; the dashed line separates starters from the bench and IR.'],
+[/^slot$/,null,null,'The lineup slot this player fills in our ESPN lineup (QB, RB, WR, TE, FLEX, D/ST, K, Bench or IR).'],
+[/^pos$/,null,null,'Position (QB, RB, WR, TE, K or D/ST).'],
+[/^nfl$/,null,null,'The player’s NFL team. “FA” means he is not on an NFL roster right now.'],
+[/^player$/,/waiver run|waiver report|dropped/,null,'The player who was claimed, added or dropped.'],
+[/^player$/,null,null,'Player name. Click a row to open the full player detail.'],
+[/^health$/,null,null,'ESPN’s current injury or availability status for the player (Active, Questionable, Doubtful, Out, IR and so on).'],
+[/^status$/,/week \d+ practice|injury check/,null,'Official game status from the team’s injury report: Out, Doubtful, Questionable, or blank for no designation.'],
+[/^status$/,null,null,'ESPN’s current injury or availability status for the player (Active, Questionable, Doubtful, Out, IR and so on).'],
+[/^plan$/,null,null,'Your own pick for this player this week, chosen from the menu. Picks get a gold edge and are saved in the dashboard database. Staff recommendations are retired.'],
+[/^total$/,null,null,'The player’s total fantasy points this season in our league scoring.'],
+[/^this wk$/,null,null,'ESPN’s projected fantasy points for this player this week, in our league scoring.'],
+[/^bye$/,null,null,'The NFL week this player’s team has its bye (no game, no points).'],
+[/^wk \d+$/,/opponents by week/,null,'The player’s NFL opponent that week (@ = away). BYE is highlighted: the player scores nothing that week.'],
+[/^wk \d+$/,/playoff weeks/,null,'The player’s playoff opponent that week with ESPN’s rank of that defense against his position (1st = toughest, 32nd = easiest). Green = easy (23rd–32nd), red = tough (1st–10th).'],
+[/^easy weeks$/,null,null,'How many of the three playoff weeks (15–17) the player faces a defense ranked 23rd–32nd against his position, an easy matchup.'],
+/* Practice report */
+[/^game status$/,null,null,'The status the team lists for the upcoming game: Out, Doubtful or Questionable (from the Friday report).'],
+[/^(mon|tue|wed|thu|fri|sat|sun) \d+\/\d+$/,null,null,'Practice participation that day from the official team report: Full, Limited or Did Not Practice (DNP).'],
+/* Waivers and transactions */
+[/^claimed by \(won\)$/,null,null,'The team whose waiver claim won this player in this waiver run.'],
+[/^also tried/,null,null,'Other teams that put in a claim for this player but lost or had the claim canceled.'],
+[/^when$/,null,null,'Date and time of the move, from ESPN’s transaction feed (Eastern time).'],
+[/^type$/,null,null,'Kind of move: add, drop, waiver claim, trade and so on.'],
+[/^dropped$/,null,null,'The player the team dropped to make room for this move, if any.'],
+[/^detail$/,null,null,'Extra information ESPN gives about the move.'],
+[/^dropped by$/,null,null,'The fantasy team that dropped this player.'],
+[/^now$/,null,null,'Where the player is now: the fantasy team that holds him, or “no roster” meaning he is available to pick up.'],
+/* Returner tables */
+[/^wk \d+ opponent$/,null,null,'Opponent that week and kickoff time. Click it for that team’s kickoffs and punts game by game, with season totals.'],
+[/^exp returns$/,null,null,'Expected kick returns for him this week: the opponent’s kick returns allowed per game (last 3 games) times his share of his team’s kick returns over his last 3 games with returns.'],
+[/^exp pts$/,null,null,'Expected kick-return points this week: expected returns times his average yards per kick return this season times 0.1 points per yard.'],
+[/^kr allowed \/ gm$/,null,null,'How many kick returns this week’s opponent allows per game over its last 3 games (small number = last game). More returns means more chances for our returner.'],
+[/^yds allowed \/ gm$/,null,null,'Kick-return yards this week’s opponent allows per game over its last 3 games (small number = last game).'],
+[/^owner$/,null,null,'Who owns him in our ESPN league. “Free agent” means he can be added; “Not in ESPN fantasy” means he is a defender ESPN does not list.'],
+[/^last game$/,/returner rankings/,null,'His share of the team’s returns in his last game played, with his returns / team returns in brackets.'],
+[/^last game$/,null,null,'Who returned and how the shares looked in the team’s most recent game.'],
+[/^% of kr$/,null,null,'Share of his team’s kick returns that he handled over his last 3 games played.'],
+[/^% of pr$/,null,null,'Share of his team’s punts he fielded (returns plus fair catches) over his last 3 games played.'],
+[/^pts\/game \(\d+\)$/,null,null,'Return points per game over his last 3 games played (byes skipped). Return points = 0.1 per return yard plus 6 per return touchdown.'],
+[/^total yds$/,null,null,'Season return yards for the return type selected above (kick, punt or both).'],
+[/^kr yds$/,null,null,'Season kick-return yards.'],
+[/^pr yds$/,null,null,'Season punt-return yards.'],
+[/^fair catches \(\d+\)$/,null,null,'Fair catches he made in his last 3 games played. A fair catch scores no points.'],
+[/^avg kr$/,null,null,'His average yards per kick return this season.'],
+[/^avg pr$/,null,null,'His average yards per punt return this season.'],
+[/^returns by week$/,null,null,'His returns out of the team’s returns each week. Green = kick, blue = punt; a darker box means a bigger share. Byes are skipped.'],
+[/^split \(last \d+\)$/,null,null,'How the team shares its returns over the last 3 games: One man (one returner has 80%+), Split (50%+) or Committee, with each returner’s share.'],
+[/^trend$/,null,null,'Steady, or Changed when last game’s main returner or share differs from the last 3 games by 30+ points.'],
+[/^injury check \(wk \d+\)$/,null,null,'Who is likely to be the team’s main kick returner this week based on official injury reports and inactives, with flags: returner back, returner out, needed on offense, share at risk.'],
+[/^team site kr \/ pr$/,null,null,'Kick and punt returners listed on the team’s own website depth chart.'],
+[/^espn kr \/ pr$/,null,null,'Kick and punt returners listed on ESPN’s depth chart.'],
+[/^agree\?$/,null,null,'Whether the team site and ESPN depth charts list the same returners. Differences mean the job is unsettled or one chart is out of date.'],
+[/^wk \d+ returners$/,null,null,'Who returned kicks and punts for the team that week, with how many each.'],
+[/^espn$/,null,null,'Where ESPN’s depth chart lists him (KR1 is the first kick returner).'],
+[/^team site$/,null,null,'Where the team’s own depth chart lists him (KR1 is the first kick returner).'],
+/* Player drawer: his returns game by game */
+[/^wk$/,null,null,'NFL week.'],
+[/^vs$/,null,null,'Opponent that week (@ = away game).'],
+[/^result$/,null,null,'Win, loss or tie for his team that game.'],
+[/^final score$/,null,null,'Final score of the game, winner first.'],
+[/^returns$/,null,null,'Number of returns he made in the game (kick returns or punt returns, per the table).'],
+[/^yds$/,null,null,'Return yards he gained in the game.'],
+[/^yds\/ret$/,null,null,'Yards per return (return yards divided by returns).'],
+[/^td$/,null,null,'Return touchdowns (6 points each).'],
+[/^fair catch$/,null,null,'Fair catches made (punt table). A fair catch scores no points.'],
+[/^team returns$/,null,null,'Total returns by his whole team in that game, so you can see his share.'],
+[/^team fc$/,null,null,'Fair catches made by his whole team in that game.'],
+[/^share %$/,null,null,'His share of his team’s returns in that game (his returns divided by team returns).'],
+[/^return pts$/,null,null,'Fantasy points from returns that game: 0.1 per return yard plus 6 per return touchdown.'],
+/* Opponent drawer: kickoffs and punts by this team */
+[/^kickoffs$/,null,null,'Kickoffs by this team in the game.'],
+[/^returned$/,null,null,'Kickoffs or punts the other team ran back (kick-return and punt-return chances our returner would get against this team).'],
+[/^ret yds$/,null,null,'Return yards this team allowed on those returns.'],
+[/^ret td$/,null,null,'Return touchdowns this team allowed.'],
+[/^touchback$/,null,null,'Kicks or punts that ended in a touchback (no return).'],
+[/^short zone$/,null,null,'Kickoffs that landed short of the landing zone (penalty): ball placed at the 40, no return.'],
+[/^out of bds$/,null,null,'Kickoffs that went out of bounds (penalty), so no return.'],
+[/^onside$/,null,null,'Onside kick attempts.'],
+[/^punts$/,null,null,'Punts by this team in the game.'],
+[/^punt yds$/,null,null,'Total punt yards (gross) in the game.'],
+[/^avg$/,null,null,'Average gross yards per punt.'],
+[/^in 20$/,null,null,'Punts downed inside the opponent’s 20-yard line.'],
+[/^span$/,null,null,'The stretch of games the shares below are measured over: last game, last 3 games, or the whole season.'],
+[/^pattern$/,null,null,'How the returns are split: One man (one returner has 80%+), Split (50%+) or Committee, measured over the last 3 games.'],
+[/^shares$/,null,null,'Each returner’s share of the team’s returns over that span.'],
+[/^rank$/,null,null,'Depth-chart order for the job (1 = first choice).'],
+[/^injury$/,null,null,'The injury listed on the team’s official report.'],
+[/^practice$/,null,null,'Practice participation on the team’s final report of the week (Full, Limited or Did Not Participate).'],
+[/^week \d+ report$/,null,null,'Player named on the official injury report for this week.'],
+/* Panel headings */
+[/^playoff odds$/,null,null,'Each team’s chance of making the playoffs and of getting the #1 seed, from a simulation of the rest of the season using projected points.'],
+[/^roster$/,null,null,'Players on this team and where they sit in the lineup, with ESPN injury status.'],
+[/^returner rankings$/,null,null,'Every kick and punt returner ranked by recent return points, with this week’s matchup and expected returns. Use the filters to narrow it.'],
+[/^all \d+ teams$/,null,null,'One row per NFL team showing who returns kicks and punts, how the work is split, and whether the depth charts agree.'],
+[/^our returners$/,null,null,'Our players who return kicks or punts, with their recent usage and this week’s matchup.'],
+[/^depth charts? today$/,null,null,'Who the team website and ESPN list as kick and punt returners right now.'],
+[/^who returns$/,null,null,'How this team splits its returns: last game, last 3 games and the season.'],
+[/^injury check$/,null,null,'This team’s official injury report and inactives, used to predict who returns kicks this week.'],
+[/^week by week$/,null,null,'Each week’s kickoff and punt returns for this team, with who returned them.'],
+[/^kick returns$/,null,null,'His kick returns game by game.'],
+[/^punt returns$/,null,null,'His punt returns game by game.'],
+[/^our roster$/,null,null,'Every player on our team with lineup slot, status, your plan pick, season points, this week’s projection and bye week.'],
+[/^opponents by week$/,null,null,'Who each of our players’s team plays in each remaining regular-season week. BYE weeks are highlighted.'],
+[/^playoff weeks/,null,null,'Playoff opponents for Weeks 15–17 for each player, with how easy the matchup is for his position.'],
+[/^waiver order$/,null,null,'Order teams pick in this week’s waiver run. It resets weekly to inverse standings.'],
+[/^best free agents available$/,null,null,'The best available players by this week’s projection at each position — our fallback when claims miss.'],
+[/^waiver report$/,null,null,'League transactions: waiver runs, adds, drops and trades from ESPN’s transaction feed.'],
+[/^players dropped$/,null,null,'Every player dropped in the league, and whether another team has picked him up since. “No roster” marks a pickup target.'],
+[/^waiver run /,null,null,'One waiver run: who won each player and who else put in a claim.'],
+[/^all moves$/,null,null,'Every add, drop, waiver claim and trade in the league, newest first.'],
+[/^seed race$/,null,null,'Where each team stands in the chase for playoff seeds, how far it is from the cutoff and how hard its remaining schedule is.'],
+[/^standings$/,null,null,'League standings with points, average, projected strength and playoff odds. Click Seed to return to standings order.'],
+[/^100\+ tracker$/,null,null,'Each team’s weekly score, shaded green when it reaches 100 and bold at 120.'],
+[/^odds trend$/,null,null,'Our playoff odds compared with the top rivals, week by week.'],
+[/^(weekly points|weekly scores|our weekly scores)$/,null,null,'Weekly fantasy points as bars: the player’s points each week, or the team’s score each week (the 100 line marks 100 points).'],
+[/^nfl schedule$/,null,null,'Every NFL game with kickoff time, TV and the players on our roster and our opponent’s roster in it.'],
+[/^this week$/,null,null,'This week’s NFL games in kickoff order, with our players (green) and the opponent’s players (orange).'],
+[/^teams on bye$/,null,null,'NFL teams with no game this week that have players on our roster.'],
+[/^latest news$/,null,null,'The newest news items about this player.'],
+[/^news by player$/,null,null,'News grouped into one story per player and event, with how many sources reported it and which was first.'],
+[/^rumor mill$/,null,null,'Unconfirmed reports that could matter to us. Confirmed items are labelled as confirmed.'],
+[/^what fantasy is adding$/,null,null,'Players being added most across Sleeper fantasy leagues in the last 24 hours — a sign which waiver claims will be contested.'],
+[/^week \d+ practice report$/,null,null,'Practice participation by day (Monday–Saturday, Eastern time) for our players and watch list, plus the Friday game status.'],
+[/^playoff schedule$/,null,null,'This player’s playoff opponents for Weeks 15–17, with ESPN’s rank of each defense against his position (1st = toughest, 32nd = easiest).'],
+[/^(qb|rb|wr|te|k|d\/st)$/,/best free agents/,null,'The best available free agents at this position, ranked by this week’s projection.'],
+[/^week \d+: vs /,null,null,'This week’s head-to-head: the fantasy team we play in our league.'],
+[/^practice$/,null,null,'Practice participation by day (Monday–Saturday, Eastern time) for our players and watch list.'],
+];
+let HT_T=0;
+function htNorm(s){return (s||'').replace(/[▲▼↕]/g,'').replace(/\s+/g,' ').trim().toLowerCase()}
+function htApply(){
+  const tabEl=document.querySelector('[role=tab][aria-selected=true]'),tab=tabEl?(tabEl.dataset.v||'').toLowerCase():'';
+  document.querySelectorAll('th,h2,h3').forEach(e=>{
+    const t=htNorm(e.textContent);if(!t||t.length>60)return;
+    const box=e.closest('section,.panel,.drawer,[role=dialog]'),ph=(e.tagName!=='H2'&&box)?box.querySelector('h2,h3'):null,panel=ph?htNorm(ph.textContent):'';
+    let tip=null;for(const [re,pre,tre,x] of HT){if(re.test(t)&&(!pre||pre.test(panel))&&(!tre||tre.test(tab))){tip=x;break}}
+    if(!tip||e.dataset.ht===tip)return;
+    e.dataset.ht=tip;const b=e.tagName==='TH'?e.querySelector('button.srt'):null;
+    e.title=tip;if(b)b.title=tip+' · Click to sort (click again to flip)';
+  })}
+try{new MutationObserver(()=>{cancelAnimationFrame(HT_T);HT_T=requestAnimationFrame(htApply)}).observe(document.body,{childList:true,subtree:true});htApply()}catch(e){}
+
 (async()=>{
   async function load(){
     try{const r=await fetch('data/bundle.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const b=await r.json();
