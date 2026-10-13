@@ -169,6 +169,7 @@ td.rgcell{font-size:.82rem;white-space:normal;min-width:120px}
 .rgcolpanel input{accent-color:var(--brass);width:16px;height:16px}
 .rgcolact{display:flex;gap:14px;align-items:center;justify-content:flex-end;border-top:1px solid var(--line);padding-top:8px}
 .rgl{font-family:var(--mono);font-size:.72rem;padding:1px 6px;border-radius:4px;background:var(--sunk);color:var(--muted);margin-left:2px}
+.wlk{display:inline-flex;gap:8px;align-items:baseline;justify-content:center}.wl{font-family:var(--mono);font-size:.72rem}.wl.W{color:var(--good)}.wl.L{color:var(--bad)}.wl.T,.wl:not(.W):not(.L){color:var(--muted)}.rk{font-style:normal;color:var(--muted);font-size:.7rem;min-width:1.2em;text-align:right}
 .heat td.h{text-align:center;font-family:var(--mono);font-size:.78rem;border-radius:4px}
 .h100{background:color-mix(in srgb,var(--good) 28%,transparent)}
 .hhigh{background:color-mix(in srgb,var(--good) 50%,transparent);font-weight:700}
@@ -541,6 +542,8 @@ function dueList(){const D=M?.dates||{},due=waiverDue(),wp=waiverProcess();const
   return `<li><span>Submit waiver claims${r?` <span class="note">· we pick ${r} of ${n}</span>`:''}${wp?` <span class="note">· ${isPast(wp)?'processed':'process'} ${fmtD(wp)}</span>`:''}</span><time>${!due?'Time unknown: no waiver date in this refresh':isPast(due)?(wp&&!isPast(wp)?`Passed (${fmtD(due)}); claims process ${fmtD(wp)}`:`Passed (${fmtD(due)}); next week's claims open after waivers clear`):fmtD(due)}</time></li>
       <li><span>Set lineup (first kickoff)</span><time>${!D.kickoff?'No kickoff time in this refresh':isPast(D.kickoff)?`Passed (${fmtD(D.kickoff)}); later games lock at their own kickoff`:fmtD(D.kickoff)}</time></li>
       <li><span>Trade deadline</span><time>${D.tradeDeadline?whenTxt(D.tradeDeadline,'Passed: no more trades'):'Not in this refresh'}</time></li>`}
+function weekRes(w,name){const r=Object.values(S.scores||{}).find(x=>+x.week===+w)?.res;return r?r[name]||null:null}
+function weekRank(w,name){const sc=Object.values(S.scores||{}).find(x=>+x.week===+w)?.scores;if(!sc||sc[name]==null)return null;return 1+Object.values(sc).filter(v=>v!=null&&v>sc[name]).length}
 function teamScores(name){const v={};Object.values(S.scores||{}).forEach(s=>{if(s.scores&&name in s.scores)v[s.week]=s.scores[name]});return v}
 function avgPPG(name){const a=Object.values(teamScores(name)).filter(x=>x!=null);return a.length?(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2):'Not played yet'}
 const SORT_DEF={rp:{k:'pts3',d:-1},sr:{k:'seed',d:1},st:{k:'seed',d:1},tr:{k:'seed',d:1},ov:{k:'seed',d:1},ro:{k:'line',d:1},cl:{k:'pri',d:1},wo:{k:'rank',d:1},pr:{k:'ord',d:1},by:{k:'line',d:1},pg:{k:'line',d:1}};
@@ -570,9 +573,9 @@ function league(){
     <div class="tw"><table><thead><tr>${sh('st','seed','Seed')}${sh('st','name','Team')}${sh('st','wl','W-L')}${sh('st','pf','PF',1)}${sh('st','avg','Avg PPG',1)}${sh('st','str','Strength',1)}${sh('st','po','Playoffs',1)}${sh('st','h','100+ games',1)}</tr></thead><tbody>
     ${st.map(t=>`<tr class="row ${t.name===S.meta?.team?'me':''} ${seedView&&t.seed===PT?'cut':''}" tabindex="0" data-team="${esc(t.name)}"><td>${t.seed}</td><td>${esc(t.name)}</td><td>${wlt(t)}</td><td class="num">${fx(t.pf,1)}</td><td class="num">${avgPPG(t.name)}</td><td class="num">${t.strength??'n/a'}</td><td class="num">${pct(t.playoffPct)}</td><td class="num">${t.hundreds??'n/a'}</td></tr>`).join('')}
     </tbody></table></div><p class="note">${seedView?'Seeds: record, then head-to-head, then points for. Dashed line = playoff cutoff. ':'Click Seed to return to standings order. '}Avg PPG = actual points per game played. Strength = projected points per week used in the odds model.</p></section>
-  <section class="panel"><div class="ph"><h2>100+ tracker</h2><span class="phr">${resetBtn('tr')}<span class="eyebrow">Green = 100+ · bold = 120+ · click a column to sort</span></span></div>
+  <section class="panel"><div class="ph"><h2>100+ tracker</h2><span class="phr">${resetBtn('tr')}<span class="eyebrow">Green = 100+ · bold = 120+ · each week: W/L, score, rank among all teams · click a column to sort</span></span></div>
     <div class="tw"><table class="heat"><thead><tr>${sh('tr','name','Team')}${wks.map(w=>sh('tr','w'+w,'Wk '+w,1)).join('')}${sh('tr','avg','Avg',1)}${sh('tr','h','100+',1)}</tr></thead><tbody>
-    ${tr.map(t=>{const s=teamScores(t.name);return `<tr class="row ${t.name===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(t.name)}"><td>${esc(t.name)}</td>${wks.map(w=>{const v=s[w];return `<td class="h ${v>=120?'hhigh':v>=100?'h100':''}">${v==null?'<span class="dim">No score</span>':v.toFixed(1)}</td>`}).join('')}<td class="num"><b>${avgPPG(t.name)}</b></td><td class="num">${t.hundreds??'n/a'}</td></tr>`}).join('')}
+    ${tr.map(t=>{const s=teamScores(t.name);return `<tr class="row ${t.name===S.meta?.team?'me':''}" tabindex="0" data-team="${esc(t.name)}"><td>${esc(t.name)}</td>${wks.map(w=>{const v=s[w];const r=v==null?null:weekRes(w,t.name),k=v==null?null:weekRank(w,t.name);return `<td class="h ${v>=120?'hhigh':v>=100?'h100':''}">${v==null?'<span class="dim">No score</span>':`<span class="wlk" title="${r==='W'?'Won':r==='L'?'Lost':r==='T'?'Tied':'Result not in this refresh'} that week; ${k}${k===1?'st':k===2?'nd':k===3?'rd':'th'} highest score of ${Object.keys(Object.values(S.scores).find(x=>+x.week===+w).scores).length} teams"><b class="wl ${r||''}">${r||'–'}</b><span>${v.toFixed(1)}</span><i class="rk">${k}</i></span>`}</td>`}).join('')}<td class="num"><b>${avgPPG(t.name)}</b></td><td class="num">${t.hundreds??'n/a'}</td></tr>`}).join('')}
     </tbody></table></div></section>`;
 }
 const slotChip=sl=>!sl?'<span class="note">Not in lineup data</span>':`<span class="chip ${sl==='IR'?'s-INJURY_RESERVE':sl==='Bench'?'t-roster':'s-ACTIVE'}">${esc(sl==='Bench'?'Bench':sl==='IR'?'IR':'Starter · '+sl)}</span>`;
@@ -1397,6 +1400,7 @@ const HT=[
 [/^vs us$/,null,null,'Our head-to-head with this team: the result if we have played, or the week we play them. “Not scheduled” means we do not meet in the regular season.'],
 [/^avg$/,/100\+/,null,'Average points per game this team has scored this season.'],
 [/^100\+$/,null,null,'Number of games this team has scored 100 or more points. Green cells are 100+, bold are 120+.'],
+[/^wk \d+$/,/100\+ tracker/,null,'Each cell reads W or L (did the team win its head-to-head game that week), then the points scored, then the rank of that score among all 14 teams that week (1 = highest). Green = 100 or more, bold = 120 or more.'],
 [/^wk \d+$/,/100\+|weekly (points|scores)/,null,'Points this team scored that week. Green = 100 or more, bold = 120 or more.'],
 /* Our roster */
 [/^lineup$/,null,null,'Where the player sits in our ESPN lineup right now (starting slot, Bench or IR). Click to sort by lineup order; the dashed line separates starters from the bench and IR.'],

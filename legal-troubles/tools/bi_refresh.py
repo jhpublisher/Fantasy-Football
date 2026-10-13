@@ -108,7 +108,7 @@ def po_sched(tid):
     return s
 # ---- scores + standings (ties are ties: not wins, not losses) ----
 POS = om.POS
-weekly = defaultdict(dict); nmatch = defaultdict(int)
+weekly = defaultdict(dict); nmatch = defaultdict(int); wres = defaultdict(dict)  # wres[week][team name] = 'W'/'L'/'T' (head-to-head)
 W = defaultdict(int); L = defaultdict(int); T = defaultdict(int); PF = defaultdict(float); H = defaultdict(int); rem = []; sc = defaultdict(list)
 def result(g):
     """(winner, loser) or None for a tie. Uses ESPN's winner field, falls back to points."""
@@ -124,8 +124,8 @@ for g in m["schedule"]:
         weekly[p][names[h]] = round(hs, 2); weekly[p][names[a]] = round(as_, 2); nmatch[p] += 1
         sc[h].append(hs); sc[a].append(as_); PF[h] += hs; PF[a] += as_
         res = result(g)
-        if res: W[res[0]] += 1; L[res[1]] += 1; H[res] += 1
-        else: T[h] += 1; T[a] += 1
+        if res: W[res[0]] += 1; L[res[1]] += 1; H[res] += 1; wres[p][names[res[0]]] = 'W'; wres[p][names[res[1]]] = 'L'
+        else: T[h] += 1; T[a] += 1; wres[p][names[h]] = 'T'; wres[p][names[a]] = 'T'
     else: rem.append((p, h, a))
 done_weeks = sorted(weekly)
 def stats(p): return om.stats_map(p, YR)
@@ -393,7 +393,7 @@ hist["runs"].append({"at": stamp, "week": wk, "model": om.MODEL, "sims": N,
                      "teams": {names[k]: {"po": tby[k]["playoffPct"], "bye": tby[k]["byePct"], "seed": tby[k]["seed"], "rec": rec(k)} for k in names}})
 hist["updatedAt"] = stamp
 if HIST: json.dump(hist, open(HIST, "w"), indent=1); dump("odds", "history", hist)
-for w, s in weekly.items(): dump("scores", f"w{w:02d}", {"week": w, "updatedAt": stamp, "matchups": nmatch[w], "scores": s})
+for w, s in weekly.items(): dump("scores", f"w{w:02d}", {"week": w, "updatedAt": stamp, "matchups": nmatch[w], "scores": s, "res": wres.get(w, {})})
 def need_of(team):
     n = NEEDS.get(team)
     return ({"need": n.get("need", ""), "needAsOf": n.get("asOf"), "needExpiresWeek": n.get("expiresWeek"), "needExpired": n["expired"], "needLegacy": bool(n.get("legacy"))} if n else {"need": ""})
