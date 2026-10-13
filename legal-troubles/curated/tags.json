@@ -1,31 +1,17 @@
 {
  "Skyy Moore": {
   "tag": "roster",
-  "note": "GB WR3 + PR1/KR1 (3 sources agree on PR1; KR1 per packers.com + actual use, ESPN feed says Melton). Returns are 43.0 of his 49.5 points. Wk 5 proj 11.6 vs CHI. Cover if he is out: Bachman (11.1) already on our bench.",
-  "ret": "Active; bye Wk 11",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
- },
- "Malik Washington": {
-  "tag": "roster",
-  "note": "MIA WR1 + PR1/KR1; best FLEX we have (proj 15.3). Hold.",
-  "ret": "Active",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
+  "note": "GB WR/PR1/KR1. Ruled out of Wk 5 game with an ankle injury; ESPN Questionable. Wk 6 proj 11.9. Cover: Bachman. Check Wed/Thu practice reports.",
+  "ret": "Questionable (ankle)",
+  "asOf": "2026-10-13",
+  "expiresWeek": 6
  },
  "Puka Nacua": {
   "tag": "roster",
-  "note": "WR1. Hold.",
+  "note": "WR1. 17 of 24 targets, 138 yds + TD in Wk 5 (30.2 pts). Proj 18.8 Wk 6 vs ARI. Hold.",
   "ret": "Active",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
- },
- "Javonte Williams": {
-  "tag": "roster",
-  "note": "RB1 now that Jones is gone (proj 16.5). Only healthy starting RB; DAL bye Wk 14. Robinson Jr. is the only real RB behind him.",
-  "ret": "Active; bye Wk 14",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
+  "asOf": "2026-10-13",
+  "expiresWeek": 6
  },
  "Josh Allen": {
   "tag": "roster",
@@ -50,31 +36,24 @@
  },
  "Brian Robinson Jr.": {
   "tag": "sell",
-  "note": "3 TDs and 25.2 pts in Wk 4 (garbage-time game, 45-24); Wk 5 proj only 9.7 as Bijan Robinson's backup; adds up 6.5% this week. Atlanta plays Sunday night 8:20 PM ET (not 4:20). Our Jones chip is gone, so he is the main RB we can shop. If sold, add Seth McGowan (IND, FA) as RB2.",
-  "ret": "Sell before Sun 8:20 PM ET",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
+  "note": "Wk 5: 7 carries for 16 yds, no catch (7.7 pts) in ATL OT loss; Wk 6 proj 10.5 as FLEX behind Bijan Robinson. Sell only for a clear upgrade; hold otherwise.",
+  "ret": "Active",
+  "asOf": "2026-10-13",
+  "expiresWeek": 6
  },
  "Austin Ekeler": {
   "tag": "drop",
-  "note": "Added Oct 7 for Kyle Williams; now proj 3.4 (ROS 41.7). WSH RB4 / KR2; role shrinks as Rachaad White (Limited, NFL.com Wk 5) returns. Cut for Wetjen.",
-  "ret": "",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
- },
- "Jalen Brooks": {
-  "tag": "roster",
-  "note": "ARI kick returner BY USAGE, NOT ON EITHER CHART: 13 of 16 KR Wk 2-4 (341 yds; 12.8 and 15.7 pts in Wk 3-4), proj 8.3. Both depth charts (ESPN, azcardinals.com) list Duvernay KR1. Keep; do not drop (Frank's 'no role' note is wrong).",
+  "note": "Wk 5: 1.9 pts, Wk 6 proj 3.1. WSH RB4; first cut when a bench spot is needed. Replacement on waivers: MarShawn Lloyd (GB RB, proj 10.2, 48.7% rostered).",
   "ret": "Active",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
+  "asOf": "2026-10-13",
+  "expiresWeek": 6
  },
  "Alex Bachman": {
   "tag": "roster",
-  "note": "LAR kick returner in practice: 4 KR for 89 yds Wk 4 (11.9 pts), proj 11.1. Plays Mon Oct 12 8:15 PM ET. First cover for Moore at FLEX.",
-  "ret": "Active; Mon night",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
+  "note": "LAR WR3/KR cover: 5.5 pts in Wk 5 (MNF loss to BUF), proj 9.6 Wk 6 vs ARI. First cover for Moore (ankle).",
+  "ret": "Active",
+  "asOf": "2026-10-13",
+  "expiresWeek": 6
  },
  "Josh Jacobs": {
   "tag": "stash",
@@ -105,11 +84,11 @@
   "expiresWeek": 7
  },
  "Rams D/ST": {
-  "tag": "drop",
-  "note": "Wk 5 vs Buffalo = our own QB (proj 2.6). Swap for Falcons D/ST (5.4).",
-  "ret": "",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
+  "tag": "roster",
+  "note": "Wk 5: -5.0 (BUF 37, OT). Wk 6 home vs ARI, proj 6.2, best option we have (top free-agent D/ST, Giants, is 4.1). Hold.",
+  "ret": "Active",
+  "asOf": "2026-10-13",
+  "expiresWeek": 6
  },
  "Kaden Wetjen": {
   "tag": "claim",
@@ -118,19 +97,12 @@
   "asOf": "2026-10-08",
   "expiresWeek": 6
  },
- "Falcons D/ST": {
-  "tag": "claim",
-  "note": "FA, instant add. Wk 5 vs Baltimore, Sunday night 8:20 PM ET; Lamar Jackson did not practice Wednesday (NFL.com). Proj 5.4 vs Rams 2.6. Drop Rams D/ST.",
-  "ret": "Wk 5 stream",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
- },
  "Justin Jefferson": {
   "tag": "target",
-  "note": "Trade target, JV Squad (1-3). ESPN lists him QUESTIONABLE, Wk 5 proj 15.5 (JV has him in an IR slot). Jones is gone from any package, so a new build is needed if Joe asks. Playoff schedule DET, WSH, @NYJ. No offer unless Joe asks.",
-  "ret": "Watch Sun status",
-  "asOf": "2026-10-08",
-  "expiresWeek": 5
+  "note": "Trade target, JV Squad (IR slot). MIN bye Wk 6, back Wk 7. ESPN shows Active. A package is needed only if Joe asks.",
+  "ret": "Bye Wk 6",
+  "asOf": "2026-10-13",
+  "expiresWeek": 7
  },
  "A.J. Brown": {
   "tag": "buy",
