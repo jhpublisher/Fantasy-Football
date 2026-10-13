@@ -350,7 +350,8 @@ def f_roster_grid():
     grid = [{"name": p["name"], "pos": p["pos"], "nfl": p["nfl"], "slot": p.get("slot"), "bye": p.get("bye"),
              "playoffs": [pentry(o_, p["pos"]) for o_ in (p.get("playoffs") or [])]}
             for p in players.values() if p.get("ours")]
-    return {"grid": grid, "leaguePA": round(statistics.mean(ppa.values()), 1) if ppa else None, "paWeeks": [1, wk - 1] if wk > 1 else None}
+    tbl = {pos: {c: [int(r_["rank"]), round(float(r_["average"]), 1)] for c, t_ in ((ab[i], i) for i in ab) for r_ in [PR.get(pid, {}).get("ratingsByOpponent", {}).get(str(t_))] if r_} for pos, pid in POSID.items()}  # this-week opponent rank = same season-to-date OPRK as the playoff grid
+    return {"oprkTable": tbl, "grid": grid, "leaguePA": round(statistics.mean(ppa.values()), 1) if ppa else None, "paWeeks": [1, wk - 1] if wk > 1 else None}
 feature("prev", f_prev)
 feature("matchup", f_matchup)
 feature("nfl", f_nfl)
@@ -411,7 +412,7 @@ dump("rosters", "current", {"week": wk, "updatedAt": stamp, "teams": {names[x["i
      "status": e["playerPoolEntry"]["player"].get("injuryStatus") or "ACTIVE"} for e in x["roster"]["entries"]] for x in r["teams"]}})
 g = extras.pop("rosterGrid")
 dump("extras", "current", {"week": wk, "updatedAt": stamp, "builtAt": stamp, **extras,
-     "roster": g if "error" in g else g["grid"], "leaguePA": None if "error" in g else g["leaguePA"], "paWeeks": None if "error" in g else g["paWeeks"],
+     "roster": g if "error" in g else g["grid"], "leaguePA": None if "error" in g else g["leaguePA"], "paWeeks": None if "error" in g else g["paWeeks"], "oprkTable": None if "error" in g else g.get("oprkTable"),
      "regWeeks": REG, "league": league,
      "scouting": {"week": wk, "asOf": datetime.now(ET).date().isoformat(), "usSeed": mine["seed"], "regWeeks": REG, "league": league},
      "errors": {k.split(".", 1)[1]: v for k, v in ERRORS.items() if k.startswith("extras.")}})
