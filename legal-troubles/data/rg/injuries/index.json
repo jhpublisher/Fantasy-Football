@@ -32,6 +32,14 @@
    "outPlayers": 73,
    "warnings": 0,
    "unmatched": 1
+  },
+  "5": {
+   "file": "2026-w05.json",
+   "sha256": "56336dc7f7eb90e697efcec16a1f216b9b31c36ecd54f2c456c6902bf9da78f5",
+   "addedAt": "2026-10-13T13:35Z",
+   "outPlayers": 92,
+   "warnings": 0,
+   "unmatched": 3
   }
  }
 }

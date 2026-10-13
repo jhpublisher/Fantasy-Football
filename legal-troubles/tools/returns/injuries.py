@@ -65,9 +65,9 @@ with cf.ThreadPoolExecutor(8) as ex:
         if n<40: fails.append(f'{t} game {gid}: game roster has only {n} players')
         INACT[t]={'game_id':gid,'roster_size':n,'did_not_play':dnp};GRNAMES[t]=names
 # --- 3) tie report names to ESPN ids
-unmatched=[]
+unmatched=[];warns0=[]
 for t,rows in rep.items():
-    if t not in playing: fails.append(f'{t}: on the injury report but not playing week {W}');continue
+    if t not in playing: warns0.append(f'{t}: on the injury report but on bye week {W} (kept, no inactives)');continue
     dnp={norm(x['name']):x['espn_id'] for x in INACT.get(t,{}).get('did_not_play',[])}
     for r in rows:
         k=norm(r['player']);hit=dnp.get(k) or (ROS.get(t,{}).get(k) or (None,))[0]
@@ -85,12 +85,12 @@ for t,rows in rep.items():
 for t in playing:
     if t not in INACT and not RO: fails.append(f'{t}: no game roster')
     if t not in rep: rep[t]=[]   # a team may file no injuries; recorded as an empty list
-outs=[];warns=[]
+outs=[];warns=list(warns0)
 for t,rows in rep.items():
     for r in rows:
         if r['game_status']=='Out':
-            on_roster=r['espn_id'] in GRNAMES.get(t,{})
-            if r['espn_id'] is None: fails.append(f"{t} {r['player']} Out but not matched to an ESPN id")
+            on_roster=r.get('espn_id') in GRNAMES.get(t,{})
+            if r.get('espn_id') is None and t in playing: fails.append(f"{t} {r['player']} Out but not matched to an ESPN id")
             elif not RO and on_roster and not r['inactive']: warns.append(f"{t} {r['player']}: official report Out; ESPN game roster doesn't flag did-not-play (official report kept)")
             outs.append(r['player'])
 res={'season':S,'week':W,'reportOnly':RO,'sources':{'injury_report':url,'inactives':'ESPN game rosters (didNotPlay), sports.core.api.espn.com competitions/{id}/competitors/{team}/roster'},
