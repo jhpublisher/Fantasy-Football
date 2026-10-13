@@ -333,8 +333,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
       <button class="tab" role="tab" id="tab-roster" aria-selected="false" data-v="roster">Our roster</button>
       <button class="tab" role="tab" id="tab-returns" aria-selected="false" data-v="returns">Returners</button>
       <button class="tab" role="tab" id="tab-news" aria-selected="false" data-v="news">News</button>
-      <button class="tab" role="tab" id="tab-waivers" aria-selected="false" data-v="waivers">Waiver report</button>
-      <button class="tab" role="tab" id="tab-market" aria-selected="false" data-v="market">Free agents</button>
+      <button class="tab" role="tab" id="tab-waivers" aria-selected="false" data-v="waivers" title="Waivers and free agents in one place. Use the two buttons at the top to switch.">Waivers &amp; FA's</button>
       <button class="tab" role="tab" id="tab-schedule" aria-selected="false" data-v="schedule">NFL schedule</button>
     </nav>
     <div class="dates" id="dates"></div>
@@ -1153,6 +1152,9 @@ function openRgPlayer(key){const p0=RG_ROWMAP.get(key);if(!p0)return;rgWith('bot
 function datesStrip(){const D=M?.dates||{},fr=[['ESPN numbers',S.meta?.updatedAt],['News',S.news.ours?.updatedAt],['Practice',S.practice?.updatedAt],['Rumors',S.news.desk?.updatedAt]];
   const el=$('#dates');if(!el)return;const due=waiverDue();el.innerHTML=`${due?`<span>Claims due <b>${whenTxt(due)}</b></span>`:''}${D.kickoff?`<span>Kickoff <b>${whenTxt(D.kickoff)}</b></span>`:''}${D.tradeDeadline?`<span>Trade deadline <b>${whenTxt(D.tradeDeadline)}</b></span>`:''}<span class="fr">Updated: ${fr.map(([k,v])=>`${k} ${v?fmtShort(v):'not loaded'}`).join(' · ')} · ${esc(checksTxt())}</span>`}
 
+const WF={v:'waivers'};
+function wafView(){const t=[['waivers','Waivers'],['fa','Free agents']].map(([k,l])=>'<button role="tab" title="'+(k==='fa'?'Best available free agents by this week\'s projection.':'League waiver runs, claims, adds, drops and trades from ESPN.')+'" data-wfv="'+k+'" aria-selected="'+(WF.v===k)+'">'+l+'</button>').join('');return '<div class="sch"><div class="sctabs" role="tablist">'+t+'</div></div>'+(WF.v==='fa'?market():waiverReport())}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-wfv]');if(b){WF.v=b.dataset.wfv;render()}});
 const SC={D:null,T:null,mine:null,cur:1,week:null,view:'week',onlyMine:false,sortBy:'team',key:null};
 const scFmtDay=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'short',day:'numeric',timeZone:'America/New_York'});
 const scFmtTime=new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'});
@@ -1357,7 +1359,7 @@ document.addEventListener('click',e=>{const v=e.target.closest('[data-txv]');if(
   if(e.target.closest('[data-txmore]')){TX.n+=60;return render()}});
 document.addEventListener('change',e=>{const s=e.target.closest('select[data-tx]');if(!s)return;TX[s.dataset.tx]=s.value;TX.n=60;render()});
 
-function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,schedule:scheduleView,waivers:waiverReport}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}let fb='';try{fb=freshBanner(S.view)}catch(e){console.warn('fresh failed',e)}$('#view').innerHTML=bn+fb+body;
+function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,schedule:scheduleView,waivers:wafView}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}let fb='';try{fb=freshBanner(S.view==='waivers'&&WF.v==='fa'?'market':S.view)}catch(e){console.warn('fresh failed',e)}$('#view').innerHTML=bn+fb+body;
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===S.view));
   if(S.meta){const dt=dataTime();$('#stamp').textContent=`Week ${LGD().week??S.meta.week} · data updated ${dt?fmtShort(dt):'time unknown'}${dt&&(Date.now()-dt)/36e5>STALE_H?' (stale)':''}`}}
 function setView(v){S.view=v;try{localStorage.setItem('lt-bi-view',v)}catch(e){}render()}
@@ -1401,7 +1403,7 @@ document.addEventListener('change',async e=>{const sel=e.target.closest('select[
   try{await savePlan(id,S.plans[id]||null)}catch(err){console.warn('plan save failed',err);if(prev)S.plans[id]=prev;else delete S.plans[id];render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeDrawer();
   if(e.key==='Enter'&&e.target.matches('tr.row')){const t=e.target;t.dataset.rgplayer?openRgPlayer(t.dataset.rgplayer):t.dataset.rgteam?openRgTeam(t.dataset.rgteam):t.dataset.player?openPlayer(t.dataset.player):openTeam(t.dataset.team)}});
-try{const v=localStorage.getItem('lt-bi-view');if(v&&['overview','returns','league','roster','market','news','schedule','waivers'].includes(v))S.view=v}catch(e){}
+try{const v=localStorage.getItem('lt-bi-view');if(v==='market'){S.view='waivers';WF.v='fa'}else if(v&&['overview','returns','league','roster','market','news','schedule','waivers'].includes(v))S.view=v}catch(e){}
 render();
 
 /* ---------- Header hover help (Oct 13, Joe: explain every header on hover; headers themselves unchanged) ----------
