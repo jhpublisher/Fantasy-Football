@@ -464,6 +464,7 @@ ours = group(ours); league = group(league)
 rum = {}
 for i in sorted(league + ours, key=lambda x: x["time"], reverse=True):
     if i["kind"] != "Rumor" or not MOVE.search(i["headline"]): continue
+    if re.search(r"\bis active\b|\bare active\b|head coach .{0,40}\bsaid\b", i["headline"], re.I): continue  # status facts and coach statements are news, not rumors (Quinn Oct 13)
     if i["why"] in ("League-wide",) and not re.search(r"\b(sign|trade|release|reunion|deal|contract|visit|workout)\w*", i["headline"], re.I): continue
     r = rum.setdefault(i["player"], {"player": i["player"], "pos": i["pos"], "nfl": i["nfl"], "owner": i["owner"], "why": i["why"], "latest": i["headline"], "link": i.get("link", ""), "source": i.get("source", "RotoWire via ESPN"), "time": i["time"], "sources": 0})
     r["sources"] += i.get("sources", 1)

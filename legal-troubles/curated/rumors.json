@@ -106,5 +106,23 @@
   "label": "Confirmed",
   "expiresWeek": 6,
   "reviewed": true
+ },
+ {
+  "player": "Brian Thomas Jr.",
+  "claim": "Yahoo (Oct 11): Jaguars WR could follow Marvin Harrison Jr. in a trade. Single source, no confirmation.",
+  "impact": "Liddle' Schitty Team owns him. Not our player.",
+  "action": "Watch",
+  "sources": 1,
+  "latest": "Brian Thomas Jr. Trade Rumors: Jaguars WR Could Follow Marvin Harrison Jr. - Yahoo Sports",
+  "link": "",
+  "source": "Google News: NFL trade rumors",
+  "time": "2026-10-11T16:07Z",
+  "owner": "Liddle’ Schitty Team",
+  "nfl": "JAX",
+  "pos": "WR",
+  "asOf": "2026-10-13",
+  "label": "Rumor",
+  "expiresWeek": 6,
+  "reviewed": true
  }
 ]

@@ -8,7 +8,7 @@
  },
  "Puka Nacua": {
   "tag": "roster",
-  "note": "WR1. 17 of 24 targets, 138 yds + TD in Wk 5 (30.2 pts). Proj 18.8 Wk 6 vs ARI. Hold.",
+  "note": "WR1. 17 of 24 targets, 138 yds + TD in Wk 5 (30.2 pts). Proj 19.7 Wk 6 vs ARI. Hold.",
   "ret": "Active",
   "asOf": "2026-10-13",
   "expiresWeek": 6
@@ -37,20 +37,6 @@
  "Brian Robinson Jr.": {
   "tag": "sell",
   "note": "Wk 5: 7 carries for 16 yds, no catch (7.7 pts) in ATL OT loss; Wk 6 proj 10.5 as FLEX behind Bijan Robinson. Sell only for a clear upgrade; hold otherwise.",
-  "ret": "Active",
-  "asOf": "2026-10-13",
-  "expiresWeek": 6
- },
- "Austin Ekeler": {
-  "tag": "drop",
-  "note": "Wk 5: 1.9 pts, Wk 6 proj 3.1. WSH RB4; first cut when a bench spot is needed. Replacement on waivers: MarShawn Lloyd (GB RB, proj 10.2, 48.7% rostered).",
-  "ret": "Active",
-  "asOf": "2026-10-13",
-  "expiresWeek": 6
- },
- "Alex Bachman": {
-  "tag": "roster",
-  "note": "LAR WR3/KR cover: 5.5 pts in Wk 5 (MNF loss to BUF), proj 9.6 Wk 6 vs ARI. First cover for Moore (ankle).",
   "ret": "Active",
   "asOf": "2026-10-13",
   "expiresWeek": 6
@@ -91,10 +77,10 @@
   "expiresWeek": 6
  },
  "Kaden Wetjen": {
-  "tag": "claim",
-  "note": "FA, instant add. PIT kick AND punt returner (site + ESPN agree): 4.0 / 11.3 / 10.7 / 12.6 pts in Wk 1-4. Wk 5 proj 11.5 at home vs IND (26th vs WRs); ROS 148.5, best of any free-agent WR. PIT plays Wk 11 (our GB-bye hole); PIT bye is Wk 9. Drop Ekeler. JOB-LOSS TRIGGER: Steelers Depot Oct 6, 'Steelers Kick-Return Game Continues To Struggle' (KR unit 29th in average through Wk 4; Trai Essex: Steelers 'need to see something more' from Wetjen; headline only). If PIT moves KR1 off Wetjen (Friday chart or Wk 5 inactives), drop the claim and re-verify before the Sun 1:00 PM ET lock.",
+  "tag": "roster",
+  "note": "On our bench. PIT kick AND punt returner (site + ESPN agree): 4.0 / 11.3 / 10.7 / 12.6 / 11.0 pts in Wk 1-5 (Wk 5: 5 KR, 110 yds). PIT bye is Wk 9; plays Wk 11 (our GB-bye hole). JOB-LOSS TRIGGER: Steelers Depot Oct 6, 'Steelers Kick-Return Game Continues To Struggle' (headline only). If PIT moves KR1 off Wetjen (Friday chart or inactives), re-verify before the Sun 1:00 PM ET lock.",
   "ret": "Every week",
-  "asOf": "2026-10-08",
+  "asOf": "2026-10-13",
   "expiresWeek": 6
  },
  "Justin Jefferson": {
