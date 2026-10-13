@@ -25,12 +25,13 @@
  },
  "ownership": {
   "ok": true,
-  "asOf": "2026-10-13T13:35+00:00",
+  "asOf": "2026-10-13T13:36+00:00",
   "ageHours": 0.0
  },
  "injury_report": {
   "ok": true,
   "asOf": "2026-10-13T13:35+00:00",
-  "ageHours": 0.0
+  "ageHours": 0.0,
+  "skipped": "not due (0h old)"
  }
 }
