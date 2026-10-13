@@ -2,37 +2,37 @@
  "espn_depth": {
   "ok": true,
   "asOf": "2026-10-13T10:34+00:00",
-  "ageHours": 0.1,
-  "skipped": "not due (0h old)"
+  "ageHours": 1.2,
+  "skipped": "not due (1h old)"
  },
  "rosters": {
   "ok": true,
   "asOf": "2026-10-13T10:34+00:00",
-  "ageHours": 0.1,
-  "skipped": "not due (0h old)"
+  "ageHours": 1.2,
+  "skipped": "not due (1h old)"
  },
  "team_sites": {
   "ok": true,
   "asOf": "2026-10-13T10:34+00:00",
-  "ageHours": 0.1,
-  "skipped": "not due (0h old)"
+  "ageHours": 1.2,
+  "skipped": "not due (1h old)"
  },
  "schedule": {
   "ok": true,
   "asOf": "2026-10-13T10:34+00:00",
-  "ageHours": 0.1,
-  "skipped": "not due (0h old)"
+  "ageHours": 1.2,
+  "skipped": "not due (1h old)"
  },
  "ownership": {
   "ok": true,
-  "asOf": "2026-10-13T10:38+00:00",
+  "asOf": "2026-10-13T11:45+00:00",
   "ageHours": 0.0
  },
  "injury_report": {
   "ok": false,
   "asOf": "2026-10-13T02:37+00:00",
-  "ageHours": 8.0,
+  "ageHours": 9.1,
   "error": "injuries.py exit 1: r/work/Fantasy-Football/Fantasy-Football/legal-troubles/tools/returns/injuries.py\", line 92, in <module>\n    on_roster=r['espn_id'] in GRNAMES.get(t,{})\n              ~^^^^^^^^^^^\nKeyError: 'espn_id'\n",
-  "failedAt": "2026-10-13T10:38+00:00"
+  "failedAt": "2026-10-13T11:45+00:00"
  }
 }
