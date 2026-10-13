@@ -559,7 +559,7 @@ const resetBtn=t=>(SORT[t].k!==SORT_DEF[t].k||SORT[t].d!==SORT_DEF[t].d)?`<butto
 function sortRows(rows,tbl,val,tie=(a,b)=>a.seed-b.seed){const {k,d}=SORT[tbl];return rows.slice().sort((a,b)=>{const x=val(a,k),y=val(b,k);
   const c=(x==null&&y==null)?0:x==null?1:y==null?-1:typeof x==='string'?x.localeCompare(y):x-y;return (x==null||y==null?c:c*d)||tie(a,b)})}
 function sh(tbl,k,label,num,tip){const s=SORT[tbl],on=s.k===k;
-  return `<th class="${num?'num':''}" aria-sort="${on?(s.d>0?'ascending':'descending'):'none'}"><button class="srt${on?' on':''}" data-sort="${tbl}:${k}" title="${tip?esc(tip)+' · click to sort':'Sort'}">${label}<i>${on?(s.d>0?'▲':'▼'):'↕'}</i></button></th>`}
+  return `<th class="${num?'num':''}" aria-sort="${on?(s.d>0?'ascending':'descending'):'none'}"><button class="srt${on?' on':''}" data-sort="${tbl}:${k}" title="${tip?esc(tip):'Sort'}">${label}<i>${on?(s.d>0?'▲':'▼'):'↕'}</i></button></th>`}
 function setSort(tbl,k){const s=SORT[tbl];if(s.k===k)s.d=-s.d;else{s.k=k;s.d=(['seed','name','line','pos','player','nfl','plan','bye','pri','drop','rank','team','need','ord','owner','site','espn'].includes(k)||ASC.has(k)||(tbl==='ro'&&k==='status')||(tbl==='tx'&&['kind','player','drop'].includes(k)))?1:-1}render()}
 function league(){
   const o=latestOdds(); if(!o) return emptyState(['Playoff odds',o]);const PT=LGD().playoffTeams;
@@ -1415,6 +1415,7 @@ const HT=[
 [/^next 3 wks$/,/our roster/,null,'Average ESPN opponent rank against his position over his next three games after this week (lower = tougher defenses; green = easy, 23rd–32nd; red = tough, 1st–10th). Hover a number for the week-by-week list. Byes are skipped.'],
 [/^rest of season$/,/our roster/,null,'Average ESPN opponent rank against his position over his remaining regular-season games after this week, through Week 14 (lower = tougher). Hover a number for the week-by-week list. Byes are skipped.'],
 [/^playoffs$/,/our roster/,null,'Average ESPN opponent rank against his position over the three playoff weeks, 15–17 (lower = tougher). Hover a number for the week-by-week list.'],
+[/^team$/,/our roster/,null,'The player’s NFL team. “FA” means he is not on an NFL roster right now.'],
 [/^team$/,/all \d+ teams|returner rankings/,null,'NFL team. Click a row to open that team’s kickoff and punt history, game by game.'],
 [/^team$/,null,/schedule/,'NFL team (all 32, one row each). The cells to the right show who the team plays each week, with a BYE marked.'],
 [/^team$/,null,null,'Fantasy team in our league (Jort Wranglers). Our team, Legal Troubles, is highlighted.'],
@@ -1434,7 +1435,7 @@ const HT=[
 [/^wk \d+$/,/100\+ tracker/,null,'Each cell reads W or L (did the team win its head-to-head game that week), then the points scored, then the rank of that score among all 14 teams that week (1 = highest). Green = 100 or more, bold = 120 or more.'],
 [/^wk \d+$/,/100\+|weekly (points|scores)/,null,'Points this team scored that week. Green = 100 or more, bold = 120 or more.'],
 /* Our roster */
-[/^lineup$/,null,null,'Where the player sits in our ESPN lineup right now (starting slot, Bench or IR). Click to sort by lineup order; the dashed line separates starters from the bench and IR.'],
+[/^lineup$/,null,null,'Where the player sits in our ESPN lineup right now (starting slot, Bench or IR). The dashed line separates starters from the bench and IR.'],
 [/^slot$/,null,null,'The lineup slot this player fills in our ESPN lineup (QB, RB, WR, TE, FLEX, D/ST, K, Bench or IR).'],
 [/^pos$/,null,null,'Position (QB, RB, WR, TE, K or D/ST).'],
 [/^nfl$/,null,null,'The player’s NFL team. “FA” means he is not on an NFL roster right now.'],
@@ -1445,9 +1446,8 @@ const HT=[
 [/^status$/,null,null,'ESPN’s current injury or availability status for the player (Active, Questionable, Doubtful, Out, IR and so on).'],
 [/^plan$/,null,null,'Your own pick for this player this week, chosen from the menu. Picks get a gold edge and are saved in the dashboard database. Staff recommendations are retired.'],
 [/^total$/,null,null,'The player’s total fantasy points this season in our league scoring.'],
-[/^team$/,/our roster/,null,'The player’s NFL team. “FA” means he is not on an NFL roster right now.'],
 [/^projected$/,/our roster/,null,'ESPN’s projected fantasy points for this player this week, in our league scoring. “Bye” or “Out” shows when he cannot play.'],
-[/^opponent$/,/our roster/,null,'The NFL team this player’s team plays this week (vs = home, @ = away), with the opponent’s rank against his position in parentheses (ESPN OPRK, season to date: 1st = toughest, 32nd = easiest; green = easy, red = tough). BYE means no game this week.'],
+[/^opponent$/,/our roster/,null,'The NFL team this player’s team plays this week (vs = home, @ = away), with the opponent’s rank against his position beside it (ESPN OPRK, season to date: 1st = toughest, 32nd = easiest; green = easy, red = tough). BYE means no game this week.'],
 [/^this wk$/,null,null,'ESPN’s projected fantasy points for this player this week, in our league scoring.'],
 [/^bye$/,null,null,'The NFL week this player’s team has its bye (no game, no points).'],
 [/^wk \d+$/,/opponents by week/,null,'The player’s NFL opponent that week (@ = away). BYE is highlighted: the player scores nothing that week.'],
@@ -1576,7 +1576,7 @@ function htApply(){
     let tip=null;for(const [re,pre,tre,x] of HT){if(re.test(t)&&(!pre||pre.test(panel))&&(!tre||tre.test(tab))){tip=x;break}}
     if(!tip||e.dataset.ht===tip)return;
     e.dataset.ht=tip;const b=e.tagName==='TH'?e.querySelector('button.srt'):null;
-    e.title=tip;if(b)b.title=tip+' · Click to sort (click again to flip)';
+    e.title=tip;if(b)b.title=tip;
   })}
 try{new MutationObserver(()=>{cancelAnimationFrame(HT_T);HT_T=requestAnimationFrame(htApply)}).observe(document.body,{childList:true,subtree:true});htApply()}catch(e){}
 
