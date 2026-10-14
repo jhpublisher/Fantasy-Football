@@ -154,6 +154,12 @@ body.nomark .nw{display:none}
 .rgbxs{display:grid;gap:4px}.rgbx{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .rgbl{font-family:var(--mono);font-size:.64rem;min-width:3.2em;text-transform:uppercase;letter-spacing:.06em}.rgbl.k{color:var(--good)}.rgbl.p{color:var(--info)}
 .rgw i.hi,.rgw i.lo{color:var(--ink)}
+.rgw i[data-rgtw]{cursor:pointer}.rgw i[data-rgtw]:hover{outline:1px solid var(--ink)}.rgw i[data-rgtw]:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+.tcs{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--good);border-radius:10px;padding:16px;display:grid;gap:12px}.tcs.p{border-left-color:var(--info)}
+.tcs h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:1.35rem;margin:0;line-height:1}
+.tcr{display:grid;gap:3px;padding:8px 0;border-top:1px solid var(--line)}.tcr:first-of-type{border-top:0}.tcr b{font-weight:600}
+.tcr{display:flex;align-items:center;gap:14px}.tcn{min-width:56px;text-align:center;line-height:1}.tcn strong{display:block;font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1;font-variant-numeric:tabular-nums}.tcn em{display:block;font-style:normal;font-size:.72rem;color:var(--muted);margin-top:2px}.tcb{display:grid;gap:3px;min-width:0}
+.tcr .l{font-family:var(--mono);font-size:.76rem;color:var(--muted);display:flex;gap:4px 12px;flex-wrap:wrap}.tcr .l span{white-space:nowrap}
 .og{background:color-mix(in srgb,var(--brass) 9%,transparent)}th.ogh{text-align:center;color:var(--brass);border-bottom:2px solid var(--brass);font-family:var(--display);font-size:1.15rem;letter-spacing:.14em;font-weight:800}
 .banner.fresh{border:1px solid #cfcfcf;background:#fff;color:#111}.banner.fresh *{color:#111}.banner.red.fresh2{border:2px solid #c0182b;background:#fdecee;color:#111}.banner.fresh2 li{color:#111}.banner.fresh2 li.fs,.banner.fresh2 li.fs *{color:#c0182b!important;font-weight:800}.rgsearch{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}.rgsearch input[type=search]{flex:1 1 180px;min-width:0;padding:7px 10px;border:1px solid var(--line,#8886);border-radius:8px;background:var(--bg);color:inherit;font:inherit}.tmsel{position:relative}.tmbox{position:absolute;z-index:20;top:100%;left:0;max-height:260px;overflow:auto;background:var(--bg);border:1px solid var(--line,#8886);border-radius:8px;padding:6px 10px;display:grid;gap:4px;min-width:130px;box-shadow:0 6px 18px #0004}.tmbox label{display:flex;gap:6px;align-items:center;white-space:nowrap}.ctr{text-align:center!important}tr.grprow th{border-bottom:0;padding-bottom:0}tr.grprow th:not(.ogh){border-bottom:0}
 .rgw i{font-style:normal;font-family:var(--mono);font-size:.7rem;min-width:34px;text-align:center;padding:2px 3px;border-radius:4px;background:var(--sunk);color:var(--muted)}
@@ -345,7 +351,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 
 <script>
 (function(){
-const S={sched:null,league:null,validation:null,sections:null,builtAt:null,returns:null,punting:null,dbError:null,dbErrors:{},dbWait:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
+const S={sched:null,league:null,validation:null,sections:null,builtAt:null,returns:null,punting:null,rtot:null,dbError:null,dbErrors:{},dbWait:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
 const PLAN_OPTS=[['','No plan'],['sell','Sell high'],['buy','Buy low'],['target','Target'],['claim','Claim'],['rental','Rental'],['stash','Stash'],['drop','Drop']];
 let savePlan=null;
 function mergePlans(){const wk=S.meta?.week;S.players={};
@@ -423,7 +429,7 @@ function allProblems(){const seen=new Set(),out=[];const add=(l,p)=>{if(!p)retur
   Object.entries(S.extras?.staleFeatures||{}).forEach(([k,o])=>add(SECNAME['extras.'+k]||k,secProblem(o)));
   (S.validation?.staleSections||[]).forEach(k=>add(SECNAME[k]||k,{err:false,txt:'stale (validator)'}));
   return out}
-const DBNAME={'rosters/current':'Team rosters','transactions/current':'Waiver report','meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','practice/current':'Practice reports','schedule/current':'NFL schedule','memos':'Memo','connect':'Database connection'};
+const DBNAME={'rosters/current':'Team rosters','transactions/current':'Waiver report','meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','returns/totals':'Total fantasy points per game (ESPN)','practice/current':'Practice reports','schedule/current':'NFL schedule','memos':'Memo','connect':'Database connection'};
 const SECNAME={meta:'ESPN numbers',players:'Players',scores:'Scores',odds:'Playoff odds',waivers:'Waiver order',nfl:'NFL schedule',curated:'Staff notes',extras:'Extras',
   'extras.matchup':'This week','extras.race':'Seed race','extras.roster':'Bye and playoff grids','extras.freeAgents':'Free agents','extras.dates':'Key dates','extras.prev':'Change vs last week',
   news:'News','news.ours':'Our news','news.league':'League news','news.desk':'Rumors and trending',practice:'Practice reports',memos:'Memo',returns:'Returns'};
@@ -768,8 +774,8 @@ const RF={q:'',teams:[],tmOpen:false,k:'elig',open:null,n:25,kind:'kr',mine:fals
 let RG_OVR=null;const rgK=()=>RG_OVR||(RF.kind==='all'?'both':RF.kind);
 function rgWith(k,f){const o=RG_OVR;RG_OVR=k;try{return f()}finally{RG_OVR=o}}
 // per-refresh cache of models and rows (rebuilt when the returns doc or the player list changes)
-let RG_CA=null,RG_CS=null,RG_CN=-1;
-function rgCache(){const n=Object.keys(S.players||{}).length;if(RG_CS!==S.returns||RG_CN!==n){RG_CS=S.returns;RG_CN=n;RG_CA={m:{},r:{}}}return RG_CA}
+let RG_CA=null,RG_CS=null,RG_CN=-1,RG_CT=null;
+function rgCache(){const n=Object.keys(S.players||{}).length;if(RG_CS!==S.returns||RG_CN!==n||RG_CT!==S.rtot){RG_CS=S.returns;RG_CN=n;RG_CT=S.rtot;RG_CA={m:{},r:{}}}return RG_CA}
 function rgMod(k){const c=rgCache();return k in c.m?c.m[k]:(c.m[k]=rgModel(k))}
 function rgRowsC(k){const c=rgCache();if(!c.r[k]){const m=rgMod(k);c.r[k]=m&&!m.error?rgRows(m):[]}return c.r[k]}
 function rgKindRow(p,k){const c=rgCache();if(!c.i)c.i={};if(!c.i[k]){const m=new Map();rgRowsC(k).forEach(q=>{m.set(rgKey(q),q);const t=q.team+':'+rgNorm(q.name);if(!m.has(t))m.set(t,q)});c.i[k]=m}return c.i[k].get(rgKey(p))||c.i[k].get(p.team+':'+rgNorm(p.name))||null}
@@ -841,6 +847,14 @@ function rgModel(kind){const R=S.returns;if(!R)return null;
 const rgBye=(M_,t,w)=>!!M_.teams[t]?.weeks?.[w]?.bye||(M_.teams[t]?.byes||[]).includes(+w);
 // fielded share: punts = returns + fair catches (a fair catch still means he held the job)
 function rgShare(x,kind){if(!x)return 0;if(kind==='kr')return x.team_n?x.n/x.team_n:0;const f=x.fc??0,tf=x.team_fc??0,d=x.team_n+tf;return d?(x.n+f)/d:0}
+// Total fantasy points per game (return + rushing + receiving, ESPN actuals in our scoring) over the same last 3 team games as Rtn pts / GM.
+// A game with no ESPN entry (he did not play) counts as 0 and says so in the tooltip.
+function rgTtl(p,last3){const T=S.rtot;if(!T)return {v:null,why:'Total points not loaded yet (returns/totals)'};
+  const e=p.id?T.players?.[String(p.id)]:Object.values(T.players||{}).find(x=>rgSame(x.name,p.name));
+  if(!e){const m=(p.id&&T.missing?.[String(p.id)])||T.missing?.[p.name];return {v:null,why:m?(p.id?`${p.name} is not in ESPN fantasy (defender), so ESPN has no points for him`:m):'ESPN has no points for him'}}
+  if(!last3.length)return {v:null,why:'No games played yet'};const lack=last3.filter(w=>!(T.weeks||[]).includes(w));if(lack.length)return {v:null,why:`Total points not refreshed yet for Week ${lack.join(', ')}`};
+  const ws=last3.map(w=>({w,x:e.w?.[String(w)]})),v=ws.reduce((a,o)=>a+(o.x??0),0)/ws.length;
+  return {v:+v.toFixed(1),why:ws.map(o=>`Wk ${o.w}: ${o.x==null?'did not play (0)':o.x.toFixed(1)}`).join(', ')}}
 function rgRows(M_){const W=M_.W,ours=new Set(Object.values(S.players).filter(p=>p.ours).map(p=>rgNorm(p.name)));
   return M_.players.map(p=>{const wk=W.map(w=>p.wk[w]||null);
     const played=W.filter(w=>!rgBye(M_,p.team,w)),last3=played.slice(-3);   // byes never count as a 0
@@ -855,7 +869,7 @@ function rgRows(M_){const W=M_.W,ours=new Set(Object.values(S.players).filter(p=
     // pooled share over his last 3 games WITH returns (2 if only 2, 1 if only 1): sum his returns / sum team returns
     const rg=played.filter(w=>(p.wk[w]?.n||0)>0).slice(-3),pn=rg.reduce((a,w)=>a+p.wk[w].n,0),pt=rg.reduce((a,w)=>a+(p.wk[w].team_n||0),0),pool={g:rg.length,sh:pt?pn/pt:0,txt:rg.length?`${pn}/${pt} in wk ${rg.join(', ')}`:'no returns yet'};
     const tot=+(wk.reduce((a,x)=>a+(x?x.pts:0),0)).toFixed(1);
-    return {...p,ours:ours.has(rgNorm(p.name)),wkA:wk,n3:last3.length,lastW:LW,lwSh:lw?Math.round(rgShare(lw,M_.kind)*100):0,lwPts:lw?lw.pts:0,lwTxt,poolSh:pool.sh,poolN:pool.g,poolTxt:pool.txt,pts3:+pts3.toFixed(1),sh3:Math.round(sh3*100),fc3,
+    return {...p,ours:ours.has(rgNorm(p.name)),wkA:wk,n3:last3.length,lastW:LW,lwSh:lw?Math.round(rgShare(lw,M_.kind)*100):0,lwPts:lw?lw.pts:0,lwTxt,poolSh:pool.sh,poolN:pool.g,poolTxt:pool.txt,pts3:+pts3.toFixed(1),ttl:rgTtl(p,last3),sh3:Math.round(sh3*100),fc3,
       tot,nKr:wk.reduce((a,x)=>a+(x?x.kr||0:0),0),nPr:wk.reduce((a,x)=>a+(x?x.pr||0:0),0),totK:+(wk.reduce((a,x)=>a+(x?x.ptsK||0:0),0)).toFixed(1),totP:+(wk.reduce((a,x)=>a+(x?x.ptsP||0:0),0)).toFixed(1),yK:wk.reduce((a,x)=>a+(x?x.yK||0:0),0),yP:wk.reduce((a,x)=>a+(x?x.yP||0:0),0),yT:wk.reduce((a,x)=>a+(x?x.y||0:0),0),site,espn,siteMin:minR(site),espnMin:minR(espn),elig:['RB','WR'].includes(p.pos)}})}
 // status for one kind (row computed on that kind's model)
 function rgStatus1(p,M_,k){const L=RG_KIND[k].L,t=M_.teams[p.team]||{src:{site:{},espn:{}}},ss=t.src.site[k],es=t.src.espn[k],siteRead=rgRead(ss),espnRead=rgRead(es),sr=p.site[k],er=p.espn[k];
@@ -886,7 +900,7 @@ function rgRank(M_,p,src){const t=M_.teams[p.team]||{src:{site:{},espn:{}}},nm=s
 function rgWeeks(M_,p,cls){return `<span class="rgw rgw-${cls||'k'}">${M_.W.map((w,i)=>{if(rgBye(M_,p.team,w))return `<i title="Wk ${w}: bye (not counted in averages)">Bye</i>`;
   const x=p.wkA[i],g=M_.teams[p.team]?.weeks?.[w],n=g?.n??0,fcT=M_.kind!=='kr'&&x?.fc?` + ${x.fc} fair catch${x.fc>1?'es':''}`:'';
   const det=M_.kind==='both'&&x?` (${x.kr} KR, ${x.pr} PR)`:'';
-  return `<i class="${x?(rgShare(x,M_.kind)>=.6?'hi':'lo'):''}"${x?` style="background:color-mix(in srgb,var(--rgc) ${Math.round(12+63*Math.min(1,rgShare(x,M_.kind)))}%,var(--sunk))"`:''} title="Wk ${w}: ${x?`${x.n} of ${x.team_n} returns${det}${fcT}, ${x.y} yds, ${x.pts} pts`:`0 of the team's ${n} returns`}">${x?x.n+'/'+x.team_n:'0/'+n}</i>`}).join('')}</span>`}
+  return `<i class="${x?(rgShare(x,M_.kind)>=.6?'hi':'lo'):''}" data-rgtw="${esc(p.team)}:${w}" role="button" tabindex="0"${x?` style="background:color-mix(in srgb,var(--rgc) ${Math.round(12+63*Math.min(1,rgShare(x,M_.kind)))}%,var(--sunk))"`:''} title="Wk ${w}: ${x?`${x.n} of ${x.team_n} returns${det}${fcT}, ${x.y} yds, ${x.pts} pts`:`0 of the team's ${n} returns`}. Tap for every ${esc(p.team)} return that week.">${x?x.n+'/'+x.team_n:'0/'+n}</i>`}).join('')}</span>`}
 function rgList(M_,t,src){const nm=src==='site'?'team site':'ESPN',one=(k,lab)=>{const s=M_.teams[t].src[src]?.[k],l=(s?.list||[]).filter(Boolean);
     const body=l.length?l.map((n,i)=>i?esc(n):`<b>${esc(n)}</b>`).join(' / '):(rgSrcNote(s,nm)||`<span class="note">Chart read; no ${RG_KIND[k].L} listed</span>`);return lab?`<div><span class="dim">${RG_KIND[k].L}</span> ${body}</div>`:body};
   if(M_.kinds.length===1)return one(M_.kinds[0]);
@@ -936,7 +950,7 @@ function rgRankHtml0(R,W){const M_=rgMod(rgK());
   const qq=RF.q.trim().toLowerCase(),tmOK=p=>!RF.teams.length||RF.teams.includes(p.team),qOK=p=>!qq||p.name.toLowerCase().includes(qq);
   const filt0={elig:p=>p.elig,fa:p=>p.elig&&p.owner==='Free agent',all:()=>true}[RF.k],filt=p=>tmOK(p)&&qOK(p)&&(qq?true:filt0(p));
   const base=P.filter(filt).sort((a,b)=>b.pts3-a.pts3||b.tot-a.tot), ix=new Map(base.map((p,i)=>[rgKey(p),i]));
-  const rpVal=(p,k)=>({player:p.name.toLowerCase(),team:p.team,pts3:p.pts3,sh3:p.sh3,lw:p.lwSh,tot:p.yT,totK:p.yK,totP:p.yP,fc3:p.fc3,site:p.siteMin,espn:p.espnMin,owner:p.owner.toLowerCase(),opp:rgOpp(p.team).key,oppk:rgExp(p).k?.ret3??null,oppy:rgExp(p).k?.yd3??null,exp:rgExp(p).ep??null,expr:rgExp(p).er??null,pkr:rgPct(p,'kr'),ppr:rgPct(p,'pr'),avgK:rgAvgK(p),avgP:rgAvgP(p)})[k];
+  const rpVal=(p,k)=>({player:p.name.toLowerCase(),team:p.team,pts3:p.pts3,ttl3:p.ttl?.v??null,sh3:p.sh3,lw:p.lwSh,tot:p.yT,totK:p.yK,totP:p.yP,fc3:p.fc3,site:p.siteMin,espn:p.espnMin,owner:p.owner.toLowerCase(),opp:rgOpp(p.team).key,oppk:rgExp(p).k?.ret3??null,oppy:rgExp(p).k?.yd3??null,exp:rgExp(p).ep??null,expr:rgExp(p).er??null,pkr:rgPct(p,'kr'),ppr:rgPct(p,'pr'),avgK:rgAvgK(p),avgP:rgAvgP(p)})[k];
   const rowsF=sortRows(RF.mine?base.filter(p=>!p.ours):base,'rp',rpVal,(a,b)=>ix.get(rgKey(a))-ix.get(rgKey(b)));
   const mineRows=RF.mine?sortRows(P.filter(p=>p.ours&&tmOK(p)&&qOK(p)),'rp',rpVal,(a,b)=>b.pts3-a.pts3||b.tot-a.tot):[];
   const rows=[...mineRows,...rowsF];
@@ -1027,6 +1041,22 @@ function rgGameTable(rows,cols,title,note){const pl=rows.filter(r=>!r.bye&&!r.no
   ${rows.map(r=>r.none?`<tr><td>${r.w}</td><td colspan="${cols.length+3}" class="note">No data</td></tr>`:r.bye?`<tr><td>${r.w}</td><td colspan="${cols.length+3}" class="note">Bye</td></tr>`:`<tr><td>${r.w}</td><td>${r.home?'vs':'@'} ${esc(r.opp)}</td>${rgScoreCells(r.sc)}${cols.map(c=>{const v=c.f(r);return v==null?(c.den&&c.den(r)===0?'<td class="num note" title="No returns this game">–</td>':'<td class="num note" title="Not in the data">n/a</td>'):`<td class="num">${c.dec?rgF(v,c.dec):v}</td>`}).join('')}</tr>`).join('')}
   ${pl.length?`<tr class="tot"><td colspan="2">Season total</td><td colspan="2">${rgRecord(pl)}</td>${agg(pl,'tot').join('')}</tr><tr class="tot"><td colspan="2">Per game</td><td colspan="2"></td>${agg(pl,'avg').join('')}</tr>${l3.length>1&&pl.length>3?`<tr class="tot"><td colspan="2">Last ${l3.length} / game</td><td colspan="2"></td>${agg(l3,'avg').join('')}</tr>`:''}`:''}
   </tbody></table></div>${note?`<p class="note">${note}</p>`:''}</section>`}
+// Team Returns card: every kick and punt return by one team in one week (opened from a week box)
+function openRgTeamWk(t,w){try{openRgTeamWk_(t,+w)}catch(e){console.warn('team returns card failed',e);drawer(`<div class="dh"><h2 id="dtitle">${esc(t)}</h2><button class="x" aria-label="Close" data-close>×</button></div><p class="note">This team's returns couldn't be shown (${esc(e.message||e)}).</p>`)}}
+function openRgTeamWk_(t,w){const R=S.returns,X=R?.teams?.[t];if(!X)throw new Error('no return data for '+t);
+  const kr=X.weeks?.[w],pr=X.pr?.weeks?.[w],sc=R.schedule?.[t]?.[String(w)],K=R.scoring||{krTd:6,krYd:.1,prTd:6,prYd:.1};
+  const byeW=!!(kr?.bye||pr?.bye)||(!kr&&!pr&&(X.byes||[]).includes(w)),opp=byeW?null:(kr?.opp||pr?.opp||sc?.opp);let dt='';try{if(sc?.kickoff)dt=new Date(sc.kickoff).toLocaleDateString('en-US',{timeZone:TZ,weekday:'short',month:'short',day:'numeric'})}catch(e){}
+  const eb=`Week ${w}${byeW?' · Bye':''}${opp?` ${sc&&sc.home===false?'at':'vs'} ${esc(opp)}`:''}${!byeW&&sc&&sc.home!=null?' · '+(sc.home?'Home':'Away'):''}${!byeW&&dt?' · '+dt:''}`;
+  const head=`<div class="dh"><div><div class="eyebrow">${eb}</div><h2 id="dtitle">${esc(t)}</h2></div><button class="x" aria-label="Close" data-close>×</button></div>`;
+  if(byeW)return drawer(head+`<p class="note">${esc(t)} was on a bye in Week ${w}, so there were no returns.</p>`);
+  const sec=(k,g)=>{const lab=k==='kr'?'Kick returns':'Punt returns',cls=k==='kr'?'k':'p',nk=k==='kr'?'kr':'pr',yv=k==='kr'?K.krYd:K.prYd,tv=k==='kr'?K.krTd:K.prTd,one=k==='kr'?'kick':'punt';
+    if(!g)return `<section class="tcs ${cls}"><h3>${lab}</h3><p class="note">${lab} for this game are not in this refresh.</p></section>`;
+    const N=g[k==='kr'?'team_kr':'team_pr']??0,fcT=k==='pr'?(g.fc??0):0,rows=(g.ret||[]).slice().sort((a,b)=>(b[nk]||0)-(a[nk]||0)||(b.y||0)-(a.y||0));
+    const yds=rows.reduce((a,r)=>a+(r.y||0),0),pts=rows.reduce((a,r)=>a+(r.y||0)*yv+(r.td||0)*tv,0),f1=v=>(Math.round(v*10)/10).toFixed(1);
+    const body=rows.length?rows.map(r=>{const n=r[nk]||0,fc=k==='pr'?(r.fc||0):0,rp=(r.y||0)*yv+(r.td||0)*tv,den=k==='kr'?N:N+fcT,sh=den?(n+fc)/den:0;
+      return `<div class="tcr"><div class="tcn"><strong>${n}</strong><em>${n===1?'return':'returns'}</em></div><div class="tcb"><div><b>${esc(r.p)}</b> <span class="note">${f1(rp)} pts${n?` · ${f1((r.y||0)/n)} avg`:''}</span></div><div class="l"><span>${r.y||0} yds</span>${r.td?`<span>${r.td} TD</span>`:''}${k==='pr'?`<span>${fc} FC</span>`:''}<span title="${k==='pr'?'Punts: returns plus fair catches, as on the rest of the page':'Share of the team\'s kick returns'}">${Math.round(sh*1000)/10}% share</span></div></div></div>`}).join(''):`<p class="note">${esc(t)} had no ${one} returns${fcT?` (${fcT} fair catch${fcT>1?'es':''})`:''} in Week ${w}.</p>`;
+    return `<section class="tcs ${cls}"><h3>${lab}</h3>${body}<div class="facts"><div class="fact"><b>${N}</b><span>Team ${one} returns</span></div><div class="fact"><b>${yds}</b><span>Team yards</span></div><div class="fact"><b>${N?f1(yds/N):'n/a'}</b><span>${N?'Team avg per return':'No returns to average'}</span></div></div></section>`};
+  drawer(head+sec('kr',kr)+sec('pr',pr)+`<p class="note">Points: ${K.krYd} per yard, ${K.krTd} per TD. Source: Return Game database${R.updatedAt?', updated '+esc(fmtD(R.updatedAt)):''}.</p>`)}
 function openRgOpp(t){const R=S.returns,k=rgKO(t),PU=S.punting?.teams?.[t],W=R.weeks||[];if(!k&&!PU)return;
   const rows=W.map(w=>{const x=k?.K?.[w],p=PU?.[w];if(x?.bye)return {w,bye:1};if(!x&&!p)return {w,none:1};const opp=x?.opp||p?.opp,fc=R.teams?.[opp]?.pr?.weeks?.[w]?.fc;
     const scr=R.scores?.[t]?.[w],sc=scr?{...scr,team:t,tie:scr.result==='T'}:null;
@@ -1093,7 +1123,8 @@ const RG_COLS=[
  {k:'pkr',l:'% of KR',num:1,kr:1,sort:'pkr',tip:'Share of his team\'s kick returns he handled, last 3 games played',cell:p=>{const v=rgPct(p,'kr');return `<td class="num">${v==null?'<span class="note">No KR</span>':v+'%'}</td>`}},
  {k:'ppr',l:'% of PR',num:1,pr:1,sort:'ppr',tip:'Share of the team\'s punts he fielded (returns + fair catches), last 3 games played',cell:p=>{const v=rgPct(p,'pr');return `<td class="num">${v==null?'<span class="note">No PR</span>':v+'%'}</td>`}},
  {k:'fc3',l:'Fair catches (3)',num:1,fc:1,sort:'fc3',tip:'Fair catches he made in his last 3 games played. They earn no points',cell:p=>`<td class="num">${p.fc3??'<span class="note">Unknown</span>'}</td>`},
- {k:'pts3',l:'Pts/game (3)',num:1,sort:'pts3',tip:'Return points per game, last 3 games played (byes skipped)',cell:p=>`<td class="num"><b>${p.pts3}</b></td>`},
+ {k:'pts3',l:'Rtn pts / GM (3)',pl:'Return points / game (3)',num:1,sort:'pts3',tip:'Return points per game, last 3 games played (byes skipped)',cell:p=>`<td class="num"><b>${p.pts3}</b></td>`},
+ {k:'ttl3',l:'Ttl pts / GM (3)',pl:'Total points / game (3)',num:1,sort:'ttl3',tip:'All fantasy points per game (returns plus rushing, receiving and anything else) in our scoring, from ESPN, average of his last 3 games played (byes skipped; a game he did not play counts as 0). Hover a number for the weeks',cell:p=>{const t=p.ttl;return t?(t.v==null?`<td class="num"><span class="note" title="${esc(t.why)}">n/a</span></td>`:`<td class="num" title="${esc(t.why)}"><b>${t.v.toFixed(1)}</b></td>`):`<td class="num"><span class="note" title="Not in the return data this week, so no total points were calculated">n/a</span></td>`}},
  {k:'avgK',l:'Avg KR',num:1,kr:1,off:1,sort:'avgK',tip:'His average yards per kick return, season to date',cell:p=>{const v=rgAvgK(p);return `<td class="num">${v==null?'<span class="note">No KR</span>':rgF(v)}</td>`}},
  {k:'avgP',l:'Avg PR',num:1,pr:1,off:1,sort:'avgP',tip:'His average yards per punt return, season to date',cell:p=>{const v=rgAvgP(p);return `<td class="num">${v==null?'<span class="note">No PR</span>':rgF(v)}</td>`}},
  {k:'totK',l:'KR yds',num:1,both:1,sort:'totK',tip:'Season kick-return yards',cell:p=>`<td class="num">${p.yK}</td>`},
@@ -1374,6 +1405,7 @@ document.addEventListener('click',e=>{if(e.target.closest('select'))return;
   if(e.target.closest('[data-rmore]')){RF.n=999;return render()}
   {const b=e.target.closest('[data-rpw]');if(b){const w=+b.dataset.rpw;RF.pw=w===S.returns?.currentWeek?null:w;return render()}}
   if(e.target.closest('[data-rmine]')){RF.mine=!RF.mine;try{localStorage.setItem('lt-rg-mine',RF.mine?'1':'0')}catch(x){}return render()}
+  const rgw=e.target.closest('[data-rgtw]');if(rgw){e.stopPropagation();const [tt,ww]=rgw.dataset.rgtw.split(':');return openRgTeamWk(tt,ww)}
   const rgo=e.target.closest('[data-rgopp]');if(rgo){e.stopPropagation();return openRgOpp(rgo.dataset.rgopp)}
   if(e.target.closest('[data-rgcolopen]')){RG_COLOPEN=!RG_COLOPEN;return render()}
   if(e.target.closest('[data-rgcolall]')){RG_HIDE=new Set();try{localStorage.setItem('lt-rg-hide','[]')}catch(x){}return render()}
@@ -1402,6 +1434,7 @@ document.addEventListener('change',async e=>{const sel=e.target.closest('select[
   if(!tag)delete S.plans[id];else S.plans[id]={tag,week:S.meta?.week,name:S.raw[id]?.name||'',setAt:new Date().toISOString()};render();
   try{await savePlan(id,S.plans[id]||null)}catch(err){console.warn('plan save failed',err);if(prev)S.plans[id]=prev;else delete S.plans[id];render()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeDrawer();
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-rgtw]')){e.preventDefault();const [tt,ww]=e.target.dataset.rgtw.split(':');return openRgTeamWk(tt,ww)}
   if(e.key==='Enter'&&e.target.matches('tr.row')){const t=e.target;t.dataset.rgplayer?openRgPlayer(t.dataset.rgplayer):t.dataset.rgteam?openRgTeam(t.dataset.rgteam):t.dataset.player?openPlayer(t.dataset.player):openTeam(t.dataset.team)}});
 try{const v=localStorage.getItem('lt-bi-view');if(v==='market'){S.view='waivers';WF.v='fa'}else if(v&&['overview','returns','league','roster','market','news','schedule','waivers'].includes(v))S.view=v}catch(e){}
 render();
@@ -1605,6 +1638,7 @@ try{new MutationObserver(()=>{cancelAnimationFrame(HT_T);HT_T=requestAnimationFr
   db.doc('returns/current').onSnapshot(s=>{ok('returns/current');RC_A=s.exists?s.data():null;rcMerge()},err('returns/current'));
   db.doc('returns/more').onSnapshot(s=>{RC_B=s.exists?s.data():null;rcMerge()},e=>{RC_B=null;rcMerge()});
   db.doc('returns/punting').onSnapshot(s=>{ok('returns/punting');S.punting=s.exists?s.data():null;soon()},err('returns/punting'));
+  db.doc('returns/totals').onSnapshot(s=>{ok('returns/totals');S.rtot=s.exists?s.data():null;soon()},err('returns/totals'));
   db.doc('rosters/current').onSnapshot(s=>{ok('rosters/current');S.rosters=s.exists?s.data():null;soon()},err('rosters/current'));
   db.doc('transactions/current').onSnapshot(s=>{ok('transactions/current');S.tx=s.exists?s.data():null;soon()},err('transactions/current'));
   db.doc('schedule/current').onSnapshot(s=>{ok('schedule/current');S.sched=s.exists?s.data():null;soon()},err('schedule/current'));

@@ -44,6 +44,8 @@ jobs:
           if [ "$RG" = "0" ] && [ -s /tmp/rg/returns.json ]; then cp /tmp/rg/returns.json data/returns.json; elif [ "$RG" = "0" ]; then RG=1; echo "::warning::returns chain wrote no returns.json"; fi
           # Punt coverage for the opponent drawer (Oct 7): ESPN box scores, cross-checked against returns.json; a failure keeps the last good data/punting.json
           if [ "$RG" = "0" ]; then python3 tools/returns/punting.py data/returns.json /tmp/punting.json && cp /tmp/punting.json data/punting.json || echo "::warning::punting.py failed; last good data/punting.json kept"; fi
+          # Total fantasy points per game for the Returner rankings "Ttl pts / GM (3)" column (Oct 13): ESPN fantasy API; a failure keeps the last good data/returns-totals.json
+          if [ "$RG" = "0" ]; then python3 tools/returns/totals_pull.py data/returns.json /tmp/totals && cp /tmp/totals/returns/totals.json data/returns-totals.json || echo "::warning::totals_pull.py failed; last good data/returns-totals.json kept"; fi
           echo "{\"bi_refresh\": $BI, \"news_sweep\": $NS, \"returns\": $RG}" > /tmp/run_status.json
           cat /tmp/run_status.json
       - name: Refresh NFL schedule board data (every run; a failure keeps the last good data/schedule.json)
@@ -87,6 +89,7 @@ jobs:
           git add legal-troubles/data/validation.json legal-troubles/index.html legal-troubles/briefing.html
           [ -f legal-troubles/data/returns.json ] && git add legal-troubles/data/returns.json
           [ -f legal-troubles/data/punting.json ] && git add legal-troubles/data/punting.json
+          [ -f legal-troubles/data/returns-totals.json ] && git add legal-troubles/data/returns-totals.json
           [ -f legal-troubles/data/schedule.json ] && git add legal-troubles/data/schedule.json
           # Guard: a stored week (or its raw archive) may be added, never modified or deleted
           CHG=$(git diff --name-only --diff-filter=MDRT -- legal-troubles/data/rg/weeks legal-troubles/data/rg/raw ':(glob)legal-troubles/data/rg/injuries/20*.json')
