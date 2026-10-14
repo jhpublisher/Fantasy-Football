@@ -30,7 +30,7 @@ if b is not None:
     lg = b.get("league") or {}
     meta = b.get("meta") or {}
     # ---------- required sections ----------
-    req = ["meta", "players", "odds", "scores", "waivers", "extras", "news.ours", "news.league", "news.desk", "practice", "memos", "nfl", "curated"]
+    req = ["meta", "players", "odds", "scores", "waivers", "extras", "news.ours", "news.league", "news.desk", "practice", "nfl", "curated"]   # memos are optional (Oct 13, Joe: week 5 memo removed; no memo is a normal state)
     if "returns" in b or "returns" in S: req.append("returns")
     for k in req:
         st = S.get(k)

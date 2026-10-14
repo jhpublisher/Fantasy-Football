@@ -8,7 +8,7 @@ Usage: python3 build_bundle.py <out_dir> <bundle.json> [curated_dir] [--prev las
 Never drops a section silently. Every required section is either fresh from this run, or the last good copy
 from the previous bundle marked {stale: true, staleSince, reason}. A section with no fresh data and no
 previous copy is written as {"error": reason}. Per-section status is in bundle.sections.
-Keeps history: old odds weeks and memos already in the bundle are preserved."""
+Keeps history: old odds weeks already in the bundle are preserved. Memos come only from the curated dir."""
 import json, os, sys, glob, argparse, copy
 from datetime import datetime, timezone
 ap = argparse.ArgumentParser()
@@ -120,14 +120,11 @@ b["sections"]["news"] = {"ok": all(b["sections"][f"news.{k}"].get("ok") for k in
                          "stale": any(b["sections"][f"news.{k}"].get("stale") for k in ("ours", "league", "desk")), "updatedAt": news_stamp}
 pr = (new.get("practice") or {}).get("current")
 b["practice"] = fresh("practice", unmark(pr), pr.get("updatedAt")) if pr else keep_old("practice", old.get("practice"), "practice/current not produced" + run_note("news_sweep"))
-# ---- memos (curated; history kept) ----
-memos = dict(old.get("memos") or {})
-for v in memos.values(): unmark(v)
-got = 0
+# ---- memos (curated dir is the source of truth; none is a normal state, Oct 13 Joe removed the week 5 memo) ----
+memos = {}
 if cur:
-    for f in glob.glob(f"{cur}/memos/*.json"): memos[os.path.basename(f)[:-5]] = load(f); got += 1
-if got: b["memos"] = fresh("memos", memos, now)
-else: b["memos"] = keep_old("memos", old.get("memos"), f"no memos in curated dir ({cur})")
+    for f in glob.glob(f"{cur}/memos/*.json"): memos[os.path.basename(f)[:-5]] = load(f)
+b["memos"] = fresh("memos", memos, now)
 # ---- returns (Return Game data) ----
 old_rt = (old.get("returns") or {}).get("current")
 rt_rc = run.get("returns")
