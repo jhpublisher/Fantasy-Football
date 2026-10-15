@@ -176,3 +176,11 @@ os.makedirs(OUT, exist_ok=True)
 json.dump(raw, open(rp, "w"), separators=(",", ":"))
 json.dump(log, open(os.path.join(OUT, "log.json"), "w"), separators=(",", ":"))
 print("wrote", OUT)
+# Keep the DB-loadable files in step with log.json (DB doc cap is 262,144 bytes; log.json outgrew it).
+import subprocess
+_here = os.path.dirname(os.path.abspath(__file__))
+for _s in ("transactions_slim.py", "transactions_weeks.py"):
+    subprocess.run([sys.executable, os.path.join(_here, _s)], check=True)
+_n = os.path.getsize(os.path.join(OUT, "dashboard.json"))
+print("dashboard.json bytes", _n, "(load this to transactions/current; week docs: weeks/week-N.json + archive-meta.json)")
+if _n > 250000: print("FAIL: dashboard.json over the DB cap margin; shrink the window in transactions_slim.py"); sys.exit(1)
