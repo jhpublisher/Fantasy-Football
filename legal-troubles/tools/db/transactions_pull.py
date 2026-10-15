@@ -182,5 +182,5 @@ _here = os.path.dirname(os.path.abspath(__file__))
 for _s in ("transactions_slim.py", "transactions_weeks.py"):
     subprocess.run([sys.executable, os.path.join(_here, _s)], check=True)
 _n = os.path.getsize(os.path.join(OUT, "dashboard.json"))
-print("dashboard.json bytes", _n, "(load this to transactions/current; week docs: weeks/week-N.json + archive-meta.json)")
+print("dashboard.json bytes", _n, "(7-day window: load to transactions/current; then batch-load weeks/week-N.json for the current and previous week + archive-meta.json for full history)")
 if _n > 250000: print("FAIL: dashboard.json over the DB cap margin; shrink the window in transactions_slim.py"); sys.exit(1)
