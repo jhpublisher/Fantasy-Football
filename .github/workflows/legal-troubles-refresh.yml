@@ -2,6 +2,7 @@ name: Legal Troubles data refresh
 on:
   schedule:
     - cron: "17 */3 * * *"   # every 3 hours
+    - cron: "47 1-22/3 * * *"   # backup, 90 min offset: GitHub dropped scheduled runs Oct 13-14
   workflow_dispatch: {}
   push:
     paths: ["legal-troubles/curated/**", "legal-troubles/tools/**"]
