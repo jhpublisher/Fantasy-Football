@@ -870,6 +870,17 @@
 "winner": "BUF",
 "loser": "LAR",
 "tie": false
+},
+"401872995": {
+"week": 6,
+"date": "2026-10-16T00:15Z",
+"home": "DEN",
+"away": "SEA",
+"homeScore": 17,
+"awayScore": 14,
+"winner": "DEN",
+"loser": "SEA",
+"tie": false
 }
 }
 }
