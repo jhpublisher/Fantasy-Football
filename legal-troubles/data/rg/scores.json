@@ -969,6 +969,17 @@
 "winner": "TEN",
 "loser": "IND",
 "tie": false
+},
+"401873004": {
+"week": 6,
+"date": "2026-10-18T20:05Z",
+"home": "LAR",
+"away": "ARI",
+"homeScore": 16,
+"awayScore": 18,
+"winner": "ARI",
+"loser": "LAR",
+"tie": false
 }
 }
 }
