@@ -1,10 +1,12 @@
 {
  "ok": true,
  "failures": [],
- "warnings": [],
- "checkedAt": "2026-10-18T20:45+00:00",
+ "warnings": [
+  "news source 'Google News: NFL trade rumors': feed returned 0 items"
+ ],
+ "checkedAt": "2026-10-18T21:55+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-10-18T20:45+00:00"
+ "bundleBuiltAt": "2026-10-18T21:55+00:00"
 }
