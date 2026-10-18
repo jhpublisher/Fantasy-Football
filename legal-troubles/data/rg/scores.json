@@ -881,6 +881,17 @@
 "winner": "DEN",
 "loser": "SEA",
 "tie": false
+},
+"401872996": {
+"week": 6,
+"date": "2026-10-18T13:30Z",
+"home": "JAX",
+"away": "HOU",
+"homeScore": 31,
+"awayScore": 34,
+"winner": "HOU",
+"loser": "JAX",
+"tie": false
 }
 }
 }
