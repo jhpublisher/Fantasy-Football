@@ -980,6 +980,28 @@
 "winner": "ARI",
 "loser": "LAR",
 "tie": false
+},
+"401873005": {
+"week": 6,
+"date": "2026-10-18T20:25Z",
+"home": "LV",
+"away": "BUF",
+"homeScore": 30,
+"awayScore": 33,
+"winner": "BUF",
+"loser": "LV",
+"tie": false
+},
+"401873006": {
+"week": 6,
+"date": "2026-10-18T20:25Z",
+"home": "KC",
+"away": "LAC",
+"homeScore": 22,
+"awayScore": 6,
+"winner": "KC",
+"loser": "LAC",
+"tie": false
 }
 }
 }
