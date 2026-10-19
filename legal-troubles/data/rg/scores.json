@@ -1002,6 +1002,17 @@
 "winner": "KC",
 "loser": "LAC",
 "tie": false
+},
+"401873007": {
+"week": 6,
+"date": "2026-10-19T00:20Z",
+"home": "GB",
+"away": "DAL",
+"homeScore": 23,
+"awayScore": 13,
+"winner": "GB",
+"loser": "DAL",
+"tie": false
 }
 }
 }
