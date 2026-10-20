@@ -341,6 +341,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
       <button class="tab" role="tab" id="tab-news" aria-selected="false" data-v="news">News</button>
       <button class="tab" role="tab" id="tab-waivers" aria-selected="false" data-v="waivers" title="Waivers and free agents in one place. Use the two buttons at the top to switch.">Waivers &amp; FA's</button>
       <button class="tab" role="tab" id="tab-schedule" aria-selected="false" data-v="schedule">NFL schedule</button>
+      <button class="tab" role="tab" id="tab-beta" aria-selected="false" data-v="beta" title="Practice picks for the return game. Not for lineup decisions.">Beta</button>
     </nav>
     <div class="dates" id="dates"></div>
   </div>
@@ -351,7 +352,7 @@ ul.list{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 
 <script>
 (function(){
-const S={sched:null,league:null,validation:null,sections:null,builtAt:null,returns:null,punting:null,rtot:null,dbError:null,dbErrors:{},dbWait:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{}};
+const S={sched:null,league:null,validation:null,sections:null,builtAt:null,returns:null,punting:null,rtot:null,dbError:null,dbErrors:{},dbWait:null,meta:null,odds:{},scores:{},players:{},waivers:null,news:{},practice:null,memos:{},memoSel:null,view:'overview',raw:{},plans:{},beta:{}};
 const PLAN_OPTS=[['','No plan'],['sell','Sell high'],['buy','Buy low'],['target','Target'],['claim','Claim'],['rental','Rental'],['stash','Stash'],['drop','Drop']];
 let savePlan=null;
 function mergePlans(){const wk=S.meta?.week;S.players={};
@@ -429,7 +430,7 @@ function allProblems(){const seen=new Set(),out=[];const add=(l,p)=>{if(!p)retur
   Object.entries(S.extras?.staleFeatures||{}).forEach(([k,o])=>add(SECNAME['extras.'+k]||k,secProblem(o)));
   (S.validation?.staleSections||[]).forEach(k=>add(SECNAME[k]||k,{err:false,txt:'stale (validator)'}));
   return out}
-const DBNAME={'rosters/current':'Team rosters','transactions/current':'Waiver report','meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','returns/totals':'Total fantasy points per game (ESPN)','practice/current':'Practice reports','schedule/current':'NFL schedule','memos':'Memo','connect':'Database connection'};
+const DBNAME={'rosters/current':'Team rosters','transactions/current':'Waiver report','meta/current':'ESPN numbers','odds':'Playoff odds','scores':'Scores','players':'Players','plans':'Your plan picks','waivers/current':'Waiver order','news':'News','extras/current':'This week, grids and free agents','validation/current':'Data checks','returns/current':'Returns','returns/punting':'Punt coverage (punts made)','returns/totals':'Total fantasy points per game (ESPN)','practice/current':'Practice reports','schedule/current':'NFL schedule','memos':'Memo','beta':'Beta practice picks','blueberry':'Blueberry tables','connect':'Database connection'};
 const SECNAME={meta:'ESPN numbers',players:'Players',scores:'Scores',odds:'Playoff odds',waivers:'Waiver order',nfl:'NFL schedule',curated:'Staff notes',extras:'Extras',
   'extras.matchup':'This week','extras.race':'Seed race','extras.roster':'Bye and playoff grids','extras.freeAgents':'Free agents','extras.dates':'Key dates','extras.prev':'Change vs last week',
   news:'News','news.ours':'Our news','news.league':'League news','news.desk':'Rumors and trending',practice:'Practice reports',memos:'Memo',returns:'Returns'};
@@ -1163,6 +1164,20 @@ function rgPlayerTable(p,k){const R=S.returns,M_=rgMod(k),nm=k==='kr'?'Kick retu
     {h:'Team returns',f:r=>r.tn,tip:'All '+(k==='kr'?'kick':'punt')+' returns by his team'},...(k==='pr'?[{h:'Team FC',f:r=>r.tfc,tip:'Fair catches by the whole team'}]:[]),share,{h:'Return pts',dec:1,f:r=>r.pts,tip:'Fantasy points from this return type'}];
   const note=(q?'':`No ${k==='kr'?'kick':'punt'} returns for him this season, so every game shows 0. `)+(k==='kr'?'Share = his kick returns ÷ his team\'s. ':'Share counts punts he fielded (returns + fair catches). Fair catch shows n/a where that game\'s count is not available. ')+'Bye weeks are marked and not counted in averages. Source: ESPN play-by-play and box score.';
   return rgGameTable(rows,cols,nm,note)}
+// Total fantasy points in every game this season (Joe, Oct 13): opened from the player card. Same ESPN totals as the Ttl pts / GM column.
+function rgTtlGames(p,M_){
+  const W=M_.W,T=S.rtot,played=W.filter(w=>!rgBye(M_,p.team,w)),last3=played.slice(-3),r=rgTtl(p,last3),head='<section class="panel"><div class="ph"><h2>Total points by game</h2>';
+  const e=T?(p.id?T.players?.[String(p.id)]:Object.values(T.players||{}).find(x=>rgSame(x.name,p.name))):null;
+  if(!e)return head+`</div><p class="note">${esc(r.why)}.</p></section>`;
+  const lack=W.filter(w=>!(T.weeks||[]).includes(w)),F=v=>v.toFixed(1);
+  const rows=W.map(w=>{const g=S.returns?.teams?.[p.team]?.weeks?.[w],h=S.returns?.schedule?.[p.team]?.[w]?.home;
+    if(rgBye(M_,p.team,w))return `<tr><td>${w}</td><td colspan="2" class="note">Bye</td></tr>`;
+    const vs=g?.opp?`${h===false?'@':h===true?'vs':''} ${esc(g.opp)}`.trim():'';
+    if(lack.includes(w))return `<tr><td>${w}</td><td>${vs}</td><td class="num note" title="Total points not refreshed yet for this week">n/a</td></tr>`;
+    const x=e.w?.[String(w)];return `<tr><td>${w}</td><td>${vs}</td>${x==null?'<td class="num note" title="ESPN has no stats for him this game">0.0 · did not play</td>':`<td class="num"><b>${F(x)}</b></td>`}</tr>`}).join('');
+  const got=played.filter(w=>!lack.includes(w)),sum=got.reduce((a,w)=>a+(e.w?.[String(w)]??0),0);
+  return head+`<span class="eyebrow">${got.length} game${got.length===1?'':'s'}</span></div><div class="tw"><table><thead><tr><th>Wk</th><th>Vs</th><th class="num" title="All fantasy points in our scoring: returns, rushing, receiving, everything (ESPN)">Total pts</th></tr></thead><tbody>${rows}
+    ${got.length?`<tr class="tot"><td colspan="2">Season total</td><td class="num">${F(sum)}</td></tr><tr class="tot"><td colspan="2">Per game</td><td class="num">${F(sum/got.length)}</td></tr>${r.v!=null&&got.length>3?`<tr class="tot"><td colspan="2" title="${esc(r.why)}">Last ${last3.length} / game</td><td class="num">${F(r.v)}</td></tr>`:''}`:''}</tbody></table></div><p class="note">Source: ESPN fantasy points in our scoring, pulled ${esc(T.asOf||'date not recorded')}. A game he missed counts as 0.</p></section>`}
 function openRgPlayer(key){const p0=RG_ROWMAP.get(key);if(!p0)return;rgWith('both',()=>{const M_=rgMod('both');if(!M_||M_.error)return;
   const p=rgRowsC('both').find(q=>rgKey(q)===rgKey(p0)||(q.team===p0.team&&rgSame(q.name,p0.name)))||p0;
   const st=['kr','pr'].map(k=>{const q=rgKindRow(p,k);return q&&(q.site[k]||q.espn[k]||q.tot||q.sh3)?rgStatus1(q,rgMod(k),k):null}).filter(Boolean);
@@ -1171,7 +1186,8 @@ function openRgPlayer(key){const p0=RG_ROWMAP.get(key);if(!p0)return;rgWith('bot
   <div class="chips">${st.map(rgChip).join('')}</div>
   <div class="facts"><div class="fact"><b>${p.lwSh}%</b><span>Last game share (${esc(p.lwTxt)})</span></div><div class="fact"><b>${p.sh3}%</b><span>Share, last ${p.n3??3} games</span></div><div class="fact"><b>${p.pts3}</b><span>Return pts/game, last 3</span></div>
    <div class="fact"><b>${p.yT}</b><span>Season return yds (${p.yK} kick, ${p.yP} punt)</span></div><div class="fact"><b>${rgAvgK(p)==null?'None':rgF(rgAvgK(p))}</b><span>Avg yds per kick return${p.nKr?` (${p.nKr} returns)`:''}</span></div><div class="fact"><b>${rgAvgP(p)==null?'None':rgF(rgAvgP(p))}</b><span>Avg yds per punt return${p.nPr?` (${p.nPr} returns)`:''}</span></div>${x.k?`<div class="fact"><b>${rgF(x.er)}</b><span>Exp returns vs ${x.opp}</span></div><div class="fact"><b>${rgF(x.ep)}</b><span>Exp pts</span></div>`:''}</div>
-  <p>Opponent: kick returns allowed/game ${rgOppCell(p)} · return yds allowed/game ${rgYdsCell(p)}</p>
+  ${rgTtlGames(p,M_)}
+   <p>Opponent: kick returns allowed/game ${rgOppCell(p)} · return yds allowed/game ${rgYdsCell(p)}</p>
   ${rgBoxes(p,'both')}
   ${c?`<p>Injury check: likely main kick returner <b>${esc(c.predicted||'unknown')}</b> ${rgFlagChips(c.flags)}</p>${(c.flags||[]).map(f=>`<p class="note">• ${esc(f[1])}</p>`).join('')}`:''}
   ${rgPlayerTable(p,'kr')}
@@ -1179,6 +1195,101 @@ function openRgPlayer(key){const p0=RG_ROWMAP.get(key);if(!p0)return;rgWith('bot
   <section class="panel"><div class="ph"><h2>Depth charts today</h2></div><div class="tw"><table><tbody>
     <tr><td>Team site</td><td>${rgRank(M_,p,'site')}</td></tr><tr><td>ESPN</td><td>${rgRank(M_,p,'espn')}</td></tr></tbody></table></div>
     <p class="note">Depth charts checked ${esc(S.returns.checked||'date not recorded')}. <button class="link" data-rgteam="${esc(p.team)}">Open ${esc(p.team)} team detail</button></p></section>`)})}
+
+/* ---------- Beta tab (Oct 13, Joe): practice picks for the return game. Not for lineup decisions. Data: db collection 'beta', one doc per week (beta/w06 ...). Only on the claude.ai dashboard. ---------- */
+const BT={w:null,f:'all'};
+const BT_FORM={single:'One returner',two:'Two returners',three:'Three returners','single+fill':'One returner + fill-ins',unknown:'Not sure'};
+const btN=f=>f==='two'?2:f==='three'?3:1;   // how many returners the formation guess names
+const btPicks=r=>Array.isArray(r.picks)?r.picks.filter(x=>x&&x.name):(r.pick?[{name:r.pick,share:r.pickShare}]:[]);
+const btActs=r=>Array.isArray(r.actuals)?r.actuals.filter(x=>x&&x.name):(r.actual?[{name:r.actual,share:r.actualShare}]:[]);
+const btShare=v=>v==null||v===''||isNaN(+v)?null:+v;
+function btList(a){return a.length?a.map(x=>`${esc(x.name)}${btShare(x.share)!=null?` <span class="note">${btShare(x.share)}%</span>`:''}`).join('<br>'):'<span class="note">none</span>'}
+function btRes(r){const p=btPicks(r),a=btActs(r);if(r.result==='hit'||r.result==='miss'||r.result==='n/a')return r.result;if(!a.length)return 'pending';if(!p.length)return 'miss';return rgSame(p[0].name,a[0].name)?'hit':'miss'}   // hit = our first name is the team's top returner
+function btFormHit(r){if(!r.actualFormation||!r.formation||r.formation==='unknown'||r.actualFormation==='unknown')return null;const one=f=>f==='single'||f==='single+fill'?'one':f;return one(r.formation)===one(r.actualFormation)}
+// names right: of the returners we named, how many actually returned; share error: average gap in share points for the names we got right
+function btSet(r){const p=btPicks(r),a=btActs(r);if(!p.length||!a.length)return null;const hit=p.filter(x=>a.some(y=>rgSame(x.name,y.name)));const errs=hit.map(x=>{const y=a.find(z=>rgSame(x.name,z.name));return btShare(x.share)!=null&&btShare(y.share)!=null?Math.abs(btShare(x.share)-btShare(y.share)):null}).filter(v=>v!=null);return {named:p.length,hit:hit.length,errs}}
+function btAcc(ds){const o={weeks:ds.length,n:0,hit:0,fN:0,fHit:0,eN:0,eHit:0,sN:0,sHit:0,nmN:0,nmHit:0,errs:[],why:{}};
+  ds.forEach(d=>{d.rows.forEach(r=>{const x=btRes(r);if(x==='hit'||x==='miss'){o.n++;if(x==='hit')o.hit++;else if(r.missReason)o.why[r.missReason]=(o.why[r.missReason]||0)+1}
+    const f=btFormHit(r);if(f!=null){o.fN++;if(f)o.fHit++}
+    const s=btSet(r);if(s){o.nmN+=s.named;o.nmHit+=s.hit;o.errs.push(...s.errs)}
+    const a=btActs(r);if(a.length&&r.espnKR1){o.eN++;if(rgSame(r.espnKR1,a[0].name))o.eHit++}
+    if(a.length&&r.siteKR1){o.sN++;if(rgSame(r.siteKR1,a[0].name))o.sHit++}})});o.mae=o.errs.length?o.errs.reduce((a,b)=>a+b,0)/o.errs.length:null;return o}
+const btScored=()=>btWeeks().filter(k=>S.beta[k].status==='scored').map(k=>({k,...S.beta[k]}));
+function btScore(){return btAcc(btScored())}
+// trend: one row per scored week with its rule version and the change vs the previous scored week; then a summary per rule version
+function btTrend(){const ds=btScored();if(!ds.length)return '';
+  const P=(a,b)=>b?Math.round(100*a/b):null,rowsT=ds.map(d=>{const t=btAcc([d]);return {d,t,f:P(t.fHit,t.fN),h:P(t.hit,t.n),nm:P(t.nmHit,t.nmN),m:t.mae,e:P(t.eHit,t.eN),s:P(t.sHit,t.sN)}});
+  const dl=(v,p,inv)=>{if(v==null||p==null)return '';const x=v-p;if(!x)return ' <span class="note">±0</span>';const good=inv?x<0:x>0;return ` <span class="${good?'rg-ok':'rg-bad'}" title="Change vs the previous scored week">${x>0?'▲':'▼'}${Math.abs(Math.round(x))}</span>`};
+  const cell=(v,p,inv,u)=>v==null?'<td class="num note">n/a</td>':`<td class="num">${Math.round(v)}${u||'%'}${dl(v,p,inv)}</td>`;
+  const body=rowsT.map((r,i)=>{const q=i?rowsT[i-1]:{};return `<tr><td>Week ${esc(r.d.week??r.d.k)}</td><td>${esc(r.d.ruleVersion||'not tagged')}</td>${cell(r.f,q.f)}${cell(r.h,q.h)}${cell(r.nm,q.nm)}${cell(r.m,q.m,true,' pts')}${cell(r.e,q.e)}${cell(r.s,q.s)}<td class="num note">${r.t.n}</td></tr>`}).join('');
+  const vs={};ds.forEach(d=>{const v=d.ruleVersion||'not tagged';(vs[v]=vs[v]||[]).push(d)});
+  const vrows=Object.entries(vs).map(([v,L])=>{const t=btAcc(L);return `<tr><td><b>${esc(v)}</b></td><td>${L.length} week${L.length===1?'':'s'}</td>${cell(P(t.fHit,t.fN))}${cell(P(t.hit,t.n))}${cell(P(t.nmHit,t.nmN))}${cell(t.mae,null,true,' pts')}${cell(P(t.eHit,t.eN))}${cell(P(t.sHit,t.sN))}<td class="num note">${t.n}</td></tr>`}).join('');
+  const th='<th class="num">Formation right</th><th class="num">Top returner right</th><th class="num">Named who returned</th><th class="num">Share miss</th><th class="num">ESPN KR1 right</th><th class="num">Site KR1 right</th><th class="num">Teams</th>';
+  return `<section class="panel"><div class="ph"><h2>Are we improving?</h2><span class="eyebrow">By week and by pick-method version</span></div>
+    <div class="tw"><table class="wrt"><thead><tr><th>Week</th><th>Version</th>${th}</tr></thead><tbody>${body}</tbody></table></div>
+    <div class="tw"><table class="wrt"><thead><tr><th>Version</th><th>Weeks</th>${th}</tr></thead><tbody>${vrows}</tbody></table></div>
+    <p class="note">Arrows compare with the previous scored week (green = better, red = worse; for share miss, lower is better). The second table groups weeks by the version of the pick rules that made the picks (rules are in claude/return-game-pick-rules.md), so a new version can be compared with the old one, and rolled back if it does worse. About 30 teams a week is a small sample: look for a trend over several weeks, not one jump.</p></section>`}
+/* Blueberry charts: u/BlueberryAsFuck's weekly return tables, one week at a time, sortable. Data: db collection blueberry (docs w01..), GitHub: data/beta-blueberry.json */
+const BB={w:null};
+SORT_DEF.bb={k:'team',d:1};SORT.bb={k:'team',d:1};SORT_DEF.bk={k:'team',d:1};SORT.bk={k:'team',d:1};
+['kr1','kr2','al','opp','pr','bu','inj'].forEach(x=>ASC.add(x));
+function bbView(){
+  const B=S.blueberry||{},ks=Object.keys(B).filter(k=>B[k]&&Array.isArray(B[k].rows)).sort();
+  const hd='<div class="ph"><h2>Blueberry charts</h2><span class="eyebrow">u/BlueberryAsFuck return tables · for study, not lineup decisions</span></div>';
+  if(!ks.length)return `<section class="panel">${hd}<div class="empty">The Blueberry tables have not been loaded yet.</div></section>`;
+  if(!BB.w||!ks.includes(BB.w))BB.w=ks[ks.length-1];
+  const d=B[BB.w],R=d.rows,nm=v=>v==null||v===''?null:+v,tx=v=>v==null||v===''?null:String(v).toLowerCase();
+  const C=[['team','Team',0,r=>tx(r.team),'NFL team.'],['kr1','KR1',0,r=>tx(r.kr1),'First kick returner on his chart. ? = practice squad; a suffix is his injury status.'],['kr2','KR2',0,r=>tx(r.kr2),'Second kick returner on his chart.'],
+    ['al','Alignment',0,r=>tx(r.alignment),'How the team lines up its returners: solo, 1 deep 1 up, or 2 deep (from his Week 4 chart on).'],['pr','Punt returner',0,r=>tx(r.pr),'Punt returner on his chart (Week 5 on).'],['bu','Backup',0,r=>tx(r.backup),'Backup returner on his chart (Week 5 on).'],['inj','Injury',0,r=>tx(r.injury),'Injury note on his chart (Week 5 on).'],
+    ['opp','Opponent',0,r=>tx(r.opp),'The team this one plays in the week the chart describes.'],['pts','Opp implied pts',1,r=>nm(r.oppProjPts),'Opponent\'s implied points from the betting line. Higher = more scoring, so more kickoffs for the returner.'],['kya','Opp KR yds/g',1,r=>nm(r.oppKRYAperG),'Kick-return yards the opponent allows per game.'],['pya','Opp PR yds/g',1,r=>nm(r.oppPRYAperG),'Punt-return yards the opponent allows per game.']];
+  const raw={team:r=>r.team,kr1:r=>r.kr1,kr2:r=>r.kr2,al:r=>r.alignment,pr:r=>r.pr,bu:r=>r.backup,inj:r=>r.injury,opp:r=>r.opp,pts:r=>r.oppProjPts,kya:r=>r.oppKRYAperG,pya:r=>r.oppPRYAperG};
+  const cols=C.filter(c=>c[0]==='team'||R.some(r=>c[3](r)!=null));
+  if(!cols.some(c=>c[0]===SORT.bb.k))Object.assign(SORT.bb,SORT_DEF.bb);
+  const vf=(r,k)=>C.find(c=>c[0]===k)[3](r);
+  const st=sortRows(R,'bb',vf,(a,b)=>String(a.team).localeCompare(String(b.team)));
+  const cell=(c,r)=>{const v=raw[c[0]](r);return `<td data-l="${esc(c[1])}"${c[2]?' class="num"':''}>${v==null||v===''?'<span class="note">–</span>':c[2]?(+v).toFixed(1):c[0]==='team'?'<b>'+esc(v)+'</b>':esc(v)}</td>`};
+  const wk=ks.map(k=>`<button data-bbw="${esc(k)}" aria-pressed="${k===BB.w}">Week ${esc(B[k].week??k.replace(/^w0?/,''))}</button>`).join('');
+  let kick='';
+  if(Array.isArray(d.kicker)&&d.kicker.length){
+    const KC=[['team','Team',0,r=>tx(r.team)],['ko','Kickoffs',1,r=>nm(r.kickoffs)],['l','% left',1,r=>nm(r.pctL)],['r','% right',1,r=>nm(r.pctR)],['w','% to weaker side',1,r=>nm(r.pctWeaker)],['note','Note',0,r=>tx(r.note)]];
+    const kv=(r,k)=>KC.find(c=>c[0]===k)[3](r);if(!KC.some(c=>c[0]===SORT.bk.k))Object.assign(SORT.bk,SORT_DEF.bk);
+    const ks2=sortRows(d.kicker,'bk',kv,(a,b)=>String(a.team).localeCompare(String(b.team)));
+    const kr={team:r=>r.team,ko:r=>r.kickoffs,l:r=>r.pctL,r:r=>r.pctR,w:r=>r.pctWeaker,note:r=>r.note};
+    kick=`<div class="ph" style="margin-top:14px"><h3>Kicker direction (his Week ${esc(d.week)} chart)</h3><span class="eyebrow">${resetBtn('bk')}</span></div><div class="tw"><table class="wrt"><thead><tr>${KC.map(c=>sh('bk',c[0],c[1],c[2])).join('')}</tr></thead><tbody>${ks2.map(r=>'<tr>'+KC.map(c=>{const v=kr[c[0]](r);return `<td data-l="${esc(c[1])}"${c[2]?' class="num"':''}${c[0]==='note'?' style="white-space:normal;min-width:200px"':''}>${v==null||v===''?'<span class="note">–</span>':c[0]==='team'?'<b>'+esc(v)+'</b>':esc(v)}</td>`}).join('')+'</tr>').join('')}</tbody></table></div>`}
+  return `<section class="panel">${hd}
+    <div class="rgtools"><div class="filters" role="group" aria-label="Blueberry week">${wk}</div></div>
+    <p class="note">His Week ${esc(d.week)} chart, posted ${d.postedAt?esc(fmtShort(Date.parse(d.postedAt))):'after the Week '+esc(d.week)+' games'}; it describes Week ${esc(d.describesWeek??(+d.week+1))}. ${R.length} teams. Click a column title to sort; click again to reverse. Columns appear only for weeks where his chart has them. ${resetBtn('bb')}</p>
+    <div class="tw"><table class="wrt"><thead><tr>${cols.map(c=>sh('bb',c[0],c[1],c[2],c[4])).join('')}</tr></thead><tbody>${st.map(r=>'<tr>'+cols.map(c=>cell(c,r)).join('')+'</tr>').join('')}</tbody></table></div>${kick}</section>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-bbw]');if(b){BB.w=b.dataset.bbw;render()}});
+function btWeeks(){return Object.keys(S.beta||{}).filter(k=>S.beta[k]&&Array.isArray(S.beta[k].rows)).sort()}
+function betaView(){
+  const ks=btWeeks();
+  const head=`<section class="panel"><div class="ph"><h2>Beta: return-game practice picks</h2><span class="eyebrow">Not for lineup decisions · picks are saved before kickoff, then scored</span></div>
+    <p class="note">For each team we guess how it will line up (one returner, two or three) and then name that many returners with the share of returns each should get. A team using one returner gets one name at about 100%; a team using three might get its top two with their shares. After the games we compare names, shares and formation with what happened, and write down why any pick missed. The point is to learn which signals work by Weeks 8 to 10. Nothing here feeds the Returners tab, the projections or any recommendation.</p></section>`;
+  if(!ks.length)return head+bbView()+`<div class="empty">No practice picks have been saved yet. The first round is recorded before the Week 6 games.</div>`;
+  if(!BT.w||!ks.includes(BT.w))BT.w=ks[ks.length-1];
+  const d=S.beta[BT.w],rows=d.rows.slice().sort((a,b)=>String(a.team).localeCompare(String(b.team)));
+  const sc=btScore(),pc=(a,b)=>b?`${a} of ${b}`:'none scored yet',pp=(a,b)=>b?Math.round(100*a/b)+'%':'n/a';
+  const mae=sc.errs.length?(sc.errs.reduce((a,b)=>a+b,0)/sc.errs.length):null;
+  const why=Object.entries(sc.why).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${esc(k)} ${v}`).join(' · ');
+  const score=`<section class="panel"><div class="ph"><h2>Scorecard</h2><span class="eyebrow">${sc.weeks} scored week${sc.weeks===1?'':'s'}</span></div>
+    <div class="facts"><div class="fact"><b>${pp(sc.fHit,sc.fN)}</b><span>Formation right: ${pc(sc.fHit,sc.fN)} teams</span></div><div class="fact"><b>${pp(sc.hit,sc.n)}</b><span>Top returner right: ${pc(sc.hit,sc.n)} teams</span></div><div class="fact"><b>${pp(sc.nmHit,sc.nmN)}</b><span>Named returners who did return: ${pc(sc.nmHit,sc.nmN)}</span></div><div class="fact"><b>${mae==null?'n/a':mae.toFixed(0)+' pts'}</b><span>Average share miss for names we got right</span></div><div class="fact"><b>${pp(sc.eHit,sc.eN)}</b><span>ESPN chart KR1 was top returner: ${pc(sc.eHit,sc.eN)}</span></div><div class="fact"><b>${pp(sc.sHit,sc.sN)}</b><span>Team-site KR1 was top returner: ${pc(sc.sHit,sc.sN)}</span></div></div>
+    <p class="note">${why?'Why top-returner picks missed: '+why+'.':'No misses scored yet.'} Depth-chart numbers count only games with a pre-game snapshot. With about 30 teams per week, one week is a small sample.</p></section>`;
+  const filt={all:()=>true,miss:r=>btRes(r)==='miss',pending:r=>btRes(r)==='pending'}[BT.f];
+  const shown=rows.filter(filt);
+  const wkBtn=ks.map(k=>`<button data-btw="${esc(k)}" aria-pressed="${k===BT.w}">Week ${esc(S.beta[k].week??k.replace(/^w0?/,''))}</button>`).join('');
+  const fBtn=[['all','All'],['miss','Misses'],['pending','Not scored yet']].map(([k,l])=>`<button data-btf="${k}" aria-pressed="${BT.f===k}">${l}</button>`).join('');
+  const chipR=x=>x==='hit'?'<span class="chip rg-ok">Top returner right</span>':x==='miss'?'<span class="chip rg-bad">Top returner missed</span>':x==='n/a'?'<span class="chip rg-muted">No returns</span>':'<span class="chip rg-muted">Not scored yet</span>';
+  const fchip=r=>{const f=btFormHit(r);return f==null?'':f?' <span class="chip rg-ok">Formation right</span>':' <span class="chip rg-bad">Formation missed</span>'};
+  const table=`<div class="tw"><table class="wrt"><thead><tr><th>Team</th><th>Formation guess</th><th>Our returners and expected share</th><th>Why</th><th>Confidence</th><th>ESPN KR1</th><th>Team site KR1</th><th>What happened</th><th>Result</th><th>Why it missed</th></tr></thead><tbody>
+    ${shown.map(r=>{const x=btRes(r),a=btActs(r);return `<tr><td data-l="Team"><b>${esc(r.team)}</b></td><td data-l="Formation guess">${esc(BT_FORM[r.formation]||r.formation||'')}</td><td data-l="Our returners and expected share">${btList(btPicks(r))}</td><td data-l="Why" style="white-space:normal;min-width:220px">${esc(r.signals||'')}</td><td data-l="Confidence">${esc(r.conf||'')}</td><td data-l="ESPN KR1">${esc(r.espnKR1||'')}</td><td data-l="Team site KR1">${esc(r.siteKR1||'')}</td><td data-l="What happened" style="white-space:normal;min-width:160px">${a.length?btList(a)+(r.actualFormation?`<br><span class="note">${esc(BT_FORM[r.actualFormation]||r.actualFormation)}</span>`:''):'<span class="note">After the games</span>'}</td><td data-l="Result">${chipR(x)}${fchip(r)}</td><td data-l="Why it missed" style="white-space:normal;min-width:160px">${esc(r.missReason||'')}${r.note?`<br><span class="note">${esc(r.note)}</span>`:''}</td></tr>`}).join('')||'<tr><td colspan="10" class="note">Nothing in this filter.</td></tr>'}
+    </tbody></table></div>`;
+  const ver=d.ruleVersion?` · pick rules ${esc(d.ruleVersion)}`:'';const st=d.status==='scored'?'Scored':d.status==='locked'?'Saved before kickoff, not scored yet':'Draft, not locked yet';
+  return head+bbView()+score+btTrend()+`<section class="panel"><div class="ph"><h2>Week ${esc(d.week??BT.w)} picks</h2><span class="eyebrow">${esc(st)}${ver}${d.lockedAt?' · saved '+esc(fmtShort(d.lockedAt)):''}</span></div>
+    <div class="rgtools"><div class="filters" role="group" aria-label="Week">${wkBtn}</div><div class="filters" role="group" aria-label="Filter">${fBtn}</div></div>
+    ${d.note?`<p class="note">${esc(d.note)}</p>`:''}${table}
+    <p class="note">Formation guess decides how many names we list: one returner = one name (about 100%), two = two names, three = our top two or three. Top returner right = our first name returned the most kicks. Named returners who did return = how many of the names we listed returned at least once. Share miss = how far our expected share was from his actual share. Formation: one, two or three returners, from Joe's calls or inferred from shares, with one returner plus fill-ins counted as one. Depth-chart columns are the pre-game snapshots. Misses are sorted by cause so we can tell the ones nobody could have caught (in-game injury) from the ones a signal should have caught.</p></section>`}
+document.addEventListener('click',e=>{const w=e.target.closest('[data-btw]');if(w){BT.w=w.dataset.btw;return render()}const f=e.target.closest('[data-btf]');if(f){BT.f=f.dataset.btf;render()}});
 
 function datesStrip(){const D=M?.dates||{},fr=[['ESPN numbers',S.meta?.updatedAt],['News',S.news.ours?.updatedAt],['Practice',S.practice?.updatedAt],['Rumors',S.news.desk?.updatedAt]];
   const el=$('#dates');if(!el)return;const due=waiverDue();el.innerHTML=`${due?`<span>Claims due <b>${whenTxt(due)}</b></span>`:''}${D.kickoff?`<span>Kickoff <b>${whenTxt(D.kickoff)}</b></span>`:''}${D.tradeDeadline?`<span>Trade deadline <b>${whenTxt(D.tradeDeadline)}</b></span>`:''}<span class="fr">Updated: ${fr.map(([k,v])=>`${k} ${v?fmtShort(v):'not loaded'}`).join(' · ')} · ${esc(checksTxt())}</span>`}
@@ -1390,7 +1501,7 @@ document.addEventListener('click',e=>{const v=e.target.closest('[data-txv]');if(
   if(e.target.closest('[data-txmore]')){TX.n+=60;return render()}});
 document.addEventListener('change',e=>{const s=e.target.closest('select[data-tx]');if(!s)return;TX[s.dataset.tx]=s.value;TX.n=60;render()});
 
-function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,schedule:scheduleView,waivers:wafView}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}let fb='';try{fb=freshBanner(S.view==='waivers'&&WF.v==='fa'?'market':S.view)}catch(e){console.warn('fresh failed',e)}$('#view').innerHTML=bn+fb+body;
+function render(){M=S.extras||null;try{normalize()}catch(e){console.warn('normalize failed',e)}mergePlans();datesStrip();const v={overview,returns:returnsView,league,roster,market,news:newsView,schedule:scheduleView,waivers:wafView,beta:betaView}[S.view];let body;try{body=v()}catch(e){console.warn('view failed',S.view,e);body=`<div class="empty">This tab couldn't be drawn from the current data (${esc(e.message||e)}). Some fields are missing or in an unexpected shape; the other tabs still work. Details are in the browser console.</div>`}let bn='';try{bn=banners()}catch(e){bn=`<div class="banner amber"><b>Data status unavailable:</b> ${esc(e.message||e)}</div>`}let fb='';try{fb=freshBanner(S.view==='waivers'&&WF.v==='fa'?'market':S.view)}catch(e){console.warn('fresh failed',e)}$('#view').innerHTML=bn+fb+body;
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===S.view));
   if(S.meta){const dt=dataTime();$('#stamp').textContent=`Week ${LGD().week??S.meta.week} · data updated ${dt?fmtShort(dt):'time unknown'}${dt&&(Date.now()-dt)/36e5>STALE_H?' (stale)':''}`}}
 function setView(v){S.view=v;try{localStorage.setItem('lt-bi-view',v)}catch(e){}render()}
@@ -1436,7 +1547,8 @@ document.addEventListener('change',async e=>{const sel=e.target.closest('select[
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#drawer').hidden)closeDrawer();
   if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-rgtw]')){e.preventDefault();const [tt,ww]=e.target.dataset.rgtw.split(':');return openRgTeamWk(tt,ww)}
   if(e.key==='Enter'&&e.target.matches('tr.row')){const t=e.target;t.dataset.rgplayer?openRgPlayer(t.dataset.rgplayer):t.dataset.rgteam?openRgTeam(t.dataset.rgteam):t.dataset.player?openPlayer(t.dataset.player):openTeam(t.dataset.team)}});
-try{const v=localStorage.getItem('lt-bi-view');if(v==='market'){S.view='waivers';WF.v='fa'}else if(v&&['overview','returns','league','roster','market','news','schedule','waivers'].includes(v))S.view=v}catch(e){}
+try{const v=localStorage.getItem('lt-bi-view');if(v==='market'){S.view='waivers';WF.v='fa'}else if(v&&['overview','returns','league','roster','market','news','schedule','waivers','beta'].includes(v))S.view=v}catch(e){}
+
 render();
 
 /* ---------- Header hover help (Oct 13, Joe: explain every header on hover; headers themselves unchanged) ----------
@@ -1624,6 +1736,8 @@ try{new MutationObserver(()=>{cancelAnimationFrame(HT_T);HT_T=requestAnimationFr
       try{const tt=await fetch('data/returns-totals.json?t='+Date.now(),{cache:'no-store'});S.rtot=tt.ok?await tt.json():S.rtot||null}catch(e){}
       try{const tr=await fetch('data/db/transactions/log.json?t='+Date.now(),{cache:'no-store'});S.tx=tr.ok?await tr.json():S.tx||null}catch(e){}
       try{const sr=await fetch('data/schedule.json?t='+Date.now(),{cache:'no-store'});S.sched=sr.ok?await sr.json():S.sched||null}catch(e){}
+      try{const br=await fetch('data/beta.json?t='+Date.now(),{cache:'no-store'});S.beta=br.ok?await br.json():S.beta||{}}catch(e){}
+      try{const bl=await fetch('data/beta-blueberry.json?t='+Date.now(),{cache:'no-store'});S.blueberry=bl.ok?await bl.json():S.blueberry||{}}catch(e){}
       // data/validation.json is written every run, even when a run was blocked, so it can be newer than bundle.validation
       try{const v=await fetch('data/validation.json?t='+Date.now(),{cache:'no-store'});if(v.ok){const V=await v.json();if(!S.validation||!S.validation.checkedAt||(V.checkedAt&&new Date(V.checkedAt)>=new Date(S.validation.checkedAt)))S.validation=V}}catch(e){}
       render();}
@@ -1635,7 +1749,46 @@ try{new MutationObserver(()=>{cancelAnimationFrame(HT_T);HT_T=requestAnimationFr
 })();
 })();
 </script>
+<style>
+#fh{position:fixed;left:0;top:0;z-index:4;display:none;overflow:hidden;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 6px 10px -8px rgba(0,0,0,.35)}
+#fh.dr{z-index:22}
+#fh table{width:auto;table-layout:auto;border-collapse:collapse;margin:0}
+#fh th{box-sizing:border-box}
+</style>
+<script>
+/* Frozen column headers (Joe, Oct 13): while a table's header row scrolls out of view, a copy stays pinned under the top bar (or at the top of the side panel). Works for every table on every tab. Clicks on the pinned copy sort like the real header. */
+(function(){
+  const fh=document.createElement('div');fh.id='fh';fh.setAttribute('role','presentation');document.body.appendChild(fh);
+  let raf=0,shown=false;
+  const hide=()=>{if(shown){fh.style.display='none';fh.innerHTML='';shown=false}};
+  function update(){raf=0;
+    try{
+      const dr=document.getElementById('drawer'),inDr=!!dr&&!dr.hidden,scope=inDr?dr:document.getElementById('view');
+      if(!scope)return hide();
+      const line=inDr?dr.getBoundingClientRect().top:(document.querySelector('.top')?.getBoundingClientRect().bottom||0);
+      let hit=null;
+      for(const tb of scope.querySelectorAll('table')){
+        const th=tb.tHead;if(!th||!th.offsetHeight)continue;
+        const hr=th.getBoundingClientRect(),tr=tb.getBoundingClientRect();
+        if(hr.top<line-1&&tr.bottom>line+hr.height+24){hit=tb;break}
+      }
+      if(!hit)return hide();
+      const wr=hit.closest('.tw,.tablewrap')||hit.parentElement,w=wr.getBoundingClientRect(),th=hit.tHead;
+      const c=document.createElement('table');c.className=hit.className;c.style.width=hit.offsetWidth+'px';
+      const hc=th.cloneNode(true),src=th.querySelectorAll('th,td'),dst=hc.querySelectorAll('th,td');
+      src.forEach((s,i)=>{const d=dst[i];if(!d)return;const x=s.getBoundingClientRect().width+'px';d.style.width=x;d.style.minWidth=x;d.style.maxWidth=x});
+      c.appendChild(hc);c.style.transform='translateX('+(-wr.scrollLeft)+'px)';
+      fh.innerHTML='';fh.appendChild(c);
+      fh.className=inDr?'dr':'';fh.style.left=w.left+'px';fh.style.top=line+'px';fh.style.width=wr.clientWidth+'px';fh.style.display='block';shown=true;
+    }catch(e){hide()}
+  }
+  const go=()=>{if(!raf)raf=requestAnimationFrame(update)};
+  addEventListener('scroll',go,true);addEventListener('resize',go);
+  const mo=new MutationObserver(go);['view','drawer'].forEach(id=>{const n=document.getElementById(id);if(n)mo.observe(n,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden']})});
+  go();
+})();
+</script>
+
 
 </body></html>
-
 </body></html>

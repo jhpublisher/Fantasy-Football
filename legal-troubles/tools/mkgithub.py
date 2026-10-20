@@ -17,6 +17,8 @@ s=s[:a]+"""  async function load(){
       try{const tt=await fetch('data/returns-totals.json?t='+Date.now(),{cache:'no-store'});S.rtot=tt.ok?await tt.json():S.rtot||null}catch(e){}
       try{const tr=await fetch('data/db/transactions/log.json?t='+Date.now(),{cache:'no-store'});S.tx=tr.ok?await tr.json():S.tx||null}catch(e){}
       try{const sr=await fetch('data/schedule.json?t='+Date.now(),{cache:'no-store'});S.sched=sr.ok?await sr.json():S.sched||null}catch(e){}
+      try{const br=await fetch('data/beta.json?t='+Date.now(),{cache:'no-store'});S.beta=br.ok?await br.json():S.beta||{}}catch(e){}
+      try{const bl=await fetch('data/beta-blueberry.json?t='+Date.now(),{cache:'no-store'});S.blueberry=bl.ok?await bl.json():S.blueberry||{}}catch(e){}
       // data/validation.json is written every run, even when a run was blocked, so it can be newer than bundle.validation
       try{const v=await fetch('data/validation.json?t='+Date.now(),{cache:'no-store'});if(v.ok){const V=await v.json();if(!S.validation||!S.validation.checkedAt||(V.checkedAt&&new Date(V.checkedAt)>=new Date(S.validation.checkedAt)))S.validation=V}}catch(e){}
       render();}
@@ -26,6 +28,8 @@ s=s[:a]+"""  async function load(){
   savePlan=async()=>{try{localStorage.setItem('lt-plans',JSON.stringify(S.plans))}catch(e){}};
   await load(); setInterval(load,10*60*1000);
 """+s[b:]
+rep("...(window.claude?['beta']:[])","'beta'")
+rep("if(!window.claude){document.getElementById('tab-beta')?.remove()}","")
 HEAD0='''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head><body>
