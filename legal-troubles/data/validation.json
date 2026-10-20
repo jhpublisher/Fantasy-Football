@@ -2,11 +2,11 @@
  "ok": true,
  "failures": [],
  "warnings": [
+  "tag for Brian Robinson Jr. expired (week 6); page must not show it as current",
+  "tag for Kaden Wetjen expired (week 6); page must not show it as current",
+  "tag for Rams D/ST expired (week 6); page must not show it as current",
   "tag for Puka Nacua expired (week 6); page must not show it as current",
   "tag for Skyy Moore expired (week 6); page must not show it as current",
-  "tag for Brian Robinson Jr. expired (week 6); page must not show it as current",
-  "tag for Rams D/ST expired (week 6); page must not show it as current",
-  "tag for Kaden Wetjen expired (week 6); page must not show it as current",
   "rumor Tyreek Hill expired (week 6)",
   "rumor Tony Pollard expired (week 6)",
   "rumor DJ Moore expired (week 6)",
@@ -18,9 +18,9 @@
   "curated claims: 1 expired: Bo Melton",
   "curated needs: 6 expired: Monty's, Pop A TD, Oviedo Roosters, El' Pol\u00edtico, Team RM, JV Squad"
  ],
- "checkedAt": "2026-10-20T20:48+00:00",
+ "checkedAt": "2026-10-20T22:43+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-10-20T20:48+00:00"
+ "bundleBuiltAt": "2026-10-20T22:43+00:00"
 }
