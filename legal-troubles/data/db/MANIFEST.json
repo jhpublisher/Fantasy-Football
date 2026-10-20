@@ -77,40 +77,40 @@
    "sha256": "cb58d7187a5a72a1e24e8ddf66c1e2709f11f255ce1161e85a255bec073aa4f1"
   },
   "league/mDraftDetail.json": {
-   "bytes": 51992,
-   "sha256": "7aa7c58cb6c044d5d9659a66366d7e7fe4de457afa1bbebaad6a270fc843f585"
+   "bytes": 52094,
+   "sha256": "d5f984e4e7a8f928f1bca5a067b64f95ca9af40de3cb22ceaecfd2203287b382"
   },
   "league/mNav.json": {
-   "bytes": 7149,
-   "sha256": "829cd02801328a3a70e8638c773d4f8c0a8d31a64ef8ccc2c663e27896bf07f9"
+   "bytes": 7268,
+   "sha256": "3bd3ba5cdb10f7df01c87d58b9e6521d60476e3877436cfec4e3c23c0284ceff"
   },
   "league/mPositionalRatings.json": {
-   "bytes": 8353,
-   "sha256": "b701d96e5f95f8bd9dd48ed9d4ca8e1370406a0ec6f9c8b871f905bd8c5add8b"
+   "bytes": 9478,
+   "sha256": "88b4dee21f71be1e93b88bb39e001642aac9fdf4499b4f7b029f8c9d825692c8"
   },
   "league/mSettings.json": {
-   "bytes": 10150,
-   "sha256": "df64995cc336384f6129c772ce0b7376fb9d8df11ebae1711bb68817abf85894"
+   "bytes": 10252,
+   "sha256": "76e48810f0186b10406c6bc5d6c170f55e2a61cb554594cb13b3fbe3050b0abc"
   },
   "league/mStandings.json": {
-   "bytes": 19560,
-   "sha256": "e83e0c120a2bb0c621762e890d4baabdc6dc725396c517ef85d08211edf02c86"
+   "bytes": 19685,
+   "sha256": "a95a663b0318ff13e90ec4cc9d8da51b4b693bfca2ae74975c0cb4c3dd703890"
   },
   "league/mStatus.json": {
-   "bytes": 1265,
-   "sha256": "e3f67d240598b65e9038bc07b63a0d1c2bb79e9969b330415f120edd14e69eb5"
+   "bytes": 1367,
+   "sha256": "72a6fd3a32f7c5bea1e30b406a7f453e7da4ea6d5ac3d7cbd8363424b691bb1a"
   },
   "league/mTeam.json": {
-   "bytes": 54867,
-   "sha256": "d114bc3c1ae9c2bfe98d1d1447bcc202c5cf0acfa72493c84614ff9fbeef9c3d"
+   "bytes": 55111,
+   "sha256": "651f6424c77a48e5cb7ea052a2cb1dcf115908f298ce7588056173a16dbb73db"
   },
   "league/mTransactions2.json": {
-   "bytes": 70722,
-   "sha256": "22ddba99a4cacbf10f09a5938176d4a006d774eb44ea0778b18a4dcfe9c18640"
+   "bytes": 6346,
+   "sha256": "d039e1f035c130241140b6905c82b823e51f6e1e4e6f445d11de0e7a88cfd0db"
   },
   "league/nfl_schedule.json": {
-   "bytes": 109005,
-   "sha256": "bd3de5424538d12755db896fe8142289bea08f77dbb689324d00412ae2aa13b8"
+   "bytes": 108977,
+   "sha256": "9417d04d060d97643cdebdf6814f273c35caac265486e302481e7a44e2ad78e3"
   },
   "current/boxscore_wk5.json": {
    "bytes": 550459,
