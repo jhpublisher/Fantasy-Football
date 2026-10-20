@@ -1232,7 +1232,8 @@ function btTrend(){const ds=btScored();if(!ds.length)return '';
 /* Blueberry charts: u/BlueberryAsFuck's weekly return tables, one week at a time, sortable. Data: db collection blueberry (docs w01..), GitHub: data/beta-blueberry.json */
 const BB={w:null};
 SORT_DEF.bb={k:'team',d:1};SORT.bb={k:'team',d:1};SORT_DEF.bk={k:'team',d:1};SORT.bk={k:'team',d:1};
-['kr1','kr2','al','opp','pr','bu','inj'].forEach(x=>ASC.add(x));
+['kr1','kr2','ks','al','opp','pr','bu','inj'].forEach(x=>ASC.add(x));
+const ksOf=r=>{const a=r.alignment==null?'':String(r.alignment).toLowerCase().trim();if(!a)return null;const q=a.includes('?')?'?':'';return a.startsWith('solo')||a.startsWith('1 deep')?'one man'+q:a.startsWith('2 deep')?'two men'+q:null};
 function bbView(){
   const B=S.blueberry||{},ks=Object.keys(B).filter(k=>B[k]&&Array.isArray(B[k].rows)).sort();
   const hd='<div class="ph"><h2>Blueberry charts</h2><span class="eyebrow">u/BlueberryAsFuck return tables · for study, not lineup decisions</span></div>';
@@ -1240,9 +1241,10 @@ function bbView(){
   if(!BB.w||!ks.includes(BB.w))BB.w=ks[ks.length-1];
   const d=B[BB.w],R=d.rows,nm=v=>v==null||v===''?null:+v,tx=v=>v==null||v===''?null:String(v).toLowerCase();
   const C=[['team','Team',0,r=>tx(r.team),'NFL team.'],['kr1','KR1',0,r=>tx(r.kr1),'First kick returner on his chart. ? = practice squad; a suffix is his injury status.'],['kr2','KR2',0,r=>tx(r.kr2),'Second kick returner on his chart.'],
-    ['al','Alignment',0,r=>tx(r.alignment),'How the team lines up its returners: solo, 1 deep 1 up, or 2 deep (from his Week 4 chart on).'],['pr','Punt returner',0,r=>tx(r.pr),'Punt returner on his chart (Week 5 on).'],['bu','Backup',0,r=>tx(r.backup),'Backup returner on his chart (Week 5 on).'],['inj','Injury',0,r=>tx(r.injury),'Injury note on his chart (Week 5 on).'],
-    ['opp','Opponent',0,r=>tx(r.opp),'The team this one plays in the week the chart describes.'],['pts','Opp implied pts',1,r=>nm(r.oppProjPts),'Opponent\'s implied points from the betting line. Higher = more scoring, so more kickoffs for the returner.'],['kya','Opp KR yds/g',1,r=>nm(r.oppKRYAperG),'Kick-return yards the opponent allows per game.'],['pya','Opp PR yds/g',1,r=>nm(r.oppPRYAperG),'Punt-return yards the opponent allows per game.']];
-  const raw={team:r=>r.team,kr1:r=>r.kr1,kr2:r=>r.kr2,al:r=>r.alignment,pr:r=>r.pr,bu:r=>r.backup,inj:r=>r.injury,opp:r=>r.opp,pts:r=>r.oppProjPts,kya:r=>r.oppKRYAperG,pya:r=>r.oppPRYAperG};
+    ['ks','Kick split',0,r=>ksOf(r),'One man = solo or 1 deep 1 up: one returner should get nearly every kick. Two men = 2 deep: kicks are shared. Worked out from his alignment call; Weeks 4 and 5 only. ? = his call was marked uncertain.'],
+['pr','Punt returner',0,r=>tx(r.pr),'Punt returner on his chart (Week 5 on).'],['bu','Backup',0,r=>tx(r.backup),'Backup returner on his chart (Week 5 on).'],['inj','Injury',0,r=>tx(r.injury),'Injury note on his chart (Week 5 on).'],
+    ['al','Alignment',0,r=>tx(r.alignment),'His alignment call: solo, 1 deep 1 up, or 2 deep (Weeks 4 and 5 only).'],['opp','Opponent',0,r=>tx(r.opp),'The team this one plays in the week the chart describes.'],['pts','Opp implied pts',1,r=>nm(r.oppProjPts),'Opponent\'s implied points from the betting line. Higher = more scoring, so more kickoffs for the returner.'],['kya','Opp KR yds/g',1,r=>nm(r.oppKRYAperG),'Kick-return yards the opponent allows per game.'],['pya','Opp PR yds/g',1,r=>nm(r.oppPRYAperG),'Punt-return yards the opponent allows per game.']];
+  const raw={ks:r=>{const v=ksOf(r);return v&&v.replace(/^./,c=>c.toUpperCase())},team:r=>r.team,kr1:r=>r.kr1,kr2:r=>r.kr2,al:r=>r.alignment,pr:r=>r.pr,bu:r=>r.backup,inj:r=>r.injury,opp:r=>r.opp,pts:r=>r.oppProjPts,kya:r=>r.oppKRYAperG,pya:r=>r.oppPRYAperG};
   const cols=C.filter(c=>c[0]==='team'||R.some(r=>c[3](r)!=null));
   if(!cols.some(c=>c[0]===SORT.bb.k))Object.assign(SORT.bb,SORT_DEF.bb);
   const vf=(r,k)=>C.find(c=>c[0]===k)[3](r);
