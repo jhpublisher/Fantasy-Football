@@ -1,15 +1,16 @@
 {
  "league_id": 293318,
  "season": 2026,
- "built": "2026-10-15",
+ "built": "2026-10-20",
  "frozen_weeks": [
   1,
   2,
   3,
   4,
-  5
+  5,
+  6
  ],
- "in_progress_week": 6,
+ "in_progress_week": 7,
  "files": {
   "weeks/w01/boxscore.json": {
    "bytes": 724972,
@@ -166,6 +167,30 @@
   "weeks/w05/roster.json": {
    "bytes": 3636878,
    "sha256": "6553b15323bd57f205700f0dbbd547f10d2da64d4880090d97b7d41df2e1a918"
+  },
+  "weeks/w06/SHA256.json": {
+   "bytes": 466,
+   "sha256": "d4621113e25ffd5013e4ddfdf494abb7a5af6f58643ec49561d2ac4096c93284"
+  },
+  "weeks/w06/boxscore.json": {
+   "bytes": 811364,
+   "sha256": "cbe1a8e5c2fa2336a282dc3985e59988227bf9b945db69acd180c70f58140a87"
+  },
+  "weeks/w06/matchups_all.json": {
+   "bytes": 3764058,
+   "sha256": "54651cd2b2c1cba15b444c0a5bd4bec0ab941876f0d60c6efb845ddd275c7d0b"
+  },
+  "weeks/w06/players_week.json": {
+   "bytes": 67095,
+   "sha256": "825692fa00c704cf01a6effec5fc9dc2a07eea8b17a399a66a424c44735ec9a9"
+  },
+  "weeks/w06/pool.json": {
+   "bytes": 7856887,
+   "sha256": "fc5eb28763802b0bd46a484aef6317e096cae5283e0871ca5e21b4820ae3a51c"
+  },
+  "weeks/w06/roster.json": {
+   "bytes": 3675812,
+   "sha256": "7ec63b1b5be6b779564e4f5099b2f43e8ddfb1ae12f3eda495e5c7d1cf0791d7"
   }
  }
 }
