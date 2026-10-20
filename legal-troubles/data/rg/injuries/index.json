@@ -40,6 +40,14 @@
    "outPlayers": 92,
    "warnings": 0,
    "unmatched": 3
+  },
+  "6": {
+   "file": "2026-w06.json",
+   "sha256": "1ed454d777cad61d891c582df0803dd1b2b2326a33030b9a835a5f8bc46232fc",
+   "addedAt": "2026-10-20T06:40Z",
+   "outPlayers": 82,
+   "warnings": 2,
+   "unmatched": 2
   }
  }
 }

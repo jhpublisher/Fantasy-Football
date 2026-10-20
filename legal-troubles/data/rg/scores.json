@@ -1013,6 +1013,17 @@
 "winner": "GB",
 "loser": "DAL",
 "tie": false
+},
+"401873008": {
+"week": 6,
+"date": "2026-10-20T00:15Z",
+"home": "SF",
+"away": "WSH",
+"homeScore": 23,
+"awayScore": 17,
+"winner": "SF",
+"loser": "WSH",
+"tie": false
 }
 }
 }
