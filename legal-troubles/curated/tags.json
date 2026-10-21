@@ -1,107 +1,114 @@
 {
- "Skyy Moore": {
-  "tag": "roster",
-  "note": "GB WR/PR1/KR1. Ruled out of Wk 5 game with an ankle injury; ESPN Questionable. Wk 6 proj 11.9. Cover: Bachman. Check Wed/Thu practice reports.",
-  "ret": "Questionable (ankle)",
-  "asOf": "2026-10-13",
-  "expiresWeek": 6
- },
  "Puka Nacua": {
   "tag": "roster",
-  "note": "WR1. 17 of 24 targets, 138 yds + TD in Wk 5 (30.2 pts). Proj 19.7 Wk 6 vs ARI. Hold.",
+  "note": "ESPN status ACTIVE (Oct 20). No 2026-dated injury report found in the Oct 20 sweep; first practice report due Wed.",
   "ret": "Active",
-  "asOf": "2026-10-13",
-  "expiresWeek": 6
+  "asOf": "2026-10-20",
+  "expiresWeek": 7
  },
  "Josh Allen": {
   "tag": "roster",
-  "note": "QB1. Bye Wk 7: stream a QB that week (Deshaun Watson FA 18.6 proj today).",
+  "note": "ESPN status ACTIVE (Oct 20). Bye Week 7.",
   "ret": "Bye Wk 7",
-  "asOf": "2026-10-08",
+  "asOf": "2026-10-20",
   "expiresWeek": 7
  },
  "Tucker Kraft": {
   "tag": "roster",
-  "note": "TE1. Bye Wk 11: stream a TE that week.",
-  "ret": "Bye Wk 11",
-  "asOf": "2026-10-08",
+  "note": "Played Wk 6 (5 rec, 37 yds); NBC Sports Oct 19: 'shakes off injury scare'. ESPN status ACTIVE. Bye Wk 11.",
+  "ret": "Active; bye Wk 11",
+  "asOf": "2026-10-20",
   "expiresWeek": 11
- },
- "Brandon Aubrey": {
-  "tag": "roster",
-  "note": "K1 (proj 11.0). DAL bye Wk 14: stream a K that week.",
-  "ret": "Bye Wk 14",
-  "asOf": "2026-10-08",
-  "expiresWeek": 14
- },
- "Brian Robinson Jr.": {
-  "tag": "sell",
-  "note": "Wk 5: 7 carries for 16 yds, no catch (7.7 pts) in ATL OT loss; Wk 6 proj 10.5 as FLEX behind Bijan Robinson. Sell only for a clear upgrade; hold otherwise.",
-  "ret": "Active",
-  "asOf": "2026-10-13",
-  "expiresWeek": 6
  },
  "Josh Jacobs": {
   "tag": "stash",
-  "note": "Commissioner's Exempt List since Aug 30, 0 games played; ESPN's DAY_TO_DAY tag is wrong. OUT for Wk 5. Yahoo Oct 7: earliest return Wk 7 if the ban is 6 games. Cut if the ban covers Wks 15-17 or no ruling by Wk 8.",
-  "ret": "Earliest Wk 7",
-  "asOf": "2026-10-08",
-  "expiresWeek": 8
+  "note": "Removed from the commissioner's exempt list Oct 16-17. NBC Sports Oct 19: LaFleur undecided on Jacobs playing Wk 7 vs DET; Jacobs to practice this week. ESPN status DAY_TO_DAY. No suspension confirmed as of Oct 19.",
+  "ret": "Wk 7 status TBD",
+  "asOf": "2026-10-20",
+  "expiresWeek": 7
+ },
+ "Brandon Aubrey": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Oct 20). DAL bye Wk 14.",
+  "ret": "Active; bye Wk 14",
+  "asOf": "2026-10-20",
+  "expiresWeek": 14
+ },
+ "Rams D/ST": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Oct 20).",
+  "ret": "Active",
+  "asOf": "2026-10-20",
+  "expiresWeek": 7
  },
  "Zach Charbonnet": {
   "tag": "stash",
-  "note": "ACL recovery; practice window opened Oct 1. Playoff RB. ESPN status OUT.",
-  "ret": "Activation ~Wk 7",
-  "asOf": "2026-10-08",
+  "note": "Yahoo Oct 19: may make his season debut Wk 7 (SNF vs KC), not confirmed. 21-day practice window opened Oct 1 (PFT). ESPN status OUT.",
+  "ret": "Possible Wk 7",
+  "asOf": "2026-10-20",
   "expiresWeek": 7
  },
  "Jadarian Price": {
   "tag": "stash",
-  "note": "IR (chest). Eligible Wk 8.",
+  "note": "On IR (chest). Last dated report found: PFT Oct 1 (did not practice). Eligible Wk 8 per earlier note.",
   "ret": "Eligible Wk 8",
-  "asOf": "2026-10-08",
+  "asOf": "2026-10-20",
   "expiresWeek": 8
  },
  "Jordyn Tyson": {
   "tag": "stash",
-  "note": "IR (hamstring). Week 7 at the soonest.",
+  "note": "On IR (hamstring). No newer dated report found in the Oct 20 sweep. Wk 7 at the soonest per earlier note.",
   "ret": "Wk 7+",
-  "asOf": "2026-10-08",
+  "asOf": "2026-10-20",
   "expiresWeek": 7
  },
- "Rams D/ST": {
+ "Skyy Moore": {
+  "tag": "stash",
+  "note": "Placed on IR Oct 17 (ankle, hurt Oct 11 vs CHI); out at least 4 games, earliest return Nov 15 vs MIN (RotoWire Oct 17). ESPN status INJURY_RESERVE; sits in a bench slot.",
+  "ret": "Earliest Nov 15 (Wk 10)",
+  "asOf": "2026-10-20",
+  "expiresWeek": 10
+ },
+ "Brian Robinson Jr.": {
   "tag": "roster",
-  "note": "Wk 5: -5.0 (BUF 37, OT). Wk 6 home vs ARI, proj 6.2, best option we have (top free-agent D/ST, Giants, is 4.1). Hold.",
+  "note": "ESPN status ACTIVE (Oct 20). No new report found in the Oct 20 sweep.",
   "ret": "Active",
-  "asOf": "2026-10-13",
-  "expiresWeek": 6
+  "asOf": "2026-10-20",
+  "expiresWeek": 7
+ },
+ "Kenneth Walker III": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Oct 20). NBC Sports Oct 19-20: leads the NFL in rushing after six weeks.",
+  "ret": "Active",
+  "asOf": "2026-10-20",
+  "expiresWeek": 7
  },
  "Kaden Wetjen": {
   "tag": "roster",
-  "note": "On our bench. PIT kick AND punt returner (site + ESPN agree): 4.0 / 11.3 / 10.7 / 12.6 / 11.0 pts in Wk 1-5 (Wk 5: 5 KR, 110 yds). PIT bye is Wk 9; plays Wk 11 (our GB-bye hole). JOB-LOSS TRIGGER: Steelers Depot Oct 6, 'Steelers Kick-Return Game Continues To Struggle' (headline only). If PIT moves KR1 off Wetjen (Friday chart or inactives), re-verify before the Sun 1:00 PM ET lock.",
-  "ret": "Every week",
-  "asOf": "2026-10-13",
-  "expiresWeek": 6
- },
- "Justin Jefferson": {
-  "tag": "target",
-  "note": "Trade target, JV Squad (IR slot). MIN bye Wk 6, back Wk 7. ESPN shows Active. A package is needed only if Joe asks.",
-  "ret": "Bye Wk 6",
-  "asOf": "2026-10-13",
+  "note": "ESPN status ACTIVE (Oct 20). No new report found in the Oct 20 sweep.",
+  "ret": "Active",
+  "asOf": "2026-10-20",
   "expiresWeek": 7
  },
- "A.J. Brown": {
-  "tag": "buy",
-  "note": "D'Ez Nutz. IR, high-ankle sprain since Sep 13. Owner gets nothing now; healthy for the playoffs.",
-  "ret": "Back Wk 7-8",
-  "asOf": "2026-10-08",
+ "Zavion Thomas": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Oct 20). No new report found in the Oct 20 sweep.",
+  "ret": "Active",
+  "asOf": "2026-10-20",
   "expiresWeek": 7
  },
- "Jordan Mason": {
-  "tag": "buy",
-  "note": "Team Waters. IR (thumb), eligible Wk 7. Not on waivers. MIN back whose workload drops once he is healthy; ESPN ROS 120.4. Healthy for Wks 15-17.",
-  "ret": "Back Wk 7",
-  "asOf": "2026-10-08",
+ "Germie Bernard": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Oct 20). No new report found in the Oct 20 sweep.",
+  "ret": "Active",
+  "asOf": "2026-10-20",
+  "expiresWeek": 7
+ },
+ "Deshaun Watson": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Oct 20). No new report found in the Oct 20 sweep.",
+  "ret": "Active",
+  "asOf": "2026-10-20",
   "expiresWeek": 7
  }
 }
