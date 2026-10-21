@@ -1,5 +1,5 @@
 {
-"asOf": "2026-10-21T01:01Z",
+"asOf": "2026-10-21T04:50Z",
 "week": 7,
 "weeks": [
 1,
@@ -1994,6 +1994,18 @@
 6
 ]
 },
+"4362478": {
+"name": "Emari Demercado",
+"team": "DAL",
+"w": {
+"2": 0.8,
+"1": 0.7
+},
+"played": [
+1,
+2
+]
+},
 "4432620": {
 "name": "Parker Washington",
 "team": "JAX",
@@ -2334,24 +2346,6 @@
 6
 ]
 },
-"4241416": {
-"name": "Chuba Hubbard",
-"team": "CAR",
-"w": {
-"6": 19.6,
-"4": 26.4,
-"3": 13.0,
-"2": 13.4,
-"1": 22.2
-},
-"played": [
-1,
-2,
-3,
-4,
-6
-]
-},
 "4569987": {
 "name": "Jaylen Warren",
 "team": "PIT",
@@ -2641,6 +2635,7 @@
 "4383391": "Jayden Price: ESPN fantasy pool does not list this player (no points to show)",
 "4565769": "Sean Fresch: ESPN fantasy pool does not list this player (no points to show)",
 "4698113": "Max Melton: ESPN fantasy pool does not list this player (no points to show)",
+"4027919": "Khalil Dorsey: ESPN fantasy pool does not list this player (no points to show)",
 "4688779": "Channing Canada: ESPN fantasy pool does not list this player (no points to show)",
 "4608004": "Donte Kent: ESPN fantasy pool does not list this player (no points to show)",
 "4429193": "Kris Abrams-Draine: ESPN fantasy pool does not list this player (no points to show)",
