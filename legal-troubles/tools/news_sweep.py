@@ -331,6 +331,7 @@ FEEDS = {
 gq = lambda q: "https://news.google.com/rss/search?" + urllib.parse.urlencode({"q": q + " when:2d", "hl": "en-US", "gl": "US", "ceid": "US:en"})
 for n in INSIDERS: FEEDS[f"Google News: {n}"] = gq(f'"{n}" NFL')
 for q in ["NFL signs free agent", "NFL waived released", "NFL trade rumors", "NFL injured reserve", "NFL practice squad elevated running back"]: FEEDS[f"Google News: {q}"] = gq(q)
+INSIDER_SRC = {f"Google News: {n}" for n in INSIDERS}
 def rss(src_url):
     """ESPN's RSS answers an empty body to GitHub's servers (Oct 7: ParseError in the Action only); fall back to ESPN's own news JSON."""
     r_ = rss_xml(src_url)
@@ -372,13 +373,17 @@ with cf.ThreadPoolExecutor(12) as ex:
     for items in ex.map(rss, FEEDS.items()):
         src = items[0]["src"]
         if "error" in items[0]: health[src] = {"status": "error", "items": 0, "recent": 0, "error": items[0]["error"]}; continue
+        if items[0].get("empty") and items[0]["badDates"] == 0 and src in INSIDER_SRC:
+            health[src] = {"status": "ok", "items": 0, "recent": 0, "note": "quiet: feed reachable, 0 items for this search (a person or topic with no news is not a broken feed)", "badDates": 0}; continue
         if items[0].get("empty"): health[src] = {"status": "warning", "items": 0, "recent": 0, "note": items[0]["note"], "badDates": items[0]["badDates"]}; continue
         meta_ = items[0].pop("_meta"); rc = sum(1 for it in items if it["ts"] >= cut)
         notes = []
         if not rc: notes.append(f"0 items in the last {HRS}h (newest {max(it['ts'] for it in items).isoformat(timespec='minutes')})")
         if meta_["badDates"]: notes.append(f"{meta_['badDates']} items with unreadable dates (e.g. {meta_['badDateExample']})")
         if meta_["futureDates"]: notes.append(f"{meta_['futureDates']} items dated in the future (time-zone error at the source)")
-        health[src] = {"status": "ok" if rc and not notes else "warning", "items": len(items), "recent": rc, "badDates": meta_["badDates"], "futureDates": meta_["futureDates"], **({"note": "; ".join(notes)} if notes else {})}
+        if src in INSIDER_SRC and not rc and len(notes) == 1: notes = ["quiet: reachable, nothing new in the window (" + notes[0] + ")"]; rc_ok = True
+        else: rc_ok = bool(rc)
+        health[src] = {"status": "ok" if rc_ok and (not notes or notes[0].startswith("quiet")) else "warning", "items": len(items), "recent": rc, "badDates": meta_["badDates"], "futureDates": meta_["futureDates"], **({"note": "; ".join(notes)} if notes else {})}
         desk_items += [it for it in items if it["ts"] >= cut]
 seen = set(); match_stats = Counter()
 for it in desk_items:
