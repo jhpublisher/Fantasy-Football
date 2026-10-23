@@ -1024,6 +1024,17 @@
 "winner": "SF",
 "loser": "WSH",
 "tie": false
+},
+"401873010": {
+"week": 7,
+"date": "2026-10-23T00:15Z",
+"home": "CHI",
+"away": "NE",
+"homeScore": 30,
+"awayScore": 24,
+"winner": "CHI",
+"loser": "NE",
+"tie": false
 }
 }
 }
