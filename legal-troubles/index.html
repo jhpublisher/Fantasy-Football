@@ -1230,33 +1230,48 @@ function btTrend(){const ds=btScored();if(!ds.length)return '';
     <div class="tw"><table class="wrt"><thead><tr><th>Version</th><th>Weeks</th>${th}</tr></thead><tbody>${vrows}</tbody></table></div>
     <p class="note">Arrows compare with the previous scored week (green = better, red = worse; for share miss, lower is better). The second table groups weeks by the version of the pick rules that made the picks (rules are in claude/return-game-pick-rules.md), so a new version can be compared with the old one, and rolled back if it does worse. About 30 teams a week is a small sample: look for a trend over several weeks, not one jump.</p></section>`}
 /* Top-15 projection runs: betaruns/wNN-rK (spec claude/return-game-top15-runs.md). GitHub: data/beta-runs.json */
-const BR={w:null,r:null};
+const BR={w:null,r:null,fr:null};
 SORT_DEF.br={k:'rank',d:1};SORT.br={k:'rank',d:1};SORT_DEF.bm={k:'act',d:-1};SORT.bm={k:'act',d:-1};
 ['name','team','opp','conf','role'].forEach(x=>ASC.add(x));
-function runsView(){
-  const B=S.betaruns||{},ids=Object.keys(B).filter(k=>B[k]&&Array.isArray(B[k].top15));
-  const hd='<div class="ph"><h2>Top-15 projections by run</h2><span class="eyebrow">Expected return points per returner · every run saved and graded on its own</span></div>';
-  if(!ids.length)return `<section class="panel">${hd}<div class="empty">No runs yet. Run 1 is recorded Thursday morning before the Thursday-night kickoff; any rerun you ask for is saved as its own run.</div></section>`;
-  const weeks=[...new Set(ids.map(k=>B[k].week))].sort((a,b)=>a-b);
-  if(BR.w==null||!weeks.includes(BR.w))BR.w=weeks[weeks.length-1];
+function runsPanel(src){
+  const KLs=src==='kl',RK=KLs?'fr':'r',B=(KLs?S.firmruns:S.betaruns)||{},ids=Object.keys(B).filter(k=>B[k]&&Array.isArray(B[k].top15));
+  const hd=`<div class="ph"><h2>${KLs?'Kickline Analytics: top-15 by run':'Our top-15 projections by run'}</h2><span class="eyebrow">Expected return points per returner · every run saved and graded on its own</span></div>`;
+  if(!ids.length)return `<section class="panel">${hd}<div class="empty">${KLs?'No Kickline runs yet.':'No runs yet. Run 1 is recorded Thursday morning before the Thursday-night kickoff; any rerun you ask for is saved as its own run.'}</div></section>`;
   const runs=ids.filter(k=>B[k].week===BR.w).sort((a,b)=>B[a].run-B[b].run);
-  if(!BR.r||!runs.includes(BR.r))BR.r=runs[0];
-  const d=B[BR.r],sc=d.scored,A=new Map(((sc&&sc.actual)||[]).map(a=>[String(a.name).toLowerCase(),a]));
+  if(!runs.length)return `<section class="panel">${hd}<div class="empty">No ${KLs?'Kickline':'our'} run saved for Week ${BR.w} yet.</div></section>`;
+  if(!BR[RK]||!runs.includes(BR[RK]))BR[RK]=runs[runs.length-1];
+  const d=B[BR[RK]],sc=d.scored,A=new Map(((sc&&sc.actual)||[]).map(a=>[String(a.name).toLowerCase(),a]));
   const f1=v=>v==null||v===''||isNaN(+v)?null:(+v).toFixed(1);
   const val=(r,k)=>{const a=A.get(String(r.name).toLowerCase())||{};return ({rank:r.rank,name:String(r.name).toLowerCase(),team:r.team,opp:r.opp,kr:+r.expKRpts,pr:+r.expPRpts,exp:+r.expPts,share:+r.share,conf:r.conf,act:a.actPts==null?null:+a.actPts,ar:a.actRank==null?null:+a.actRank,err:a.actPts==null?null:Math.abs(a.actPts-r.expPts)})[k]};
   const hasAct=A.size>0;
   const C=[['rank','#',1,'Our rank: 1 = highest expected points.'],['name','Returner',0],['team','Team',0],['opp','Opp',0,'Opponent this week.'],['kr','Exp KR pts',1,'Expected kick-return points.'],['pr','Exp PR pts',1,'Expected punt-return points.'],['exp','Exp pts',1,'Expected total return points (0.1 per yard, 6 per TD).'],['share','KR share %',1,'Expected share of the team\'s kick returns.'],['conf','Conf',0]].concat(hasAct?[['act','Actual pts',1,'Return points he actually scored.'],['ar','Actual rank',1,'His rank among all returners that week.'],['err','Miss',1,'Absolute gap between expected and actual points.']]:[]);
   const rows=sortRows(d.top15,'br',val,(a,b)=>a.rank-b.rank);
   const cell=(r,c)=>{const k=c[0],v=val(r,k);if(k==='name')return `<td data-l="Returner"><b>${esc(r.name)}</b>${r.carried?' <span class="note">carried</span>':''}<br><span class="note" style="white-space:normal">${esc(r.why||'')}</span></td>`;if(k==='team'||k==='opp'||k==='conf')return `<td data-l="${esc(c[1])}">${esc(v||'')}</td>`;return `<td data-l="${esc(c[1])}" class="num">${v==null||isNaN(v)?'<span class="note">–</span>':(k==='rank'||k==='ar'||k==='share'?Math.round(v):f1(v))}</td>`};
-  const rb=runs.map(k=>`<button data-brr="${esc(k)}" aria-pressed="${k===BR.r}">Run ${esc(B[k].run)}${B[k].kind==='scheduled'?' (scheduled)':' (asked)'}</button>`).join('');
-  const wb=weeks.length>1?`<div class="filters" role="group" aria-label="Week">${weeks.map(w=>`<button data-brw="${w}" aria-pressed="${w===BR.w}">Week ${w}</button>`).join('')}</div>`:'';
+  const rb=runs.map(k=>`<button data-brr="${src}:${esc(k)}" aria-pressed="${k===BR[RK]}">Run ${esc(B[k].run)}${B[k].kind==='scheduled'?' (scheduled)':' (asked)'}</button>`).join('');
+  const wb='';
   const cmp=runs.some(k=>B[k].scored)?`<div class="tw"><table class="wrt"><thead><tr><th>Run</th><th>Saved</th><th class="num">Expected total</th><th class="num">Actual total</th><th class="num">Avg miss / pick</th><th class="num">Of our 15 in actual top 15</th></tr></thead><tbody>${runs.map(k=>{const x=B[k],s=x.scored;return `<tr><td>Run ${esc(x.run)}</td><td>${esc(fmtShort(Date.parse(x.runAt)))}</td>${s?`<td class="num">${f1(s.totalExp)}</td><td class="num">${f1(s.totalAct)}</td><td class="num">${f1(s.maeTop15)}</td><td class="num">${esc(s.hitsInActualTop15)}</td>`:'<td colspan="4" class="note">Not scored yet</td>'}</tr>`}).join('')}</tbody></table></div>`:'';
   const miss=sc&&Array.isArray(sc.missed)&&sc.missed.length?`<div class="ph" style="margin-top:14px"><h3>Top-15 finishers we did not have</h3></div><div class="tw"><table class="wrt"><thead><tr><th>Returner</th><th>Team</th><th class="num">Actual pts</th><th class="num">Actual rank</th><th>Why we missed</th><th>Catchable?</th></tr></thead><tbody>${sc.missed.map(m=>`<tr><td><b>${esc(m.name)}</b></td><td>${esc(m.team)}</td><td class="num">${f1(m.actPts)}</td><td class="num">${esc(m.actRank)}</td><td style="white-space:normal;min-width:220px">${esc(m.why||'')}</td><td>${m.catchable==null?'':m.catchable?'Yes':'No'}</td></tr>`).join('')}</tbody></table></div>`:'';
   const inp=d.inputs||{};
   return `<section class="panel">${hd}<div class="rgtools">${wb}<div class="filters" role="group" aria-label="Run">${rb}</div></div>
-    <p class="note">Run ${esc(d.run)} saved ${esc(fmtShort(Date.parse(d.runAt)))}${inp.blueberryWeek?' · uses his Week '+esc(inp.blueberryWeek)+' chart':' · no Blueberry chart used'}${d.status==='scored'?' · scored':' · not scored yet'}. ${d.note?esc(d.note):''} ${resetBtn('br')}</p>
+    <p class="note">Run ${esc(d.run)} saved ${esc(fmtShort(Date.parse(d.runAt)))}${inp.blueberryWeek?' · uses his Week '+esc(inp.blueberryWeek)+' chart':' · no Blueberry chart used'}${d.status==='scored'?' · scored':' · not scored yet'}. ${d.note?(d.note.length>240?`<details style="display:inline"><summary style="display:inline;cursor:pointer">${esc(d.note.slice(0,240))}… <u>full note</u></summary>${esc(d.note.slice(240))}</details>`:esc(d.note)):''} ${resetBtn('br')}</p>
     ${cmp}<div class="tw"><table class="wrt"><thead><tr>${C.map(c=>sh('br',c[0],c[1],c[2],c[3])).join('')}</tr></thead><tbody>${rows.map(r=>'<tr>'+C.map(c=>cell(r,c)).join('')+'</tr>').join('')}</tbody></table></div>${miss}</section>`}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-brr]');if(b){BR.r=b.dataset.brr;return render()}const w=e.target.closest('[data-brw]');if(w){BR.w=+w.dataset.brw;BR.r=null;render()}});
+const KLM={m:(()=>{try{return localStorage.getItem('lt-klmode')||'ours'}catch(e){return 'ours'}})()};
+function runsView(){
+  const B=S.betaruns||{},F=S.firmruns||{},ok=o=>Object.keys(o).filter(k=>o[k]&&Array.isArray(o[k].top15));
+  const weeks=[...new Set([...ok(B).map(k=>B[k].week),...ok(F).map(k=>F[k].week)])].sort((a,b)=>a-b);
+  if(BR.w==null||!weeks.includes(BR.w))BR.w=weeks[weeks.length-1];
+  const hasKL=ok(F).length>0;if(!hasKL&&KLM.m!=='ours')KLM.m='ours';
+  const wb=weeks.length>1?`<div class="filters" role="group" aria-label="Week">${weeks.map(w=>`<button data-brw="${w}" aria-pressed="${w===BR.w}">Week ${w}</button>`).join('')}</div>`:'';
+  const tg=hasKL?`<div class="filters" role="group" aria-label="Whose projections">${[['ours','Ours'],['kl','Kickline'],['both','Both']].map(([m,l])=>`<button data-klm="${m}" aria-pressed="${KLM.m===m}">${l}</button>`).join('')}</div>`:'';
+  const bar=(wb||tg)?`<div class="rgtools" style="margin-bottom:10px">${tg}${wb}</div>`:'';
+  if(KLM.m==='kl')return bar+runsPanel('kl');
+  if(KLM.m==='both'){
+    const pick=(src)=>{const O=src==='kl'?F:B,rk=src==='kl'?'fr':'r',L=ok(O).filter(k=>O[k].week===BR.w).sort((a,b)=>O[a].run-O[b].run);const id=BR[rk]&&L.includes(BR[rk])?BR[rk]:L[0];return id?O[id]:null};
+    const o=pick('ours'),k=pick('kl');let ov='';
+    if(o&&k){const n=new Set(o.top15.map(r=>String(r.name).toLowerCase()));const c=k.top15.filter(r=>n.has(String(r.name).toLowerCase())).length;ov=`<p class="note">Week ${BR.w}: ${c} of 15 names are on both lists (our run ${esc(o.run)}, Kickline run ${esc(k.run)}).</p>`}
+    return bar+ov+`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:14px;align-items:start">${runsPanel('ours')}${runsPanel('kl')}</div>`}
+  return bar+runsPanel('ours')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-brr]');if(b){const [sr,id]=b.dataset.brr.split(/:(.+)/);BR[sr==='kl'?'fr':'r']=id;return render()}const m=e.target.closest('[data-klm]');if(m){KLM.m=m.dataset.klm;try{localStorage.setItem('lt-klmode',KLM.m)}catch(x){}return render()}const w=e.target.closest('[data-brw]');if(w){BR.w=+w.dataset.brw;BR.r=null;BR.fr=null;render()}});
 /* Blueberry charts: u/BlueberryAsFuck's weekly return tables, one week at a time, sortable. Data: db collection blueberry (docs w01..), GitHub: data/beta-blueberry.json */
 const BB={w:null};
 SORT_DEF.bb={k:'team',d:1};SORT.bb={k:'team',d:1};SORT_DEF.bk={k:'team',d:1};SORT.bk={k:'team',d:1};
@@ -1768,6 +1783,7 @@ try{new MutationObserver(()=>{cancelAnimationFrame(HT_T);HT_T=requestAnimationFr
       try{const sr=await fetch('data/schedule.json?t='+Date.now(),{cache:'no-store'});S.sched=sr.ok?await sr.json():S.sched||null}catch(e){}
       try{const br=await fetch('data/beta.json?t='+Date.now(),{cache:'no-store'});S.beta=br.ok?await br.json():S.beta||{}}catch(e){}
       try{const bq=await fetch('data/beta-runs.json?t='+Date.now(),{cache:'no-store'});S.betaruns=bq.ok?await bq.json():S.betaruns||{}}catch(e){}
+      try{const fq=await fetch('data/firm-runs.json?t='+Date.now(),{cache:'no-store'});S.firmruns=fq.ok?await fq.json():S.firmruns||{}}catch(e){}
       try{const bl=await fetch('data/beta-blueberry.json?t='+Date.now(),{cache:'no-store'});S.blueberry=bl.ok?await bl.json():S.blueberry||{}}catch(e){}
       // data/validation.json is written every run, even when a run was blocked, so it can be newer than bundle.validation
       try{const v=await fetch('data/validation.json?t='+Date.now(),{cache:'no-store'});if(v.ok){const V=await v.json();if(!S.validation||!S.validation.checkedAt||(V.checkedAt&&new Date(V.checkedAt)>=new Date(S.validation.checkedAt)))S.validation=V}}catch(e){}
