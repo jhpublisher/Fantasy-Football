@@ -1035,6 +1035,17 @@
 "winner": "CHI",
 "loser": "NE",
 "tie": false
+},
+"401873011": {
+"week": 7,
+"date": "2026-10-25T13:30Z",
+"home": "NO",
+"away": "PIT",
+"homeScore": 10,
+"awayScore": 16,
+"winner": "PIT",
+"loser": "NO",
+"tie": false
 }
 }
 }
