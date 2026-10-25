@@ -1046,6 +1046,83 @@
 "winner": "PIT",
 "loser": "NO",
 "tie": false
+},
+"401873012": {
+"week": 7,
+"date": "2026-10-25T17:00Z",
+"home": "BAL",
+"away": "CIN",
+"homeScore": 13,
+"awayScore": 35,
+"winner": "CIN",
+"loser": "BAL",
+"tie": false
+},
+"401873013": {
+"week": 7,
+"date": "2026-10-25T17:00Z",
+"home": "TEN",
+"away": "CLE",
+"homeScore": 24,
+"awayScore": 27,
+"winner": "CLE",
+"loser": "TEN",
+"tie": false
+},
+"401873014": {
+"week": 7,
+"date": "2026-10-25T17:00Z",
+"home": "MIN",
+"away": "IND",
+"homeScore": 16,
+"awayScore": 10,
+"winner": "MIN",
+"loser": "IND",
+"tie": false
+},
+"401873015": {
+"week": 7,
+"date": "2026-10-25T17:00Z",
+"home": "NYJ",
+"away": "MIA",
+"homeScore": 25,
+"awayScore": 28,
+"winner": "MIA",
+"loser": "NYJ",
+"tie": false
+},
+"401873016": {
+"week": 7,
+"date": "2026-10-25T17:00Z",
+"home": "HOU",
+"away": "NYG",
+"homeScore": 21,
+"awayScore": 27,
+"winner": "NYG",
+"loser": "HOU",
+"tie": false
+},
+"401873017": {
+"week": 7,
+"date": "2026-10-25T17:00Z",
+"home": "ATL",
+"away": "SF",
+"homeScore": 29,
+"awayScore": 20,
+"winner": "ATL",
+"loser": "SF",
+"tie": false
+},
+"401873018": {
+"week": 7,
+"date": "2026-10-25T17:00Z",
+"home": "CAR",
+"away": "TB",
+"homeScore": 13,
+"awayScore": 43,
+"winner": "TB",
+"loser": "CAR",
+"tie": false
 }
 }
 }
