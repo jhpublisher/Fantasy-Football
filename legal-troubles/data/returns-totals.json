@@ -1,5 +1,5 @@
 {
-"asOf": "2026-10-25T11:32Z",
+"asOf": "2026-10-25T12:48Z",
 "week": 7,
 "weeks": [
 1,
@@ -1802,16 +1802,6 @@
 5
 ]
 },
-"5088338": {
-"name": "Elijah Sarratt",
-"team": "BAL",
-"w": {
-"4": 1.8
-},
-"played": [
-4
-]
-},
 "4686422": {
 "name": "Xavier Hutchinson",
 "team": "HOU",
@@ -2071,6 +2061,12 @@
 5,
 6
 ]
+},
+"4692590": {
+"name": "Jalin Hyatt",
+"team": "NYG",
+"w": {},
+"played": []
 },
 "4429105": {
 "name": "Arian Smith",
@@ -2466,6 +2462,16 @@
 4,
 5,
 6
+]
+},
+"5088338": {
+"name": "Elijah Sarratt",
+"team": "BAL",
+"w": {
+"4": 1.8
+},
+"played": [
+4
 ]
 },
 "4567156": {
