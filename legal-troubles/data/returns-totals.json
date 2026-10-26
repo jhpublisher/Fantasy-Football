@@ -1,5 +1,5 @@
 {
-"asOf": "2026-10-26T07:02Z",
+"asOf": "2026-10-26T10:42Z",
 "week": 7,
 "weeks": [
 1,
@@ -2400,12 +2400,6 @@
 2
 ]
 },
-"4428209": {
-"name": "Ricky Pearsall",
-"team": "SF",
-"w": {},
-"played": []
-},
 "4430737": {
 "name": "Kyren Williams",
 "team": "LAR",
@@ -2657,6 +2651,7 @@
 "4870706": "Caleb Downs: ESPN fantasy pool does not list this player (no points to show)",
 "4382401": "Riley Moss: ESPN fantasy pool does not list this player (no points to show)",
 "4373809": "Jevon Holland: ESPN fantasy pool does not list this player (no points to show)",
+"4035686": "Jack Jones: ESPN fantasy pool does not list this player (no points to show)",
 "4695280": "Micah Robinson: ESPN fantasy pool does not list this player (no points to show)"
 },
 "source": "ESPN fantasy API kona_player_info, actual weekly points in league scoring (appliedTotal)"
