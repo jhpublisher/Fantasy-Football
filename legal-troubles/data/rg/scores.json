@@ -1123,6 +1123,39 @@
 "winner": "TB",
 "loser": "CAR",
 "tie": false
+},
+"401873019": {
+"week": 7,
+"date": "2026-10-25T20:05Z",
+"home": "ARI",
+"away": "DEN",
+"homeScore": 16,
+"awayScore": 30,
+"winner": "DEN",
+"loser": "ARI",
+"tie": false
+},
+"401873020": {
+"week": 7,
+"date": "2026-10-25T20:25Z",
+"home": "DET",
+"away": "GB",
+"homeScore": 20,
+"awayScore": 17,
+"winner": "DET",
+"loser": "GB",
+"tie": false
+},
+"401873021": {
+"week": 7,
+"date": "2026-10-25T20:25Z",
+"home": "LV",
+"away": "LAR",
+"homeScore": 21,
+"awayScore": 35,
+"winner": "LAR",
+"loser": "LV",
+"tie": false
 }
 }
 }
