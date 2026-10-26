@@ -1156,6 +1156,17 @@
 "winner": "LAR",
 "loser": "LV",
 "tie": false
+},
+"401873022": {
+"week": 7,
+"date": "2026-10-26T00:20Z",
+"home": "SEA",
+"away": "KC",
+"homeScore": 20,
+"awayScore": 3,
+"winner": "SEA",
+"loser": "KC",
+"tie": false
 }
 }
 }
