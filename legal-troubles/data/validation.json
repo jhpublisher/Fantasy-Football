@@ -1,27 +1,10 @@
 {
  "ok": true,
  "failures": [],
- "warnings": [
-  "tag for Kaden Wetjen expired (week 7); page must not show it as current",
-  "tag for Zavion Thomas expired (week 7); page must not show it as current",
-  "tag for Deshaun Watson expired (week 7); page must not show it as current",
-  "tag for Jordyn Tyson expired (week 7); page must not show it as current",
-  "tag for Brian Robinson Jr. expired (week 7); page must not show it as current",
-  "tag for Zach Charbonnet expired (week 7); page must not show it as current",
-  "tag for Rams D/ST expired (week 7); page must not show it as current",
-  "tag for Germie Bernard expired (week 7); page must not show it as current",
-  "tag for Josh Jacobs expired (week 7); page must not show it as current",
-  "tag for Kenneth Walker III expired (week 7); page must not show it as current",
-  "tag for Josh Allen expired (week 7); page must not show it as current",
-  "tag for Puka Nacua expired (week 7); page must not show it as current",
-  "rumor Tyreek Hill expired (week 7)",
-  "rumor Marvin Harrison Jr. expired (week 7)",
-  "rumor Josh Jacobs expired (week 7)",
-  "curated tags: 12 expired: Puka Nacua, Josh Allen, Josh Jacobs, Rams D/ST, Zach Charbonnet, Jordyn Tyson, Brian Robinson Jr., Kenneth Walker III, Kaden Wetjen, Zavion Thomas, Germie Bernard, Deshaun Watson"
- ],
- "checkedAt": "2026-10-27T10:15+00:00",
+ "warnings": [],
+ "checkedAt": "2026-10-27T13:32+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-10-27T10:15+00:00"
+ "bundleBuiltAt": "2026-10-27T13:32+00:00"
 }
