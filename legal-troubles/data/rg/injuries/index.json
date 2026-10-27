@@ -48,6 +48,14 @@
    "outPlayers": 82,
    "warnings": 2,
    "unmatched": 2
+  },
+  "7": {
+   "file": "2026-w07.json",
+   "sha256": "d23f31b2b4c628ae65494c74cd3d3d6b8008741073505f491fa8e58c778e8425",
+   "addedAt": "2026-10-27T06:52Z",
+   "outPlayers": 72,
+   "warnings": 2,
+   "unmatched": 2
   }
  }
 }

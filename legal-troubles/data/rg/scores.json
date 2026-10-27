@@ -1025,6 +1025,17 @@
 "loser": "WSH",
 "tie": false
 },
+"401873009": {
+"week": 7,
+"date": "2026-10-27T00:15Z",
+"home": "PHI",
+"away": "DAL",
+"homeScore": 21,
+"awayScore": 38,
+"winner": "DAL",
+"loser": "PHI",
+"tie": false
+},
 "401873010": {
 "week": 7,
 "date": "2026-10-23T00:15Z",

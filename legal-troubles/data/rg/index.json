@@ -72,6 +72,18 @@
      "player values": 156
     }
    }
+  },
+  "7": {
+   "file": "weeks/2026-w07.json",
+   "sha256": "0feb14ff913d2280aa31a49e2bebd9240d8d6d44fd4c093f1f83dd631e4d22ef",
+   "addedAt": "2026-10-27T06:52Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 196,
+     "player values": 148
+    }
+   }
   }
  }
 }
