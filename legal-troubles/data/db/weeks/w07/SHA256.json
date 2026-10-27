@@ -1,0 +1,10 @@
+{
+ "week": 7,
+ "files": {
+  "roster.json": "2c49100ab20ca51d019ed51ac257db2b380b6d5b8b9ec3f07cf2638ecdf1a2b6",
+  "boxscore.json": "8458aaafdc339d712454d5e287b440cc7d9d39017c1f03f572678c9937a14c6b",
+  "matchups_all.json": "7e326d50cdf27de630ce57e629c1942952efe7e5c8c5706c879f73ead88b9760",
+  "pool.json": "bf4a25ffad1af1df5755ce8916a14113162a683d8d19dddf888dc36dd1a15086",
+  "players_week.json": "a1775d1bc334734e88e136a0660d7a287259e7787bd8e9986fa04c5fec97ec4e"
+ }
+}
