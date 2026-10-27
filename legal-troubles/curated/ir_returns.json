@@ -1,38 +1,26 @@
 {
  "Jadarian Price": {
   "returnWeek": 8,
-  "note": "IR (chest). Eligible Wk 8 (tags.json, Oct 6; no newer dated report Oct 20)",
-  "asOf": "2026-10-06",
+  "note": "IR (chest). Coach Macdonald Oct 26 (KJR via ESPN): designated for return from IR during Wk 8; official move likely Thursday",
+  "asOf": "2026-10-27",
   "expiresWeek": 8
  },
  "Zach Charbonnet": {
-  "returnWeek": 7,
-  "note": "ACL recovery; practice window opened Oct 1; Yahoo Oct 19: might debut Wk 7 SNF vs KC (not confirmed)",
-  "asOf": "2026-10-20",
-  "expiresWeek": 7
+  "returnWeek": 8,
+  "note": "ACL recovery; activated from PUP Oct 22, ruled out Wk 7 (ESPN Oct 23); Wk 8 status not yet reported (unconfirmed)",
+  "asOf": "2026-10-27",
+  "expiresWeek": 8
  },
  "Jordyn Tyson": {
-  "returnWeek": 7,
-  "note": "IR (hamstring). Week 7 at the soonest (tags.json, Oct 6; no newer dated report Oct 20)",
-  "asOf": "2026-10-06",
-  "expiresWeek": 7
+  "returnWeek": 9,
+  "note": "IR (hamstring). Loomis Oct 21 (ESPN): 'getting closer', practice window not yet opened; NO bye Wk 8; no newer report Oct 27 (unconfirmed, earliest after bye)",
+  "asOf": "2026-10-27",
+  "expiresWeek": 9
  },
  "Skyy Moore": {
   "returnWeek": 10,
-  "note": "IR (ankle) since Oct 17; out at least 4 games; earliest return Nov 15 vs MIN (RotoWire Oct 17)",
+  "note": "IR (ankle) since Oct 17; out at least 4 games; earliest return Nov 15 vs MIN (RotoWire/ESPN Oct 17)",
   "asOf": "2026-10-20",
   "expiresWeek": 10
- },
- "A.J. Brown": {
-  "returnWeek": 8,
-  "note": "IR, high-ankle sprain; back Wk 7-8, later week used (tags.json, Oct 6)",
-  "asOf": "2026-10-06",
-  "expiresWeek": 8
- },
- "Jordan Mason": {
-  "returnWeek": 7,
-  "note": "Thumb surgery, IR; eligible Wk 7 (tags.json Aaron Jones note, Oct 6)",
-  "asOf": "2026-10-06",
-  "expiresWeek": 7
  }
 }
