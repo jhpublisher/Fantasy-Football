@@ -1,5 +1,5 @@
 {
-"asOf": "2026-10-27T23:15Z",
+"asOf": "2026-10-28T05:44Z",
 "week": 8,
 "weeks": [
 1,
@@ -1769,6 +1769,26 @@
 7
 ]
 },
+"5081432": {
+"name": "Antonio Williams",
+"team": "WSH",
+"w": {
+"6": 6.5,
+"5": 4.8,
+"4": 3.6,
+"3": 2.5,
+"2": 3.9,
+"1": 14.4
+},
+"played": [
+1,
+2,
+3,
+4,
+5,
+6
+]
+},
 "4683151": {
 "name": "Deion Burks",
 "team": "IND",
@@ -2039,6 +2059,26 @@
 "w": {},
 "played": []
 },
+"4374302": {
+"name": "Amon-Ra St. Brown",
+"team": "DET",
+"w": {
+"7": 20.7,
+"5": 13.5,
+"4": 11.5,
+"3": 9.9,
+"2": 31.7,
+"1": 23.7
+},
+"played": [
+1,
+2,
+3,
+4,
+5,
+7
+]
+},
 "5150247": {
 "name": "Malik Benson",
 "team": "LV",
@@ -2153,18 +2193,6 @@
 7
 ]
 },
-"4362478": {
-"name": "Emari Demercado",
-"team": "DAL",
-"w": {
-"2": 0.8,
-"1": 0.7
-},
-"played": [
-1,
-2
-]
-},
 "4432620": {
 "name": "Parker Washington",
 "team": "JAX",
@@ -2183,6 +2211,28 @@
 4,
 5,
 6
+]
+},
+"4701936": {
+"name": "Matthew Golden",
+"team": "GB",
+"w": {
+"7": 6.9,
+"6": 20.4,
+"5": 21.0,
+"4": 10.2,
+"3": 19.5,
+"2": 7.8,
+"1": 12.5
+},
+"played": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
 ]
 },
 "4038441": {
@@ -2443,28 +2493,6 @@
 7
 ]
 },
-"4808839": {
-"name": "Isaiah Bond",
-"team": "CLE",
-"w": {
-"7": 0,
-"6": 0,
-"5": 8.9,
-"4": 0.7,
-"3": 0,
-"2": 1.5,
-"1": 0
-},
-"played": [
-1,
-2,
-3,
-4,
-5,
-6,
-7
-]
-},
 "4431487": {
 "name": "Savion Williams",
 "team": "GB",
@@ -2555,26 +2583,6 @@
 7
 ]
 },
-"5081432": {
-"name": "Antonio Williams",
-"team": "WSH",
-"w": {
-"6": 6.5,
-"5": 4.8,
-"4": 3.6,
-"3": 2.5,
-"2": 3.9,
-"1": 14.4
-},
-"played": [
-1,
-2,
-3,
-4,
-5,
-6
-]
-},
 "4685553": {
 "name": "Brenen Thompson",
 "team": "LAC",
@@ -2585,28 +2593,6 @@
 "played": [
 1,
 2
-]
-},
-"4701936": {
-"name": "Matthew Golden",
-"team": "GB",
-"w": {
-"7": 6.9,
-"6": 20.4,
-"5": 21.0,
-"4": 10.2,
-"3": 19.5,
-"2": 7.8,
-"1": 12.5
-},
-"played": [
-1,
-2,
-3,
-4,
-5,
-6,
-7
 ]
 },
 "4430737": {
@@ -2791,26 +2777,6 @@
 7
 ]
 },
-"4374302": {
-"name": "Amon-Ra St. Brown",
-"team": "DET",
-"w": {
-"7": 20.7,
-"5": 13.5,
-"4": 11.5,
-"3": 9.9,
-"2": 31.7,
-"1": 23.7
-},
-"played": [
-1,
-2,
-3,
-4,
-5,
-7
-]
-},
 "4243389": {
 "name": "Calvin Austin III",
 "team": "NYG",
@@ -2822,6 +2788,28 @@
 "team": "NO",
 "w": {},
 "played": []
+},
+"4808839": {
+"name": "Isaiah Bond",
+"team": "CLE",
+"w": {
+"7": 0,
+"6": 0,
+"5": 8.9,
+"4": 0.7,
+"3": 0,
+"2": 1.5,
+"1": 0
+},
+"played": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+]
 },
 "5085024": {
 "name": "CJ Williams",
@@ -2916,7 +2904,6 @@
 "4383391": "Jayden Price: ESPN fantasy pool does not list this player (no points to show)",
 "4565769": "Sean Fresch: ESPN fantasy pool does not list this player (no points to show)",
 "4698113": "Max Melton: ESPN fantasy pool does not list this player (no points to show)",
-"4027919": "Khalil Dorsey: ESPN fantasy pool does not list this player (no points to show)",
 "4688779": "Channing Canada: ESPN fantasy pool does not list this player (no points to show)",
 "4608004": "Donte Kent: ESPN fantasy pool does not list this player (no points to show)",
 "4429193": "Kris Abrams-Draine: ESPN fantasy pool does not list this player (no points to show)",
