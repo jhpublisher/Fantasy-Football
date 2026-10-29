@@ -1,5 +1,5 @@
 {
-"asOf": "2026-10-29T19:17Z",
+"asOf": "2026-10-29T23:38Z",
 "week": 8,
 "weeks": [
 1,
@@ -2507,6 +2507,26 @@
 7
 ]
 },
+"4432710": {
+"name": "TreVeyon Henderson",
+"team": "NE",
+"w": {
+"7": 3.3,
+"6": 2.5,
+"5": 4.3,
+"4": 4.2,
+"3": 3.4,
+"2": 13.6
+},
+"played": [
+2,
+3,
+4,
+5,
+6,
+7
+]
+},
 "4870653": {
 "name": "KC Concepcion",
 "team": "CLE",
@@ -2916,7 +2936,6 @@
 "4383391": "Jayden Price: ESPN fantasy pool does not list this player (no points to show)",
 "4565769": "Sean Fresch: ESPN fantasy pool does not list this player (no points to show)",
 "4698113": "Max Melton: ESPN fantasy pool does not list this player (no points to show)",
-"4688779": "Channing Canada: ESPN fantasy pool does not list this player (no points to show)",
 "4608004": "Donte Kent: ESPN fantasy pool does not list this player (no points to show)",
 "4429193": "Kris Abrams-Draine: ESPN fantasy pool does not list this player (no points to show)",
 "4241720": "Marcus Jones: ESPN fantasy pool does not list this player (no points to show)",
