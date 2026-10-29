@@ -1,5 +1,5 @@
 {
-"asOf": "2026-10-29T00:58Z",
+"asOf": "2026-10-29T01:57Z",
 "week": 8,
 "weeks": [
 1,
@@ -2894,6 +2894,16 @@
 6,
 7
 ]
+},
+"3895856": {
+"name": "Christian Kirk",
+"team": "SF",
+"w": {
+"7": 0
+},
+"played": [
+7
+]
 }
 },
 "missing": {
@@ -2913,7 +2923,6 @@
 "4870706": "Caleb Downs: ESPN fantasy pool does not list this player (no points to show)",
 "4382401": "Riley Moss: ESPN fantasy pool does not list this player (no points to show)",
 "4373809": "Jevon Holland: ESPN fantasy pool does not list this player (no points to show)",
-"4035686": "Jack Jones: ESPN fantasy pool does not list this player (no points to show)",
 "4695280": "Micah Robinson: ESPN fantasy pool does not list this player (no points to show)"
 },
 "source": "ESPN fantasy API kona_player_info, actual weekly points in league scoring (appliedTotal)"
