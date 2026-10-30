@@ -1178,6 +1178,17 @@
 "winner": "SEA",
 "loser": "KC",
 "tie": false
+},
+"401873023": {
+"week": 8,
+"date": "2026-10-30T00:15Z",
+"home": "GB",
+"away": "CAR",
+"homeScore": 27,
+"awayScore": 19,
+"winner": "GB",
+"loser": "CAR",
+"tie": false
 }
 }
 }
