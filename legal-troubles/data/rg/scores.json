@@ -1310,6 +1310,17 @@
 "winner": "NE",
 "loser": "MIA",
 "tie": false
+},
+"401873035": {
+"week": 8,
+"date": "2026-11-02T01:20Z",
+"home": "WSH",
+"away": "PHI",
+"homeScore": 27,
+"awayScore": 10,
+"winner": "WSH",
+"loser": "PHI",
+"tie": false
 }
 }
 }
