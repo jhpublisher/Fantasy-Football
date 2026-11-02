@@ -1277,6 +1277,39 @@
 "winner": "CIN",
 "loser": "TEN",
 "tie": false
+},
+"401873032": {
+"week": 8,
+"date": "2026-11-01T21:05Z",
+"home": "LAR",
+"away": "LAC",
+"homeScore": 24,
+"awayScore": 9,
+"winner": "LAR",
+"loser": "LAC",
+"tie": false
+},
+"401873033": {
+"week": 8,
+"date": "2026-11-01T21:25Z",
+"home": "DEN",
+"away": "KC",
+"homeScore": 28,
+"awayScore": 24,
+"winner": "DEN",
+"loser": "KC",
+"tie": false
+},
+"401873034": {
+"week": 8,
+"date": "2026-11-01T21:25Z",
+"home": "MIA",
+"away": "NE",
+"homeScore": 19,
+"awayScore": 24,
+"winner": "NE",
+"loser": "MIA",
+"tie": false
 }
 }
 }
