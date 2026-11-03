@@ -72,22 +72,11 @@ jobs:
         if: steps.validate.outputs.rc == '0'
         working-directory: legal-troubles
         run: cp /tmp/candidate.json data/bundle.json
-      - name: Rebuild site pages from the dashboard source (mkgithub.py via mksite.py)
-        working-directory: legal-troubles
-        run: |
-          set +e
-          # index.html is generated from tools/front-office-bi.html by tools/mkgithub.py; briefing.html from tools/ceo-briefing.html.
-          # A failed page build keeps the committed pages (and is reported); it never touches data or curated files.
-          if [ -f tools/front-office-bi.html ] && [ -f tools/ceo-briefing.html ] && [ -f tools/mkgithub.py ]; then
-            python3 tools/mksite.py --bi tools/front-office-bi.html --briefing tools/ceo-briefing.html --site . --mkgithub tools/mkgithub.py || echo "::warning::mksite failed; pages not rebuilt"
-          else
-            echo "::warning::page sources missing in tools/; pages not rebuilt"
-          fi
       - name: Commit (bundle only when valid; validation result and pages always)
         run: |
           git config user.name "Legal Troubles Front Office"
           git config user.email "actions@users.noreply.github.com"
-          git add legal-troubles/data/validation.json legal-troubles/index.html legal-troubles/briefing.html
+          git add legal-troubles/data/validation.json
           [ -f legal-troubles/data/returns.json ] && git add legal-troubles/data/returns.json
           [ -f legal-troubles/data/punting.json ] && git add legal-troubles/data/punting.json
           [ -f legal-troubles/data/returns-totals.json ] && git add legal-troubles/data/returns-totals.json
