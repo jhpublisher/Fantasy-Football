@@ -34,6 +34,18 @@ for x in pj:
 nact=sum("actual" in v for v in players.values())
 if nact<500: fail(f"only {nact} players with week-{w} actuals")
 bj=json.loads(box); n=bad=0
+# Fallback (Nov 3 fix): roster players missing from the top-4000 pool, or whose pool actual disagrees (Elijah Mitchell: pool 0 vs boxscore 5.7), take their week-w actual from the
+# boxscore entry's appliedStatTotal, so reconcile never counts them as 0. Added players are marked src=boxscore.
+nfill=0
+for m in bj["schedule"]:
+    if m["matchupPeriodId"]!=w: continue
+    for side in("home","away"):
+        for e in m[side]["rosterForCurrentScoringPeriod"]["entries"]:
+            pid=str(e["playerId"]); ppe=e.get("playerPoolEntry",{})
+            if "appliedStatTotal" in ppe and abs(players.get(pid,{}).get("actual",0)-ppe["appliedStatTotal"])>0.005:
+                pl=ppe.get("player",{}); row=players.setdefault(pid,{"name":pl.get("fullName",pid),"pos":pl.get("defaultPositionId"),"proTeam":pl.get("proTeamId")})
+                row["actual"]=round(ppe["appliedStatTotal"],2); row["src"]="boxscore"; nfill+=1
+if nfill: print(f"filled {nfill} roster players from boxscore appliedStatTotal")
 for m in bj["schedule"]:
     if m["matchupPeriodId"]!=w: continue
     for side in("home","away"):
