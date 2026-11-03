@@ -29,7 +29,7 @@ fails = []
 def fail(m): fails.append(m)
 
 # ---- 1) live feed merged into raw.json (never delete)
-_f = get(B + "?view=mTransactions2"); live = _f["transactions"]
+_f = get(B + "?view=mTransactions2"); live = _f.get("transactions", [])
 # The default feed is ONLY the current scoring week (verified Oct 8). scoringPeriodId=N returns week N (week 1 includes the draft).
 cur = max([t["scoringPeriodId"] for t in live if t["type"] != "FUTURE_ROSTER"] + [_f.get("scoringPeriodId", 0)])  # empty current-week feed (new week, no rows yet) falls back to ESPN scoringPeriodId
 _ids = {t["id"] for t in live}
