@@ -1332,6 +1332,17 @@
 "winner": "CHI",
 "loser": "SEA",
 "tie": false
+},
+"401873037": {
+"week": 9,
+"date": "2026-11-06T01:15Z",
+"home": "BAL",
+"away": "JAX",
+"homeScore": 10,
+"awayScore": 33,
+"winner": "JAX",
+"loser": "BAL",
+"tie": false
 }
 }
 }
