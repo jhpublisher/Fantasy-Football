@@ -1343,6 +1343,17 @@
 "winner": "JAX",
 "loser": "BAL",
 "tie": false
+},
+"401873038": {
+"week": 9,
+"date": "2026-11-08T14:30Z",
+"home": "ATL",
+"away": "CIN",
+"homeScore": 17,
+"awayScore": 34,
+"winner": "CIN",
+"loser": "ATL",
+"tie": false
 }
 }
 }
