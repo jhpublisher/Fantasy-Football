@@ -1,31 +1,31 @@
 {
  "Puka Nacua": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). ESPN Oct 26: 8 rec/68 yds + TD in Wk 7 win over LV, played through the calf injury without issue.",
+  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 11 of 12 targets for 80 yds + TD in the Wk 8 24-9 win over LAC; Davante Adams (IR, hamstring) unavailable.",
   "ret": "Active; bye Wk 11",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Josh Allen": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). Last ESPN report Oct 19 (Wk 6 win). Bye was Wk 7; plays Wk 8.",
-  "ret": "Active",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 21/34, 289 yds, 2 TD, 1 INT plus a rushing TD in the Wk 8 36-10 win. Nov 8 (Pro Football Network): NFL fined a Ravens LB $35,822 for hits on Allen; no injury designation listed by ESPN.",
+  "ret": "Active; bye was Wk 7",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Tucker Kraft": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). ESPN Oct 26: 4 rec/48 yds + TD in Wk 7 loss at DET.",
+  "note": "ESPN status ACTIVE (Nov 8). ESPN Oct 30: 6 of 6 targets for 53 yds + TD in the Wk 8 27-19 win over CAR.",
   "ret": "Active; bye Wk 11",
-  "asOf": "2026-10-27",
+  "asOf": "2026-11-08",
   "expiresWeek": 11
  },
  "Josh Jacobs": {
-  "tag": "stash",
-  "note": "ESPN status DAY_TO_DAY (Oct 27). Played Wk 7 at DET (TD catch, ESPN Oct 26). NFL probe of the incident video still open; no suspension announced (Oct 27 search found nothing newer than Oct 25-26 reports).",
-  "ret": "Played Wk 7; suspension risk open",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Nov 8). Played Wk 7 and Wk 8 (20.2 pts in Wk 8). ESPN Nov 2: LaFleur said the Packers know of the prior physical-abuse allegations. ESPN Nov 5: Jacobs said he does not anticipate missing additional games. No suspension announced.",
+  "ret": "Active; NFL review open, no suspension announced",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Brandon Aubrey": {
   "tag": "roster",
@@ -36,79 +36,93 @@
  },
  "Rams D/ST": {
   "tag": "roster",
-  "note": "ESPN lists no injury status for D/ST (Oct 27). LAR beat LV 35-21 in Wk 7. Bye Wk 11.",
+  "note": "ESPN lists no injury status for D/ST (Nov 8). LAR beat LAC 24-9 in Wk 8 (10.0 pts). Bye Wk 11.",
   "ret": "n/a (D/ST); bye Wk 11",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Zach Charbonnet": {
-  "tag": "stash",
-  "note": "ESPN status OUT (Oct 27). Activated from PUP Oct 22 after a full practice week; ruled out for Wk 7 vs KC (knee; Macdonald via Fox 13, ESPN Oct 23). No Wk 8 report yet; season debut still pending.",
-  "ret": "Wk 8 report pending",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Nov 8). Season debut in Wk 8 (4.4 pts). ESPN Nov 6 (Clay): Price and Charbonnet called 'palatable flex options' vs ARI.",
+  "ret": "Active; bye Wk 11",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Jadarian Price": {
-  "tag": "stash",
-  "note": "On IR (chest), ESPN INJURY_RESERVE (Oct 27). Macdonald Oct 26 (KJR via ESPN): Price will be designated for return from IR during Wk 8; transaction likely official Thursday (21-day window).",
-  "ret": "Designated to return in Wk 8 (coach, Oct 26)",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Nov 8). Returned from IR in Wk 8 (4.7 pts). ESPN Nov 6 (Clay): Price and Charbonnet called 'palatable flex options' vs ARI.",
+  "ret": "Active; bye Wk 11",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Jordyn Tyson": {
   "tag": "stash",
-  "note": "On IR (hamstring), ESPN INJURY_RESERVE (Oct 27). Last dated report ESPN Oct 21: Loomis says 'getting closer', 21-day window not yet opened. No newer report found Oct 27. NO has its bye in Wk 8.",
-  "ret": "Return date not reported; NO bye Wk 8",
-  "asOf": "2026-10-27",
+  "note": "ESPN status QUESTIONABLE (Nov 8). Activated from IR Sat Nov 7 (hamstring) but listed questionable for Wk 9 vs CLE (RotoWire via ESPN Nov 7); Schultz (NBC Sports, Nov 7): good to go, set to debut.",
+  "ret": "Activated Nov 7; Q for Wk 9 debut",
+  "asOf": "2026-11-08",
   "expiresWeek": 9
  },
  "Skyy Moore": {
   "tag": "stash",
-  "note": "IR (ankle) since Oct 17; out at least 4 games, earliest return Nov 15 vs MIN (RotoWire Oct 17; ESPN Oct 17). ESPN status INJURY_RESERVE (Oct 27).",
+  "note": "IR (ankle) since Oct 17; out at least 4 games, earliest return Nov 15 vs MIN (RotoWire/ESPN Oct 17). ESPN status INJURY_RESERVE (Nov 8); newest ESPN player item is still Oct 17.",
   "ret": "Earliest Nov 15 (Wk 10)",
-  "asOf": "2026-10-27",
+  "asOf": "2026-11-08",
   "expiresWeek": 10
  },
  "Brian Robinson Jr.": {
-  "tag": "roster",
-  "note": "ESPN status OUT (Oct 27). Hamstring: ruled out for Wk 7 at SF, his first missed game of the season (ATL site via ESPN, Oct 23). No Wk 8 report yet.",
-  "ret": "Out Wk 7; Wk 8 report pending",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "tag": "stash",
+  "note": "ESPN status INJURY_RESERVE (Nov 8). Hamstring: ruled out for Wk 9 (ESPN Nov 6), placed on IR Sat Nov 7; must miss at least four games; next chance Sun Dec 13 at CLE (Raimondi, ESPN Nov 7).",
+  "ret": "IR; earliest Dec 13 (Wk 14)",
+  "asOf": "2026-11-08",
+  "expiresWeek": 14
  },
  "Kenneth Walker III": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). ESPN Oct 26: 14 car/36 yds + 4 rec/21 in Wk 7 loss at SEA.",
+  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 21 car/69 yds + 4 rec/15 in the Wk 8 28-24 loss to DEN; rookie Emmett Johnson had 5-128-1.",
   "ret": "Active",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Zavion Thomas": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). No new ESPN report since August; none found Oct 27.",
-  "ret": "Active",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "note": "ESPN status ACTIVE (Nov 8). No injury designation listed. Latest ESPN player report is from Aug 30; Wk 8 he scored 9.7 pts.",
+  "ret": "Active; bye Wk 10",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Germie Bernard": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). ESPN Oct 26: 3 rec/27 yds in Wk 7 win over NO; role described as secure.",
+  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 5 of 5 targets for 30 yds in the Wk 8 27-6 win over CLE.",
   "ret": "Active; bye Wk 9",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "asOf": "2026-11-08",
+  "expiresWeek": 10
  },
  "J.J. McCarthy": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). ESPN Oct 25: first start of the season, 20/28 for 252 yds, no TD/INT in Wk 7 OT win over HOU. NYG bye is Wk 8.",
-  "ret": "Active; bye Wk 8",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "note": "ESPN status ACTIVE (Nov 8). ESPN Oct 25: first start of the season, 20/28 for 252 yds, no TD/INT in the Wk 7 OT win over HOU. NYG bye was Wk 8; plays Wk 9.",
+  "ret": "Active; bye was Wk 8",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  },
  "Xavier Worthy": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). ESPN Oct 26: 3 rec/11 yds in Wk 7 loss at SEA, with Rashee Rice out (hamstring/knee). KC bye was Wk 5.",
-  "ret": "Active",
-  "asOf": "2026-10-27",
-  "expiresWeek": 8
+  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 3 of 6 targets for 13 yds in the Wk 8 28-24 loss to DEN; Rashee Rice had no designation (ESPN Oct 30).",
+  "ret": "Active; bye was Wk 5",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
+ },
+ "Jaylen Wright": {
+  "tag": "roster",
+  "note": "ESPN status QUESTIONABLE (Nov 8). Quad: limited Thu, practiced Fri, listed questionable for Wk 9 vs DET (RotoWire via ESPN Nov 5-6). Wk 8: 14.7 pts.",
+  "ret": "Q for Wk 9; bye was Wk 6",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
+ },
+ "Josh Downs": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Nov 8). Requested a trade after Colts moved two starters (ESPN Oct 30). PFT Nov 8: Colts told teams they were offered a fourth-round pick for him; trade deadline pending. Wk 8: 12.3 pts.",
+  "ret": "Active; trade rumors, bye Wk 13",
+  "asOf": "2026-11-08",
+  "expiresWeek": 9
  }
 }
