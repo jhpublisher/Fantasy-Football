@@ -1431,6 +1431,61 @@
 "winner": "KC",
 "loser": "NYJ",
 "tie": false
+},
+"401873046": {
+"week": 9,
+"date": "2026-11-08T21:05Z",
+"home": "LAC",
+"away": "HOU",
+"homeScore": 22,
+"awayScore": 44,
+"winner": "HOU",
+"loser": "LAC",
+"tie": false
+},
+"401873047": {
+"week": 9,
+"date": "2026-11-08T21:25Z",
+"home": "SF",
+"away": "LV",
+"homeScore": 38,
+"awayScore": 17,
+"winner": "SF",
+"loser": "LV",
+"tie": false
+},
+"401873048": {
+"week": 9,
+"date": "2026-11-08T21:25Z",
+"home": "SEA",
+"away": "ARI",
+"homeScore": 17,
+"awayScore": 3,
+"winner": "SEA",
+"loser": "ARI",
+"tie": false
+},
+"401873049": {
+"week": 9,
+"date": "2026-11-08T21:25Z",
+"home": "NE",
+"away": "GB",
+"homeScore": 27,
+"awayScore": 45,
+"winner": "GB",
+"loser": "NE",
+"tie": false
+},
+"401873050": {
+"week": 9,
+"date": "2026-11-09T01:20Z",
+"home": "CHI",
+"away": "TB",
+"homeScore": 27,
+"awayScore": 24,
+"winner": "CHI",
+"loser": "TB",
+"tie": false
 }
 }
 }
