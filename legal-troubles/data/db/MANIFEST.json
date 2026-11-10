@@ -10,9 +10,10 @@
   5,
   6,
   7,
-  8
+  8,
+  9
  ],
- "in_progress_week": 9,
+ "in_progress_week": 10,
  "files": {
   "weeks/w01/boxscore.json": {
    "bytes": 724972,
@@ -241,6 +242,30 @@
   "weeks/w08/roster.json": {
    "bytes": 4266510,
    "sha256": "521437bafad7d6d1356d587a00c4709f44d896a72c51a18df38824d06d58fcff"
+  },
+  "weeks/w09/SHA256.json": {
+   "bytes": 466,
+   "sha256": "7331e12007a0f7d5275eb0eacc420b58d559b801f90857a11db7cea64afdcec3"
+  },
+  "weeks/w09/boxscore.json": {
+   "bytes": 1006341,
+   "sha256": "bf486aca43913a3a47bb0a889a0bd2a878e704a64001b7bc5bbb1e5a5a9788fe"
+  },
+  "weeks/w09/matchups_all.json": {
+   "bytes": 5250128,
+   "sha256": "69af091d9f288ff73bc6a2f969a11eedbe004b5c7b102de49b48f570117f19f8"
+  },
+  "weeks/w09/players_week.json": {
+   "bytes": 69253,
+   "sha256": "ee10af9fa5651d9d2867f66cf915d12924ef4e4e1b711044be23d5f30e357b6d"
+  },
+  "weeks/w09/pool.json": {
+   "bytes": 10358954,
+   "sha256": "c8488ff3bc5897384a0bbee9372714c70243f57b461cb918561c725103cb388f"
+  },
+  "weeks/w09/roster.json": {
+   "bytes": 4595917,
+   "sha256": "1887673daeaaf351f3abd62c3941597d646ed8c5204d501ba4cf9ed700d9b7c4"
   }
  }
 }
