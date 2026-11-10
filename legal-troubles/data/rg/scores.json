@@ -1486,6 +1486,17 @@
 "winner": "CHI",
 "loser": "TB",
 "tie": false
+},
+"401873051": {
+"week": 9,
+"date": "2026-11-10T01:15Z",
+"home": "MIN",
+"away": "BUF",
+"homeScore": 6,
+"awayScore": 23,
+"winner": "BUF",
+"loser": "MIN",
+"tie": false
 }
 }
 }
