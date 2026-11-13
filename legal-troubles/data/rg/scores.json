@@ -1497,6 +1497,17 @@
 "winner": "BUF",
 "loser": "MIN",
 "tie": false
+},
+"401873052": {
+"week": 10,
+"date": "2026-11-13T01:15Z",
+"home": "NYG",
+"away": "WSH",
+"homeScore": 21,
+"awayScore": 24,
+"winner": "WSH",
+"loser": "NYG",
+"tie": false
 }
 }
 }
