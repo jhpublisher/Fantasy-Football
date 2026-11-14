@@ -1,73 +1,73 @@
 {
  "Puka Nacua": {
-  "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 11 of 12 targets for 80 yds + TD in the Wk 8 24-9 win over LAC; Davante Adams (IR, hamstring) unavailable.",
-  "ret": "Active; bye Wk 11",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "tag": "stash",
+  "note": "ESPN status INJURY_RESERVE (Nov 14). Rams placed him on IR Thu Nov 12 (ESPN Nov 13): PCL and MCL sprains plus a turf-toe injury suffered late in the Wk 9 win at Washington; must miss at least the next four games. Wk 9: 29.0 pts.",
+  "ret": "IR; out at least 4 games (LAR bye Wk 11)",
+  "asOf": "2026-11-14",
+  "expiresWeek": 14
  },
  "Josh Allen": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 21/34, 289 yds, 2 TD, 1 INT plus a rushing TD in the Wk 8 36-10 win. Nov 8 (Pro Football Network): NFL fined a Ravens LB $35,822 for hits on Allen; no injury designation listed by ESPN.",
-  "ret": "Active; bye was Wk 7",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "note": "ESPN status ACTIVE (Nov 14). ESPN Nov 10 (Wk 9 Monday night): 21/31, 234 yds, 1 TD, 1 INT plus six carries; sacked repeatedly by a Flores defense. Wk 9: 12.9 pts.",
+  "ret": "Active",
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Tucker Kraft": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). ESPN Oct 30: 6 of 6 targets for 53 yds + TD in the Wk 8 27-19 win over CAR.",
+  "note": "ESPN status ACTIVE (Nov 14). ESPN Nov 9: 1 of 3 targets for 1 yd and two rushes for 8 yds in the Wk 9 45-27 win over NE (1.4 pts).",
   "ret": "Active; bye Wk 11",
-  "asOf": "2026-11-08",
+  "asOf": "2026-11-14",
   "expiresWeek": 11
  },
  "Josh Jacobs": {
-  "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). Played Wk 7 and Wk 8 (20.2 pts in Wk 8). ESPN Nov 2: LaFleur said the Packers know of the prior physical-abuse allegations. ESPN Nov 5: Jacobs said he does not anticipate missing additional games. No suspension announced.",
-  "ret": "Active; NFL review open, no suspension announced",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "tag": "stash",
+  "note": "ESPN status OUT (Nov 14). Fractured his right ring finger and left the Wk 9 win over NE; out Sun vs MIN; finger surgery Fri Nov 13; initial estimate 2-3 weeks. ESPN Nov 11: could return as soon as Wk 12 vs LAR (GB bye Wk 11) unless the Packers use an IR spot (automatic 4 games); IR decision was due Sat. Wk 9: 0.5 pts. NFL conduct review: no suspension announced.",
+  "ret": "Out Wk 10; Wk 12 at the earliest (unconfirmed)",
+  "asOf": "2026-11-14",
+  "expiresWeek": 12
  },
  "Brandon Aubrey": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Oct 27). Latest ESPN kicker report Oct 20. DAL bye Wk 14.",
+  "note": "ESPN status ACTIVE (Nov 14). ESPN Nov 9: 2-for-3 on field goals and 3-for-3 on PATs in the Wk 9 27-23 win; missed a kick for the second straight week. DAL bye Wk 14.",
   "ret": "Active; bye Wk 14",
-  "asOf": "2026-10-27",
+  "asOf": "2026-11-14",
   "expiresWeek": 14
  },
  "Rams D/ST": {
   "tag": "roster",
-  "note": "ESPN lists no injury status for D/ST (Nov 8). LAR beat LAC 24-9 in Wk 8 (10.0 pts). Bye Wk 11.",
+  "note": "ESPN lists no injury status for D/ST (Nov 14). LAR won at WAS in Wk 9 (11.0 pts). Bye Wk 11.",
   "ret": "n/a (D/ST); bye Wk 11",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Zach Charbonnet": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). Season debut in Wk 8 (4.4 pts). ESPN Nov 6 (Clay): Price and Charbonnet called 'palatable flex options' vs ARI.",
+  "note": "ESPN status ACTIVE (Nov 14). Wk 9: 9.1 pts. ESPN Nov 13: Mike Clay is locking him into his lineup vs LV.",
   "ret": "Active; bye Wk 11",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Jadarian Price": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). Returned from IR in Wk 8 (4.7 pts). ESPN Nov 6 (Clay): Price and Charbonnet called 'palatable flex options' vs ARI.",
+  "note": "ESPN status ACTIVE (Nov 14). ESPN Nov 9: 9 carries for 24 yds and 4 of 4 targets for 54 yds in the Wk 9 17-3 win (15.4 pts).",
   "ret": "Active; bye Wk 11",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Jordyn Tyson": {
-  "tag": "stash",
-  "note": "ESPN status QUESTIONABLE (Nov 8). Activated from IR Sat Nov 7 (hamstring) but listed questionable for Wk 9 vs CLE (RotoWire via ESPN Nov 7); Schultz (NBC Sports, Nov 7): good to go, set to debut.",
-  "ret": "Activated Nov 7; Q for Wk 9 debut",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Nov 14). Activated from IR Nov 7, debuted in Wk 9 (3.0 pts). ESPN Nov 12: analysts want to see more from him. NO bye was Wk 8.",
+  "ret": "Active",
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Skyy Moore": {
   "tag": "stash",
-  "note": "IR (ankle) since Oct 17; out at least 4 games, earliest return Nov 15 vs MIN (RotoWire/ESPN Oct 17). ESPN status INJURY_RESERVE (Nov 8); newest ESPN player item is still Oct 17.",
-  "ret": "Earliest Nov 15 (Wk 10)",
-  "asOf": "2026-11-08",
-  "expiresWeek": 10
+  "note": "IR (ankle) since Oct 17. ESPN Nov 13-14: limited in practice all of Wk 10 prep, listed questionable for Sun vs MIN, but likely not elevated since GB will use the roster spot on an RB with Jacobs out.",
+  "ret": "IR; possible return soon, not expected Wk 10",
+  "asOf": "2026-11-14",
+  "expiresWeek": 11
  },
  "Brian Robinson Jr.": {
   "tag": "stash",
@@ -78,51 +78,58 @@
  },
  "Kenneth Walker III": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 21 car/69 yds + 4 rec/15 in the Wk 8 28-24 loss to DEN; rookie Emmett Johnson had 5-128-1.",
-  "ret": "Active",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "note": "ESPN status QUESTIONABLE (Nov 14). Groin tightness kept him out of Friday's practice; listed questionable for Wk 10 at ATL (ESPN Nov 13). Wk 9: 35.3 pts.",
+  "ret": "Q for Wk 10",
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Zavion Thomas": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). No injury designation listed. Latest ESPN player report is from Aug 30; Wk 8 he scored 9.7 pts.",
+  "note": "ESPN status ACTIVE (Nov 14). ESPN Nov 11: 1 of 2 targets for 13 yds and three kick returns for 88 yds in the Wk 9 win; only five offensive snaps (never more than 15 in a game this season). Wk 9: 10.6 pts.",
   "ret": "Active; bye Wk 10",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "asOf": "2026-11-14",
+  "expiresWeek": 11
  },
  "Germie Bernard": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 5 of 5 targets for 30 yds in the Wk 8 27-6 win over CLE.",
-  "ret": "Active; bye Wk 9",
-  "asOf": "2026-11-08",
+  "note": "ESPN status ACTIVE (Nov 14). PIT bye was Wk 9. Latest ESPN player report is Nov 1 (5 of 5 targets, 30 yds in the Wk 8 win over CLE).",
+  "ret": "Active; plays Wk 10",
+  "asOf": "2026-11-14",
   "expiresWeek": 10
  },
  "J.J. McCarthy": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). ESPN Oct 25: first start of the season, 20/28 for 252 yds, no TD/INT in the Wk 7 OT win over HOU. NYG bye was Wk 8; plays Wk 9.",
-  "ret": "Active; bye was Wk 8",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "note": "ESPN status ACTIVE (Nov 14). Played the Wk 10 Thursday night loss: 23/36, 293 yds, 1 TD, 1 INT plus six rushes (ESPN Nov 13), his third start.",
+  "ret": "Active; played Wk 10 (TNF)",
+  "asOf": "2026-11-14",
+  "expiresWeek": 11
  },
  "Xavier Worthy": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). ESPN Nov 1: 3 of 6 targets for 13 yds in the Wk 8 28-24 loss to DEN; Rashee Rice had no designation (ESPN Oct 30).",
-  "ret": "Active; bye was Wk 5",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "note": "ESPN status ACTIVE (Nov 14). Left the Wk 9 win over NYJ in the fourth quarter with a hamstring injury, day-to-day (Reid, Nov 10); full participant Wed Nov 12 (ESPN Nov 11). Wk 9: 7.8 pts.",
+  "ret": "Active",
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Jaylen Wright": {
   "tag": "roster",
-  "note": "ESPN status QUESTIONABLE (Nov 8). Quad: limited Thu, practiced Fri, listed questionable for Wk 9 vs DET (RotoWire via ESPN Nov 5-6). Wk 8: 14.7 pts.",
-  "ret": "Q for Wk 9; bye was Wk 6",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "note": "ESPN status ACTIVE (Nov 14). Missed the Wk 9 loss to DET (inactive, quad); full participant Wed Nov 11 (Miami Herald via ESPN). Lightly used RB2 behind Ollie Gordon (ESPN).",
+  "ret": "Active; bye was Wk 6",
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  },
  "Josh Downs": {
   "tag": "roster",
-  "note": "ESPN status ACTIVE (Nov 8). Requested a trade after Colts moved two starters (ESPN Oct 30). PFT Nov 8: Colts told teams they were offered a fourth-round pick for him; trade deadline pending. Wk 8: 12.3 pts.",
-  "ret": "Active; trade rumors, bye Wk 13",
-  "asOf": "2026-11-08",
-  "expiresWeek": 9
+  "note": "ESPN status ACTIVE (Nov 14). Traded to KC Tue Nov 10 before the deadline (ESPN Nov 13); Reid said Fri he looks ready to play Sun at ATL, role not specified. Wk 9 (IND): 3.9 pts.",
+  "ret": "Active; now on KC",
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
+ },
+ "Dylan Laube": {
+  "tag": "roster",
+  "note": "ESPN status ACTIVE (Nov 14). Wk 9: 19.7 pts. Latest ESPN player item is from Oct 12 (4 rushes/9 yds + TD, 3 catches/16 yds). LV bye Wk 13.",
+  "ret": "Active; bye Wk 13",
+  "asOf": "2026-11-14",
+  "expiresWeek": 10
  }
 }

@@ -1,14 +1,26 @@
 {
  "Skyy Moore": {
-  "returnWeek": 10,
-  "note": "IR (ankle) since Oct 17; out at least 4 games; earliest return Nov 15 vs MIN (RotoWire/ESPN Oct 17); newest ESPN item still Oct 17",
-  "asOf": "2026-11-08",
-  "expiresWeek": 10
+  "returnWeek": 11,
+  "note": "IR (ankle) since Oct 17; limited in practice in Wk 10 prep, listed questionable for Wk 10 but likely not elevated (ESPN Nov 13-14); unconfirmed",
+  "asOf": "2026-11-14",
+  "expiresWeek": 11
  },
  "Brian Robinson Jr.": {
   "returnWeek": 14,
   "note": "IR (hamstring), placed Nov 7; must miss at least four games; next chance Sun Dec 13 at CLE (Raimondi, ESPN Nov 7)",
   "asOf": "2026-11-08",
   "expiresWeek": 14
+ },
+ "Puka Nacua": {
+  "returnWeek": 15,
+  "note": "IR (PCL/MCL sprains, turf toe) placed Nov 12; must miss at least four games (Wk 10, 12, 13, 14; LAR bye Wk 11) per ESPN Nov 13; return week derived from that minimum, unconfirmed",
+  "asOf": "2026-11-14",
+  "expiresWeek": 15
+ },
+ "Josh Jacobs": {
+  "returnWeek": 12,
+  "note": "Fractured finger, surgery Nov 13; ESPN Nov 11: could return as soon as Wk 12 vs LAR (GB bye Wk 11) unless placed on IR; unconfirmed",
+  "asOf": "2026-11-14",
+  "expiresWeek": 12
  }
 }
