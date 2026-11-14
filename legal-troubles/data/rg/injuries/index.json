@@ -56,6 +56,22 @@
    "outPlayers": 72,
    "warnings": 2,
    "unmatched": 2
+  },
+  "8": {
+   "file": "2026-w08.json",
+   "sha256": "b649e5094bd0d604d64606ded3c988dbd8973b2c89eb19748cff1aebd75fa1bf",
+   "addedAt": "2026-11-14T13:22Z",
+   "outPlayers": 50,
+   "warnings": 1,
+   "unmatched": 2
+  },
+  "9": {
+   "file": "2026-w09.json",
+   "sha256": "94596a17773d9874c9af2963f625a3ce76e5b6de2ab0b69c995d2feb51908a43",
+   "addedAt": "2026-11-14T13:22Z",
+   "outPlayers": 75,
+   "warnings": 4,
+   "unmatched": 2
   }
  }
 }
