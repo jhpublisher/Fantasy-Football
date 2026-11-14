@@ -2,28 +2,11 @@
  "ok": true,
  "failures": [],
  "warnings": [
-  "tag for J.J. McCarthy expired (week 9); page must not show it as current",
-  "tag for Kenneth Walker III expired (week 9); page must not show it as current",
-  "tag for Jaylen Wright expired (week 9); page must not show it as current",
-  "tag for Zavion Thomas expired (week 9); page must not show it as current",
-  "tag for Josh Jacobs expired (week 9); page must not show it as current",
-  "tag for Rams D/ST expired (week 9); page must not show it as current",
-  "tag for Jordyn Tyson expired (week 9); page must not show it as current",
-  "tag for Zach Charbonnet expired (week 9); page must not show it as current",
-  "tag for Xavier Worthy expired (week 9); page must not show it as current",
-  "tag for Josh Downs expired (week 9); page must not show it as current",
-  "tag for Josh Allen expired (week 9); page must not show it as current",
-  "tag for Jadarian Price expired (week 9); page must not show it as current",
-  "tag for Puka Nacua expired (week 9); page must not show it as current",
-  "news source 'Practice reports': practice days have passed with no report found for our injured players: Kenneth Walker III, Josh Jacobs (Frank: check the official injury report)",
-  "rumor Josh Jacobs expired (week 9)",
-  "rumor Lamar Jackson expired (week 9)",
-  "rumor Tyreek Hill expired (week 9)",
-  "curated tags: 13 expired: Puka Nacua, Josh Allen, Josh Jacobs, Rams D/ST, Zach Charbonnet, Jadarian Price, Jordyn Tyson, Kenneth Walker III, Zavion Thomas, J.J. McCarthy, Xavier Worthy, Jaylen Wright, Josh Downs"
+  "news source 'Practice reports': practice days have passed with no report found for our injured players: Kenneth Walker III, Josh Jacobs (Frank: check the official injury report)"
  ],
- "checkedAt": "2026-11-14T13:22+00:00",
+ "checkedAt": "2026-11-14T13:26+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-11-14T13:22+00:00"
+ "bundleBuiltAt": "2026-11-14T13:26+00:00"
 }
