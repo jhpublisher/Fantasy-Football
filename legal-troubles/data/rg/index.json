@@ -84,6 +84,30 @@
      "player values": 148
     }
    }
+  },
+  "8": {
+   "file": "weeks/2026-w08.json",
+   "sha256": "1a29998b9b9a76e2b27ee5138a057fc092cf3736505a0363b9cabba616877665",
+   "addedAt": "2026-11-14T13:21Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 196,
+     "player values": 148
+    }
+   }
+  },
+  "9": {
+   "file": "weeks/2026-w09.json",
+   "sha256": "0a243ec1790f37f22991909856fc6735b2073c752402f2f1613edd124ee558d0",
+   "addedAt": "2026-11-14T13:21Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 210,
+     "player values": 144
+    }
+   }
   }
  }
 }

@@ -18,5 +18,35 @@
   "espn": 4,
   "reason": "ESPN per-game team stats list 4 MIA kickoffs for CIN@MIA; play-by-play shows 5 MIA kickoff plays, none 'No Play'. ESPN's season total for MIA (17) = stored weeks 1-4 (12) + 5, agreeing with our count; CIN's sources all agree. Per-game MIA value is an ESPN-side inconsistency. Re-confirmed 2026-10-13 by independent check. Rich/Paige/Quinn.",
   "approved": "2026-10-13"
+ },
+ {
+  "week": 8,
+  "game_id": "401873032",
+  "team": "LAC",
+  "field": "boxTotalKickReturnYards",
+  "ours": 52,
+  "espn": 47,
+  "reason": "ESPN box score lists Derius Davis 2 KR for 32 yds and Keaton Mitchell 1 for 20 (player lines sum to 52); ESPN's team total line says 47. ESPN fantasy weekly stats (what our league scores) agree with the player lines (Davis 32, Mitchell 20). Play-by-play shows Davis 9 and 18 yds (the 18-yd return carried an offensive holding penalty) and Mitchell 20 = 47, so the team total matches the play-by-play and Davis's player line is 5 yds higher. We store the player lines (the scoring source). Found by Linda; approved by Joe Nov 14 2026.",
+  "approved": "2026-11-14"
+ },
+ {
+  "week": 8,
+  "game_id": "401873032",
+  "team": "LAC",
+  "field": "kickReturnYards",
+  "ours": 52,
+  "espn": 47,
+  "reason": "Same game: ESPN per-game team stat (core API) kickReturnYards is 47 while ESPN's player lines and fantasy stats sum to 52. See the boxTotalKickReturnYards entry. Approved by Joe Nov 14 2026.",
+  "approved": "2026-11-14"
+ },
+ {
+  "week": 8,
+  "game_id": "401873034",
+  "team": "MIA",
+  "field": "kickoffs",
+  "ours": 5,
+  "espn": 4,
+  "reason": "ESPN per-game team stats list 4 MIA kickoffs for MIA at NE; play-by-play shows 5 MIA kickoffs (Pinion 3 touchbacks, Gonzalez 1 touchback, Pinion 1 onside kick recovered by NE). Same ESPN-side omission as the approved Week 5 MIA entry. Approved by Joe Nov 14 2026 (standing approval for further mismatches where the play-by-play supports our number; each is listed in the changelog).",
+  "approved": "2026-11-14"
  }
 ]

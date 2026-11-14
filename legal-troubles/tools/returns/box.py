@@ -157,6 +157,14 @@ for w in weeks:
     assert n==2*EXPECT[w],f"Week {w}: {n} team boxes for {EXPECT[w]} games"
     assert sum(1 for t in PT if t["week"]==w)==n,f"Week {w}: punt team boxes != kick team boxes"
     assert n+len(byes[w])==len(ALL_TEAMS)==32,f"Week {w}: {n} playing + {len(byes[w])} bye != 32"
+# approved ESPN-side box-score inconsistencies (data/rg/exceptions.json; Joe approved Nov 14): team total line differs from the player lines that ESPN fantasy scoring uses
+_EXC=json.load(open(os.environ["RG_EXCEPTIONS"])) if os.environ.get("RG_EXCEPTIONS") and os.path.exists(os.environ["RG_EXCEPTIONS"]) else []
+def _boxok(t):
+    if "team_kr_yds" not in t: return False
+    for x in _EXC:
+        if x.get("field")=="boxTotalKickReturnYards" and (x["week"],str(x["game_id"]),x["team"],x["ours"],x["espn"])==(t["week"],str(t["game_id"]),t["team"],int(t["team_kr_yds"]),int(t["espn_total_yds"])) and str(t["team_kr"])==str(t["espn_total_kr"]): return True
+    return False
+bad=[t for t in bad if not _boxok(t)]
 if bad: sys.exit(f"FAIL: ESPN totals disagree with player sums: {bad[:5]}")
 print(f"current week {CUR}; weeks {weeks}; games/week {EXPECT}; byes {({w:b for w,b in byes.items() if b})}; scoring {PER_YD}/yd {PER_TD}/TD; {len(R)} KR player rows, {len(PR)} PR player rows OK; fair catches: {sum(int(t['team_fc'] or 0) for t in PT)} ({len(FCW)} not matched to a player, {len(NOPBP)} games without play-by-play)")
 for m in FCW[:10]: print("WARN",m)
