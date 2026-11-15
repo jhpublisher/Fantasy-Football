@@ -1,0 +1,7579 @@
+{
+ "week": 10,
+ "run": "sun-late",
+ "pulledAtET": "2026-11-15 13:04:39 ET",
+ "pulledAtUTC": "2026-11-15T18:04:39Z",
+ "note": "recovery run; the scheduled sun-early and sun-late runs of Nov 15 were lost to the project size cap; sun-early cannot be reconstructed",
+ "espn": {
+  "ARI": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Devin Duvernay",
+     "pos": "WR",
+     "id": "4039050"
+    },
+    {
+     "rank": 2,
+     "name": "Max Melton",
+     "pos": "CB",
+     "id": "4698113"
+    },
+    {
+     "rank": 3,
+     "name": "Jeremiyah Love",
+     "pos": "RB",
+     "id": "4870808"
+    },
+    {
+     "rank": 4,
+     "name": "Jalen Brooks",
+     "pos": "WR",
+     "id": "4692835"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Devin Duvernay",
+     "pos": "WR",
+     "id": "4039050"
+    },
+    {
+     "rank": 2,
+     "name": "Michael Wilson",
+     "pos": "WR",
+     "id": "4360761"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Reggie Virgil",
+      "pos": "WR",
+      "id": "4869132"
+     },
+     {
+      "rank": 2,
+      "name": "Zay Jones",
+      "pos": "WR",
+      "id": "3059722"
+     },
+     {
+      "rank": 3,
+      "name": "Simi Fehoko",
+      "pos": "WR",
+      "id": "4360739"
+     },
+     {
+      "rank": 4,
+      "name": "Devin Duvernay",
+      "pos": "WR",
+      "id": "4039050"
+     },
+     {
+      "rank": 5,
+      "name": "Harrison Wallace III",
+      "pos": "WR",
+      "id": "4699354"
+     },
+     {
+      "rank": 6,
+      "name": "Michael Wilson",
+      "pos": "WR",
+      "id": "4360761"
+     },
+     {
+      "rank": 7,
+      "name": "Kendrick Bourne",
+      "pos": "WR",
+      "id": "3045523"
+     },
+     {
+      "rank": 8,
+      "name": "Jalen Brooks",
+      "pos": "WR",
+      "id": "4692835"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Carson Beck",
+      "pos": "QB",
+      "id": "4430841"
+     },
+     {
+      "rank": 2,
+      "name": "Josh Johnson",
+      "pos": "QB",
+      "id": "11394"
+     },
+     {
+      "rank": 3,
+      "name": "Joey Aguilar",
+      "pos": "QB",
+      "id": "5151948"
+     },
+     {
+      "rank": 4,
+      "name": "Gardner Minshew II",
+      "pos": "QB",
+      "id": "4038524"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Trey McBride",
+      "pos": "TE",
+      "id": "4361307"
+     },
+     {
+      "rank": 2,
+      "name": "Elijah Higgins",
+      "pos": "TE",
+      "id": "4426844"
+     },
+     {
+      "rank": 3,
+      "name": "Hunter Long",
+      "pos": "TE",
+      "id": "4239944"
+     },
+     {
+      "rank": 4,
+      "name": "Teagan Quitoriano",
+      "pos": "TE",
+      "id": "4374045"
+     },
+     {
+      "rank": 5,
+      "name": "Tip Reiman",
+      "pos": "TE",
+      "id": "4696700"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Tyler Allgeier",
+      "pos": "RB",
+      "id": "4373626"
+     },
+     {
+      "rank": 2,
+      "name": "Bam Knight",
+      "pos": "RB",
+      "id": "4427728"
+     },
+     {
+      "rank": 3,
+      "name": "Evan Hull",
+      "pos": "RB",
+      "id": "4569609"
+     },
+     {
+      "rank": 4,
+      "name": "James Conner",
+      "pos": "RB",
+      "id": "3045147"
+     },
+     {
+      "rank": 5,
+      "name": "Jeremiyah Love",
+      "pos": "RB",
+      "id": "4870808"
+     },
+     {
+      "rank": 6,
+      "name": "Trey Benson",
+      "pos": "RB",
+      "id": "4429275"
+     }
+    ]
+   }
+  },
+  "ATL": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Khalil Herbert",
+     "pos": "RB",
+     "id": "4035886"
+    },
+    {
+     "rank": 2,
+     "name": "Olamide Zaccheaus",
+     "pos": "WR",
+     "id": "3917914"
+    },
+    {
+     "rank": 3,
+     "name": "Zachariah Branch",
+     "pos": "WR",
+     "id": "4870612"
+    },
+    {
+     "rank": 4,
+     "name": "Brian Robinson Jr.",
+     "pos": "RB",
+     "id": "4241474"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Olamide Zaccheaus",
+     "pos": "WR",
+     "id": "3917914"
+    },
+    {
+     "rank": 2,
+     "name": "Jahan Dotson",
+     "pos": "WR",
+     "id": "4361409"
+    },
+    {
+     "rank": 3,
+     "name": "Zachariah Branch",
+     "pos": "WR",
+     "id": "4870612"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Drake London",
+      "pos": "WR",
+      "id": "4426502"
+     },
+     {
+      "rank": 2,
+      "name": "Jahan Dotson",
+      "pos": "WR",
+      "id": "4361409"
+     },
+     {
+      "rank": 3,
+      "name": "Olamide Zaccheaus",
+      "pos": "WR",
+      "id": "3917914"
+     },
+     {
+      "rank": 4,
+      "name": "Zachariah Branch",
+      "pos": "WR",
+      "id": "4870612"
+     },
+     {
+      "rank": 5,
+      "name": "Chris Blair",
+      "pos": "WR",
+      "id": "4369886"
+     },
+     {
+      "rank": 6,
+      "name": "Beaux Collins",
+      "pos": "WR",
+      "id": "4431210"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Michael Penix Jr.",
+      "pos": "QB",
+      "id": "4360423"
+     },
+     {
+      "rank": 2,
+      "name": "Tua Tagovailoa",
+      "pos": "QB",
+      "id": "4241479"
+     },
+     {
+      "rank": 3,
+      "name": "Andy Dalton",
+      "pos": "QB",
+      "id": "14012"
+     },
+     {
+      "rank": 4,
+      "name": "Jack Strand",
+      "pos": "QB",
+      "id": "5344782"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Kyle Pitts Sr.",
+      "pos": "TE",
+      "id": "4360248"
+     },
+     {
+      "rank": 2,
+      "name": "Charlie Woerner",
+      "pos": "TE",
+      "id": "4035020"
+     },
+     {
+      "rank": 3,
+      "name": "Austin Hooper",
+      "pos": "TE",
+      "id": "3043275"
+     },
+     {
+      "rank": 4,
+      "name": "Nick Muse",
+      "pos": "TE",
+      "id": "4249624"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Bijan Robinson",
+      "pos": "RB",
+      "id": "4430807"
+     },
+     {
+      "rank": 2,
+      "name": "Khalil Herbert",
+      "pos": "RB",
+      "id": "4035886"
+     },
+     {
+      "rank": 3,
+      "name": "Brian Robinson Jr.",
+      "pos": "RB",
+      "id": "4241474"
+     },
+     {
+      "rank": 4,
+      "name": "Trey Sermon",
+      "pos": "RB",
+      "id": "4241401"
+     }
+    ]
+   }
+  },
+  "BAL": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "LaJohntay Wester",
+     "pos": "WR",
+     "id": "4690143"
+    },
+    {
+     "rank": 2,
+     "name": "Rasheen Ali",
+     "pos": "RB",
+     "id": "4690013"
+    },
+    {
+     "rank": 3,
+     "name": "Justice Hill",
+     "pos": "RB",
+     "id": "4038441"
+    },
+    {
+     "rank": 4,
+     "name": "Adam Randall",
+     "pos": "RB",
+     "id": "4685526"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "LaJohntay Wester",
+     "pos": "WR",
+     "id": "4690143"
+    },
+    {
+     "rank": 2,
+     "name": "Elijah Sarratt",
+     "pos": "WR",
+     "id": "5088338"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Zay Flowers",
+      "pos": "WR",
+      "id": "4429615"
+     },
+     {
+      "rank": 2,
+      "name": "Rashod Bateman",
+      "pos": "WR",
+      "id": "4360939"
+     },
+     {
+      "rank": 3,
+      "name": "Ja'Kobi Lane",
+      "pos": "WR",
+      "id": "4870847"
+     },
+     {
+      "rank": 4,
+      "name": "Devontez Walker",
+      "pos": "WR",
+      "id": "4696882"
+     },
+     {
+      "rank": 5,
+      "name": "LaJohntay Wester",
+      "pos": "WR",
+      "id": "4690143"
+     },
+     {
+      "rank": 6,
+      "name": "Elijah Sarratt",
+      "pos": "WR",
+      "id": "5088338"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Jacoby Brissett",
+      "pos": "QB",
+      "id": "2578570"
+     },
+     {
+      "rank": 2,
+      "name": "Joe Fagnano",
+      "pos": "QB",
+      "id": "4429582"
+     },
+     {
+      "rank": 3,
+      "name": "Kedon Slovis",
+      "pos": "QB",
+      "id": "4428512"
+     },
+     {
+      "rank": 4,
+      "name": "Lamar Jackson",
+      "pos": "QB",
+      "id": "3916387"
+     },
+     {
+      "rank": 5,
+      "name": "Tyler Huntley",
+      "pos": "QB",
+      "id": "4035671"
+     },
+     {
+      "rank": 6,
+      "name": "Skylar Thompson",
+      "pos": "QB",
+      "id": "4036419"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Mark Andrews",
+      "pos": "TE",
+      "id": "3116365"
+     },
+     {
+      "rank": 2,
+      "name": "Josh Cuevas",
+      "pos": "TE",
+      "id": "4876132"
+     },
+     {
+      "rank": 3,
+      "name": "Matt Hibner",
+      "pos": "TE",
+      "id": "4432260"
+     },
+     {
+      "rank": 4,
+      "name": "Durham Smythe",
+      "pos": "TE",
+      "id": "3052897"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Derrick Henry",
+      "pos": "RB",
+      "id": "3043078"
+     },
+     {
+      "rank": 2,
+      "name": "Justice Hill",
+      "pos": "RB",
+      "id": "4038441"
+     },
+     {
+      "rank": 3,
+      "name": "Rasheen Ali",
+      "pos": "RB",
+      "id": "4690013"
+     },
+     {
+      "rank": 4,
+      "name": "Adam Randall",
+      "pos": "RB",
+      "id": "4685526"
+     }
+    ]
+   }
+  },
+  "BUF": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Greg Dortch",
+     "pos": "WR",
+     "id": "4037235"
+    },
+    {
+     "rank": 2,
+     "name": "Ray Davis",
+     "pos": "RB",
+     "id": "4429501"
+    },
+    {
+     "rank": 3,
+     "name": "Khalil Shakir",
+     "pos": "WR",
+     "id": "4373678"
+    },
+    {
+     "rank": 4,
+     "name": "Ty Johnson",
+     "pos": "RB",
+     "id": "3915411"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Greg Dortch",
+     "pos": "WR",
+     "id": "4037235"
+    },
+    {
+     "rank": 2,
+     "name": "Dee Alford",
+     "pos": "CB",
+     "id": "4401823"
+    },
+    {
+     "rank": 3,
+     "name": "Ray Davis",
+     "pos": "RB",
+     "id": "4429501"
+    },
+    {
+     "rank": 4,
+     "name": "Khalil Shakir",
+     "pos": "WR",
+     "id": "4373678"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "DJ Moore",
+      "pos": "WR",
+      "id": "3915416"
+     },
+     {
+      "rank": 2,
+      "name": "Khalil Shakir",
+      "pos": "WR",
+      "id": "4373678"
+     },
+     {
+      "rank": 3,
+      "name": "Keon Coleman",
+      "pos": "WR",
+      "id": "4635008"
+     },
+     {
+      "rank": 4,
+      "name": "Greg Dortch",
+      "pos": "WR",
+      "id": "4037235"
+     },
+     {
+      "rank": 5,
+      "name": "Skyler Bell",
+      "pos": "WR",
+      "id": "4683153"
+     },
+     {
+      "rank": 6,
+      "name": "Tyrell Shavers",
+      "pos": "WR",
+      "id": "4241476"
+     },
+     {
+      "rank": 7,
+      "name": "Joshua Palmer",
+      "pos": "WR",
+      "id": "4242433"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Josh Allen",
+      "pos": "QB",
+      "id": "3918298"
+     },
+     {
+      "rank": 2,
+      "name": "Kyle Allen",
+      "pos": "QB",
+      "id": "3115293"
+     },
+     {
+      "rank": 3,
+      "name": "Shane Buechele",
+      "pos": "QB",
+      "id": "4039034"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Dalton Kincaid",
+      "pos": "TE",
+      "id": "4385690"
+     },
+     {
+      "rank": 2,
+      "name": "Dawson Knox",
+      "pos": "TE",
+      "id": "3930086"
+     },
+     {
+      "rank": 3,
+      "name": "Jackson Hawes",
+      "pos": "TE",
+      "id": "4573699"
+     },
+     {
+      "rank": 4,
+      "name": "Keleki Latu",
+      "pos": "TE",
+      "id": "4688552"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "James Cook III",
+      "pos": "RB",
+      "id": "4379399"
+     },
+     {
+      "rank": 2,
+      "name": "Ty Johnson",
+      "pos": "RB",
+      "id": "3915411"
+     },
+     {
+      "rank": 3,
+      "name": "Ray Davis",
+      "pos": "RB",
+      "id": "4429501"
+     }
+    ]
+   }
+  },
+  "CAR": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Anthony Tyus III",
+     "pos": "RB",
+     "id": "4709392"
+    },
+    {
+     "rank": 2,
+     "name": "Trevor Etienne",
+     "pos": "RB",
+     "id": "4685350"
+    },
+    {
+     "rank": 3,
+     "name": "John Metchie III",
+     "pos": "WR",
+     "id": "4567096"
+    },
+    {
+     "rank": 4,
+     "name": "Xavier Legette",
+     "pos": "WR",
+     "id": "4430034"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Trevor Etienne",
+     "pos": "RB",
+     "id": "4685350"
+    },
+    {
+     "rank": 2,
+     "name": "Jalen Coker",
+     "pos": "WR",
+     "id": "4695883"
+    },
+    {
+     "rank": 3,
+     "name": "Xavier Legette",
+     "pos": "WR",
+     "id": "4430034"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Tetairoa McMillan",
+      "pos": "WR",
+      "id": "4685472"
+     },
+     {
+      "rank": 2,
+      "name": "Jalen Coker",
+      "pos": "WR",
+      "id": "4695883"
+     },
+     {
+      "rank": 3,
+      "name": "Xavier Legette",
+      "pos": "WR",
+      "id": "4430034"
+     },
+     {
+      "rank": 4,
+      "name": "John Metchie III",
+      "pos": "WR",
+      "id": "4567096"
+     },
+     {
+      "rank": 5,
+      "name": "Brycen Tremayne",
+      "pos": "WR",
+      "id": "4360763"
+     },
+     {
+      "rank": 6,
+      "name": "Chris Brazzell II",
+      "pos": "WR",
+      "id": "5091739"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Bryce Young",
+      "pos": "QB",
+      "id": "4685720"
+     },
+     {
+      "rank": 2,
+      "name": "Kenny Pickett",
+      "pos": "QB",
+      "id": "4240703"
+     },
+     {
+      "rank": 3,
+      "name": "Haynes King",
+      "pos": "QB",
+      "id": "4428993"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Tommy Tremble",
+      "pos": "TE",
+      "id": "4372780"
+     },
+     {
+      "rank": 2,
+      "name": "Darren Waller",
+      "pos": "TE",
+      "id": "2576925"
+     },
+     {
+      "rank": 3,
+      "name": "Mitchell Evans",
+      "pos": "TE",
+      "id": "4683243"
+     },
+     {
+      "rank": 4,
+      "name": "Feleipe Franks",
+      "pos": "TE",
+      "id": "4034948"
+     },
+     {
+      "rank": 5,
+      "name": "Ja'Tavion Sanders",
+      "pos": "TE",
+      "id": "4431588"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Chuba Hubbard",
+      "pos": "RB",
+      "id": "4241416"
+     },
+     {
+      "rank": 2,
+      "name": "Trevor Etienne",
+      "pos": "RB",
+      "id": "4685350"
+     },
+     {
+      "rank": 3,
+      "name": "Anthony Tyus III",
+      "pos": "RB",
+      "id": "4709392"
+     },
+     {
+      "rank": 4,
+      "name": "AJ Dillon",
+      "pos": "RB",
+      "id": "4239934"
+     },
+     {
+      "rank": 5,
+      "name": "Jonathon Brooks",
+      "pos": "RB",
+      "id": "4678008"
+     }
+    ]
+   }
+  },
+  "CHI": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Zavion Thomas",
+     "pos": "WR",
+     "id": "4869748"
+    },
+    {
+     "rank": 2,
+     "name": "Josh Blackwell",
+     "pos": "CB",
+     "id": "4240459"
+    },
+    {
+     "rank": 3,
+     "name": "Kalif Raymond",
+     "pos": "WR",
+     "id": "2973405"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Kalif Raymond",
+     "pos": "WR",
+     "id": "2973405"
+    },
+    {
+     "rank": 2,
+     "name": "Zavion Thomas",
+     "pos": "WR",
+     "id": "4869748"
+    },
+    {
+     "rank": 3,
+     "name": "Josh Blackwell",
+     "pos": "CB",
+     "id": "4240459"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Luther Burden III",
+      "pos": "WR",
+      "id": "4685278"
+     },
+     {
+      "rank": 2,
+      "name": "Rome Odunze",
+      "pos": "WR",
+      "id": "4431299"
+     },
+     {
+      "rank": 3,
+      "name": "Kalif Raymond",
+      "pos": "WR",
+      "id": "2973405"
+     },
+     {
+      "rank": 4,
+      "name": "Zavion Thomas",
+      "pos": "WR",
+      "id": "4869748"
+     },
+     {
+      "rank": 5,
+      "name": "Jahdae Walker",
+      "pos": "WR",
+      "id": "5160110"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Caleb Williams",
+      "pos": "QB",
+      "id": "4431611"
+     },
+     {
+      "rank": 2,
+      "name": "Tyson Bagent",
+      "pos": "QB",
+      "id": "4434153"
+     },
+     {
+      "rank": 3,
+      "name": "Case Keenum",
+      "pos": "QB",
+      "id": "15168"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Colston Loveland",
+      "pos": "TE",
+      "id": "4723086"
+     },
+     {
+      "rank": 2,
+      "name": "Sam Roush",
+      "pos": "TE",
+      "id": "4685504"
+     },
+     {
+      "rank": 3,
+      "name": "Stephen Carlson",
+      "pos": "TE",
+      "id": "3948283"
+     },
+     {
+      "rank": 4,
+      "name": "Hayden Large",
+      "pos": "TE",
+      "id": "5150662"
+     },
+     {
+      "rank": 5,
+      "name": "Cole Kmet",
+      "pos": "TE",
+      "id": "4258595"
+     },
+     {
+      "rank": 6,
+      "name": "Nikola Kalinic",
+      "pos": "TE",
+      "id": "4916349"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "D'Andre Swift",
+      "pos": "RB",
+      "id": "4259545"
+     },
+     {
+      "rank": 2,
+      "name": "Kyle Monangai",
+      "pos": "RB",
+      "id": "4608686"
+     },
+     {
+      "rank": 3,
+      "name": "Roschon Johnson",
+      "pos": "RB",
+      "id": "4426386"
+     },
+     {
+      "rank": 4,
+      "name": "Zavier Scott",
+      "pos": "RB",
+      "id": "4257364"
+     },
+     {
+      "rank": 5,
+      "name": "Brittain Brown",
+      "pos": "RB",
+      "id": "4036032"
+     }
+    ]
+   }
+  },
+  "CIN": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Dohnte Meyers",
+     "pos": "WR",
+     "id": "4384852"
+    },
+    {
+     "rank": 2,
+     "name": "Tahj Brooks",
+     "pos": "RB",
+     "id": "4429299"
+    },
+    {
+     "rank": 3,
+     "name": "Samaje Perine",
+     "pos": "RB",
+     "id": "3116389"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Dohnte Meyers",
+     "pos": "WR",
+     "id": "4384852"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Ja'Marr Chase",
+      "pos": "WR",
+      "id": "4362628"
+     },
+     {
+      "rank": 2,
+      "name": "Tee Higgins",
+      "pos": "WR",
+      "id": "4239993"
+     },
+     {
+      "rank": 3,
+      "name": "Dohnte Meyers",
+      "pos": "WR",
+      "id": "4384852"
+     },
+     {
+      "rank": 4,
+      "name": "Colbie Young",
+      "pos": "WR",
+      "id": "5092508"
+     },
+     {
+      "rank": 5,
+      "name": "Mitchell Tinsley",
+      "pos": "WR",
+      "id": "4690070"
+     },
+     {
+      "rank": 6,
+      "name": "Andrei Iosivas",
+      "pos": "WR",
+      "id": "4368003"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Joe Burrow",
+      "pos": "QB",
+      "id": "3915511"
+     },
+     {
+      "rank": 2,
+      "name": "Joe Flacco",
+      "pos": "QB",
+      "id": "11252"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Mike Gesicki",
+      "pos": "TE",
+      "id": "3116164"
+     },
+     {
+      "rank": 2,
+      "name": "Drew Sample",
+      "pos": "TE",
+      "id": "3127310"
+     },
+     {
+      "rank": 3,
+      "name": "Cam Grandy",
+      "pos": "TE",
+      "id": "4700712"
+     },
+     {
+      "rank": 4,
+      "name": "Jack Endries",
+      "pos": "TE",
+      "id": "5085189"
+     },
+     {
+      "rank": 5,
+      "name": "Erick All Jr.",
+      "pos": "TE",
+      "id": "4427834"
+     },
+     {
+      "rank": 6,
+      "name": "Tanner Hudson",
+      "pos": "TE",
+      "id": "3050481"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Chase Brown",
+      "pos": "RB",
+      "id": "4362238"
+     },
+     {
+      "rank": 2,
+      "name": "Samaje Perine",
+      "pos": "RB",
+      "id": "3116389"
+     },
+     {
+      "rank": 3,
+      "name": "Tahj Brooks",
+      "pos": "RB",
+      "id": "4429299"
+     }
+    ]
+   }
+  },
+  "CLE": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Dylan Sampson",
+     "pos": "RB",
+     "id": "5081397"
+    },
+    {
+     "rank": 2,
+     "name": "Malachi Corley",
+     "pos": "WR",
+     "id": "4613104"
+    },
+    {
+     "rank": 3,
+     "name": "Jaleel McLaughlin",
+     "pos": "RB",
+     "id": "4722893"
+    },
+    {
+     "rank": 4,
+     "name": "Isaiah Bond",
+     "pos": "WR",
+     "id": "4808839"
+    },
+    {
+     "rank": 5,
+     "name": "Raheim Sanders",
+     "pos": "RB",
+     "id": "4601080"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "KC Concepcion",
+     "pos": "WR",
+     "id": "4870653"
+    },
+    {
+     "rank": 2,
+     "name": "Denzel Boston",
+     "pos": "WR",
+     "id": "4832800"
+    },
+    {
+     "rank": 3,
+     "name": "Isaiah Bond",
+     "pos": "WR",
+     "id": "4808839"
+    },
+    {
+     "rank": 4,
+     "name": "Tylan Wallace",
+     "pos": "WR",
+     "id": "4241424"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Denzel Boston",
+      "pos": "WR",
+      "id": "4832800"
+     },
+     {
+      "rank": 2,
+      "name": "KC Concepcion",
+      "pos": "WR",
+      "id": "4870653"
+     },
+     {
+      "rank": 3,
+      "name": "Jerry Jeudy",
+      "pos": "WR",
+      "id": "4241463"
+     },
+     {
+      "rank": 4,
+      "name": "Tylan Wallace",
+      "pos": "WR",
+      "id": "4241424"
+     },
+     {
+      "rank": 5,
+      "name": "Malachi Corley",
+      "pos": "WR",
+      "id": "4613104"
+     },
+     {
+      "rank": 6,
+      "name": "Isaiah Bond",
+      "pos": "WR",
+      "id": "4808839"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Deshaun Watson",
+      "pos": "QB",
+      "id": "3122840"
+     },
+     {
+      "rank": 2,
+      "name": "Shedeur Sanders",
+      "pos": "QB",
+      "id": "4432762"
+     },
+     {
+      "rank": 3,
+      "name": "Dillon Gabriel",
+      "pos": "QB",
+      "id": "4427238"
+     },
+     {
+      "rank": 4,
+      "name": "Taylen Green",
+      "pos": "QB",
+      "id": "4431325"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Harold Fannin Jr.",
+      "pos": "TE",
+      "id": "5083076"
+     },
+     {
+      "rank": 2,
+      "name": "Blake Whiteheart",
+      "pos": "TE",
+      "id": "4362018"
+     },
+     {
+      "rank": 3,
+      "name": "Carsen Ryan",
+      "pos": "TE",
+      "id": "4685540"
+     },
+     {
+      "rank": 4,
+      "name": "Zaire Mitchell-Paden",
+      "pos": "TE",
+      "id": "4876006"
+     },
+     {
+      "rank": 5,
+      "name": "Joe Royer",
+      "pos": "TE",
+      "id": "4565859"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Quinshon Judkins",
+      "pos": "RB",
+      "id": "4685702"
+     },
+     {
+      "rank": 2,
+      "name": "Dylan Sampson",
+      "pos": "RB",
+      "id": "5081397"
+     },
+     {
+      "rank": 3,
+      "name": "Jaleel McLaughlin",
+      "pos": "RB",
+      "id": "4722893"
+     },
+     {
+      "rank": 4,
+      "name": "Raheim Sanders",
+      "pos": "RB",
+      "id": "4601080"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Michael Burton",
+      "pos": "FB",
+      "id": "2515270"
+     }
+    ]
+   }
+  },
+  "DAL": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "KaVontae Turpin",
+     "pos": "WR",
+     "id": "3676833"
+    },
+    {
+     "rank": 2,
+     "name": "Tyler Goodson",
+     "pos": "RB",
+     "id": "4429676"
+    },
+    {
+     "rank": 3,
+     "name": "Malik Davis",
+     "pos": "RB",
+     "id": "4240603"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "KaVontae Turpin",
+     "pos": "WR",
+     "id": "3676833"
+    },
+    {
+     "rank": 2,
+     "name": "Jonathan Mingo",
+     "pos": "WR",
+     "id": "4426485"
+    },
+    {
+     "rank": 3,
+     "name": "Caleb Downs",
+     "pos": "S",
+     "id": "4870706"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "CeeDee Lamb",
+      "pos": "WR",
+      "id": "4241389"
+     },
+     {
+      "rank": 2,
+      "name": "George Pickens",
+      "pos": "WR",
+      "id": "4426354"
+     },
+     {
+      "rank": 3,
+      "name": "Ryan Flournoy",
+      "pos": "WR",
+      "id": "5083754"
+     },
+     {
+      "rank": 4,
+      "name": "KaVontae Turpin",
+      "pos": "WR",
+      "id": "3676833"
+     },
+     {
+      "rank": 5,
+      "name": "Jonathan Mingo",
+      "pos": "WR",
+      "id": "4426485"
+     },
+     {
+      "rank": 6,
+      "name": "Camden Brown",
+      "pos": "WR",
+      "id": "4808759"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Dak Prescott",
+      "pos": "QB",
+      "id": "2577417"
+     },
+     {
+      "rank": 2,
+      "name": "Sam Howell",
+      "pos": "QB",
+      "id": "4426875"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Jake Ferguson",
+      "pos": "TE",
+      "id": "4242355"
+     },
+     {
+      "rank": 2,
+      "name": "Brevyn Spann-Ford",
+      "pos": "TE",
+      "id": "4360967"
+     },
+     {
+      "rank": 3,
+      "name": "Luke Schoonmaker",
+      "pos": "TE",
+      "id": "4372096"
+     },
+     {
+      "rank": 4,
+      "name": "James Mitchell",
+      "pos": "TE",
+      "id": "4361988"
+     },
+     {
+      "rank": 5,
+      "name": "Princeton Fant",
+      "pos": "TE",
+      "id": "4242442"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Javonte Williams",
+      "pos": "RB",
+      "id": "4361579"
+     },
+     {
+      "rank": 2,
+      "name": "Israel Abanikanda",
+      "pos": "RB",
+      "id": "4429202"
+     },
+     {
+      "rank": 3,
+      "name": "Tyler Goodson",
+      "pos": "RB",
+      "id": "4429676"
+     },
+     {
+      "rank": 4,
+      "name": "Malik Davis",
+      "pos": "RB",
+      "id": "4240603"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Hunter Luepke",
+      "pos": "FB",
+      "id": "4383396"
+     }
+    ]
+   }
+  },
+  "DEN": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Marvin Mims Jr.",
+     "pos": "WR",
+     "id": "4686472"
+    },
+    {
+     "rank": 2,
+     "name": "Jonah Coleman",
+     "pos": "RB",
+     "id": "4702555"
+    },
+    {
+     "rank": 3,
+     "name": "RJ Harvey",
+     "pos": "RB",
+     "id": "4568490"
+    },
+    {
+     "rank": 4,
+     "name": "Tyler Badie",
+     "pos": "RB",
+     "id": "4362748"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Marvin Mims Jr.",
+     "pos": "WR",
+     "id": "4686472"
+    },
+    {
+     "rank": 2,
+     "name": "Kris Abrams-Draine",
+     "pos": "CB",
+     "id": "4429193"
+    },
+    {
+     "rank": 3,
+     "name": "Riley Moss",
+     "pos": "CB",
+     "id": "4382401"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Jaylen Waddle",
+      "pos": "WR",
+      "id": "4372016"
+     },
+     {
+      "rank": 2,
+      "name": "Courtland Sutton",
+      "pos": "WR",
+      "id": "3128429"
+     },
+     {
+      "rank": 3,
+      "name": "Pat Bryant",
+      "pos": "WR",
+      "id": "4600981"
+     },
+     {
+      "rank": 4,
+      "name": "Troy Franklin",
+      "pos": "WR",
+      "id": "4431280"
+     },
+     {
+      "rank": 5,
+      "name": "Marvin Mims Jr.",
+      "pos": "WR",
+      "id": "4686472"
+     },
+     {
+      "rank": 6,
+      "name": "Lil'Jordan Humphrey",
+      "pos": "WR",
+      "id": "4039057"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Bo Nix",
+      "pos": "QB",
+      "id": "4426338"
+     },
+     {
+      "rank": 2,
+      "name": "Jarrett Stidham",
+      "pos": "QB",
+      "id": "3892775"
+     },
+     {
+      "rank": 3,
+      "name": "Sam Ehlinger",
+      "pos": "QB",
+      "id": "4241820"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Evan Engram",
+      "pos": "TE",
+      "id": "3051876"
+     },
+     {
+      "rank": 2,
+      "name": "Adam Trautman",
+      "pos": "TE",
+      "id": "3911853"
+     },
+     {
+      "rank": 3,
+      "name": "Nate Adkins",
+      "pos": "TE",
+      "id": "4383440"
+     },
+     {
+      "rank": 4,
+      "name": "Dallen Bentley",
+      "pos": "TE",
+      "id": "5159802"
+     },
+     {
+      "rank": 5,
+      "name": "Caleb Lohner",
+      "pos": "TE",
+      "id": "4432208"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Jonah Coleman",
+      "pos": "RB",
+      "id": "4702555"
+     },
+     {
+      "rank": 2,
+      "name": "J.K. Dobbins",
+      "pos": "RB",
+      "id": "4241985"
+     },
+     {
+      "rank": 3,
+      "name": "RJ Harvey",
+      "pos": "RB",
+      "id": "4568490"
+     },
+     {
+      "rank": 4,
+      "name": "Tyler Badie",
+      "pos": "RB",
+      "id": "4362748"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Adam Prentice",
+      "pos": "FB",
+      "id": "3929914"
+     }
+    ]
+   }
+  },
+  "DET": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "DeAndre Carter",
+     "pos": "WR",
+     "id": "2580216"
+    },
+    {
+     "rank": 2,
+     "name": "Jacob Saylors",
+     "pos": "RB",
+     "id": "4383429"
+    },
+    {
+     "rank": 3,
+     "name": "Sione Vaki",
+     "pos": "RB",
+     "id": "4912274"
+    },
+    {
+     "rank": 4,
+     "name": "Tom Kennedy",
+     "pos": "WR",
+     "id": "3126997"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "DeAndre Carter",
+     "pos": "WR",
+     "id": "2580216"
+    },
+    {
+     "rank": 2,
+     "name": "Amon-Ra St. Brown",
+     "pos": "WR",
+     "id": "4374302"
+    },
+    {
+     "rank": 3,
+     "name": "Tay Martin",
+     "pos": "WR",
+     "id": "4245144"
+    },
+    {
+     "rank": 4,
+     "name": "Tom Kennedy",
+     "pos": "WR",
+     "id": "3126997"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Amon-Ra St. Brown",
+      "pos": "WR",
+      "id": "4374302"
+     },
+     {
+      "rank": 2,
+      "name": "Jameson Williams",
+      "pos": "WR",
+      "id": "4426388"
+     },
+     {
+      "rank": 3,
+      "name": "Isaac TeSlaa",
+      "pos": "WR",
+      "id": "5123663"
+     },
+     {
+      "rank": 4,
+      "name": "Tay Martin",
+      "pos": "WR",
+      "id": "4245144"
+     },
+     {
+      "rank": 5,
+      "name": "DeAndre Carter",
+      "pos": "WR",
+      "id": "2580216"
+     },
+     {
+      "rank": 6,
+      "name": "Tom Kennedy",
+      "pos": "WR",
+      "id": "3126997"
+     },
+     {
+      "rank": 7,
+      "name": "Kendrick Law",
+      "pos": "WR",
+      "id": "4685441"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Jared Goff",
+      "pos": "QB",
+      "id": "3046779"
+     },
+     {
+      "rank": 2,
+      "name": "Joshua Dobbs",
+      "pos": "QB",
+      "id": "3044720"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Sam LaPorta",
+      "pos": "TE",
+      "id": "4430027"
+     },
+     {
+      "rank": 2,
+      "name": "Brock Wright",
+      "pos": "TE",
+      "id": "4242392"
+     },
+     {
+      "rank": 3,
+      "name": "Tyler Conklin",
+      "pos": "TE",
+      "id": "3915486"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Jahmyr Gibbs",
+      "pos": "RB",
+      "id": "4429795"
+     },
+     {
+      "rank": 2,
+      "name": "Sione Vaki",
+      "pos": "RB",
+      "id": "4912274"
+     },
+     {
+      "rank": 3,
+      "name": "Jacob Saylors",
+      "pos": "RB",
+      "id": "4383429"
+     },
+     {
+      "rank": 4,
+      "name": "Isiah Pacheco",
+      "pos": "RB",
+      "id": "4361529"
+     }
+    ]
+   }
+  },
+  "GB": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Skyy Moore",
+     "pos": "WR",
+     "id": "4430191"
+    },
+    {
+     "rank": 2,
+     "name": "Bo Melton",
+     "pos": "WR",
+     "id": "4259305"
+    },
+    {
+     "rank": 3,
+     "name": "Savion Williams",
+     "pos": "WR",
+     "id": "4431487"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Skyy Moore",
+     "pos": "WR",
+     "id": "4430191"
+    },
+    {
+     "rank": 2,
+     "name": "Matthew Golden",
+     "pos": "WR",
+     "id": "4701936"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Christian Watson",
+      "pos": "WR",
+      "id": "4248528"
+     },
+     {
+      "rank": 2,
+      "name": "Matthew Golden",
+      "pos": "WR",
+      "id": "4701936"
+     },
+     {
+      "rank": 3,
+      "name": "Savion Williams",
+      "pos": "WR",
+      "id": "4431487"
+     },
+     {
+      "rank": 4,
+      "name": "Skyy Moore",
+      "pos": "WR",
+      "id": "4430191"
+     },
+     {
+      "rank": 5,
+      "name": "Bo Melton",
+      "pos": "WR",
+      "id": "4259305"
+     },
+     {
+      "rank": 6,
+      "name": "J. Michael Sturdivant",
+      "pos": "WR",
+      "id": "4635009"
+     },
+     {
+      "rank": 7,
+      "name": "Jayden Reed",
+      "pos": "WR",
+      "id": "4362249"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Jordan Love",
+      "pos": "QB",
+      "id": "4036378"
+     },
+     {
+      "rank": 2,
+      "name": "Tyrod Taylor",
+      "pos": "QB",
+      "id": "14163"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Tucker Kraft",
+      "pos": "TE",
+      "id": "4572680"
+     },
+     {
+      "rank": 2,
+      "name": "Mark Redman",
+      "pos": "TE",
+      "id": "4431346"
+     },
+     {
+      "rank": 3,
+      "name": "Jonnu Smith",
+      "pos": "TE",
+      "id": "3054212"
+     },
+     {
+      "rank": 4,
+      "name": "Drake Dabney",
+      "pos": "TE",
+      "id": "4429466"
+     },
+     {
+      "rank": 5,
+      "name": "Luke Musgrave",
+      "pos": "TE",
+      "id": "4428085"
+     },
+     {
+      "rank": 6,
+      "name": "Josh Whyle",
+      "pos": "TE",
+      "id": "4360086"
+     },
+     {
+      "rank": 7,
+      "name": "Thomas Yassmin",
+      "pos": "TE",
+      "id": "4361027"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Josh Jacobs",
+      "pos": "RB",
+      "id": "4047365"
+     },
+     {
+      "rank": 2,
+      "name": "MarShawn Lloyd",
+      "pos": "RB",
+      "id": "4429023"
+     },
+     {
+      "rank": 3,
+      "name": "Chris Brooks",
+      "pos": "RB",
+      "id": "3149687"
+     },
+     {
+      "rank": 4,
+      "name": "Kaleb Johnson",
+      "pos": "RB",
+      "id": "4819231"
+     },
+     {
+      "rank": 5,
+      "name": "Pierre Strong Jr.",
+      "pos": "RB",
+      "id": "4249836"
+     }
+    ]
+   }
+  },
+  "HOU": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Tremon Smith",
+     "pos": "CB",
+     "id": "3134448"
+    },
+    {
+     "rank": 2,
+     "name": "Woody Marks",
+     "pos": "RB",
+     "id": "4429059"
+    },
+    {
+     "rank": 3,
+     "name": "Xavier Hutchinson",
+     "pos": "WR",
+     "id": "4686422"
+    },
+    {
+     "rank": 4,
+     "name": "Nikko Remigio",
+     "pos": "WR",
+     "id": "4372716"
+    },
+    {
+     "rank": 5,
+     "name": "Jaylin Noel",
+     "pos": "WR",
+     "id": "4586312"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Tank Dell",
+     "pos": "WR",
+     "id": "4366031"
+    },
+    {
+     "rank": 2,
+     "name": "Tremon Smith",
+     "pos": "CB",
+     "id": "3134448"
+    },
+    {
+     "rank": 3,
+     "name": "Nikko Remigio",
+     "pos": "WR",
+     "id": "4372716"
+    },
+    {
+     "rank": 4,
+     "name": "Jaylin Noel",
+     "pos": "WR",
+     "id": "4586312"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Nico Collins",
+      "pos": "WR",
+      "id": "4258173"
+     },
+     {
+      "rank": 2,
+      "name": "Xavier Hutchinson",
+      "pos": "WR",
+      "id": "4686422"
+     },
+     {
+      "rank": 3,
+      "name": "Tank Dell",
+      "pos": "WR",
+      "id": "4366031"
+     },
+     {
+      "rank": 4,
+      "name": "Marvin Harrison Jr.",
+      "pos": "WR",
+      "id": "4432708"
+     },
+     {
+      "rank": 5,
+      "name": "Kayshon Boutte",
+      "pos": "WR",
+      "id": "4429022"
+     },
+     {
+      "rank": 6,
+      "name": "Nikko Remigio",
+      "pos": "WR",
+      "id": "4372716"
+     },
+     {
+      "rank": 7,
+      "name": "Jayden Higgins",
+      "pos": "WR",
+      "id": "4877706"
+     },
+     {
+      "rank": 8,
+      "name": "Jaylin Noel",
+      "pos": "WR",
+      "id": "4586312"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "C.J. Stroud",
+      "pos": "QB",
+      "id": "4432577"
+     },
+     {
+      "rank": 2,
+      "name": "Davis Mills",
+      "pos": "QB",
+      "id": "4242546"
+     },
+     {
+      "rank": 3,
+      "name": "Graham Mertz",
+      "pos": "QB",
+      "id": "4426335"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Dalton Schultz",
+      "pos": "TE",
+      "id": "3117256"
+     },
+     {
+      "rank": 2,
+      "name": "Foster Moreau",
+      "pos": "TE",
+      "id": "3843945"
+     },
+     {
+      "rank": 3,
+      "name": "Brevin Jordan",
+      "pos": "TE",
+      "id": "4362504"
+     },
+     {
+      "rank": 4,
+      "name": "Marlin Klein",
+      "pos": "TE",
+      "id": "4695705"
+     },
+     {
+      "rank": 5,
+      "name": "Cade Stover",
+      "pos": "TE",
+      "id": "4426496"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Woody Marks",
+      "pos": "RB",
+      "id": "4429059"
+     },
+     {
+      "rank": 2,
+      "name": "David Montgomery",
+      "pos": "RB",
+      "id": "4035538"
+     },
+     {
+      "rank": 3,
+      "name": "Emari Demercado",
+      "pos": "RB",
+      "id": "4362478"
+     },
+     {
+      "rank": 4,
+      "name": "Dare Ogunbowale",
+      "pos": "RB",
+      "id": "2983509"
+     },
+     {
+      "rank": 5,
+      "name": "British Brooks",
+      "pos": "RB",
+      "id": "4373273"
+     }
+    ]
+   }
+  },
+  "IND": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Seth McGowan",
+     "pos": "RB",
+     "id": "4686468"
+    },
+    {
+     "rank": 2,
+     "name": "Anthony Gould",
+     "pos": "WR",
+     "id": "4429684"
+    },
+    {
+     "rank": 3,
+     "name": "Deion Burks",
+     "pos": "WR",
+     "id": "4683151"
+    },
+    {
+     "rank": 4,
+     "name": "Ashton Dulin",
+     "pos": "WR",
+     "id": "4061956"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Anthony Gould",
+     "pos": "WR",
+     "id": "4429684"
+    },
+    {
+     "rank": 2,
+     "name": "Ashton Dulin",
+     "pos": "WR",
+     "id": "4061956"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Laquon Treadwell",
+      "pos": "WR",
+      "id": "3051889"
+     },
+     {
+      "rank": 2,
+      "name": "Ashton Dulin",
+      "pos": "WR",
+      "id": "4061956"
+     },
+     {
+      "rank": 3,
+      "name": "Anthony Gould",
+      "pos": "WR",
+      "id": "4429684"
+     },
+     {
+      "rank": 4,
+      "name": "Deion Burks",
+      "pos": "WR",
+      "id": "4683151"
+     },
+     {
+      "rank": 5,
+      "name": "Nick Westbrook-Ikhine",
+      "pos": "WR",
+      "id": "3929785"
+     },
+     {
+      "rank": 6,
+      "name": "Quez Watkins",
+      "pos": "WR",
+      "id": "4050373"
+     },
+     {
+      "rank": 7,
+      "name": "Alec Pierce",
+      "pos": "WR",
+      "id": "4360078"
+     },
+     {
+      "rank": 8,
+      "name": "D.J. Montgomery",
+      "pos": "WR",
+      "id": "4249030"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Daniel Jones",
+      "pos": "QB",
+      "id": "3917792"
+     },
+     {
+      "rank": 2,
+      "name": "Anthony Richardson Sr.",
+      "pos": "QB",
+      "id": "4429084"
+     },
+     {
+      "rank": 3,
+      "name": "Riley Leonard",
+      "pos": "QB",
+      "id": "4683423"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Tyler Warren",
+      "pos": "TE",
+      "id": "4431459"
+     },
+     {
+      "rank": 2,
+      "name": "Will Mallory",
+      "pos": "TE",
+      "id": "4362523"
+     },
+     {
+      "rank": 3,
+      "name": "Drew Ogletree",
+      "pos": "TE",
+      "id": "4722908"
+     },
+     {
+      "rank": 4,
+      "name": "Pharaoh Brown",
+      "pos": "TE",
+      "id": "2971281"
+     },
+     {
+      "rank": 5,
+      "name": "Mo Alie-Cox",
+      "pos": "TE",
+      "id": "2998565"
+     },
+     {
+      "rank": 6,
+      "name": "Carson Towt",
+      "pos": "TE",
+      "id": "4702120"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Jonathan Taylor",
+      "pos": "RB",
+      "id": "4242335"
+     },
+     {
+      "rank": 2,
+      "name": "Seth McGowan",
+      "pos": "RB",
+      "id": "4686468"
+     },
+     {
+      "rank": 3,
+      "name": "DJ Giddens",
+      "pos": "RB",
+      "id": "4874509"
+     }
+    ]
+   }
+  },
+  "JAX": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Ameer Abdullah",
+     "pos": "RB",
+     "id": "2576336"
+    },
+    {
+     "rank": 2,
+     "name": "Josh Cameron",
+     "pos": "WR",
+     "id": "4879194"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Parker Washington",
+     "pos": "WR",
+     "id": "4432620"
+    },
+    {
+     "rank": 2,
+     "name": "CJ Williams",
+     "pos": "WR",
+     "id": "5085024"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Parker Washington",
+      "pos": "WR",
+      "id": "4432620"
+     },
+     {
+      "rank": 2,
+      "name": "Jakobi Meyers",
+      "pos": "WR",
+      "id": "3916433"
+     },
+     {
+      "rank": 3,
+      "name": "Brian Thomas Jr.",
+      "pos": "WR",
+      "id": "4432773"
+     },
+     {
+      "rank": 4,
+      "name": "Josh Cameron",
+      "pos": "WR",
+      "id": "4879194"
+     },
+     {
+      "rank": 5,
+      "name": "Travis Hunter",
+      "pos": "WR",
+      "id": "4685415"
+     },
+     {
+      "rank": 6,
+      "name": "CJ Williams",
+      "pos": "WR",
+      "id": "5085024"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Trevor Lawrence",
+      "pos": "QB",
+      "id": "4360310"
+     },
+     {
+      "rank": 2,
+      "name": "Quinn Ewers",
+      "pos": "QB",
+      "id": "4889929"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Brenton Strange",
+      "pos": "TE",
+      "id": "4430539"
+     },
+     {
+      "rank": 2,
+      "name": "Nate Boerkircher",
+      "pos": "TE",
+      "id": "4686248"
+     },
+     {
+      "rank": 3,
+      "name": "Tanner Koziol",
+      "pos": "TE",
+      "id": "4917427"
+     },
+     {
+      "rank": 4,
+      "name": "Quintin Morris",
+      "pos": "TE",
+      "id": "4244049"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Bhayshul Tuten",
+      "pos": "RB",
+      "id": "4882093"
+     },
+     {
+      "rank": 2,
+      "name": "Chris Rodriguez Jr.",
+      "pos": "RB",
+      "id": "4362619"
+     },
+     {
+      "rank": 3,
+      "name": "Ameer Abdullah",
+      "pos": "RB",
+      "id": "2576336"
+     },
+     {
+      "rank": 4,
+      "name": "LeQuint Allen Jr.",
+      "pos": "RB",
+      "id": "4911851"
+     }
+    ]
+   }
+  },
+  "KC": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Emmett Johnson",
+     "pos": "RB",
+     "id": "4832955"
+    },
+    {
+     "rank": 2,
+     "name": "Brashard Smith",
+     "pos": "RB",
+     "id": "4596602"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Cyrus Allen",
+     "pos": "WR",
+     "id": "4912218"
+    },
+    {
+     "rank": 2,
+     "name": "Emmett Johnson",
+     "pos": "RB",
+     "id": "4832955"
+    },
+    {
+     "rank": 3,
+     "name": "Josh Downs",
+     "pos": "WR",
+     "id": "4688813"
+    },
+    {
+     "rank": 4,
+     "name": "Brashard Smith",
+     "pos": "RB",
+     "id": "4596602"
+    },
+    {
+     "rank": 5,
+     "name": "Tyquan Thornton",
+     "pos": "WR",
+     "id": "4362921"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Rashee Rice",
+      "pos": "WR",
+      "id": "4428331"
+     },
+     {
+      "rank": 2,
+      "name": "Josh Downs",
+      "pos": "WR",
+      "id": "4688813"
+     },
+     {
+      "rank": 3,
+      "name": "Xavier Worthy",
+      "pos": "WR",
+      "id": "4683062"
+     },
+     {
+      "rank": 4,
+      "name": "Cyrus Allen",
+      "pos": "WR",
+      "id": "4912218"
+     },
+     {
+      "rank": 5,
+      "name": "Jalen Royals",
+      "pos": "WR",
+      "id": "5082630"
+     },
+     {
+      "rank": 6,
+      "name": "Andrew Armstrong",
+      "pos": "WR",
+      "id": "5093923"
+     },
+     {
+      "rank": 7,
+      "name": "Jacob De Jesus",
+      "pos": "WR",
+      "id": "5155179"
+     },
+     {
+      "rank": 8,
+      "name": "Tyquan Thornton",
+      "pos": "WR",
+      "id": "4362921"
+     },
+     {
+      "rank": 9,
+      "name": "Jeff Caldwell",
+      "pos": "WR",
+      "id": "4885466"
+     },
+     {
+      "rank": 10,
+      "name": "Jimmy Holiday",
+      "pos": "WR",
+      "id": "4431142"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Patrick Mahomes",
+      "pos": "QB",
+      "id": "3139477"
+     },
+     {
+      "rank": 2,
+      "name": "Justin Fields",
+      "pos": "QB",
+      "id": "4362887"
+     },
+     {
+      "rank": 3,
+      "name": "Garrett Nussmeier",
+      "pos": "QB",
+      "id": "4567747"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Travis Kelce",
+      "pos": "TE",
+      "id": "15847"
+     },
+     {
+      "rank": 2,
+      "name": "Noah Gray",
+      "pos": "TE",
+      "id": "4240472"
+     },
+     {
+      "rank": 3,
+      "name": "Jake Briningstool",
+      "pos": "TE",
+      "id": "4431196"
+     },
+     {
+      "rank": 4,
+      "name": "Jared Wiley",
+      "pos": "TE",
+      "id": "4430723"
+     },
+     {
+      "rank": 5,
+      "name": "John Michael Gyllenborg",
+      "pos": "TE",
+      "id": "4708490"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Kenneth Walker III",
+      "pos": "RB",
+      "id": "4567048"
+     },
+     {
+      "rank": 2,
+      "name": "Emmett Johnson",
+      "pos": "RB",
+      "id": "4832955"
+     },
+     {
+      "rank": 3,
+      "name": "Jaydn Ott",
+      "pos": "RB",
+      "id": "4685489"
+     },
+     {
+      "rank": 4,
+      "name": "Nate Carter",
+      "pos": "RB",
+      "id": "4605841"
+     },
+     {
+      "rank": 5,
+      "name": "Brashard Smith",
+      "pos": "RB",
+      "id": "4596602"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Ben VanSumeren",
+      "pos": "FB",
+      "id": "4372070"
+     }
+    ]
+   }
+  },
+  "LV": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Dylan Laube",
+     "pos": "RB",
+     "id": "4366963"
+    },
+    {
+     "rank": 2,
+     "name": "Dareke Young",
+     "pos": "WR",
+     "id": "4401805"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Malik Benson",
+     "pos": "WR",
+     "id": "5150247"
+    },
+    {
+     "rank": 2,
+     "name": "Dylan Laube",
+     "pos": "RB",
+     "id": "4366963"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Tre Tucker",
+      "pos": "WR",
+      "id": "4428718"
+     },
+     {
+      "rank": 2,
+      "name": "Jalen Nailor",
+      "pos": "WR",
+      "id": "4382466"
+     },
+     {
+      "rank": 3,
+      "name": "Jack Bech",
+      "pos": "WR",
+      "id": "4603186"
+     },
+     {
+      "rank": 4,
+      "name": "Dont'e Thornton Jr.",
+      "pos": "WR",
+      "id": "4432775"
+     },
+     {
+      "rank": 5,
+      "name": "Dareke Young",
+      "pos": "WR",
+      "id": "4401805"
+     },
+     {
+      "rank": 6,
+      "name": "Malik Benson",
+      "pos": "WR",
+      "id": "5150247"
+     },
+     {
+      "rank": 7,
+      "name": "Cody White",
+      "pos": "WR",
+      "id": "4241983"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Fernando Mendoza",
+      "pos": "QB",
+      "id": "4837248"
+     },
+     {
+      "rank": 2,
+      "name": "Aidan O'Connell",
+      "pos": "QB",
+      "id": "4260394"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Brock Bowers",
+      "pos": "TE",
+      "id": "4432665"
+     },
+     {
+      "rank": 2,
+      "name": "Michael Mayer",
+      "pos": "TE",
+      "id": "4429086"
+     },
+     {
+      "rank": 3,
+      "name": "Ian Thomas",
+      "pos": "TE",
+      "id": "4045305"
+     },
+     {
+      "rank": 4,
+      "name": "Carter Runyon",
+      "pos": "TE",
+      "id": "5155825"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Ashton Jeanty",
+      "pos": "RB",
+      "id": "4890973"
+     },
+     {
+      "rank": 2,
+      "name": "Mike Washington Jr.",
+      "pos": "RB",
+      "id": "4686658"
+     },
+     {
+      "rank": 3,
+      "name": "Dylan Laube",
+      "pos": "RB",
+      "id": "4366963"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Connor Heyward",
+      "pos": "FB",
+      "id": "4241961"
+     }
+    ]
+   }
+  },
+  "LAC": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Keaton Mitchell",
+     "pos": "RB",
+     "id": "4596334"
+    },
+    {
+     "rank": 2,
+     "name": "KeAndre Lambert-Smith",
+     "pos": "WR",
+     "id": "4430870"
+    },
+    {
+     "rank": 3,
+     "name": "Kimani Vidal",
+     "pos": "RB",
+     "id": "4430968"
+    },
+    {
+     "rank": 4,
+     "name": "Derius Davis",
+     "pos": "WR",
+     "id": "4362477"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Derius Davis",
+     "pos": "WR",
+     "id": "4362477"
+    },
+    {
+     "rank": 2,
+     "name": "Brenen Thompson",
+     "pos": "WR",
+     "id": "4685553"
+    },
+    {
+     "rank": 3,
+     "name": "KeAndre Lambert-Smith",
+     "pos": "WR",
+     "id": "4430870"
+    },
+    {
+     "rank": 4,
+     "name": "Ladd McConkey",
+     "pos": "WR",
+     "id": "4612826"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Ladd McConkey",
+      "pos": "WR",
+      "id": "4612826"
+     },
+     {
+      "rank": 2,
+      "name": "Quentin Johnston",
+      "pos": "WR",
+      "id": "4429025"
+     },
+     {
+      "rank": 3,
+      "name": "Tre' Harris",
+      "pos": "WR",
+      "id": "4686612"
+     },
+     {
+      "rank": 4,
+      "name": "KeAndre Lambert-Smith",
+      "pos": "WR",
+      "id": "4430870"
+     },
+     {
+      "rank": 5,
+      "name": "Brenen Thompson",
+      "pos": "WR",
+      "id": "4685553"
+     },
+     {
+      "rank": 6,
+      "name": "Derius Davis",
+      "pos": "WR",
+      "id": "4362477"
+     },
+     {
+      "rank": 7,
+      "name": "Theo Wease Jr.",
+      "pos": "WR",
+      "id": "4426535"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Justin Herbert",
+      "pos": "QB",
+      "id": "4038941"
+     },
+     {
+      "rank": 2,
+      "name": "DJ Uiagalelei",
+      "pos": "QB",
+      "id": "4429020"
+     },
+     {
+      "rank": 3,
+      "name": "Trey Lance",
+      "pos": "QB",
+      "id": "4383351"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Charlie Kolar",
+      "pos": "TE",
+      "id": "4241263"
+     },
+     {
+      "rank": 2,
+      "name": "Oronde Gadsden",
+      "pos": "TE",
+      "id": "4595342"
+     },
+     {
+      "rank": 3,
+      "name": "David Njoku",
+      "pos": "TE",
+      "id": "3123076"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Omarion Hampton",
+      "pos": "RB",
+      "id": "4685382"
+     },
+     {
+      "rank": 2,
+      "name": "Kimani Vidal",
+      "pos": "RB",
+      "id": "4430968"
+     },
+     {
+      "rank": 3,
+      "name": "Keaton Mitchell",
+      "pos": "RB",
+      "id": "4596334"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Scott Matlock",
+      "pos": "FB",
+      "id": "4373684"
+     },
+     {
+      "rank": 2,
+      "name": "Alec Ingold",
+      "pos": "FB",
+      "id": "3917668"
+     }
+    ]
+   }
+  },
+  "LAR": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Xavier Smith",
+     "pos": "WR",
+     "id": "4386544"
+    },
+    {
+     "rank": 2,
+     "name": "Ronnie Rivers",
+     "pos": "RB",
+     "id": "4243003"
+    },
+    {
+     "rank": 3,
+     "name": "Brennan Presley",
+     "pos": "WR",
+     "id": "4431342"
+    },
+    {
+     "rank": 4,
+     "name": "Dean Connors",
+     "pos": "RB",
+     "id": "5082269"
+    },
+    {
+     "rank": 5,
+     "name": "Jordan Whittington",
+     "pos": "WR",
+     "id": "4569382"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Xavier Smith",
+     "pos": "WR",
+     "id": "4386544"
+    },
+    {
+     "rank": 2,
+     "name": "Brennan Presley",
+     "pos": "WR",
+     "id": "4431342"
+    },
+    {
+     "rank": 3,
+     "name": "Jordan Whittington",
+     "pos": "WR",
+     "id": "4569382"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Konata Mumpfield",
+      "pos": "WR",
+      "id": "4710855"
+     },
+     {
+      "rank": 2,
+      "name": "Tutu Atwell",
+      "pos": "WR",
+      "id": "4360797"
+     },
+     {
+      "rank": 3,
+      "name": "CJ Daniels",
+      "pos": "WR",
+      "id": "4605951"
+     },
+     {
+      "rank": 4,
+      "name": "Xavier Smith",
+      "pos": "WR",
+      "id": "4386544"
+     },
+     {
+      "rank": 5,
+      "name": "Brennan Presley",
+      "pos": "WR",
+      "id": "4431342"
+     },
+     {
+      "rank": 6,
+      "name": "Puka Nacua",
+      "pos": "WR",
+      "id": "4426515"
+     },
+     {
+      "rank": 7,
+      "name": "Davante Adams",
+      "pos": "WR",
+      "id": "16800"
+     },
+     {
+      "rank": 8,
+      "name": "Jordan Whittington",
+      "pos": "WR",
+      "id": "4569382"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Matthew Stafford",
+      "pos": "QB",
+      "id": "12483"
+     },
+     {
+      "rank": 2,
+      "name": "Stetson Bennett IV",
+      "pos": "QB",
+      "id": "4259553"
+     },
+     {
+      "rank": 3,
+      "name": "Ty Simpson",
+      "pos": "QB",
+      "id": "4685522"
+     },
+     {
+      "rank": 4,
+      "name": "Matthew Caldwell",
+      "pos": "QB",
+      "id": "4877717"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Tyler Higbee",
+      "pos": "TE",
+      "id": "2573401"
+     },
+     {
+      "rank": 2,
+      "name": "Colby Parkinson",
+      "pos": "TE",
+      "id": "4242557"
+     },
+     {
+      "rank": 3,
+      "name": "Davis Allen",
+      "pos": "TE",
+      "id": "4426553"
+     },
+     {
+      "rank": 4,
+      "name": "Max Klare",
+      "pos": "TE",
+      "id": "4833029"
+     },
+     {
+      "rank": 5,
+      "name": "Terrance Ferguson",
+      "pos": "TE",
+      "id": "4570037"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Kyren Williams",
+      "pos": "RB",
+      "id": "4430737"
+     },
+     {
+      "rank": 2,
+      "name": "Blake Corum",
+      "pos": "RB",
+      "id": "4429096"
+     },
+     {
+      "rank": 3,
+      "name": "Ronnie Rivers",
+      "pos": "RB",
+      "id": "4243003"
+     },
+     {
+      "rank": 4,
+      "name": "Dean Connors",
+      "pos": "RB",
+      "id": "5082269"
+     }
+    ]
+   }
+  },
+  "MIA": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Jaylen Wright",
+     "pos": "RB",
+     "id": "4682745"
+    },
+    {
+     "rank": 2,
+     "name": "Malik Washington",
+     "pos": "WR",
+     "id": "4569603"
+    },
+    {
+     "rank": 3,
+     "name": "Kevin Coleman Jr.",
+     "pos": "WR",
+     "id": "4685307"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Malik Washington",
+     "pos": "WR",
+     "id": "4569603"
+    },
+    {
+     "rank": 2,
+     "name": "Kevin Coleman Jr.",
+     "pos": "WR",
+     "id": "4685307"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Malik Washington",
+      "pos": "WR",
+      "id": "4569603"
+     },
+     {
+      "rank": 2,
+      "name": "Caleb Douglas",
+      "pos": "WR",
+      "id": "4869645"
+     },
+     {
+      "rank": 3,
+      "name": "Chris Bell",
+      "pos": "WR",
+      "id": "4869961"
+     },
+     {
+      "rank": 4,
+      "name": "Kevin Coleman Jr.",
+      "pos": "WR",
+      "id": "4685307"
+     },
+     {
+      "rank": 5,
+      "name": "Jalen Tolbert",
+      "pos": "WR",
+      "id": "4249417"
+     },
+     {
+      "rank": 6,
+      "name": "Jared Wayne",
+      "pos": "WR",
+      "id": "4430681"
+     },
+     {
+      "rank": 7,
+      "name": "Jalen Reagor",
+      "pos": "WR",
+      "id": "4241802"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Kyle McCord",
+      "pos": "QB",
+      "id": "4433971"
+     },
+     {
+      "rank": 2,
+      "name": "Brady Cook",
+      "pos": "QB",
+      "id": "4429435"
+     },
+     {
+      "rank": 3,
+      "name": "Malik Willis",
+      "pos": "QB",
+      "id": "4242512"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Greg Dulcich",
+      "pos": "TE",
+      "id": "4367209"
+     },
+     {
+      "rank": 2,
+      "name": "Will Kacmarek",
+      "pos": "TE",
+      "id": "4880236"
+     },
+     {
+      "rank": 3,
+      "name": "Seydou Traore",
+      "pos": "TE",
+      "id": "4714379"
+     },
+     {
+      "rank": 4,
+      "name": "Justin Joly",
+      "pos": "TE",
+      "id": "4912052"
+     },
+     {
+      "rank": 5,
+      "name": "Cole Turner",
+      "pos": "TE",
+      "id": "4361438"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Ollie Gordon II",
+      "pos": "RB",
+      "id": "4711533"
+     },
+     {
+      "rank": 2,
+      "name": "Jaylen Wright",
+      "pos": "RB",
+      "id": "4682745"
+     },
+     {
+      "rank": 3,
+      "name": "Kaytron Allen",
+      "pos": "RB",
+      "id": "4685246"
+     },
+     {
+      "rank": 4,
+      "name": "De'Von Achane",
+      "pos": "RB",
+      "id": "4429160"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "DJ Herman",
+      "pos": "FB",
+      "id": "4685116"
+     }
+    ]
+   }
+  },
+  "MIN": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Myles Price",
+     "pos": "WR",
+     "id": "4430656"
+    },
+    {
+     "rank": 2,
+     "name": "Demond Claiborne",
+     "pos": "RB",
+     "id": "4832846"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Myles Price",
+     "pos": "WR",
+     "id": "4430656"
+    },
+    {
+     "rank": 2,
+     "name": "Tai Felton",
+     "pos": "WR",
+     "id": "4565185"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Justin Jefferson",
+      "pos": "WR",
+      "id": "4262921"
+     },
+     {
+      "rank": 2,
+      "name": "Jordan Addison",
+      "pos": "WR",
+      "id": "4429205"
+     },
+     {
+      "rank": 3,
+      "name": "Jauan Jennings",
+      "pos": "WR",
+      "id": "3886598"
+     },
+     {
+      "rank": 4,
+      "name": "Myles Price",
+      "pos": "WR",
+      "id": "4430656"
+     },
+     {
+      "rank": 5,
+      "name": "Tai Felton",
+      "pos": "WR",
+      "id": "4565185"
+     },
+     {
+      "rank": 6,
+      "name": "Jeshaun Jones",
+      "pos": "WR",
+      "id": "4360637"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Kirk Cousins",
+      "pos": "QB",
+      "id": "14880"
+     },
+     {
+      "rank": 2,
+      "name": "Kyler Murray",
+      "pos": "QB",
+      "id": "3917315"
+     },
+     {
+      "rank": 3,
+      "name": "Carson Wentz",
+      "pos": "QB",
+      "id": "2573079"
+     },
+     {
+      "rank": 4,
+      "name": "Max Brosmer",
+      "pos": "QB",
+      "id": "4573398"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "T.J. Hockenson",
+      "pos": "TE",
+      "id": "4036133"
+     },
+     {
+      "rank": 2,
+      "name": "Ben Yurosek",
+      "pos": "TE",
+      "id": "4433959"
+     },
+     {
+      "rank": 3,
+      "name": "Gavin Bartholomew",
+      "pos": "TE",
+      "id": "4708049"
+     },
+     {
+      "rank": 4,
+      "name": "Devin Culp",
+      "pos": "TE",
+      "id": "4361112"
+     },
+     {
+      "rank": 5,
+      "name": "Josh Oliver",
+      "pos": "TE",
+      "id": "3921690"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Jordan Mason",
+      "pos": "RB",
+      "id": "4360569"
+     },
+     {
+      "rank": 2,
+      "name": "Aaron Jones Sr.",
+      "pos": "RB",
+      "id": "3042519"
+     },
+     {
+      "rank": 3,
+      "name": "DeeJay Dallas",
+      "pos": "RB",
+      "id": "4240631"
+     },
+     {
+      "rank": 4,
+      "name": "Demond Claiborne",
+      "pos": "RB",
+      "id": "4832846"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Max Bredeson",
+      "pos": "FB",
+      "id": "4878695"
+     }
+    ]
+   }
+  },
+  "NE": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Kyle Williams",
+     "pos": "WR",
+     "id": "4613202"
+    },
+    {
+     "rank": 2,
+     "name": "Corey Kiner",
+     "pos": "RB",
+     "id": "4431431"
+    },
+    {
+     "rank": 3,
+     "name": "Lan Larison",
+     "pos": "RB",
+     "id": "4698253"
+    },
+    {
+     "rank": 4,
+     "name": "Channing Canada",
+     "pos": "CB",
+     "id": "4688779"
+    },
+    {
+     "rank": 5,
+     "name": "TreVeyon Henderson",
+     "pos": "RB",
+     "id": "4432710"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Marcus Jones",
+     "pos": "CB",
+     "id": "4241720"
+    },
+    {
+     "rank": 2,
+     "name": "Efton Chism III",
+     "pos": "WR",
+     "id": "4695193"
+    },
+    {
+     "rank": 3,
+     "name": "DeMario Douglas",
+     "pos": "WR",
+     "id": "4427095"
+    },
+    {
+     "rank": 4,
+     "name": "Romeo Doubs",
+     "pos": "WR",
+     "id": "4361432"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "A.J. Brown",
+      "pos": "WR",
+      "id": "4047646"
+     },
+     {
+      "rank": 2,
+      "name": "DeMario Douglas",
+      "pos": "WR",
+      "id": "4427095"
+     },
+     {
+      "rank": 3,
+      "name": "Mack Hollins",
+      "pos": "WR",
+      "id": "2991662"
+     },
+     {
+      "rank": 4,
+      "name": "Efton Chism III",
+      "pos": "WR",
+      "id": "4695193"
+     },
+     {
+      "rank": 5,
+      "name": "Kyle Williams",
+      "pos": "WR",
+      "id": "4613202"
+     },
+     {
+      "rank": 6,
+      "name": "Romeo Doubs",
+      "pos": "WR",
+      "id": "4361432"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Drake Maye",
+      "pos": "QB",
+      "id": "4431452"
+     },
+     {
+      "rank": 2,
+      "name": "Tommy DeVito",
+      "pos": "QB",
+      "id": "4240391"
+     },
+     {
+      "rank": 3,
+      "name": "Behren Morton",
+      "pos": "QB",
+      "id": "4431465"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Hunter Henry",
+      "pos": "TE",
+      "id": "3046439"
+     },
+     {
+      "rank": 2,
+      "name": "Eli Raridon",
+      "pos": "TE",
+      "id": "4831959"
+     },
+     {
+      "rank": 3,
+      "name": "Cameron Latu",
+      "pos": "TE",
+      "id": "4372026"
+     },
+     {
+      "rank": 4,
+      "name": "Julian Hill",
+      "pos": "TE",
+      "id": "4365395"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Rhamondre Stevenson",
+      "pos": "RB",
+      "id": "4569173"
+     },
+     {
+      "rank": 2,
+      "name": "Corey Kiner",
+      "pos": "RB",
+      "id": "4431431"
+     },
+     {
+      "rank": 3,
+      "name": "Lan Larison",
+      "pos": "RB",
+      "id": "4698253"
+     },
+     {
+      "rank": 4,
+      "name": "TreVeyon Henderson",
+      "pos": "RB",
+      "id": "4432710"
+     },
+     {
+      "rank": 5,
+      "name": "Myles Montgomery",
+      "pos": "RB",
+      "id": "4676889"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Reggie Gilliam",
+      "pos": "FB",
+      "id": "4039505"
+     }
+    ]
+   }
+  },
+  "NO": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Barion Brown",
+     "pos": "WR",
+     "id": "4698597"
+    },
+    {
+     "rank": 2,
+     "name": "Bryce Lance",
+     "pos": "WR",
+     "id": "4879276"
+    },
+    {
+     "rank": 3,
+     "name": "Mason Tipton",
+     "pos": "WR",
+     "id": "4573697"
+    },
+    {
+     "rank": 4,
+     "name": "Ty Chandler",
+     "pos": "RB",
+     "id": "4242431"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Barion Brown",
+     "pos": "WR",
+     "id": "4698597"
+    },
+    {
+     "rank": 2,
+     "name": "Mason Tipton",
+     "pos": "WR",
+     "id": "4573697"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Chris Olave",
+      "pos": "WR",
+      "id": "4361370"
+     },
+     {
+      "rank": 2,
+      "name": "Jordyn Tyson",
+      "pos": "WR",
+      "id": "4880281"
+     },
+     {
+      "rank": 3,
+      "name": "Devaughn Vele",
+      "pos": "WR",
+      "id": "4569559"
+     },
+     {
+      "rank": 4,
+      "name": "Bryce Lance",
+      "pos": "WR",
+      "id": "4879276"
+     },
+     {
+      "rank": 5,
+      "name": "Barion Brown",
+      "pos": "WR",
+      "id": "4698597"
+     },
+     {
+      "rank": 6,
+      "name": "Mason Tipton",
+      "pos": "WR",
+      "id": "4573697"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Tyler Shough",
+      "pos": "QB",
+      "id": "4360689"
+     },
+     {
+      "rank": 2,
+      "name": "Spencer Rattler",
+      "pos": "QB",
+      "id": "4426339"
+     },
+     {
+      "rank": 3,
+      "name": "Zach Wilson",
+      "pos": "QB",
+      "id": "4361259"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Juwan Johnson",
+      "pos": "TE",
+      "id": "3929645"
+     },
+     {
+      "rank": 2,
+      "name": "Noah Fant",
+      "pos": "TE",
+      "id": "4036131"
+     },
+     {
+      "rank": 3,
+      "name": "Oscar Delp",
+      "pos": "TE",
+      "id": "4702559"
+     },
+     {
+      "rank": 4,
+      "name": "Moliki Matavao",
+      "pos": "TE",
+      "id": "4432731"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Travis Etienne Jr.",
+      "pos": "RB",
+      "id": "4239996"
+     },
+     {
+      "rank": 2,
+      "name": "Alvin Kamara",
+      "pos": "RB",
+      "id": "3054850"
+     },
+     {
+      "rank": 3,
+      "name": "Audric Estime",
+      "pos": "RB",
+      "id": "4569682"
+     },
+     {
+      "rank": 4,
+      "name": "CJ Donaldson",
+      "pos": "RB",
+      "id": "5081999"
+     },
+     {
+      "rank": 5,
+      "name": "Ty Chandler",
+      "pos": "RB",
+      "id": "4242431"
+     }
+    ]
+   }
+  },
+  "NYG": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Charlie Jones",
+     "pos": "WR",
+     "id": "4257188"
+    },
+    {
+     "rank": 2,
+     "name": "Deonte Banks",
+     "pos": "CB",
+     "id": "4428328"
+    },
+    {
+     "rank": 3,
+     "name": "Tyrone Tracy Jr.",
+     "pos": "RB",
+     "id": "4360516"
+    },
+    {
+     "rank": 4,
+     "name": "Braxton Berrios",
+     "pos": "WR",
+     "id": "3123075"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Charlie Jones",
+     "pos": "WR",
+     "id": "4257188"
+    },
+    {
+     "rank": 2,
+     "name": "Jevon Holland",
+     "pos": "S",
+     "id": "4373809"
+    },
+    {
+     "rank": 3,
+     "name": "Calvin Austin III",
+     "pos": "WR",
+     "id": "4243389"
+    },
+    {
+     "rank": 4,
+     "name": "Braxton Berrios",
+     "pos": "WR",
+     "id": "3123075"
+    },
+    {
+     "rank": 5,
+     "name": "Gunner Olszewski",
+     "pos": "WR",
+     "id": "4424106"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Malik Nabers",
+      "pos": "WR",
+      "id": "4595348"
+     },
+     {
+      "rank": 2,
+      "name": "Malachi Fields",
+      "pos": "WR",
+      "id": "4682648"
+     },
+     {
+      "rank": 3,
+      "name": "Darnell Mooney",
+      "pos": "WR",
+      "id": "4040655"
+     },
+     {
+      "rank": 4,
+      "name": "Charlie Jones",
+      "pos": "WR",
+      "id": "4257188"
+     },
+     {
+      "rank": 5,
+      "name": "Jalin Hyatt",
+      "pos": "WR",
+      "id": "4692590"
+     },
+     {
+      "rank": 6,
+      "name": "Calvin Austin III",
+      "pos": "WR",
+      "id": "4243389"
+     },
+     {
+      "rank": 7,
+      "name": "Braxton Berrios",
+      "pos": "WR",
+      "id": "3123075"
+     },
+     {
+      "rank": 8,
+      "name": "Gunner Olszewski",
+      "pos": "WR",
+      "id": "4424106"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "J.J. McCarthy",
+      "pos": "QB",
+      "id": "4433970"
+     },
+     {
+      "rank": 2,
+      "name": "Jameis Winston",
+      "pos": "QB",
+      "id": "2969939"
+     },
+     {
+      "rank": 3,
+      "name": "Jaxson Dart",
+      "pos": "QB",
+      "id": "4689114"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Isaiah Likely",
+      "pos": "TE",
+      "id": "4361050"
+     },
+     {
+      "rank": 2,
+      "name": "Theo Johnson",
+      "pos": "TE",
+      "id": "4429148"
+     },
+     {
+      "rank": 3,
+      "name": "Chris Manhertz",
+      "pos": "TE",
+      "id": "2531358"
+     },
+     {
+      "rank": 4,
+      "name": "Thomas Fidone II",
+      "pos": "TE",
+      "id": "4590292"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Cam Skattebo",
+      "pos": "RB",
+      "id": "4696981"
+     },
+     {
+      "rank": 2,
+      "name": "Devin Singletary",
+      "pos": "RB",
+      "id": "4040761"
+     },
+     {
+      "rank": 3,
+      "name": "Greg Desrosiers Jr.",
+      "pos": "RB",
+      "id": "4691889"
+     },
+     {
+      "rank": 4,
+      "name": "Tyrone Tracy Jr.",
+      "pos": "RB",
+      "id": "4360516"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Patrick Ricard",
+      "pos": "FB",
+      "id": "2975417"
+     }
+    ]
+   }
+  },
+  "NYJ": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Kene Nwangwu",
+     "pos": "RB",
+     "id": "4035537"
+    },
+    {
+     "rank": 2,
+     "name": "Isaiah Williams",
+     "pos": "WR",
+     "id": "4569371"
+    },
+    {
+     "rank": 3,
+     "name": "Arian Smith",
+     "pos": "WR",
+     "id": "4429105"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Isaiah Williams",
+     "pos": "WR",
+     "id": "4569371"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Garrett Wilson",
+      "pos": "WR",
+      "id": "4569618"
+     },
+     {
+      "rank": 2,
+      "name": "Omar Cooper Jr.",
+      "pos": "WR",
+      "id": "4723820"
+     },
+     {
+      "rank": 3,
+      "name": "Adonai Mitchell",
+      "pos": "WR",
+      "id": "4597500"
+     },
+     {
+      "rank": 4,
+      "name": "Isaiah Williams",
+      "pos": "WR",
+      "id": "4569371"
+     },
+     {
+      "rank": 5,
+      "name": "Malik McClain",
+      "pos": "WR",
+      "id": "4682509"
+     },
+     {
+      "rank": 6,
+      "name": "Tim Patrick",
+      "pos": "WR",
+      "id": "3134353"
+     },
+     {
+      "rank": 7,
+      "name": "Arian Smith",
+      "pos": "WR",
+      "id": "4429105"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Geno Smith",
+      "pos": "QB",
+      "id": "15864"
+     },
+     {
+      "rank": 2,
+      "name": "Cade Klubnik",
+      "pos": "QB",
+      "id": "4685413"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Mason Taylor",
+      "pos": "TE",
+      "id": "4808766"
+     },
+     {
+      "rank": 2,
+      "name": "Kenyon Sadiq",
+      "pos": "TE",
+      "id": "5083315"
+     },
+     {
+      "rank": 3,
+      "name": "Jeremy Ruckert",
+      "pos": "TE",
+      "id": "4361372"
+     },
+     {
+      "rank": 4,
+      "name": "Jelani Woods",
+      "pos": "TE",
+      "id": "4241410"
+     },
+     {
+      "rank": 5,
+      "name": "Andrew Beck",
+      "pos": "FB",
+      "id": "3125107"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Breece Hall",
+      "pos": "RB",
+      "id": "4427366"
+     },
+     {
+      "rank": 2,
+      "name": "Braelon Allen",
+      "pos": "RB",
+      "id": "4685247"
+     },
+     {
+      "rank": 3,
+      "name": "Isaiah Davis",
+      "pos": "RB",
+      "id": "4695404"
+     },
+     {
+      "rank": 4,
+      "name": "Kene Nwangwu",
+      "pos": "RB",
+      "id": "4035537"
+     },
+     {
+      "rank": 5,
+      "name": "Chip Trayanum",
+      "pos": "RB",
+      "id": "4430893"
+     }
+    ]
+   }
+  },
+  "PHI": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Britain Covey",
+     "pos": "WR",
+     "id": "3926231"
+    },
+    {
+     "rank": 2,
+     "name": "Darius Cooper",
+     "pos": "WR",
+     "id": "4715355"
+    },
+    {
+     "rank": 3,
+     "name": "Will Shipley",
+     "pos": "RB",
+     "id": "4431545"
+    },
+    {
+     "rank": 4,
+     "name": "Tank Bigsby",
+     "pos": "RB",
+     "id": "4429013"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Britain Covey",
+     "pos": "WR",
+     "id": "3926231"
+    },
+    {
+     "rank": 2,
+     "name": "Makai Lemon",
+     "pos": "WR",
+     "id": "4870795"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "DeVonta Smith",
+      "pos": "WR",
+      "id": "4241478"
+     },
+     {
+      "rank": 2,
+      "name": "Dontayvion Wicks",
+      "pos": "WR",
+      "id": "4428850"
+     },
+     {
+      "rank": 3,
+      "name": "Makai Lemon",
+      "pos": "WR",
+      "id": "4870795"
+     },
+     {
+      "rank": 4,
+      "name": "Darius Cooper",
+      "pos": "WR",
+      "id": "4715355"
+     },
+     {
+      "rank": 5,
+      "name": "Elijah Moore",
+      "pos": "WR",
+      "id": "4372414"
+     },
+     {
+      "rank": 6,
+      "name": "Britain Covey",
+      "pos": "WR",
+      "id": "3926231"
+     },
+     {
+      "rank": 7,
+      "name": "Johnny Wilson",
+      "pos": "WR",
+      "id": "4686104"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Joe Milton",
+      "pos": "QB",
+      "id": "4360698"
+     },
+     {
+      "rank": 2,
+      "name": "Tanner McKee",
+      "pos": "QB",
+      "id": "4685201"
+     },
+     {
+      "rank": 3,
+      "name": "Cole Payton",
+      "pos": "QB",
+      "id": "4879250"
+     },
+     {
+      "rank": 4,
+      "name": "Jalen Hurts",
+      "pos": "QB",
+      "id": "4040715"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Dallas Goedert",
+      "pos": "TE",
+      "id": "3121023"
+     },
+     {
+      "rank": 2,
+      "name": "Eli Stowers",
+      "pos": "TE",
+      "id": "4431574"
+     },
+     {
+      "rank": 3,
+      "name": "Johnny Mundt",
+      "pos": "TE",
+      "id": "3052096"
+     },
+     {
+      "rank": 4,
+      "name": "Grant Calcaterra",
+      "pos": "TE",
+      "id": "4241374"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Saquon Barkley",
+      "pos": "RB",
+      "id": "3929630"
+     },
+     {
+      "rank": 2,
+      "name": "Tank Bigsby",
+      "pos": "RB",
+      "id": "4429013"
+     },
+     {
+      "rank": 3,
+      "name": "Will Shipley",
+      "pos": "RB",
+      "id": "4431545"
+     }
+    ]
+   }
+  },
+  "PIT": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Kaden Wetjen",
+     "pos": "WR",
+     "id": "5081338"
+    },
+    {
+     "rank": 2,
+     "name": "Eli Heidenreich",
+     "pos": "RB",
+     "id": "5081508"
+    },
+    {
+     "rank": 3,
+     "name": "Donte Kent",
+     "pos": "CB",
+     "id": "4608004"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Kaden Wetjen",
+     "pos": "WR",
+     "id": "5081338"
+    },
+    {
+     "rank": 2,
+     "name": "Roman Wilson",
+     "pos": "WR",
+     "id": "4431492"
+    },
+    {
+     "rank": 3,
+     "name": "Donte Kent",
+     "pos": "CB",
+     "id": "4608004"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "DK Metcalf",
+      "pos": "WR",
+      "id": "4047650"
+     },
+     {
+      "rank": 2,
+      "name": "Germie Bernard",
+      "pos": "WR",
+      "id": "4685261"
+     },
+     {
+      "rank": 3,
+      "name": "Ben Skowronek",
+      "pos": "WR",
+      "id": "4035656"
+     },
+     {
+      "rank": 4,
+      "name": "Brandon Smith",
+      "pos": "WR",
+      "id": "4240577"
+     },
+     {
+      "rank": 5,
+      "name": "Kaden Wetjen",
+      "pos": "WR",
+      "id": "5081338"
+     },
+     {
+      "rank": 6,
+      "name": "Michael Pittman Jr.",
+      "pos": "WR",
+      "id": "4035687"
+     },
+     {
+      "rank": 7,
+      "name": "Roman Wilson",
+      "pos": "WR",
+      "id": "4431492"
+     },
+     {
+      "rank": 8,
+      "name": "Cole Burgess",
+      "pos": "WR",
+      "id": "5192448"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Aaron Rodgers",
+      "pos": "QB",
+      "id": "8439"
+     },
+     {
+      "rank": 2,
+      "name": "Mason Rudolph",
+      "pos": "QB",
+      "id": "3116407"
+     },
+     {
+      "rank": 3,
+      "name": "Will Howard",
+      "pos": "QB",
+      "id": "4429955"
+     },
+     {
+      "rank": 4,
+      "name": "Drew Allar",
+      "pos": "QB",
+      "id": "4714771"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Darnell Washington",
+      "pos": "TE",
+      "id": "4430802"
+     },
+     {
+      "rank": 2,
+      "name": "Pat Freiermuth",
+      "pos": "TE",
+      "id": "4361411"
+     },
+     {
+      "rank": 3,
+      "name": "Robert Tonyan",
+      "pos": "TE",
+      "id": "2975674"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Jaylen Warren",
+      "pos": "RB",
+      "id": "4569987"
+     },
+     {
+      "rank": 2,
+      "name": "Rico Dowdle",
+      "pos": "RB",
+      "id": "4038815"
+     },
+     {
+      "rank": 3,
+      "name": "Lew Nichols",
+      "pos": "RB",
+      "id": "4428119"
+     },
+     {
+      "rank": 4,
+      "name": "Travis Homer",
+      "pos": "RB",
+      "id": "4037457"
+     },
+     {
+      "rank": 5,
+      "name": "Eli Heidenreich",
+      "pos": "RB",
+      "id": "5081508"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Riley Nowakowski",
+      "pos": "FB",
+      "id": "4693370"
+     }
+    ]
+   }
+  },
+  "SF": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Deebo Samuel Sr.",
+     "pos": "WR",
+     "id": "3126486"
+    },
+    {
+     "rank": 2,
+     "name": "Jordan James",
+     "pos": "RB",
+     "id": "4685397"
+    },
+    {
+     "rank": 3,
+     "name": "Jacob Cowing",
+     "pos": "WR",
+     "id": "4575665"
+    },
+    {
+     "rank": 4,
+     "name": "Isaac Guerendo",
+     "pos": "RB",
+     "id": "4372561"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Jacob Cowing",
+     "pos": "WR",
+     "id": "4575665"
+    },
+    {
+     "rank": 2,
+     "name": "Jordan Watkins",
+     "pos": "WR",
+     "id": "4431466"
+    },
+    {
+     "rank": 3,
+     "name": "Christian Kirk",
+     "pos": "WR",
+     "id": "3895856"
+    },
+    {
+     "rank": 4,
+     "name": "Ricky Pearsall",
+     "pos": "WR",
+     "id": "4428209"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Mike Evans",
+      "pos": "WR",
+      "id": "16737"
+     },
+     {
+      "rank": 2,
+      "name": "Deebo Samuel Sr.",
+      "pos": "WR",
+      "id": "3126486"
+     },
+     {
+      "rank": 3,
+      "name": "Keenan Allen",
+      "pos": "WR",
+      "id": "15818"
+     },
+     {
+      "rank": 4,
+      "name": "Demarcus Robinson",
+      "pos": "WR",
+      "id": "3043116"
+     },
+     {
+      "rank": 5,
+      "name": "Jordan Watkins",
+      "pos": "WR",
+      "id": "4431466"
+     },
+     {
+      "rank": 6,
+      "name": "Brandin Cooks",
+      "pos": "WR",
+      "id": "16731"
+     },
+     {
+      "rank": 7,
+      "name": "Jacob Cowing",
+      "pos": "WR",
+      "id": "4575665"
+     },
+     {
+      "rank": 8,
+      "name": "Brandon Aiyuk",
+      "pos": "WR",
+      "id": "4360438"
+     },
+     {
+      "rank": 9,
+      "name": "De'Zhaun Stribling",
+      "pos": "WR",
+      "id": "4710714"
+     },
+     {
+      "rank": 10,
+      "name": "Christian Kirk",
+      "pos": "WR",
+      "id": "3895856"
+     },
+     {
+      "rank": 11,
+      "name": "Ricky Pearsall",
+      "pos": "WR",
+      "id": "4428209"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Brock Purdy",
+      "pos": "QB",
+      "id": "4361741"
+     },
+     {
+      "rank": 2,
+      "name": "Mac Jones",
+      "pos": "QB",
+      "id": "4241464"
+     },
+     {
+      "rank": 3,
+      "name": "Kurtis Rourke",
+      "pos": "QB",
+      "id": "4430431"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "George Kittle",
+      "pos": "TE",
+      "id": "3040151"
+     },
+     {
+      "rank": 2,
+      "name": "Luke Farrell",
+      "pos": "TE",
+      "id": "4040612"
+     },
+     {
+      "rank": 3,
+      "name": "Brayden Willis",
+      "pos": "TE",
+      "id": "4360290"
+     },
+     {
+      "rank": 4,
+      "name": "Jake Tonges",
+      "pos": "TE",
+      "id": "4259147"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Christian McCaffrey",
+      "pos": "RB",
+      "id": "3117251"
+     },
+     {
+      "rank": 2,
+      "name": "Kaelon Black",
+      "pos": "RB",
+      "id": "4696044"
+     },
+     {
+      "rank": 3,
+      "name": "Jordan James",
+      "pos": "RB",
+      "id": "4685397"
+     },
+     {
+      "rank": 4,
+      "name": "Isaac Guerendo",
+      "pos": "RB",
+      "id": "4372561"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Kyle Juszczyk",
+      "pos": "FB",
+      "id": "16002"
+     }
+    ]
+   }
+  },
+  "SEA": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Rashid Shaheed",
+     "pos": "WR",
+     "id": "4032473"
+    },
+    {
+     "rank": 2,
+     "name": "George Holani",
+     "pos": "RB",
+     "id": "4429835"
+    },
+    {
+     "rank": 3,
+     "name": "Tory Horton",
+     "pos": "WR",
+     "id": "4597703"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Rashid Shaheed",
+     "pos": "WR",
+     "id": "4032473"
+    },
+    {
+     "rank": 2,
+     "name": "Tory Horton",
+     "pos": "WR",
+     "id": "4597703"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Jaxon Smith-Njigba",
+      "pos": "WR",
+      "id": "4430878"
+     },
+     {
+      "rank": 2,
+      "name": "Rashid Shaheed",
+      "pos": "WR",
+      "id": "4032473"
+     },
+     {
+      "rank": 3,
+      "name": "Cooper Kupp",
+      "pos": "WR",
+      "id": "2977187"
+     },
+     {
+      "rank": 4,
+      "name": "Tory Horton",
+      "pos": "WR",
+      "id": "4597703"
+     },
+     {
+      "rank": 5,
+      "name": "Irv Charles",
+      "pos": "WR",
+      "id": "3929636"
+     },
+     {
+      "rank": 6,
+      "name": "Jake Bobo",
+      "pos": "WR",
+      "id": "4360405"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Sam Darnold",
+      "pos": "QB",
+      "id": "3912547"
+     },
+     {
+      "rank": 2,
+      "name": "Drew Lock",
+      "pos": "QB",
+      "id": "3924327"
+     },
+     {
+      "rank": 3,
+      "name": "Jalen Milroe",
+      "pos": "QB",
+      "id": "4432734"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "AJ Barner",
+      "pos": "TE",
+      "id": "4576297"
+     },
+     {
+      "rank": 2,
+      "name": "Eric Saubert",
+      "pos": "TE",
+      "id": "2975863"
+     },
+     {
+      "rank": 3,
+      "name": "Nick Kallerup",
+      "pos": "TE",
+      "id": "4569547"
+     },
+     {
+      "rank": 4,
+      "name": "Elijah Arroyo",
+      "pos": "TE",
+      "id": "4678006"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Zach Charbonnet",
+      "pos": "RB",
+      "id": "4426385"
+     },
+     {
+      "rank": 2,
+      "name": "Jadarian Price",
+      "pos": "RB",
+      "id": "4685512"
+     },
+     {
+      "rank": 3,
+      "name": "George Holani",
+      "pos": "RB",
+      "id": "4429835"
+     },
+     {
+      "rank": 4,
+      "name": "Emanuel Wilson",
+      "pos": "RB",
+      "id": "4887558"
+     }
+    ],
+    "FB": [
+     {
+      "rank": 1,
+      "name": "Brady Russell",
+      "pos": "FB",
+      "id": "4243176"
+     },
+     {
+      "rank": 2,
+      "name": "Robbie Ouzts",
+      "pos": "FB",
+      "id": "4691688"
+     }
+    ]
+   }
+  },
+  "TB": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Sean Tucker",
+     "pos": "RB",
+     "id": "4430871"
+    },
+    {
+     "rank": 2,
+     "name": "Kameron Johnson",
+     "pos": "WR",
+     "id": "5097554"
+    },
+    {
+     "rank": 3,
+     "name": "Kenny Gainwell",
+     "pos": "RB",
+     "id": "4371733"
+    },
+    {
+     "rank": 4,
+     "name": "Tez Johnson",
+     "pos": "WR",
+     "id": "4608810"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Tez Johnson",
+     "pos": "WR",
+     "id": "4608810"
+    },
+    {
+     "rank": 2,
+     "name": "Kameron Johnson",
+     "pos": "WR",
+     "id": "5097554"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Emeka Egbuka",
+      "pos": "WR",
+      "id": "4567750"
+     },
+     {
+      "rank": 2,
+      "name": "Chris Godwin Jr.",
+      "pos": "WR",
+      "id": "3116165"
+     },
+     {
+      "rank": 3,
+      "name": "Ted Hurst III",
+      "pos": "WR",
+      "id": "5220680"
+     },
+     {
+      "rank": 4,
+      "name": "Tez Johnson",
+      "pos": "WR",
+      "id": "4608810"
+     },
+     {
+      "rank": 5,
+      "name": "Kameron Johnson",
+      "pos": "WR",
+      "id": "5097554"
+     },
+     {
+      "rank": 6,
+      "name": "Jalen McMillan",
+      "pos": "WR",
+      "id": "4430834"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Baker Mayfield",
+      "pos": "QB",
+      "id": "3052587"
+     },
+     {
+      "rank": 2,
+      "name": "Jalon Daniels",
+      "pos": "QB",
+      "id": "4596472"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Cade Otton",
+      "pos": "TE",
+      "id": "4243331"
+     },
+     {
+      "rank": 2,
+      "name": "Payne Durham",
+      "pos": "TE",
+      "id": "4372505"
+     },
+     {
+      "rank": 3,
+      "name": "Bauer Sharp",
+      "pos": "TE",
+      "id": "4890373"
+     },
+     {
+      "rank": 4,
+      "name": "Ko Kieft",
+      "pos": "TE",
+      "id": "4034779"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Bucky Irving",
+      "pos": "RB",
+      "id": "4596448"
+     },
+     {
+      "rank": 2,
+      "name": "Kenny Gainwell",
+      "pos": "RB",
+      "id": "4371733"
+     },
+     {
+      "rank": 3,
+      "name": "Sean Tucker",
+      "pos": "RB",
+      "id": "4430871"
+     }
+    ]
+   }
+  },
+  "TEN": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Chimere Dike",
+     "pos": "WR",
+     "id": "4431268"
+    },
+    {
+     "rank": 2,
+     "name": "Julius Chestnut",
+     "pos": "RB",
+     "id": "4367567"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Chimere Dike",
+     "pos": "WR",
+     "id": "4431268"
+    },
+    {
+     "rank": 2,
+     "name": "Micah Robinson",
+     "pos": "CB",
+     "id": "4695280"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Carnell Tate",
+      "pos": "WR",
+      "id": "4871023"
+     },
+     {
+      "rank": 2,
+      "name": "Wan'Dale Robinson",
+      "pos": "WR",
+      "id": "4569587"
+     },
+     {
+      "rank": 3,
+      "name": "Chimere Dike",
+      "pos": "WR",
+      "id": "4431268"
+     },
+     {
+      "rank": 4,
+      "name": "Elic Ayomanor",
+      "pos": "WR",
+      "id": "4883647"
+     },
+     {
+      "rank": 5,
+      "name": "Calvin Ridley",
+      "pos": "WR",
+      "id": "3925357"
+     },
+     {
+      "rank": 6,
+      "name": "Xavier Restrepo",
+      "pos": "WR",
+      "id": "4431353"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Cam Ward",
+      "pos": "QB",
+      "id": "4688380"
+     },
+     {
+      "rank": 2,
+      "name": "Mitchell Trubisky",
+      "pos": "QB",
+      "id": "3039707"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Gunnar Helm",
+      "pos": "TE",
+      "id": "4686728"
+     },
+     {
+      "rank": 2,
+      "name": "Daniel Bellinger",
+      "pos": "TE",
+      "id": "4361516"
+     },
+     {
+      "rank": 3,
+      "name": "David Martin-Robinson",
+      "pos": "TE",
+      "id": "4360978"
+     },
+     {
+      "rank": 4,
+      "name": "Kylen Granson",
+      "pos": "TE",
+      "id": "4039160"
+     },
+     {
+      "rank": 5,
+      "name": "Jaren Kanak",
+      "pos": "TE",
+      "id": "4877034"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Tony Pollard",
+      "pos": "RB",
+      "id": "3916148"
+     },
+     {
+      "rank": 2,
+      "name": "Tyjae Spears",
+      "pos": "RB",
+      "id": "4428557"
+     },
+     {
+      "rank": 3,
+      "name": "Nicholas Singleton",
+      "pos": "RB",
+      "id": "4685555"
+     },
+     {
+      "rank": 4,
+      "name": "Julius Chestnut",
+      "pos": "RB",
+      "id": "4367567"
+     }
+    ]
+   }
+  },
+  "WSH": {
+   "kr": [
+    {
+     "rank": 1,
+     "name": "Rachaad White",
+     "pos": "RB",
+     "id": "4697815"
+    },
+    {
+     "rank": 2,
+     "name": "Luke McCaffrey",
+     "pos": "WR",
+     "id": "4426948"
+    },
+    {
+     "rank": 3,
+     "name": "Dyami Brown",
+     "pos": "WR",
+     "id": "4361577"
+    },
+    {
+     "rank": 4,
+     "name": "Jaylin Lane",
+     "pos": "WR",
+     "id": "4602667"
+    }
+   ],
+   "pr": [
+    {
+     "rank": 1,
+     "name": "Antonio Williams",
+     "pos": "WR",
+     "id": "5081432"
+    },
+    {
+     "rank": 2,
+     "name": "Luke McCaffrey",
+     "pos": "WR",
+     "id": "4426948"
+    },
+    {
+     "rank": 3,
+     "name": "Jaylin Lane",
+     "pos": "WR",
+     "id": "4602667"
+    }
+   ],
+   "offense": {
+    "WR": [
+     {
+      "rank": 1,
+      "name": "Stefon Diggs",
+      "pos": "WR",
+      "id": "2976212"
+     },
+     {
+      "rank": 2,
+      "name": "Antonio Williams",
+      "pos": "WR",
+      "id": "5081432"
+     },
+     {
+      "rank": 3,
+      "name": "Treylon Burks",
+      "pos": "WR",
+      "id": "4567156"
+     },
+     {
+      "rank": 4,
+      "name": "Van Jefferson",
+      "pos": "WR",
+      "id": "3930066"
+     },
+     {
+      "rank": 5,
+      "name": "Luke McCaffrey",
+      "pos": "WR",
+      "id": "4426948"
+     },
+     {
+      "rank": 6,
+      "name": "Dyami Brown",
+      "pos": "WR",
+      "id": "4361577"
+     },
+     {
+      "rank": 7,
+      "name": "Terry McLaurin",
+      "pos": "WR",
+      "id": "3121422"
+     },
+     {
+      "rank": 8,
+      "name": "Jaylin Lane",
+      "pos": "WR",
+      "id": "4602667"
+     }
+    ],
+    "QB": [
+     {
+      "rank": 1,
+      "name": "Jayden Daniels",
+      "pos": "QB",
+      "id": "4426348"
+     },
+     {
+      "rank": 2,
+      "name": "Marcus Mariota",
+      "pos": "QB",
+      "id": "2576980"
+     },
+     {
+      "rank": 3,
+      "name": "Athan Kaliakmanis",
+      "pos": "QB",
+      "id": "4432722"
+     }
+    ],
+    "TE": [
+     {
+      "rank": 1,
+      "name": "Chig Okonkwo",
+      "pos": "TE",
+      "id": "4360635"
+     },
+     {
+      "rank": 2,
+      "name": "Ben Sinnott",
+      "pos": "TE",
+      "id": "4690923"
+     },
+     {
+      "rank": 3,
+      "name": "John Bates",
+      "pos": "TE",
+      "id": "4048228"
+     },
+     {
+      "rank": 4,
+      "name": "Colson Yankoff",
+      "pos": "TE",
+      "id": "4361088"
+     }
+    ],
+    "RB": [
+     {
+      "rank": 1,
+      "name": "Rachaad White",
+      "pos": "RB",
+      "id": "4697815"
+     },
+     {
+      "rank": 2,
+      "name": "Austin Ekeler",
+      "pos": "RB",
+      "id": "3068267"
+     },
+     {
+      "rank": 3,
+      "name": "Robert Henry Jr.",
+      "pos": "RB",
+      "id": "5151317"
+     },
+     {
+      "rank": 4,
+      "name": "Jacory Croskey-Merritt",
+      "pos": "RB",
+      "id": "4575131"
+     },
+     {
+      "rank": 5,
+      "name": "Jeremy McNichols",
+      "pos": "RB",
+      "id": "3127586"
+     }
+    ]
+   }
+  }
+ },
+ "sites": {
+  "ARI": {
+   "url": "https://www.azcardinals.com/team/depth-chart",
+   "kr": [
+    "Devin Duvernay",
+    "Max Melton",
+    "Harrison Wallace III"
+   ],
+   "pr": [
+    "Devin Duvernay",
+    "Harrison Wallace III"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Reggie Virgil",
+      "Harrison Wallace III"
+     ],
+     [
+      "Simi Fehoko",
+      "Devin Duvernay"
+     ]
+    ],
+    "TE": [
+     [
+      "Trey McBride"
+     ],
+     [
+      "Elijah Higgins",
+      "Teagan Quitoriano"
+     ]
+    ],
+    "QB": [
+     [
+      "Carson Beck",
+      "Josh Johnson",
+      "Joey Aguilar"
+     ]
+    ],
+    "RB": [
+     [
+      "Tyler Allgeier",
+      "Bam Knight",
+      "Evan Hull"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "ATL": {
+   "url": "https://www.atlantafalcons.com/team/depth-chart",
+   "kr": [
+    "Olamide Zaccheaus",
+    "Zachariah Branch",
+    "Khalil Herbert"
+   ],
+   "pr": [
+    "Zachariah Branch",
+    "Olamide Zaccheaus",
+    "Jahan Dotson"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Drake London",
+      "Chris Blair"
+     ],
+     [
+      "Olamide Zaccheaus",
+      "Zachariah Branch"
+     ],
+     [
+      "Jahan Dotson",
+      "Beaux Collins"
+     ]
+    ],
+    "TE": [
+     [
+      "Kyle Pitts Sr.",
+      "Austin Hooper"
+     ],
+     [
+      "Charlie Woerner",
+      "Nick Muse"
+     ]
+    ],
+    "RB": [
+     [
+      "Bijan Robinson",
+      "Khalil Herbert"
+     ]
+    ],
+    "QB": [
+     [
+      "Michael Penix Jr.",
+      "Tua Tagovailoa",
+      "Andy Dalton",
+      "Jack Strand"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "BAL": {
+   "url": "https://www.baltimoreravens.com/team/depth-chart",
+   "kr": [
+    "LaJohntay Wester",
+    "Rasheen Ali",
+    "Justice Hill"
+   ],
+   "pr": [
+    "LaJohntay Wester",
+    "Elijah Sarratt"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Zay Flowers",
+      "Devontez Walker",
+      "Elijah Sarratt"
+     ],
+     [
+      "Rashod Bateman",
+      "Ja'Kobi Lane",
+      "LaJohntay Wester"
+     ]
+    ],
+    "TE": [
+     [
+      "Mark Andrews",
+      "Josh Cuevas"
+     ],
+     [
+      "Matt Hibner"
+     ]
+    ],
+    "QB": [
+     [
+      "Jacoby Brissett",
+      "Joe Fagnano",
+      "Kedon Slovis"
+     ]
+    ],
+    "RB": [
+     [
+      "Derrick Henry",
+      "Justice Hill",
+      "Rasheen Ali"
+     ]
+    ]
+   },
+   "kr_label": "KOR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "BUF": {
+   "url": "https://www.buffalobills.com/team/depth-chart",
+   "kr": [
+    "Ray Davis",
+    "Greg Dortch",
+    "Ty Johnson"
+   ],
+   "pr": [
+    "Greg Dortch",
+    "Dee Alford",
+    "Ray Davis",
+    "Khalil Shakir"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "DJ Moore",
+      "Skyler Bell"
+     ],
+     [
+      "Khalil Shakir",
+      "Greg Dortch"
+     ],
+     [
+      "Keon Coleman"
+     ]
+    ],
+    "TE": [
+     [
+      "Dalton Kincaid",
+      "Dawson Knox",
+      "Jackson Hawes",
+      "Keleki Latu"
+     ]
+    ],
+    "QB": [
+     [
+      "Josh Allen",
+      "Kyle Allen"
+     ]
+    ],
+    "RB": [
+     [
+      "James Cook III",
+      "Ray Davis",
+      "Ty Johnson"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KOR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "CAR": {
+   "url": "https://www.panthers.com/team/depth-chart",
+   "kr": [
+    "Anthony Tyus III",
+    "Trevor Etienne"
+   ],
+   "pr": [
+    "Trevor Etienne"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Tetairoa McMillan",
+      "Brycen Tremayne"
+     ],
+     [
+      "Jalen Coker"
+     ],
+     [
+      "John Metchie III"
+     ]
+    ],
+    "TE": [
+     [
+      "Tommy Tremble",
+      "Mitchell Evans",
+      "Darren Waller",
+      "Ja'Tavion Sanders",
+      "Feleipe Franks"
+     ]
+    ],
+    "QB": [
+     [
+      "Bryce Young",
+      "Kenny Pickett",
+      "Haynes King"
+     ]
+    ],
+    "RB": [
+     [
+      "Chuba Hubbard",
+      "Trevor Etienne",
+      "AJ Dillon",
+      "Anthony Tyus III"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "CHI": {
+   "url": "https://www.chicagobears.com/team/depth-chart",
+   "kr": [
+    "Kalif Raymond",
+    "Zavion Thomas"
+   ],
+   "pr": [
+    "Kalif Raymond",
+    "Zavion Thomas"
+   ],
+   "asof": "10/31/2026",
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Rome Odunze",
+      "Zavion Thomas"
+     ],
+     [
+      "Kalif Raymond"
+     ],
+     [
+      "Luther Burden III",
+      "Jahdae Walker"
+     ]
+    ],
+    "TE": [
+     [
+      "Colston Loveland",
+      "Sam Roush"
+     ]
+    ],
+    "QB": [
+     [
+      "Caleb Williams",
+      "Tyson Bagent",
+      "Case Keenum"
+     ]
+    ],
+    "RB": [
+     [
+      "D'Andre Swift",
+      "Kyle Monangai",
+      "Roschon Johnson"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR"
+  },
+  "CIN": {
+   "url": "https://www.bengals.com/team/depth-chart",
+   "kr": [
+    "Dohnte Meyers",
+    "Samaje Perine",
+    "Tahj Brooks"
+   ],
+   "pr": [
+    "Dohnte Meyers",
+    "Mitch Tinsley"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Ja'Marr Chase",
+      "Mitch Tinsley"
+     ],
+     [
+      "Dohnte Meyers"
+     ],
+     [
+      "Tee Higgins",
+      "Colbie Young"
+     ]
+    ],
+    "TE": [
+     [
+      "Drew Sample",
+      "Mike Gesicki",
+      "Jack Endries Cam Grandy"
+     ]
+    ],
+    "QB": [
+     [
+      "Joe Burrow",
+      "Joe Flacco"
+     ]
+    ],
+    "RB": [
+     [
+      "Chase Brown",
+      "Samaje Perine",
+      "Tahj Brooks"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KOR",
+   "offense_note": "site labels the running back row HB; stored under RB",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "CLE": {
+   "url": "https://www.clevelandbrowns.com/team/depth-chart",
+   "kr": [
+    "Malachi Corley",
+    "Dylan Sampson"
+   ],
+   "pr": [
+    "KC Concepcion Jr.",
+    "Denzel Boston"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Jerry Jeudy",
+      "Tylan Wallace"
+     ],
+     [
+      "Denzel Boston",
+      "Malachi Corley"
+     ],
+     [
+      "KC Concepcion Jr.",
+      "Isaiah Bond"
+     ]
+    ],
+    "QB": [
+     [
+      "Deshaun Watson",
+      "Shedeur Sanders",
+      "Dillon Gabriel",
+      "Taylen Green"
+     ]
+    ],
+    "RB": [
+     [
+      "Quinshon Judkins",
+      "Dylan Sampson",
+      "Michael Burton",
+      "Jaleel McLaughlin"
+     ]
+    ],
+    "TE": [
+     [
+      "Harold Fannin Jr.",
+      "Blake Whiteheart"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "DAL": {
+   "url": "https://www.dallascowboys.com/team/depth-chart",
+   "kr": [
+    "KaVontae Turpin",
+    "Tyler Goodson",
+    "Jonathan Mingo"
+   ],
+   "pr": [
+    "KaVontae Turpin",
+    "Jonathan Mingo",
+    "Caleb Downs"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "George Pickens",
+      "Camden Brown"
+     ],
+     [
+      "Ryan Flournoy",
+      "KaVontae Turpin"
+     ],
+     [
+      "CeeDee Lamb",
+      "Jonathan Mingo"
+     ]
+    ],
+    "TE": [
+     [
+      "Jake Ferguson Brevyn Spann-Ford",
+      "Luke Schoonmaker"
+     ]
+    ],
+    "QB": [
+     [
+      "Dak Prescott",
+      "Sam Howell"
+     ]
+    ],
+    "RB": [
+     [
+      "Javonte Williams",
+      "Tyler Goodson"
+     ]
+    ],
+    "FB": [
+     [
+      "Hunter Luepke"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "DEN": {
+   "url": "https://www.denverbroncos.com/team/depth-chart",
+   "kr": [
+    "Marvin Mims Jr."
+   ],
+   "pr": [
+    "Marvin Mims Jr.",
+    "Riley Moss"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Marvin Mims Jr.",
+      "Troy Franklin"
+     ],
+     [
+      "Jaylen Waddle",
+      "Lil'Jordan Humphrey"
+     ],
+     [
+      "Courtland Sutton"
+     ]
+    ],
+    "TE": [
+     [
+      "Evan Engram",
+      "Adam Trautman",
+      "Nate Adkins",
+      "Dallen Bentley"
+     ]
+    ],
+    "RB": [
+     [
+      "J.K. Dobbins",
+      "Jonah Coleman"
+     ]
+    ],
+    "FB": [
+     [
+      "Adam Prentice"
+     ]
+    ],
+    "QB": [
+     [
+      "Bo Nix",
+      "Jarrett Stidham",
+      "Sam Ehlinger"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "DET": {
+   "url": "https://www.detroitlions.com/team/depth-chart",
+   "kr": [
+    "Jacob Saylors",
+    "DeAndre Carter"
+   ],
+   "pr": [
+    "DeAndre Carter"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Jameson Williams"
+     ],
+     [
+      "Amon-Ra St. Brown",
+      "DeAndre Carter"
+     ],
+     [
+      "Isaac TeSlaa",
+      "Tay Martin"
+     ]
+    ],
+    "TE": [
+     [
+      "Sam LaPorta",
+      "Brock Wright",
+      "Tyler Conklin",
+      "Jackson Meeks"
+     ]
+    ],
+    "QB": [
+     [
+      "Jared Goff",
+      "Joshua Dobbs"
+     ]
+    ],
+    "RB": [
+     [
+      "Jahmyr Gibbs",
+      "Sione Vaki",
+      "Jacob Saylors"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "GB": {
+   "url": "https://www.packers.com/team/depth-chart",
+   "kr": [
+    "Bo Melton"
+   ],
+   "pr": [
+    "Matthew Golden"
+   ],
+   "asof": "Nov. 10, 2026",
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Christian Watson",
+      "Bo Melton"
+     ],
+     [
+      "Matthew Golden",
+      "J. Michael Sturdivant"
+     ],
+     [
+      "Savion Williams"
+     ]
+    ],
+    "TE": [
+     [
+      "Tucker Kraft",
+      "Jonnu Smith",
+      "Mark Redman"
+     ]
+    ],
+    "QB": [
+     [
+      "Jordan Love",
+      "Tyrod Taylor"
+     ]
+    ],
+    "RB": [
+     [
+      "Josh Jacobs",
+      "MarShawn Lloyd",
+      "Pierre Strong Jr."
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR"
+  },
+  "HOU": {
+   "url": "https://www.houstontexans.com/team/depth-chart",
+   "kr": null,
+   "pr": null,
+   "asof": null,
+   "status": {
+    "kr": "no_chart",
+    "pr": "no_chart"
+   },
+   "reason": "Houston publishes no depth chart (page loads, no table; verified standing finding)",
+   "offense": {},
+   "pagelen": 476207,
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "IND": {
+   "url": "https://www.colts.com/team/depth-chart",
+   "kr": [
+    "Ashton Dulin",
+    "Seth McGowan"
+   ],
+   "pr": [
+    "Anthony Gould",
+    "Ashton Dulin"
+   ],
+   "asof": "Week 17",
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Laquon Treadwell",
+      "Nick Westbrook-Ikhine"
+     ],
+     [
+      "Anthony Gould"
+     ],
+     [
+      "Ashton Dulin",
+      "Deion Burks"
+     ]
+    ],
+    "TE": [
+     [
+      "Tyler Warren",
+      "Mo Alie-Cox",
+      "Drew Ogletree",
+      "Will Mallory Pharaoh Brown"
+     ]
+    ],
+    "QB": [
+     [
+      "Daniel Jones",
+      "Anthony Richardson Sr.",
+      "Riley Leonard"
+     ]
+    ],
+    "RB": [
+     [
+      "Jonathan Taylor",
+      "Seth McGowan",
+      "DJ Giddens"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR"
+  },
+  "JAX": {
+   "url": "https://www.jaguars.com/team/depth-chart",
+   "kr": [
+    "Bhayshul Tuten",
+    "LeQuint Allen Jr."
+   ],
+   "pr": [
+    "Parker Washington"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Parker Washington",
+      "Josh Cameron"
+     ],
+     [
+      "Brian Thomas Jr.",
+      "Travis Hunter"
+     ],
+     [
+      "Jakobi Meyers",
+      "CJ Williams"
+     ]
+    ],
+    "TE": [
+     [
+      "Brenton Strange",
+      "Nate Boerkircher",
+      "Quintin Morris",
+      "Tanner Koziol"
+     ]
+    ],
+    "QB": [
+     [
+      "Trevor Lawrence",
+      "Quinn Ewers"
+     ]
+    ],
+    "RB": [
+     [
+      "Bhayshul Tuten Chris Rodriguez Jr.",
+      "LeQuint Allen Jr.",
+      "Ameer Abdullah"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "KC": {
+   "url": "https://www.chiefs.com/team/depth-chart",
+   "kr": [
+    "Emmett Johnson",
+    "Cyrus Allen"
+   ],
+   "pr": [
+    "Emmett Johnson",
+    "Cyrus Allen"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Rashee Rice",
+      "Jalen Royals",
+      "Andrew Armstrong"
+     ],
+     [
+      "Xavier Worthy",
+      "Cyrus Allen",
+      "Josh Downs"
+     ]
+    ],
+    "TE": [
+     [
+      "Travis Kelce",
+      "Noah Gray",
+      "Jared Wiley",
+      "Jake Briningstool"
+     ]
+    ],
+    "QB": [
+     [
+      "Patrick Mahomes",
+      "Justin Fields",
+      "Garrett Nussmeier"
+     ]
+    ],
+    "RB": [
+     [
+      "Kenneth Walker",
+      "Emmett Johnson",
+      "Jaydn Ott"
+     ]
+    ],
+    "FB": [
+     [
+      "Ben VanSumeren"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "LAC": {
+   "url": "https://www.chargers.com/team/depth-chart",
+   "kr": [
+    "Derius Davis",
+    "Keaton Mitchell",
+    "Kimani Vidal"
+   ],
+   "pr": [
+    "Derius Davis",
+    "Brenen Thompson",
+    "Ladd McConkey"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Ladd McConkey",
+      "Tre' Harris",
+      "Derius Davis Theo Wease Jr."
+     ],
+     [
+      "Quentin Johnston",
+      "Brenen Thompson"
+     ]
+    ],
+    "TE": [
+     [
+      "Charlie Kolar",
+      "Oronde Gadsden"
+     ]
+    ],
+    "QB": [
+     [
+      "Justin Herbert",
+      "DJ Uiagalelei"
+     ]
+    ],
+    "FB": [
+     [
+      "Alec Ingold",
+      "Scott Matlock"
+     ]
+    ],
+    "RB": [
+     [
+      "Omarion Hampton",
+      "Keaton Mitchell",
+      "Kimani Vidal"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "LAR": {
+   "url": "https://www.therams.com/team/depth-chart",
+   "kr": [
+    "Jordan Whittington",
+    "Ronnie Rivers"
+   ],
+   "pr": [
+    "Kyren Williams",
+    "Tutu Atwell"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Konata Mumpfield",
+      "CJ Daniels"
+     ],
+     [
+      "Puka Nacua",
+      "Jordan Whittington",
+      "Tutu Atwell"
+     ]
+    ],
+    "TE": [
+     [
+      "Davis Allen Tyler Higbee"
+     ],
+     [
+      "Colby Parkinson",
+      "Max Klare"
+     ]
+    ],
+    "QB": [
+     [
+      "Matthew Stafford",
+      "Stetson Bennett IV",
+      "Ty Simpson"
+     ]
+    ],
+    "RB": [
+     [
+      "Kyren Williams",
+      "Blake Corum",
+      "Ronnie Rivers"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "LV": {
+   "url": "https://www.raiders.com/team/depth-chart",
+   "kr": [
+    "Dylan Laube",
+    "Dareke Young"
+   ],
+   "pr": [
+    "Malik Benson",
+    "Dylan Laube"
+   ],
+   "asof": "November 10, 2026",
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Jalen Nailor",
+      "Malik Benson",
+      "Dont'e Thornton Jr."
+     ],
+     [
+      "Tre Tucker",
+      "Jack Bech",
+      "Dareke Young Cody White"
+     ]
+    ],
+    "TE": [
+     [
+      "Brock Bowers",
+      "Michael Mayer",
+      "Ian Thomas"
+     ]
+    ],
+    "QB": [
+     [
+      "Fernando Mendoza",
+      "Aidan O'Connell"
+     ]
+    ],
+    "RB": [
+     [
+      "Ashton Jeanty",
+      "Mike Washington Jr.",
+      "Dylan Laube"
+     ]
+    ],
+    "FB": [
+     [
+      "Connor Heyward"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR"
+  },
+  "MIA": {
+   "url": "https://www.miamidolphins.com/team/depth-chart",
+   "kr": [
+    "Malik Washington",
+    "Jaylen Wright"
+   ],
+   "pr": [
+    "Malik Washington",
+    "Kevin Coleman Jr."
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Caleb Douglas",
+      "Jared Wayne"
+     ],
+     [
+      "Malik Washington",
+      "Kevin Coleman Jr."
+     ],
+     [
+      "Chris Bell",
+      "Jalen Tolbert"
+     ]
+    ],
+    "TE": [
+     [
+      "Greg Dulcich",
+      "Will Kacmarek",
+      "Seydou Traore",
+      "Justin Joly"
+     ]
+    ],
+    "FB": [
+     [
+      "DJ Herman"
+     ]
+    ],
+    "RB": [
+     [
+      "Ollie Gordon II",
+      "Jaylen Wright",
+      "Kaytron Allen"
+     ]
+    ],
+    "QB": [
+     [
+      "Kyle McCord"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "MIN": {
+   "url": "https://www.vikings.com/team/depth-chart",
+   "kr": [
+    "Myles Price",
+    "Tai Felton",
+    "Demond Claiborne"
+   ],
+   "pr": [
+    "Myles Price",
+    "Tai Felton"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "QB": [
+     [
+      "Kyler Murray",
+      "Carson Wentz",
+      "Max Brosmer",
+      "Kirk Cousins"
+     ]
+    ],
+    "RB": [
+     [
+      "Aaron Jones Sr. Jordan Mason",
+      "Demond Claiborne",
+      "DeeJay Dallas"
+     ]
+    ],
+    "FB": [
+     [
+      "Max Bredeson"
+     ]
+    ],
+    "WR": [
+     [
+      "Justin Jefferson",
+      "Tai Felton"
+     ],
+     [
+      "Jordan Addison"
+     ],
+     [
+      "Jauan Jennings",
+      "Myles Price"
+     ]
+    ],
+    "TE": [
+     [
+      "T.J. Hockenson",
+      "Gavin Bartholomew"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "NE": {
+   "url": "https://www.patriots.com/team/depth-chart",
+   "kr": [
+    "Kyle Williams",
+    "Corey Kiner",
+    "Lan Larison"
+   ],
+   "pr": [
+    "Marcus Jones",
+    "DeMario Douglas"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "A.J. Brown",
+      "Efton Chism III"
+     ],
+     [
+      "DeMario Douglas",
+      "Kyle Williams"
+     ],
+     [
+      "Efton Chism III",
+      "Kyle Williams"
+     ]
+    ],
+    "TE": [
+     [
+      "Hunter Henry",
+      "Eli Raridon",
+      "Cameron Latu"
+     ]
+    ],
+    "RB": [
+     [
+      "Rhamondre Stevenson",
+      "TreVeyon Henderson",
+      "Corey Kiner",
+      "Lan Larison"
+     ]
+    ],
+    "QB": [
+     [
+      "Drake Maye",
+      "Tommy DeVito",
+      "Behren Morton"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "NO": {
+   "url": "https://www.neworleanssaints.com/team/depth-chart",
+   "kr": [
+    "Barion Brown",
+    "Bryce Lance"
+   ],
+   "pr": [
+    "Barion Brown",
+    "Bryce Lance"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Chris Olave",
+      "Barion Brown"
+     ],
+     [
+      "Devaughn Vele",
+      "Bryce Lance"
+     ],
+     [
+      "Jordyn Tyson",
+      "Barion Brown"
+     ]
+    ],
+    "TE": [
+     [
+      "Juwan Johnson",
+      "Noah Fant",
+      "Oscar Delp"
+     ]
+    ],
+    "QB": [
+     [
+      "Tyler Shough",
+      "Spencer Rattler",
+      "Zach Wilson"
+     ]
+    ],
+    "RB": [
+     [
+      "Alvin Kamara",
+      "Audric Estimé",
+      "CJ Donaldson"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "NYG": {
+   "url": "https://www.giants.com/team/depth-chart",
+   "kr": [
+    "Deonte Banks",
+    "Devin Singletary"
+   ],
+   "pr": [
+    "Jevón Holland",
+    "Charlie Jones"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Malik Nabers",
+      "Malachi Fields",
+      "Jalin Hyatt"
+     ],
+     [
+      "Darnell Mooney",
+      "Charlie Jones"
+     ]
+    ],
+    "TE": [
+     [
+      "Isaiah Likely",
+      "Theo Johnson",
+      "Chris Manhertz",
+      "Thomas Fidone II"
+     ]
+    ],
+    "QB": [
+     [
+      "J.J. McCarthy",
+      "Jameis Winston"
+     ]
+    ],
+    "FB": [
+     [
+      "Patrick Ricard"
+     ]
+    ],
+    "RB": [
+     [
+      "Cam Skattebo",
+      "Devin Singletary",
+      "Gregory Desrosiers"
+     ]
+    ]
+   },
+   "kr_label": "KOR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "NYJ": {
+   "url": "https://www.newyorkjets.com/team/depth-chart",
+   "kr": [
+    "Kene Nwangwu",
+    "Isaiah Williams",
+    "Isaiah Davis"
+   ],
+   "pr": [
+    "Isaiah Williams",
+    "Isaiah Davis"
+   ],
+   "asof": "2026-08-08",
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Garrett Wilson",
+      "Omar Cooper Jr.",
+      "Isaiah Williams"
+     ],
+     [
+      "Adonai Mitchell",
+      "Tim Patrick",
+      "Malik McClain"
+     ]
+    ],
+    "TE": [
+     [
+      "Jeremy Ruckert",
+      "Jelani Woods"
+     ],
+     [
+      "Mason Taylor",
+      "Kenyon Sadiq"
+     ]
+    ],
+    "QB": [
+     [
+      "Geno Smith",
+      "Cade Klubnik"
+     ]
+    ],
+    "FB": [
+     [
+      "Andrew Beck"
+     ]
+    ],
+    "RB": [
+     [
+      "Breece Hall",
+      "Braelon Allen",
+      "Isaiah Davis",
+      "Kene Nwangwu"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR"
+  },
+  "PHI": {
+   "url": "https://www.philadelphiaeagles.com/team/depth-chart",
+   "kr": [
+    "Will Shipley",
+    "Britain Covey"
+   ],
+   "pr": [
+    "Britain Covey",
+    "Makai Lemon",
+    "Elijah Moore"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "DeVonta Smith",
+      "Hollywood Brown"
+     ],
+     [
+      "Makai Lemon",
+      "Elijah Moore",
+      "Britain Covey"
+     ],
+     [
+      "Dontayvion Wicks",
+      "Darius Cooper"
+     ]
+    ],
+    "TE": [
+     [
+      "Dallas Goedert",
+      "Johnny Mundt"
+     ]
+    ],
+    "RB": [
+     [
+      "Saquon Barkley"
+     ]
+    ],
+    "QB": [
+     [
+      "Tanner McKee",
+      "Cole Payton",
+      "Joe Milton"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "PIT": {
+   "url": "https://www.steelers.com/team/depth-chart",
+   "kr": [
+    "Kaden Wetjen",
+    "Jaylen Warren",
+    "Rico Dowdle"
+   ],
+   "pr": [
+    "Kaden Wetjen",
+    "Rico Dowdle"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "DK Metcalf",
+      "Kaden Wetjen"
+     ],
+     [
+      "Ben Skowronek",
+      "Brandon Smith"
+     ],
+     [
+      "Germie Bernard"
+     ]
+    ],
+    "TE": [
+     [
+      "Pat Freiermuth Darnell Washington",
+      "Robert Tonyan"
+     ]
+    ],
+    "QB": [
+     [
+      "Aaron Rodgers",
+      "Mason Rudolph",
+      "Will Howard",
+      "Drew Allar"
+     ]
+    ],
+    "RB": [
+     [
+      "Jaylen Warren",
+      "Rico Dowdle",
+      "Eli Heidenreich",
+      "Travis Homer",
+      "Lew Nichols"
+     ]
+    ],
+    "FB": [
+     [
+      "Riley Nowakowski"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "SEA": {
+   "url": "https://www.seahawks.com/team/depth-chart",
+   "kr": [
+    "Rashid Shaheed",
+    "Velus Jones Jr.",
+    "Tory Horton",
+    "George Holani",
+    "Emanuel Wilson"
+   ],
+   "pr": [
+    "Rashid Shaheed",
+    "Tory Horton"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Cooper Kupp Rashid Shaheed",
+      "Irvin Charles"
+     ],
+     [
+      "Jaxon Smith-Njigba",
+      "Tory Horton"
+     ]
+    ],
+    "TE": [
+     [
+      "AJ Barner",
+      "Eric Saubert",
+      "Nick Kallerup"
+     ]
+    ],
+    "QB": [
+     [
+      "Sam Darnold",
+      "Drew Lock",
+      "Jalen Milroe"
+     ]
+    ],
+    "FB": [
+     [
+      "Brady Russell"
+     ]
+    ],
+    "RB": [
+     [
+      "Zach Charbonnet",
+      "Jadarian Price",
+      "Emanuel Wilson",
+      "George Holani"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "SF": {
+   "url": "https://www.49ers.com/team/depth-chart",
+   "kr": [
+    "Deebo Samuel Sr.",
+    "Jordan James"
+   ],
+   "pr": [
+    "Jacob Cowing",
+    "Jordan Watkins"
+   ],
+   "asof": "11/10/26",
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Mike Evans",
+      "Jordan Watkins",
+      "Brandin Cooks"
+     ],
+     [
+      "Deebo Samuel Sr.",
+      "Demarcus Robinson",
+      "Jacob Cowing"
+     ]
+    ],
+    "TE": [
+     [
+      "George Kittle",
+      "Luke Farrell",
+      "Brayden Willis"
+     ]
+    ],
+    "RB": [
+     [
+      "Christian McCaffrey",
+      "Kaelon Black",
+      "Jordan James"
+     ]
+    ],
+    "FB": [
+     [
+      "Kyle Juszczyk"
+     ]
+    ],
+    "QB": [
+     [
+      "Brock Purdy",
+      "Mac Jones",
+      "Kurtis Rourke"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KOR"
+  },
+  "TB": {
+   "url": "https://www.buccaneers.com/team/depth-chart",
+   "kr": [
+    "Kenny Gainwell",
+    "Sean Tucker"
+   ],
+   "pr": [
+    "Tez Johnson",
+    "Kameron Johnson"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Ted Hurst III",
+      "David Sills V"
+     ],
+     [
+      "Chris Godwin Jr.",
+      "Kameron Johnson"
+     ],
+     [
+      "Emeka Egbuka",
+      "Tez Johnson"
+     ]
+    ],
+    "TE": [
+     [
+      "Cade Otton",
+      "Payne Durham",
+      "Ko Kieft",
+      "Bauer Sharp"
+     ]
+    ],
+    "QB": [
+     [
+      "Baker Mayfield",
+      "Jalon Daniels"
+     ]
+    ],
+    "RB": [
+     [
+      "Bucky Irving",
+      "Kenny Gainwell",
+      "Sean Tucker"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  },
+  "TEN": {
+   "url": "https://www.tennesseetitans.com/team/depth-chart",
+   "kr": [
+    "Chimere Dike",
+    "Julius Chestnut"
+   ],
+   "pr": [
+    "Chimere Dike",
+    "Micah Robinson"
+   ],
+   "asof": "11/10/26",
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Calvin Ridley",
+      "Chimere Dike"
+     ],
+     [
+      "Wan'Dale Robinson"
+     ],
+     [
+      "Carnell Tate",
+      "Elic Ayomanor"
+     ]
+    ],
+    "TE": [
+     [
+      "Gunnar Helm",
+      "Daniel Bellinger",
+      "David Martin-Robinson Kylen Granson"
+     ]
+    ],
+    "QB": [
+     [
+      "Cam Ward",
+      "Mitchell Trubisky"
+     ]
+    ],
+    "RB": [
+     [
+      "Tony Pollard",
+      "Tyjae Spears Nick Singleton",
+      "Julius Chestnut"
+     ]
+    ]
+   },
+   "pr_label": "PR",
+   "kr_label": "KOR"
+  },
+  "WSH": {
+   "url": "https://www.commanders.com/team/depth-chart",
+   "kr": [
+    "Luke McCaffrey",
+    "Jaylin Lane",
+    "Dyami Brown"
+   ],
+   "pr": [
+    "Jaylin Lane",
+    "Luke McCaffrey",
+    "Treylon Burks"
+   ],
+   "asof": null,
+   "status": {
+    "kr": "listed",
+    "pr": "listed"
+   },
+   "reason": "ok",
+   "offense": {
+    "WR": [
+     [
+      "Terry McLaurin",
+      "Treylon Burks"
+     ],
+     [
+      "Stefon Diggs",
+      "Jaylin Lane"
+     ],
+     [
+      "Dyami Brown",
+      "Antonio Williams",
+      "Luke McCaffrey"
+     ]
+    ],
+    "TE": [
+     [
+      "Chig Okonkwo",
+      "Ben Sinnott"
+     ],
+     [
+      "John Bates",
+      "Colson Yankoff"
+     ]
+    ],
+    "QB": [
+     [
+      "Jayden Daniels",
+      "Marcus Mariota",
+      "Athan Kaliakmanis"
+     ]
+    ],
+    "RB": [
+     [
+      "Jacory Croskey-Merritt",
+      "Rachaad White",
+      "Austin Ekeler"
+     ]
+    ]
+   },
+   "kr_label": "KR",
+   "pr_label": "PR",
+   "asof_note": "page carries no date text (team does not date its chart)"
+  }
+ },
+ "changesVsPrevious": [
+  {
+   "team": "ATL",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Brian Robinson Jr.",
+    "Khalil Herbert",
+    "Olamide Zaccheaus",
+    "Zachariah Branch"
+   ],
+   "new": [
+    "Khalil Herbert",
+    "Olamide Zaccheaus",
+    "Zachariah Branch",
+    "Brian Robinson Jr."
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "ATL",
+   "kind": "PR",
+   "source": "espn",
+   "old": [
+    "Zachariah Branch",
+    "Olamide Zaccheaus",
+    "Jahan Dotson"
+   ],
+   "new": [
+    "Olamide Zaccheaus",
+    "Jahan Dotson",
+    "Zachariah Branch"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "CAR",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Trevor Etienne",
+    "David Moore",
+    "John Metchie III",
+    "Anthony Tyus III",
+    "Xavier Legette"
+   ],
+   "new": [
+    "Anthony Tyus III",
+    "Trevor Etienne",
+    "John Metchie III",
+    "Xavier Legette"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "CAR",
+   "kind": "PR",
+   "source": "espn",
+   "old": [
+    "Trevor Etienne",
+    "David Moore",
+    "Jalen Coker",
+    "John Metchie III",
+    "Chuba Hubbard",
+    "Xavier Legette"
+   ],
+   "new": [
+    "Trevor Etienne",
+    "Jalen Coker",
+    "Xavier Legette"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "DEN",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Marvin Mims Jr.",
+    "Cody Schrader",
+    "Jonah Coleman",
+    "RJ Harvey",
+    "Tyler Badie"
+   ],
+   "new": [
+    "Marvin Mims Jr.",
+    "Jonah Coleman",
+    "RJ Harvey",
+    "Tyler Badie"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "GB",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Bo Melton",
+    "Coleman Owen",
+    "Savion Williams",
+    "Skyy Moore"
+   ],
+   "new": [
+    "Skyy Moore",
+    "Bo Melton",
+    "Savion Williams"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "GB",
+   "kind": "PR",
+   "source": "espn",
+   "old": [
+    "Coleman Owen",
+    "Matthew Golden",
+    "Skyy Moore"
+   ],
+   "new": [
+    "Skyy Moore",
+    "Matthew Golden"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "HOU",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Tremon Smith",
+    "Woody Marks",
+    "Xavier Hutchinson",
+    "Jaylin Noel"
+   ],
+   "new": [
+    "Tremon Smith",
+    "Woody Marks",
+    "Xavier Hutchinson",
+    "Nikko Remigio",
+    "Jaylin Noel"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "HOU",
+   "kind": "PR",
+   "source": "espn",
+   "old": [
+    "Tank Dell",
+    "Tremon Smith",
+    "Jaylin Noel"
+   ],
+   "new": [
+    "Tank Dell",
+    "Tremon Smith",
+    "Nikko Remigio",
+    "Jaylin Noel"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "IND",
+   "kind": "PR",
+   "source": "espn",
+   "old": [
+    "Anthony Gould",
+    "Josh Downs",
+    "Ashton Dulin"
+   ],
+   "new": [
+    "Anthony Gould",
+    "Ashton Dulin"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "KC",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Nikko Remigio",
+    "Brashard Smith",
+    "Emmett Johnson"
+   ],
+   "new": [
+    "Emmett Johnson",
+    "Brashard Smith"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "KC",
+   "kind": "PR",
+   "source": "espn",
+   "old": [
+    "Nikko Remigio",
+    "Brashard Smith",
+    "Tyquan Thornton"
+   ],
+   "new": [
+    "Cyrus Allen",
+    "Emmett Johnson",
+    "Josh Downs",
+    "Brashard Smith",
+    "Tyquan Thornton"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "LAR",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Jordan Whittington",
+    "Tutu Atwell",
+    "Ronnie Rivers",
+    "Dean Connors"
+   ],
+   "new": [
+    "Xavier Smith",
+    "Ronnie Rivers",
+    "Brennan Presley",
+    "Dean Connors",
+    "Jordan Whittington"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "LAR",
+   "kind": "PR",
+   "source": "espn",
+   "old": [
+    "Kyren Williams",
+    "Jordan Whittington",
+    "Tutu Atwell"
+   ],
+   "new": [
+    "Xavier Smith",
+    "Brennan Presley",
+    "Jordan Whittington"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "NE",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Kyle Williams",
+    "Corey Kiner",
+    "Lan Larison",
+    "TreVeyon Henderson",
+    "Channing Canada"
+   ],
+   "new": [
+    "Kyle Williams",
+    "Corey Kiner",
+    "Lan Larison",
+    "Channing Canada",
+    "TreVeyon Henderson"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  },
+  {
+   "team": "TB",
+   "kind": "KR",
+   "source": "espn",
+   "old": [
+    "Kameron Johnson",
+    "Tez Johnson",
+    "Kenny Gainwell"
+   ],
+   "new": [
+    "Sean Tucker",
+    "Kameron Johnson",
+    "Kenny Gainwell",
+    "Tez Johnson"
+   ],
+   "baseline": "w09-r2 Nov 8"
+  }
+ ],
+ "changesBaseline": "sun-early.json for week 10 is MISSING. Compared ESPN KR/PR only against the Nov 8 snapshot (depth-w09-r2.json). Site charts and skill-position order have no earlier stored snapshot, so no change list for them.",
+ "nyj": {
+  "espn_kr": [
+   "Kene Nwangwu",
+   "Isaiah Williams",
+   "Arian Smith"
+  ],
+  "espn_pr": [
+   "Isaiah Williams"
+  ],
+  "site_kr": [
+   "Kene Nwangwu",
+   "Isaiah Williams",
+   "Isaiah Davis"
+  ],
+  "site_pr": [
+   "Isaiah Williams",
+   "Isaiah Davis"
+  ],
+  "site_asof": "2026-08-08"
+ }
+}
