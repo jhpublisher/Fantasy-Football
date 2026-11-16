@@ -1596,6 +1596,50 @@
 "winner": "MIN",
 "loser": "GB",
 "tie": false
+},
+"401873061": {
+"week": 10,
+"date": "2026-11-15T21:05Z",
+"home": "ARI",
+"away": "LAR",
+"homeScore": 6,
+"awayScore": 34,
+"winner": "LAR",
+"loser": "ARI",
+"tie": false
+},
+"401873062": {
+"week": 10,
+"date": "2026-11-15T21:05Z",
+"home": "LV",
+"away": "SEA",
+"homeScore": 13,
+"awayScore": 21,
+"winner": "SEA",
+"loser": "LV",
+"tie": false
+},
+"401873063": {
+"week": 10,
+"date": "2026-11-15T21:25Z",
+"home": "DAL",
+"away": "SF",
+"homeScore": 40,
+"awayScore": 46,
+"winner": "SF",
+"loser": "DAL",
+"tie": false
+},
+"401873064": {
+"week": 10,
+"date": "2026-11-16T01:20Z",
+"home": "CIN",
+"away": "PIT",
+"homeScore": 38,
+"awayScore": 18,
+"winner": "CIN",
+"loser": "PIT",
+"tie": false
 }
 }
 }
