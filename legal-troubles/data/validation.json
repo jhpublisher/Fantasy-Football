@@ -1,10 +1,12 @@
 {
  "ok": true,
  "failures": [],
- "warnings": [],
- "checkedAt": "2026-11-16T20:42+00:00",
+ "warnings": [
+  "news source 'Google News: NFL signs free agent': error: HTTPError: HTTP Error 429: Too Many Requests"
+ ],
+ "checkedAt": "2026-11-17T01:43+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-11-16T20:42+00:00"
+ "bundleBuiltAt": "2026-11-17T01:43+00:00"
 }
