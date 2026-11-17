@@ -1,7 +1,7 @@
 {
  "league_id": 293318,
  "season": 2026,
- "built": "2026-11-03",
+ "built": "2026-11-17",
  "frozen_weeks": [
   1,
   2,
@@ -11,9 +11,10 @@
   6,
   7,
   8,
-  9
+  9,
+  10
  ],
- "in_progress_week": 10,
+ "in_progress_week": 11,
  "files": {
   "weeks/w01/boxscore.json": {
    "bytes": 724972,
@@ -80,40 +81,40 @@
    "sha256": "cb58d7187a5a72a1e24e8ddf66c1e2709f11f255ce1161e85a255bec073aa4f1"
   },
   "league/mDraftDetail.json": {
-   "bytes": 52094,
-   "sha256": "d5f984e4e7a8f928f1bca5a067b64f95ca9af40de3cb22ceaecfd2203287b382"
+   "bytes": 52441,
+   "sha256": "53b28831f1e68e2a4e6437a06d2872affaebeb689f45e0afff86cef689314c06"
   },
   "league/mNav.json": {
-   "bytes": 7268,
-   "sha256": "3bd3ba5cdb10f7df01c87d58b9e6521d60476e3877436cfec4e3c23c0284ceff"
+   "bytes": 7609,
+   "sha256": "4b7e47703fb97eb1763082c87734164037751c45fa430126155216ddd0adde34"
   },
   "league/mPositionalRatings.json": {
-   "bytes": 9478,
-   "sha256": "88b4dee21f71be1e93b88bb39e001642aac9fdf4499b4f7b029f8c9d825692c8"
+   "bytes": 9788,
+   "sha256": "c871106a7e29068e24ba192ec2be53b5a008a1778a03aad75bf46aa72b6b71b0"
   },
   "league/mSettings.json": {
-   "bytes": 10252,
-   "sha256": "76e48810f0186b10406c6bc5d6c170f55e2a61cb554594cb13b3fbe3050b0abc"
+   "bytes": 10599,
+   "sha256": "4f96785df56171b0f004ada9e8af47a17956f5dea62400c45b3a568503e2b1f7"
   },
   "league/mStandings.json": {
-   "bytes": 19685,
-   "sha256": "a95a663b0318ff13e90ec4cc9d8da51b4b693bfca2ae74975c0cb4c3dd703890"
+   "bytes": 20143,
+   "sha256": "0205c9e82b0175e45b76fd8eccfbc30b0f2fbbc7629a5112f290a47b94164e0b"
   },
   "league/mStatus.json": {
-   "bytes": 1367,
-   "sha256": "72a6fd3a32f7c5bea1e30b406a7f453e7da4ea6d5ac3d7cbd8363424b691bb1a"
+   "bytes": 1714,
+   "sha256": "ca84b5623266c07e25e3eb9a6dc0f75b4ed85b84a0a20c5e73de2fa6c6fdcdbf"
   },
   "league/mTeam.json": {
-   "bytes": 55111,
-   "sha256": "651f6424c77a48e5cb7ea052a2cb1dcf115908f298ce7588056173a16dbb73db"
+   "bytes": 56031,
+   "sha256": "a377b44698e598b46ce75451b51fdd380b0a69565af59ea478effd0241d4dd46"
   },
   "league/mTransactions2.json": {
-   "bytes": 6346,
-   "sha256": "d039e1f035c130241140b6905c82b823e51f6e1e4e6f445d11de0e7a88cfd0db"
+   "bytes": 4528,
+   "sha256": "057b42c2d8a170d963c9cfc54cb8e1ad1dd0e2b2bb55ea8b744f1d9d74e1ca7f"
   },
   "league/nfl_schedule.json": {
-   "bytes": 108977,
-   "sha256": "9417d04d060d97643cdebdf6814f273c35caac265486e302481e7a44e2ad78e3"
+   "bytes": 108863,
+   "sha256": "ee191e4f019f0199512e029fbb6124335f3f5bd81d0c089e3d18f9612060f6ec"
   },
   "current/boxscore_wk5.json": {
    "bytes": 550459,
@@ -266,6 +267,30 @@
   "weeks/w09/roster.json": {
    "bytes": 4595917,
    "sha256": "1887673daeaaf351f3abd62c3941597d646ed8c5204d501ba4cf9ed700d9b7c4"
+  },
+  "weeks/w10/boxscore.json": {
+   "bytes": 1056506,
+   "sha256": "091d83bc2ce5a6e26950dd3837cd350d6ee256fef84d16bd3c21034fe0d3938b"
+  },
+  "weeks/w10/SHA256.json": {
+   "bytes": 467,
+   "sha256": "f41307af59aef23edb64a334ab89ef990ebabe68e4108f72f28d0db03c4fe988"
+  },
+  "weeks/w10/players_week.json": {
+   "bytes": 68824,
+   "sha256": "7b4c01c24b982ffda298674c8a9ddec611379a85a5bc1e06921bd95f3078a01a"
+  },
+  "weeks/w10/pool.json": {
+   "bytes": 11186134,
+   "sha256": "b387d2d92b9e46b4a76d0b878ef1bf21e62ecef31036e59a097a82406a264944"
+  },
+  "weeks/w10/matchups_all.json": {
+   "bytes": 5671891,
+   "sha256": "5edc282703ed8929ab6d0a2931df5d41e511f4c132cf880845bcce0bc7fe3151"
+  },
+  "weeks/w10/roster.json": {
+   "bytes": 4852050,
+   "sha256": "d722c2f07c3d0f2adcec1674f80ae0174d999d0046c81c58221997f828ca7ced"
   }
  }
 }
