@@ -1,5 +1,5 @@
 {
-"asOf": "2026-11-18T11:44Z",
+"asOf": "2026-11-18T13:30Z",
 "week": 11,
 "weeks": [
 1,
@@ -2446,12 +2446,6 @@
 9
 ]
 },
-"4240603": {
-"name": "Malik Davis",
-"team": "DAL",
-"w": {},
-"played": []
-},
 "5083754": {
 "name": "Ryan Flournoy",
 "team": "DAL",
@@ -2660,6 +2654,18 @@
 },
 "played": [
 9
+]
+},
+"4429105": {
+"name": "Arian Smith",
+"team": "NYJ",
+"w": {
+"2": 0,
+"1": 0
+},
+"played": [
+1,
+2
 ]
 },
 "4808759": {
@@ -3104,6 +3110,20 @@
 8,
 9,
 10
+]
+},
+"4240657": {
+"name": "Michael Carter",
+"team": "TEN",
+"w": {
+"8": 0,
+"7": 1.9,
+"6": 0
+},
+"played": [
+6,
+7,
+8
 ]
 },
 "4366031": {
@@ -3558,18 +3578,6 @@
 10
 ]
 },
-"4429105": {
-"name": "Arian Smith",
-"team": "NYJ",
-"w": {
-"2": 0,
-"1": 0
-},
-"played": [
-1,
-2
-]
-},
 "4688813": {
 "name": "Josh Downs",
 "team": "KC",
@@ -3774,7 +3782,6 @@
 }
 },
 "missing": {
-"Michael Carter": "no ESPN id for this returner (not matched to an ESPN player)",
 "Mitch Tinsley": "no ESPN id for this returner (not matched to an ESPN player)",
 "4240459": "Josh Blackwell: ESPN fantasy pool does not list this player (no points to show)",
 "3134448": "Tremon Smith: ESPN fantasy pool does not list this player (no points to show)",
