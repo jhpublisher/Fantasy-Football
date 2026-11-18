@@ -14,23 +14,24 @@
  "team_sites": {
   "ok": true,
   "asOf": "2026-11-18T00:58+00:00",
-  "ageHours": 10.7,
+  "ageHours": 10.8,
   "skipped": "not due (11h old)"
  },
  "schedule": {
   "ok": true,
   "asOf": "2026-11-18T00:58+00:00",
-  "ageHours": 10.7,
+  "ageHours": 10.8,
   "skipped": "not due (11h old)"
  },
  "ownership": {
   "ok": true,
-  "asOf": "2026-11-18T11:41+00:00",
+  "asOf": "2026-11-18T11:44+00:00",
   "ageHours": 0.0
  },
  "injury_report": {
   "ok": true,
   "asOf": "2026-11-18T11:41+00:00",
-  "ageHours": 0.0
+  "ageHours": 0.1,
+  "skipped": "not due (0h old)"
  }
 }
