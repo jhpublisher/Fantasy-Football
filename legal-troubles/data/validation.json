@@ -2,22 +2,22 @@
  "ok": true,
  "failures": [],
  "warnings": [
-  "tag for Dylan Laube expired (week 10); page must not show it as current",
   "tag for Kenneth Walker III expired (week 10); page must not show it as current",
+  "tag for Jaylen Wright expired (week 10); page must not show it as current",
+  "tag for Rams D/ST expired (week 10); page must not show it as current",
+  "tag for Jordyn Tyson expired (week 10); page must not show it as current",
+  "tag for Zach Charbonnet expired (week 10); page must not show it as current",
+  "tag for Xavier Worthy expired (week 10); page must not show it as current",
   "tag for Josh Downs expired (week 10); page must not show it as current",
   "tag for Josh Allen expired (week 10); page must not show it as current",
-  "tag for Rams D/ST expired (week 10); page must not show it as current",
-  "tag for Jaylen Wright expired (week 10); page must not show it as current",
-  "tag for Zach Charbonnet expired (week 10); page must not show it as current",
+  "tag for Dylan Laube expired (week 10); page must not show it as current",
   "tag for Germie Bernard expired (week 10); page must not show it as current",
-  "tag for Xavier Worthy expired (week 10); page must not show it as current",
-  "tag for Jordyn Tyson expired (week 10); page must not show it as current",
   "tag for Jadarian Price expired (week 10); page must not show it as current",
   "curated tags: 11 expired: Josh Allen, Rams D/ST, Zach Charbonnet, Jadarian Price, Jordyn Tyson, Kenneth Walker III, Germie Bernard, Xavier Worthy, Jaylen Wright, Josh Downs, Dylan Laube"
  ],
- "checkedAt": "2026-11-18T20:33+00:00",
+ "checkedAt": "2026-11-18T21:38+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-11-18T20:33+00:00"
+ "bundleBuiltAt": "2026-11-18T21:38+00:00"
 }
