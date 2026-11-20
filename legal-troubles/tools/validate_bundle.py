@@ -13,6 +13,8 @@ A = ap.parse_args()
 F, Wn = [], []
 def fail(m): F.append(m)
 def warn(m): Wn.append(m)
+I = []  # staff-only notes (expired/old-format curated items); the page hides these items, so they are not page warnings
+def info(m): I.append(m)
 now = datetime.now(timezone.utc)
 try: b = json.load(open(A.bundle))
 except Exception as e:
@@ -100,7 +102,7 @@ if b is not None:
         if not p.get("name") or p.get("pos") in (None, "", "?"): fail(f"player {pid}: unresolved name/position ({p.get('name')!r}, {p.get('pos')!r})")
         chk_ab(f"players/{pid}", p.get("nfl"))
         for o in p.get("playoffs") or []: chk_ab(f"players/{pid} playoffs", o)
-        if p.get("tagExpired"): warn(f"tag for {p.get('name')} expired (week {p.get('tagExpiresWeek')}); page must not show it as current")
+        if p.get("tagExpired"): info(f"tag for {p.get('name')} expired (week {p.get('tagExpiresWeek')}); page must not show it as current")
     ex = (b.get("extras") or {}).get("current") or {}
     mu = ex.get("matchup")
     if isinstance(mu, dict) and not is_err(mu):
@@ -123,8 +125,8 @@ if b is not None:
         elif h.get("status") == "warning": warn(f"news source {k!r}: {h.get('note')}")
     for e in desk.get("errors") or []: fail(f"news_sweep: {e}")
     for r in desk.get("rumors") or []:
-        if r.get("expired"): warn(f"rumor {r.get('player')} expired (week {r.get('expiresWeek')})")
-        if r.get("legacy"): warn(f"rumor {r.get('player')}: old format (no asOf/expiresWeek), shown as current until week {r.get('expiresWeek')}")
+        if r.get("expired"): info(f"rumor {r.get('player')} expired (week {r.get('expiresWeek')})")
+        if r.get("legacy"): info(f"rumor {r.get('player')}: old format (no asOf/expiresWeek), shown as current until week {r.get('expiresWeek')}")
     # ---------- practice ----------
     pr = b.get("practice") or {}
     for nm, x in (pr.get("players") or {}).items():
@@ -137,8 +139,8 @@ if b is not None:
     for k in ("tags", "claims", "needs"):
         x = cs.get(k) or {}
         if x.get("error"): fail(f"curated {k}: {x['error']}")
-        if x.get("legacy"): warn(f"curated {k}: {x['legacy']} old-format entries (no asOf/expiresWeek) shown as current until week {(lg.get('currentWeek') or 0) + 1}: {', '.join(x.get('legacyNames') or [])}. Re-save them with asOf + expiresWeek")
-        if x.get("expired"): warn(f"curated {k}: {x['expired']} expired: {', '.join(x.get('expiredNames') or [])}")
+        if x.get("legacy"): info(f"curated {k}: {x['legacy']} old-format entries (no asOf/expiresWeek) shown as current until week {(lg.get('currentWeek') or 0) + 1}: {', '.join(x.get('legacyNames') or [])}. Re-save them with asOf + expiresWeek")
+        if x.get("expired"): info(f"curated {k}: {x['expired']} expired: {', '.join(x.get('expiredNames') or [])}")
     # ---------- returns ----------
     rt = (b.get("returns") or {}).get("current")
     if rt is not None and not is_err(rt):
@@ -202,7 +204,7 @@ if b is not None:
     elif rt is not None: fail(f"returns: {rt.get('error')}")
     if (b.get("run") or {}).get("badFiles"): fail(f"unreadable output files: {list(b['run']['badFiles'])}")
 stale_sections = sorted(set(stale_sections))
-v = {"ok": not F, "failures": F, "warnings": Wn, "checkedAt": now.isoformat(timespec="minutes"), "staleData": bool(stale_sections),
+v = {"ok": not F, "failures": F, "warnings": Wn, "info": I, "checkedAt": now.isoformat(timespec="minutes"), "staleData": bool(stale_sections),
      "staleSections": stale_sections, "maxAgeHours": A.max_age_hours, "bundleBuiltAt": (b or {}).get("builtAt")}
 if b is not None and not A.no_write:
     b["validation"] = v; json.dump(b, open(A.bundle, "w"), separators=(",", ":"))
