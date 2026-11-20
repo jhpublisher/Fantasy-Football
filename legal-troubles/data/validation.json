@@ -1,7 +1,9 @@
 {
  "ok": true,
  "failures": [],
- "warnings": [],
+ "warnings": [
+  "news source 'Practice reports': practice days have passed with no report found for our injured players: Zavion Thomas (Frank: check the official injury report)"
+ ],
  "info": [
   "tag for Dylan Laube expired (week 10); page must not show it as current",
   "tag for Kenneth Walker III expired (week 10); page must not show it as current",
@@ -16,9 +18,9 @@
   "tag for Jadarian Price expired (week 10); page must not show it as current",
   "curated tags: 11 expired: Josh Allen, Rams D/ST, Zach Charbonnet, Jadarian Price, Jordyn Tyson, Kenneth Walker III, Germie Bernard, Xavier Worthy, Jaylen Wright, Josh Downs, Dylan Laube"
  ],
- "checkedAt": "2026-11-20T18:52+00:00",
+ "checkedAt": "2026-11-20T20:23+00:00",
  "staleData": false,
  "staleSections": [],
  "maxAgeHours": 6.0,
- "bundleBuiltAt": "2026-11-20T18:52+00:00"
+ "bundleBuiltAt": "2026-11-20T20:23+00:00"
 }
