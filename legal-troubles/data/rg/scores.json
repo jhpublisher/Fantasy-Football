@@ -1685,6 +1685,17 @@
 "loser": "BAL",
 "tie": false
 },
+"401873069": {
+"week": 11,
+"date": "2026-11-22T21:25Z",
+"home": "NYG",
+"away": "JAX",
+"homeScore": 23,
+"awayScore": 18,
+"winner": "NYG",
+"loser": "JAX",
+"tie": false
+},
 "401873070": {
 "week": 11,
 "date": "2026-11-22T18:00Z",
@@ -1738,6 +1749,17 @@
 "awayScore": 27,
 "winner": "NYJ",
 "loser": "LAC",
+"tie": false
+},
+"401873075": {
+"week": 11,
+"date": "2026-11-22T21:25Z",
+"home": "DEN",
+"away": "LV",
+"homeScore": 38,
+"awayScore": 24,
+"winner": "DEN",
+"loser": "LV",
 "tie": false
 },
 "401873076": {
