@@ -1772,6 +1772,17 @@
 "winner": "PHI",
 "loser": "PIT",
 "tie": false
+},
+"401873077": {
+"week": 11,
+"date": "2026-11-23T01:20Z",
+"home": "SF",
+"away": "MIN",
+"homeScore": 35,
+"awayScore": 10,
+"winner": "SF",
+"loser": "MIN",
+"tie": false
 }
 }
 }
