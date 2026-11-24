@@ -120,6 +120,18 @@
      "player values": 144
     }
    }
+  },
+  "11": {
+   "file": "weeks/2026-w11.json",
+   "sha256": "0c113fe9782853d162b2a000dde606d05639fd7f6982367529c8ecd72cbb32fe",
+   "addedAt": "2026-11-24T06:28Z",
+   "verify": {
+    "ok": true,
+    "checked": {
+     "team-game values": 182,
+     "player values": 130
+    }
+   }
   }
  }
 }

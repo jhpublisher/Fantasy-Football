@@ -80,6 +80,14 @@
    "outPlayers": 70,
    "warnings": 1,
    "unmatched": 1
+  },
+  "11": {
+   "file": "2026-w11.json",
+   "sha256": "68f528b8618ff975c2b784012c45899f67676ea1ae83e6efc769cda25adb423f",
+   "addedAt": "2026-11-24T06:28Z",
+   "outPlayers": 54,
+   "warnings": 0,
+   "unmatched": 1
   }
  }
 }

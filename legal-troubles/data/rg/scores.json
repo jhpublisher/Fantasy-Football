@@ -1783,6 +1783,17 @@
 "winner": "SF",
 "loser": "MIN",
 "tie": false
+},
+"401873078": {
+"week": 11,
+"date": "2026-11-24T01:15Z",
+"home": "WSH",
+"away": "CIN",
+"homeScore": 22,
+"awayScore": 20,
+"winner": "WSH",
+"loser": "CIN",
+"tie": false
 }
 }
 }
