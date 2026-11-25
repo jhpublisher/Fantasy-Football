@@ -1,5 +1,5 @@
 {
-"asOf": "2026-11-24T23:55Z",
+"asOf": "2026-11-25T03:12Z",
 "week": 12,
 "weeks": [
 1,
@@ -2427,6 +2427,24 @@
 9
 ]
 },
+"4430870": {
+"name": "KeAndre Lambert-Smith",
+"team": "LAC",
+"w": {
+"10": 0,
+"9": 5.5,
+"8": 0,
+"6": 3.7,
+"1": 0
+},
+"played": [
+1,
+6,
+8,
+9,
+10
+]
+},
 "4699354": {
 "name": "Harrison Wallace III",
 "team": "ARI",
@@ -2923,34 +2941,6 @@
 11
 ]
 },
-"4882093": {
-"name": "Bhayshul Tuten",
-"team": "JAX",
-"w": {
-"11": 6.8,
-"10": 18.8,
-"9": 8.9,
-"8": 29.9,
-"6": 22.7,
-"5": 10.6,
-"4": 10.1,
-"3": 16.0,
-"2": 13.2,
-"1": 9.3
-},
-"played": [
-1,
-2,
-3,
-4,
-5,
-6,
-8,
-9,
-10,
-11
-]
-},
 "4426485": {
 "name": "Jonathan Mingo",
 "team": "DAL",
@@ -3345,24 +3335,6 @@
 9,
 10,
 11
-]
-},
-"4430870": {
-"name": "KeAndre Lambert-Smith",
-"team": "LAC",
-"w": {
-"10": 0,
-"9": 5.5,
-"8": 0,
-"6": 3.7,
-"1": 0
-},
-"played": [
-1,
-6,
-8,
-9,
-10
 ]
 },
 "4612826": {
@@ -3877,34 +3849,6 @@
 11
 ]
 },
-"4911851": {
-"name": "LeQuint Allen Jr.",
-"team": "JAX",
-"w": {
-"11": 0.4,
-"10": 0,
-"9": 0,
-"8": 0,
-"6": 0.1,
-"5": 0,
-"4": 0,
-"3": 1.9,
-"2": 0,
-"1": 0
-},
-"played": [
-1,
-2,
-3,
-4,
-5,
-6,
-8,
-9,
-10,
-11
-]
-},
 "4360761": {
 "name": "Michael Wilson",
 "team": "ARI",
@@ -4100,6 +4044,7 @@
 "4870706": "Caleb Downs: ESPN fantasy pool does not list this player (no points to show)",
 "4382401": "Riley Moss: ESPN fantasy pool does not list this player (no points to show)",
 "4373809": "Jevon Holland: ESPN fantasy pool does not list this player (no points to show)",
+"4608004": "Donte Kent: ESPN fantasy pool does not list this player (no points to show)",
 "4695280": "Micah Robinson: ESPN fantasy pool does not list this player (no points to show)"
 },
 "source": "ESPN fantasy API kona_player_info, actual weekly points in league scoring (appliedTotal)"
