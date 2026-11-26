@@ -1,5 +1,5 @@
 {
-"asOf": "2026-11-25T19:18Z",
+"asOf": "2026-11-26T00:43Z",
 "week": 12,
 "weeks": [
 1,
@@ -3799,34 +3799,6 @@
 11
 ]
 },
-"4429615": {
-"name": "Zay Flowers",
-"team": "BAL",
-"w": {
-"11": 12.4,
-"10": 8.4,
-"9": 3.8,
-"8": 0,
-"7": 25.7,
-"6": 9.7,
-"5": 10.1,
-"4": 22.8,
-"3": 12.9,
-"1": 27.5
-},
-"played": [
-1,
-3,
-4,
-5,
-6,
-7,
-8,
-9,
-10,
-11
-]
-},
 "4038815": {
 "name": "Rico Dowdle",
 "team": "PIT",
@@ -4022,6 +3994,28 @@
 10,
 11
 ]
+},
+"4870847": {
+"name": "Ja'Kobi Lane",
+"team": "BAL",
+"w": {
+"11": 0,
+"10": 7.6,
+"9": 0,
+"8": 1.8,
+"7": 4.0,
+"6": 6.0,
+"1": 1.6
+},
+"played": [
+1,
+6,
+7,
+8,
+9,
+10,
+11
+]
 }
 },
 "missing": {
@@ -4039,7 +4033,6 @@
 "5153072": "Kapena Gushiken: ESPN fantasy pool does not list this player (no points to show)",
 "4682618": "Cooper DeJean: ESPN fantasy pool does not list this player (no points to show)",
 "4726127": "Tacario Davis: ESPN fantasy pool does not list this player (no points to show)",
-"4685530": "Malaki Starks: ESPN fantasy pool does not list this player (no points to show)",
 "4401823": "Dee Alford: ESPN fantasy pool does not list this player (no points to show)",
 "4870706": "Caleb Downs: ESPN fantasy pool does not list this player (no points to show)",
 "4382401": "Riley Moss: ESPN fantasy pool does not list this player (no points to show)",
