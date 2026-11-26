@@ -1794,6 +1794,17 @@
 "winner": "WSH",
 "loser": "CIN",
 "tie": false
+},
+"401873079": {
+"week": 12,
+"date": "2026-11-26T01:00Z",
+"home": "LAR",
+"away": "GB",
+"homeScore": 26,
+"awayScore": 13,
+"winner": "LAR",
+"loser": "GB",
+"tie": false
 }
 }
 }
