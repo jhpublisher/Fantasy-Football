@@ -1273,7 +1273,7 @@ function runsView(){
   return bar+runsPanel('ours')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-brr]');if(b){const [sr,id]=b.dataset.brr.split(/:(.+)/);BR[sr==='kl'?'fr':'r']=id;return render()}const m=e.target.closest('[data-klm]');if(m){KLM.m=m.dataset.klm;try{localStorage.setItem('lt-klmode',KLM.m)}catch(x){}return render()}const w=e.target.closest('[data-brw]');if(w){BR.w=+w.dataset.brw;BR.r=null;BR.fr=null;render()}});
 /* Blueberry charts: u/BlueberryAsFuck's weekly return tables, one week at a time, sortable. Data: db collection blueberry (docs w01..), GitHub: data/beta-blueberry.json */
-const BB={w:null};
+const BB={w:null,v:'report'};
 SORT_DEF.bb={k:'team',d:1};SORT.bb={k:'team',d:1};SORT_DEF.bk={k:'team',d:1};SORT.bk={k:'team',d:1};
 ['kr1','kr2','ks','al','opp','pr','bu','inj'].forEach(x=>ASC.add(x));
 const ksOf=r=>{const a=r.alignment==null?'':String(r.alignment).toLowerCase().trim();if(!a)return null;const q=a.includes('?')?'?':'';return a.startsWith('solo')||a.startsWith('1 deep')?'one man'+q:a.startsWith('2 deep')?'two men'+q:null};
@@ -1294,18 +1294,25 @@ function bbView(){
   const st=sortRows(R,'bb',vf,(a,b)=>String(a.team).localeCompare(String(b.team)));
   const cell=(c,r)=>{const v=raw[c[0]](r);return `<td data-l="${esc(c[1])}"${c[2]?' class="num"':''}>${v==null||v===''?'<span class="note">–</span>':c[2]?(+v).toFixed(1):c[0]==='team'?'<b>'+esc(v)+'</b>':esc(v)}</td>`};
   const wk=ks.map(k=>`<button data-bbw="${esc(k)}" aria-pressed="${k===BB.w}">Week ${esc(B[k].week??k.replace(/^w0?/,''))}</button>`).join('');
-  let kick='';
+  let kick=`<div class="empty">No return-direction table for his Week ${esc(d.week)} post.</div>`;
   if(Array.isArray(d.kicker)&&d.kicker.length){
     const KC=[['team','Team',0,r=>tx(r.team)],['ko','Kickoffs',1,r=>nm(r.kickoffs)],['l','% left',1,r=>nm(r.pctL)],['r','% right',1,r=>nm(r.pctR)],['w','% to weaker side',1,r=>nm(r.pctWeaker)],['note','Note',0,r=>tx(r.note)]];
     const kv=(r,k)=>KC.find(c=>c[0]===k)[3](r);if(!KC.some(c=>c[0]===SORT.bk.k))Object.assign(SORT.bk,SORT_DEF.bk);
     const ks2=sortRows(d.kicker,'bk',kv,(a,b)=>String(a.team).localeCompare(String(b.team)));
     const kr={team:r=>r.team,ko:r=>r.kickoffs,l:r=>r.pctL,r:r=>r.pctR,w:r=>r.pctWeaker,note:r=>r.note};
-    kick=`<div class="ph" style="margin-top:14px"><h3>Kicker direction (his Week ${esc(d.week)} chart)</h3><span class="eyebrow">${resetBtn('bk')}</span></div><div class="tw"><table class="wrt"><thead><tr>${KC.map(c=>sh('bk',c[0],c[1],c[2])).join('')}</tr></thead><tbody>${ks2.map(r=>'<tr>'+KC.map(c=>{const v=kr[c[0]](r);return `<td data-l="${esc(c[1])}"${c[2]?' class="num"':''}${c[0]==='note'?' style="white-space:normal;min-width:200px"':''}>${v==null||v===''?'<span class="note">–</span>':c[0]==='team'?'<b>'+esc(v)+'</b>':esc(v)}</td>`}).join('')+'</tr>').join('')}</tbody></table></div>`}
-  return `<section class="panel">${hd}
+    kick=`<div class="ph"><h3>Kicker direction (his Week ${esc(d.week)} chart)</h3><span class="eyebrow">${resetBtn('bk')}</span></div><div class="tw"><table class="wrt"><thead><tr>${KC.map(c=>sh('bk',c[0],c[1],c[2])).join('')}</tr></thead><tbody>${ks2.map(r=>'<tr>'+KC.map(c=>{const v=kr[c[0]](r);return `<td data-l="${esc(c[1])}"${c[2]?' class="num"':''}${c[0]==='note'?' style="white-space:normal;min-width:200px"':''}>${v==null||v===''?'<span class="note">–</span>':c[0]==='team'?'<b>'+esc(v)+'</b>':esc(v)}</td>`}).join('')+'</tr>').join('')}</tbody></table></div>`}
+  const vb=[['report','Report'],['dir','Return direction'],['notes','Notes']].map(([v,l])=>`<button data-bbv="${v}" aria-pressed="${v===BB.v}">${l}</button>`).join('');
+  const lead=`His Week ${esc(d.week)} chart, posted ${d.postedAt?esc(fmtShort(Date.parse(d.postedAt))):'after the Week '+esc(d.week)+' games'}; it describes Week ${esc(d.describesWeek??(+d.week+1))}.`;
+  let body;
+  if(BB.v==='dir')body=`<p class="note">${lead}</p>${kick}`;
+  else if(BB.v==='notes'){const t=String(d.notes||'').split('\n').filter(Boolean).map(l=>{const m=l.match(/^([A-Z]{2,3}):\s*(.*)$/);return m?`<p style="margin:0"><b>${m[1]}</b> · ${esc(m[2])}</p>`:`<p style="margin:0">${esc(l)}</p>`}).join('');
+    body=`<p class="note">${lead}</p>${t?`<div style="display:grid;gap:8px;max-width:820px">${t}</div>`:`<div class="empty">His write-ups are not posted on this public site. They are on your private claude.ai dashboard.</div>`}`}
+  else body=`<p class="note">${lead} ${R.length} teams. Click a column title to sort; click again to reverse. Columns appear only for weeks where his chart has them. ${resetBtn('bb')}</p>
+    <div class="tw"><table class="wrt"><thead><tr>${cols.map(c=>sh('bb',c[0],c[1],c[2],c[4])).join('')}</tr></thead><tbody>${st.map(r=>'<tr>'+cols.map(c=>cell(c,r)).join('')+'</tr>').join('')}</tbody></table></div>`;
+  return `<section class="panel"><div class="ph"><h2>Blueberry charts</h2><div class="filters" role="group" aria-label="Blueberry view" style="margin-right:auto">${vb}</div><span class="eyebrow">u/BlueberryAsFuck return tables · for study, not lineup decisions</span></div>
     <div class="rgtools"><div class="filters" role="group" aria-label="Blueberry week">${wk}</div></div>
-    <p class="note">His Week ${esc(d.week)} chart, posted ${d.postedAt?esc(fmtShort(Date.parse(d.postedAt))):'after the Week '+esc(d.week)+' games'}; it describes Week ${esc(d.describesWeek??(+d.week+1))}. ${R.length} teams. Click a column title to sort; click again to reverse. Columns appear only for weeks where his chart has them. ${resetBtn('bb')}</p>
-    <div class="tw"><table class="wrt"><thead><tr>${cols.map(c=>sh('bb',c[0],c[1],c[2],c[4])).join('')}</tr></thead><tbody>${st.map(r=>'<tr>'+cols.map(c=>cell(c,r)).join('')+'</tr>').join('')}</tbody></table></div>${kick}</section>`}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-bbw]');if(b){BB.w=b.dataset.bbw;render()}});
+    ${body}</section>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-bbw]');if(b){BB.w=b.dataset.bbw;render()}const v=e.target.closest('[data-bbv]');if(v){BB.v=v.dataset.bbv;render()}});
 function btWeeks(){return Object.keys(S.beta||{}).filter(k=>S.beta[k]&&Array.isArray(S.beta[k].rows)).sort()}
 function betaView(){
   const ks=btWeeks();
