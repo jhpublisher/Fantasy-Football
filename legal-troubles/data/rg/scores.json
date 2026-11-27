@@ -1838,6 +1838,17 @@
 "winner": "BUF",
 "loser": "KC",
 "tie": false
+},
+"401873083": {
+"week": 12,
+"date": "2026-11-27T20:00Z",
+"home": "PIT",
+"away": "DEN",
+"homeScore": 27,
+"awayScore": 5,
+"winner": "PIT",
+"loser": "DEN",
+"tie": false
 }
 }
 }
