@@ -1805,6 +1805,28 @@
 "winner": "LAR",
 "loser": "GB",
 "tie": false
+},
+"401873080": {
+"week": 12,
+"date": "2026-11-26T21:30Z",
+"home": "DAL",
+"away": "PHI",
+"homeScore": 38,
+"awayScore": 39,
+"winner": "PHI",
+"loser": "DAL",
+"tie": false
+},
+"401873081": {
+"week": 12,
+"date": "2026-11-26T18:00Z",
+"home": "DET",
+"away": "CHI",
+"homeScore": 35,
+"awayScore": 39,
+"winner": "CHI",
+"loser": "DET",
+"tie": false
 }
 }
 }

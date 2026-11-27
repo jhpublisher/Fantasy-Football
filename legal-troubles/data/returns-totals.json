@@ -1,5 +1,5 @@
 {
-"asOf": "2026-11-26T19:51Z",
+"asOf": "2026-11-27T01:43Z",
 "week": 12,
 "weeks": [
 1,
@@ -4037,7 +4037,6 @@
 "4870706": "Caleb Downs: ESPN fantasy pool does not list this player (no points to show)",
 "4382401": "Riley Moss: ESPN fantasy pool does not list this player (no points to show)",
 "4373809": "Jevon Holland: ESPN fantasy pool does not list this player (no points to show)",
-"4608004": "Donte Kent: ESPN fantasy pool does not list this player (no points to show)",
 "4695280": "Micah Robinson: ESPN fantasy pool does not list this player (no points to show)"
 },
 "source": "ESPN fantasy API kona_player_info, actual weekly points in league scoring (appliedTotal)"
