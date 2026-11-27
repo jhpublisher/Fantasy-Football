@@ -1827,6 +1827,17 @@
 "winner": "CHI",
 "loser": "DET",
 "tie": false
+},
+"401873082": {
+"week": 12,
+"date": "2026-11-27T01:20Z",
+"home": "BUF",
+"away": "KC",
+"homeScore": 13,
+"awayScore": 10,
+"winner": "BUF",
+"loser": "KC",
+"tie": false
 }
 }
 }
